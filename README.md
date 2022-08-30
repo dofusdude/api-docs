@@ -11,11 +11,14 @@ The original yaml was created with a GUI Tool named [Stoplight Studio](https://s
 For now, the Spec will stay in 3.0 until more tools support 3.1.
 
 ## Propose Features
+
 2 Ways. One way is to just visit the [Discord](https://discord.gg/3EtHskZD8h) and write something into the chat.
 
 The second, much more serious way:
 
 Fork this repository. Then make the desired changes and push. GitHub will ask to if you want to create a pull request. Do that.
+
+To avoid blowing up the git history, please use the [Prettier plugin](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) in VS Code for formatting.
 
 In the comments of the pull request we can talk about the changes.
 If your feature is really complicated or you want to talk about it, visit the [Discord](https://discord.gg/3EtHskZD8h).
