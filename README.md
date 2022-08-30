@@ -1,6 +1,6 @@
 # API Documentation
 
-This is the OpenAPI Specification for https://api.dofusdu.de.
+This is the OpenAPI Specification for https://dofusdu.de.
 
 The Swagger instance on the main page links directly to this document on GitHub.
 
