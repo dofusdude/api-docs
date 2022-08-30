@@ -726,8 +726,8 @@ paths:
         required: true
         description: a valid language code
       - schema:
-          type: string
-          example: "24132"
+          type: integer
+          example: 24132
         name: ankama_id
         in: path
         required: true
@@ -816,8 +816,8 @@ paths:
         required: true
         description: a valid language code
       - schema:
-          type: string
-          example: "7295"
+          type: integer
+          example: 7295
         name: ankama_id
         in: path
         required: true
@@ -1255,8 +1255,8 @@ paths:
         required: true
         description: a valid language code
       - schema:
-          type: string
-          example: "17206"
+          type: integer
+          example: 17206
         name: ankama_id
         in: path
         required: true
@@ -1339,8 +1339,8 @@ paths:
         required: true
         description: a valid language code
       - schema:
-          type: string
-          example: "25256"
+          type: integer
+          example: 25256
         name: ankama_id
         in: path
         required: true
@@ -1409,8 +1409,8 @@ paths:
         required: true
         description: a valid language code
       - schema:
-          type: string
-          example: "180"
+          type: integer
+          example: 180
         name: ankama_id
         in: path
         required: true
@@ -1492,8 +1492,8 @@ paths:
         required: true
         description: a valid language code
       - schema:
-          type: string
-          example: "499"
+          type: integer
+          example: 499
         name: ankama_id
         in: path
         required: true
@@ -1508,7 +1508,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Set"
+                $ref: "#/components/schemas/Equipment-Set"
               examples:
                 Atcham:
                   value:
@@ -2573,7 +2573,7 @@ components:
           type: integer
         image_urls:
           $ref: "#/components/schemas/Image-Urls"
-    Set:
+    Equipment-Set:
       title: ""
       x-stoplight:
         id: nfthmjnb0ebpw
