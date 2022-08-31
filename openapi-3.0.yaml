@@ -890,8 +890,8 @@ paths:
         required: true
         description: a valid language code
       - schema:
-          type: string
-          example: "26009"
+          type: integer
+          example: 26009
         name: ankama_id
         in: path
         required: true
