@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
   title: Dofusdude API
-  version: "0.1"
-  description: "The last API for everything Dofus <span style=\"font-size:1.8rem;\">\U0001F92F</span>\n<h2>Main Features</h2>\n<ul>\n<li><span style=\"font-size:1.8rem;\">\U0001F977</span> <b>seamless auto-update</b> load data in the background when a new Dofus version is released and serving it within 2 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.</li>\n\n<li><span style=\"font-size:1.8rem;\">⚡</span> <b>blazingly fast</b> all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in <span style=\"font-size:1.8rem;\">\U0001F1E9\U0001F1EA</span>.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F5E3️</span> <b>multilingual</b> supporting <em>en</em>, <em>fr</em>, <em>es</em>, <em>pt</em> including the dropped languages from the Dofus website <em>de</em> and <em>it</em>.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F9E0</span> <b>search by relevance</b> allowing typos in name and description, handled by language specific text analysis and indexing by the powerful <a href=\"https://www.meilisearch.com\">Meilisearch</a> written in Rust.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F575️</span> <b>complete</b> actual data from the game including items invisible to the encyclopedia like quest items.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F5BC️</span> <b>HD images</b> rendering vector graphics into PNGs up to 800x800 px in the background.</li>\n\n</ul>\n\n\n<h2>Current state</h2>\n<div style=\"display:flex;justify-content:space-around;flex-wrap:wrap\">\n<ul style=\"font-size:1.6rem;\">\n<li>Weapons ✅</li>\n<li>Equipment ✅</li>\n<li>Sets ✅</li>\n<li>Resources ✅</li>\n<li>Consumables ✅</li>\n<li>Pets ✅</li>\n<li>Mounts ✅</li>\n<li>Cosmetics/Ceremonial Items ✅</li>\n<li>Harnesses ✅</li>\n<li>Quest Items ✅</li>\n</ul>\n\n<ul style=\"font-size:1.6rem;\">\n<li>Monsters ❌</li>\n<li>Classes ❌</li>\n<li>Spells ❌</li>\n</ul>\n</div>\n\n\n<h3>Maybes? I don't know what for <span style=\"font-size:1.8rem;\">\U0001F937</span></h3>\n<ul>\n<li>Professions ❌ </li>\n<li>Sidekicks ❌</li>\n<li>Haven Bags ❌</li>\n<li>Map ❌</li>\n</ul>\n\n\n<h2>Future</h2>\nI want this project to be useful and not just add plain categories no one needs. More and more features will be added to enhance the quality based on the needs of you, the developers.\n<br>Examples:\n<p><em>I need to know where I can drop the all the items I need to craft set X!</em></p>\n<p><em>Please get a detailed always up-to-date spell description so I can calculate the damage for my set builder site!</em></p>\n<p>Nearly everything can be done. But I want to make sure somebody also wants it.\nIf you have anything or you are just interested in the project, join the <a href=\"https://discord.gg/3EtHskZD8h\">Discord</a>.</p>\n\n<h3>Versioning</h3>\n<p>Updating an API is a hard problem. This is why we'll keep it simple: \nEverything you see here on this site, you can use now and forever. Updates could introduce new fields, new paths or parameter but never break backwards compatibility, so no field or parameter will be deleted. Ever.\n</p>\n<p>There is one exception! <b>The API will <em>always</em> choose being up-to-date over everything else</b>. So if Ankama decides to drop languages from the game like they did with their website, the API will loose support for them, too.\n</p>\n<p>\nWe can prevent this specific use case with a nice community but even then, it would be hidden behind a feature flag.\n</p>\n\n<h2>Get started! \U0001F973</h2>\n<p>Scroll down and try it for yourself.</p>\n<p>If you are ready to use them in your project, think about <a href=\"https://github.com/OpenAPITools/openapi-generator\">generating a client <span style=\"font-size:1.8rem;\">\U0001F9D9</span></a> from the <a href=\"https://dofusdu.de/swagger.yaml\">OpenAPI 3.0 Spec</a> to get started quickly.</p>\n\n<p>Examples for consumers:</p>\n<ul>\n<li><a href=\"https://alm.dofusdu.de/swagger\">Almanax API v1 by Dofusdude</a></li>\n<li><a href=\"https://dofuscraftlist-dev.netlify.app\">Dofus Craftlist by Lystina</a></li>\n</ul>\n\nThe Almanax API is an example for using a <a href=\"https://github.com/dofusdude/almanax-api/tree/main/src/main/java/org/acme/openapi\">generated Client</a> from the OpenAPI Spec.\n\n"
+  version: "0.2"
+  description: "The last API for everything Dofus <span style=\"font-size:1.8rem;\">\U0001F92F</span>\n<h2>Main Features</h2>\n<ul>\n<li><span style=\"font-size:1.8rem;\">\U0001F977</span> <b>seamless auto-update</b> load data in the background when a new Dofus version is released and serving it within 2 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.</li>\n\n<li><span style=\"font-size:1.8rem;\">⚡</span> <b>blazingly fast</b> all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in <span style=\"font-size:1.8rem;\">\U0001F1E9\U0001F1EA</span>.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F5E3️</span> <b>multilingual</b> supporting <em>en</em>, <em>fr</em>, <em>es</em>, <em>pt</em> including the dropped languages from the Dofus website <em>de</em> and <em>it</em>.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F9E0</span> <b>search by relevance</b> allowing typos in name and description, handled by language specific text analysis and indexing by the powerful <a href=\"https://www.meilisearch.com\">Meilisearch</a> written in Rust.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F575️</span> <b>complete</b> actual data from the game including items invisible to the encyclopedia like quest items.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F5BC️</span> <b>HD images</b> rendering vector graphics into PNGs up to 800x800 px in the background.</li>\n\n</ul>\n\n\n<h2>Current state</h2>\n<div style=\"display:flex;justify-content:space-around;flex-wrap:wrap\">\n<ul style=\"font-size:1.6rem;\">\n<li>Weapons ✅</li>\n<li>Equipment ✅</li>\n<li>Sets ✅</li>\n<li>Resources ✅</li>\n<li>Consumables ✅</li>\n<li>Pets ✅</li>\n<li>Mounts ✅</li>\n<li>Cosmetics/Ceremonial Items ✅</li>\n<li>Harnesses ✅</li>\n<li>Quest Items ✅</li>\n</ul>\n\n<ul style=\"font-size:1.6rem;\">\n<li>Monsters ❌</li>\n<li>Classes ❌</li>\n<li>Spells ❌</li>\n<li>Professions ❌ </li>\n</ul>\n</div>\n\n\n<h3>Maybes? I don't know what for <span style=\"font-size:1.8rem;\">\U0001F937</span></h3>\n<ul>\n<li>Sidekicks ❌</li>\n<li>Haven Bags ❌</li>\n<li>Map ❌</li>\n</ul>\n\n\n<h2>Future</h2>\nI want this project to be useful and not just add plain categories no one needs. More and more features will be added to enhance the quality based on the needs of you, the developers.\n<br>Examples:\n<p><em>I need to know where I can drop the all the items I need to craft set X!</em></p>\n<p><em>Please get a detailed always up-to-date spell description so I can calculate the damage for my set builder site!</em></p>\n<p>Nearly everything can be done. But I want to make sure somebody also wants it.\nIf you have anything or you are just interested in the project, join the <a href=\"https://discord.gg/3EtHskZD8h\">Discord</a>.</p>\n\n<h3>Versioning</h3>\n<p>Updating an API is a hard problem. This is why we'll keep it simple: \nEverything you see here on this site, you can use now and forever. Updates could introduce new fields, new paths or parameter but never break backwards compatibility, so no field or parameter will be deleted. Ever.\n</p>\n<p>There is one exception! <b>The API will <em>always</em> choose being up-to-date over everything else</b>. So if Ankama decides to drop languages from the game like they did with their website, the API will loose support for them, too.\n</p>\n<p>\nWe can prevent this specific use case with a nice community but even then, it would be hidden behind a feature flag.\n</p>\n\n<h2>Get started! \U0001F973</h2>\n<p>Scroll down and try it for yourself.</p>\n<p>If you are ready to use them in your project, think about <a href=\"https://github.com/OpenAPITools/openapi-generator\">generating a client <span style=\"font-size:1.8rem;\">\U0001F9D9</span></a> from the <a href=\"https://raw.githubusercontent.com/dofusdude/api-docs/main/openapi-3.0.yaml\">OpenAPI 3.0 Spec</a> to get started quickly.</p>\n\n<p>Examples for consumers:</p>\n<ul>\n<li><a href=\"https://alm.dofusdu.de/swagger\">Almanax API v1</a> by Dofusdude</li>\n<li><a href=\"https://dofuscraftlist-dev.netlify.app\">Dofus Craftlist</a> by Lystina</li>\n</ul>\n\nThe Almanax API is an example for using a <a href=\"https://github.com/dofusdude/almanax-api/tree/main/src/main/java/org/acme/openapi\">generated Client</a> from the OpenAPI Spec.\n\n"
   contact:
     name: Survival
     url: "https://discord.gg/3EtHskZD8h"
@@ -755,14 +755,12 @@ paths:
                     pods: 0
                     image_urls:
                       icon: "https://api.dofusdu.de/dofus2/img/item/17481.png"
-                      sd: "https://api.dofusdu.de/dofus2/img/item/17481-200.png"
-                      hq: "https://api.dofusdu.de/dofus2/img/item/17481-400.png"
-                      hd: "https://api.dofusdu.de/dofus2/img/item/17481-800.png"
                     effects:
                       - int_minimum: 0
                         int_maximum: 0
                         type:
                           name: "Exchangeable:"
+                          id: 0
                         ignore_int_min: true
                         ignore_int_max: true
                         formatted: "Exchangeable: 0"
@@ -770,6 +768,7 @@ paths:
                         int_maximum: 0
                         type:
                           name: "Compatible with:"
+                          id: 1
                         ignore_int_min: true
                         ignore_int_max: true
                         formatted: "Compatible with: 0"
@@ -777,6 +776,7 @@ paths:
                         int_maximum: 0
                         type:
                           name: "Compatible with:"
+                          id: 1
                         ignore_int_min: true
                         ignore_int_max: true
                         formatted: "Compatible with: 0"
@@ -845,9 +845,6 @@ paths:
                     pods: 1
                     image_urls:
                       icon: "https://api.dofusdu.de/dofus2/img/item/48137.png"
-                      sd: "https://api.dofusdu.de/dofus2/img/item/48137-200.png"
-                      hq: "https://api.dofusdu.de/dofus2/img/item/48137-400.png"
-                      hd: "https://api.dofusdu.de/dofus2/img/item/48137-800.png"
                     effects: null
                     conditions: null
                     recipe:
@@ -923,14 +920,12 @@ paths:
                     pods: 10
                     image_urls:
                       icon: "https://api.dofusdu.de/dofus2/img/item/22009.png"
-                      sd: "https://api.dofusdu.de/dofus2/img/item/22009-200.png"
-                      hq: "https://api.dofusdu.de/dofus2/img/item/22009-400.png"
-                      hd: "https://api.dofusdu.de/dofus2/img/item/22009-800.png"
                     effects:
                       - int_minimum: 201
                         int_maximum: 300
                         type:
                           name: Initiative
+                          id: 24
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 201 to 300 Initiative
@@ -938,6 +933,7 @@ paths:
                         int_maximum: 350
                         type:
                           name: Vitality
+                          id: 9
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 301 to 350 Vitality
@@ -945,6 +941,7 @@ paths:
                         int_maximum: 40
                         type:
                           name: Intelligence
+                          id: 13
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 31 to 40 Intelligence
@@ -952,6 +949,7 @@ paths:
                         int_maximum: 40
                         type:
                           name: Chance
+                          id: 22
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 31 to 40 Chance
@@ -959,6 +957,7 @@ paths:
                         int_maximum: 20
                         type:
                           name: Power
+                          id: 32
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 16 to 20 Power
@@ -966,6 +965,7 @@ paths:
                         int_maximum: 35
                         type:
                           name: Wisdom
+                          id: 10
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 26 to 35 Wisdom
@@ -973,6 +973,7 @@ paths:
                         int_maximum: 12
                         type:
                           name: Lock
+                          id: 26
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 9 to 12 Lock
@@ -980,6 +981,7 @@ paths:
                         int_maximum: 18
                         type:
                           name: Fire Damage
+                          id: 61
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 14 to 18 Fire Damage
@@ -987,6 +989,7 @@ paths:
                         int_maximum: 18
                         type:
                           name: Water Damage
+                          id: 27
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 14 to 18 Water Damage
@@ -994,6 +997,7 @@ paths:
                         int_maximum: 10
                         type:
                           name: "% Water Resistance"
+                          id: 17
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 7 to 10% Water Resistance
@@ -1001,6 +1005,7 @@ paths:
                         int_maximum: 12
                         type:
                           name: Heals
+                          id: 11
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 9 to 12 Heals
@@ -1008,6 +1013,7 @@ paths:
                         int_maximum: 0
                         type:
                           name: Critical Damage
+                          id: 38
                         ignore_int_min: false
                         ignore_int_max: true
                         formatted: "-15 Critical Damage"
@@ -1015,6 +1021,7 @@ paths:
                         int_maximum: 0
                         type:
                           name: Range
+                          id: 31
                         ignore_int_min: false
                         ignore_int_max: true
                         formatted: "-1 Range"
@@ -1022,6 +1029,7 @@ paths:
                         int_maximum: 0
                         type:
                           name: MP
+                          id: 8
                         ignore_int_min: false
                         ignore_int_max: true
                         formatted: 1 MP
@@ -1029,6 +1037,7 @@ paths:
                         int_maximum: 25
                         type:
                           name: (Neutral damage)
+                          id: 42
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 21 to 25 (Neutral damage)
@@ -1036,6 +1045,7 @@ paths:
                         int_maximum: 20
                         type:
                           name: (Fire steal)
+                          id: 57
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 16 to 20 (Fire steal)
@@ -1043,6 +1053,7 @@ paths:
                         int_maximum: 20
                         type:
                           name: (Water steal)
+                          id: 44
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 16 to 20 (Water steal)
@@ -1051,6 +1062,7 @@ paths:
                         int_value: 12
                         element:
                           name: AP
+                          id: 12
                     critical_hit_probability: 10
                     critical_hit_bonus: 3
                     is_two_handed: false
@@ -1096,12 +1108,12 @@ paths:
                       icon: "https://api.dofusdu.de/dofus2/img/item/16362.png"
                       sd: "https://api.dofusdu.de/dofus2/img/item/16362-200.png"
                       hq: "https://api.dofusdu.de/dofus2/img/item/16362-400.png"
-                      hd: "https://api.dofusdu.de/dofus2/img/item/16362-800.png"
                     effects:
                       - int_minimum: 451
                         int_maximum: 500
                         type:
                           name: Vitality
+                          id: 9
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 451 to 500 Vitality
@@ -1109,6 +1121,7 @@ paths:
                         int_maximum: 100
                         type:
                           name: Strength
+                          id: 45
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 71 to 100 Strength
@@ -1116,6 +1129,7 @@ paths:
                         int_maximum: 60
                         type:
                           name: Wisdom
+                          id: 10
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 41 to 60 Wisdom
@@ -1123,6 +1137,7 @@ paths:
                         int_maximum: 0
                         type:
                           name: Range
+                          id: 31
                         ignore_int_min: false
                         ignore_int_max: true
                         formatted: 1 Range
@@ -1130,6 +1145,7 @@ paths:
                         int_maximum: 30
                         type:
                           name: Prospecting
+                          id: 25
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 21 to 30 Prospecting
@@ -1137,6 +1153,7 @@ paths:
                         int_maximum: 20
                         type:
                           name: Neutral Damage
+                          id: 49
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 16 to 20 Neutral Damage
@@ -1144,6 +1161,7 @@ paths:
                         int_maximum: 20
                         type:
                           name: Earth Damage
+                          id: 48
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 16 to 20 Earth Damage
@@ -1151,6 +1169,7 @@ paths:
                         int_maximum: -5
                         type:
                           name: "% Neutral Resistance"
+                          id: 34
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: "-4 to -5% Neutral Resistance"
@@ -1158,6 +1177,7 @@ paths:
                         int_maximum: -5
                         type:
                           name: "% Earth Resistance"
+                          id: 63
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: "-4 to -5% Earth Resistance"
@@ -1165,6 +1185,7 @@ paths:
                         int_maximum: -5
                         type:
                           name: "% Fire Resistance"
+                          id: 37
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: "-4 to -5% Fire Resistance"
@@ -1172,6 +1193,7 @@ paths:
                         int_maximum: -5
                         type:
                           name: "% Water Resistance"
+                          id: 17
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: "-4 to -5% Water Resistance"
@@ -1179,6 +1201,7 @@ paths:
                         int_maximum: -5
                         type:
                           name: "% Air Resistance"
+                          id: 16
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: "-4 to -5% Air Resistance"
@@ -1186,6 +1209,7 @@ paths:
                         int_maximum: 8
                         type:
                           name: AP Reduction
+                          id: 64
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 6 to 8 AP Reduction
@@ -1193,6 +1217,7 @@ paths:
                         int_maximum: 20
                         type:
                           name: Lock
+                          id: 26
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 16 to 20 Lock
@@ -1292,6 +1317,7 @@ paths:
                         int_maximum: 0
                         type:
                           name: HP
+                          id: 21
                         ignore_int_min: false
                         ignore_int_max: true
                         formatted: 70 HP
@@ -1368,9 +1394,6 @@ paths:
                     pods: 0
                     image_urls:
                       icon: "https://api.dofusdu.de/dofus2/img/item/24041.png"
-                      sd: "https://api.dofusdu.de/dofus2/img/item/24041-200.png"
-                      hq: "https://api.dofusdu.de/dofus2/img/item/24041-400.png"
-                      hd: "https://api.dofusdu.de/dofus2/img/item/24041-800.png"
                     effects: null
                     conditions: null
                     recipe: null
@@ -1442,6 +1465,7 @@ paths:
                         int_maximum: 300
                         type:
                           name: Vitalidade
+                          id: 9
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 0 a 300 Vitalidade
@@ -1449,6 +1473,7 @@ paths:
                         int_maximum: 1
                         type:
                           name: invocaç
+                          id: 28
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 0 a 1 invocaç
@@ -1456,6 +1481,7 @@ paths:
                         int_maximum: 1000
                         type:
                           name: Iniciativa
+                          id: 24
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 0 a 1000 Iniciativa
@@ -1523,6 +1549,7 @@ paths:
                           int_maximum: 0
                           type:
                             name: Intelligenz
+                            id: 13
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 30 Intelligenz
@@ -1530,6 +1557,7 @@ paths:
                           int_maximum: 0
                           type:
                             name: Flinkheit
+                            id: 36
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 30 Flinkheit
@@ -1537,6 +1565,7 @@ paths:
                           int_maximum: 0
                           type:
                             name: Glück
+                            id: 22
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 30 Glück
@@ -1544,6 +1573,7 @@ paths:
                           int_maximum: 0
                           type:
                             name: AP-Entzug
+                            id: 64
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 5 AP-Entzug
@@ -1551,6 +1581,7 @@ paths:
                           int_maximum: 0
                           type:
                             name: Kritischer Schaden
+                            id: 38
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 10 Kritischer Schaden
@@ -1558,6 +1589,7 @@ paths:
                           int_maximum: 0
                           type:
                             name: Intelligenz
+                            id: 13
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 30 Intelligenz
@@ -1565,6 +1597,7 @@ paths:
                           int_maximum: 0
                           type:
                             name: Flinkheit
+                            id: 36
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 30 Flinkheit
@@ -1572,6 +1605,7 @@ paths:
                           int_maximum: 0
                           type:
                             name: Glück
+                            id: 22
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 30 Glück
@@ -1579,6 +1613,7 @@ paths:
                           int_maximum: 0
                           type:
                             name: AP-Entzug
+                            id: 64
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 5 AP-Entzug
@@ -1586,6 +1621,7 @@ paths:
                           int_maximum: 0
                           type:
                             name: Kritischer Schaden
+                            id: 38
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 10 Kritischer Schaden
@@ -1593,6 +1629,7 @@ paths:
                           int_maximum: 0
                           type:
                             name: AP
+                            id: 12
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 1 AP
@@ -2319,6 +2356,28 @@ paths:
           in: query
           name: "page[number]"
           description: "page number based on the current page[size]. So you could get page 1 with 8 entrys and page 2 would have entries 8 to 16."
+  /meta/elements:
+    get:
+      summary: Effects and Condition Elements
+      tags:
+        - meta
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+              examples:
+                id = index:
+                  value:
+                    - Vitality
+                    - Intelligence
+      operationId: get-meta-elements
+      description: Get the mappings for all specific elements that are linked in the dataset. All names are english. Translations are not needed because of a global unique id which is the index inside the array. Future elements will get a higher id.
+      parameters: []
 components:
   schemas:
     Items-List-Entry-Typed:
@@ -2356,34 +2415,41 @@ components:
     Cosmetic:
       type: object
       x-examples:
-        example-1:
+        Tor Tur:
           ankama_id: 24132
           name: Panzer von Meister Tor Tur
           description: Dieser Panzer mit einem Gewicht von mindestens 20 Kilopods dient der Muskelstärkung im Rahmen des Trainings bei Meister Tor Tur.
-          type: Prunkumhang
+          type:
+            name: Prunkumhang
           level: 180
           pods: 0
           image_urls:
-            icon: "https://api.dofusdu.de/dofus/img/item/17481.png"
+            icon: "https://api.dofusdu.de/dofus2/img/item/17481.png"
           effects:
-            - min: 0
-              max: 0
-              type: "Austauschbar ab:"
-              ignore_min: true
-              ignore_max: true
-              templated: "Austauschbar ab: 0"
-            - min: 0
-              max: 0
-              type: "Kompatibel zu:"
-              ignore_min: true
-              ignore_max: true
-              templated: "Kompatibel zu: 0"
-            - min: 0
-              max: 0
-              type: "Kompatibel zu:"
-              ignore_min: true
-              ignore_max: true
-              templated: "Kompatibel zu: 0"
+            - int_minimum: 0
+              int_maximum: 0
+              type:
+                name: "Austauschbar ab:"
+                id: 0
+              ignore_int_min: true
+              ignore_int_max: true
+              formatted: "Austauschbar ab: 0"
+            - int_minimum: 0
+              int_maximum: 0
+              type:
+                name: "Kompatibel zu:"
+                id: 1
+              ignore_int_min: true
+              ignore_int_max: true
+              formatted: "Kompatibel zu: 0"
+            - int_minimum: 0
+              int_maximum: 0
+              type:
+                name: "Kompatibel zu:"
+                id: 1
+              ignore_int_min: true
+              ignore_int_max: true
+              formatted: "Kompatibel zu: 0"
           conditions: null
           recipe: null
       properties:
@@ -2436,7 +2502,7 @@ components:
     Effects-Entry:
       type: object
       x-examples:
-        example-1:
+        Agility:
           int_minimum: 51
           int_maximum: 70
           type:
@@ -2444,6 +2510,8 @@ components:
           ignore_int_min: false
           ignore_int_max: false
           formatted: 51 to 70 Agility
+      x-tags:
+        - meta
       properties:
         int_minimum:
           type: integer
@@ -2456,7 +2524,8 @@ components:
           properties:
             name:
               type: string
-              description: translated effect type
+            id:
+              type: integer
         ignore_int_min:
           type: boolean
           description: "ignore the int min field because the actual value is a string. For readability the templated field is the only important field in this case. "
@@ -2728,6 +2797,8 @@ components:
           properties:
             name:
               type: string
+            id:
+              type: integer
     Equipment:
       type: object
       x-examples:
@@ -2744,12 +2815,12 @@ components:
             icon: "https://api.dofusdu.de/dofus2/img/item/16363.png"
             sd: "https://api.dofusdu.de/dofus2/img/item/16363-200.png"
             hq: "https://api.dofusdu.de/dofus2/img/item/16363-400.png"
-            hd: "https://api.dofusdu.de/dofus2/img/item/16363-800.png"
           effects:
             - int_minimum: 251
               int_maximum: 300
               type:
                 name: Vitality
+                id: 9
               ignore_int_min: false
               ignore_int_max: false
               formatted: 251 to 300 Vitality
@@ -2757,6 +2828,7 @@ components:
               int_maximum: 100
               type:
                 name: Intelligence
+                id: 13
               ignore_int_min: false
               ignore_int_max: false
               formatted: 71 to 100 Intelligence
@@ -2764,6 +2836,7 @@ components:
               int_maximum: 40
               type:
                 name: Agility
+                id: 36
               ignore_int_min: false
               ignore_int_max: false
               formatted: 31 to 40 Agility
@@ -2771,6 +2844,7 @@ components:
               int_maximum: 40
               type:
                 name: Wisdom
+                id: 10
               ignore_int_min: false
               ignore_int_max: false
               formatted: 31 to 40 Wisdom
@@ -2778,6 +2852,7 @@ components:
               int_maximum: 12
               type:
                 name: Heals
+                id: 11
               ignore_int_min: false
               ignore_int_max: false
               formatted: 8 to 12 Heals
@@ -2785,6 +2860,7 @@ components:
               int_maximum: 0
               type:
                 name: Summons
+                id: 28
               ignore_int_min: false
               ignore_int_max: true
               formatted: 1 Summons
@@ -2792,6 +2868,7 @@ components:
               int_maximum: 15
               type:
                 name: Prospecting
+                id: 25
               ignore_int_min: false
               ignore_int_max: false
               formatted: 11 to 15 Prospecting
@@ -2799,6 +2876,7 @@ components:
               int_maximum: 10
               type:
                 name: Fire Damage
+                id: 61
               ignore_int_min: false
               ignore_int_max: false
               formatted: 7 to 10 Fire Damage
@@ -2806,6 +2884,7 @@ components:
               int_maximum: 10
               type:
                 name: Air Damage
+                id: 47
               ignore_int_min: false
               ignore_int_max: false
               formatted: 7 to 10 Air Damage
@@ -2813,6 +2892,7 @@ components:
               int_maximum: 15
               type:
                 name: Air Resistance
+                id: 60
               ignore_int_min: false
               ignore_int_max: false
               formatted: 11 to 15 Air Resistance
@@ -2820,6 +2900,7 @@ components:
               int_maximum: 7
               type:
                 name: "% Earth Resistance"
+                id: 63
               ignore_int_min: false
               ignore_int_max: false
               formatted: 5 to 7% Earth Resistance
@@ -2827,6 +2908,7 @@ components:
               int_maximum: 7
               type:
                 name: "% Water Resistance"
+                id: 17
               ignore_int_min: false
               ignore_int_max: false
               formatted: 5 to 7% Water Resistance
@@ -2891,6 +2973,8 @@ components:
           nullable: true
           items:
             $ref: "#/components/schemas/Recipe-Entry"
+      title: ""
+      description: ""
     Weapon:
       type: object
       x-examples:
@@ -2908,14 +2992,12 @@ components:
           pods: 10
           image_urls:
             icon: "https://api.dofusdu.de/dofus2/img/item/22009.png"
-            sd: "https://api.dofusdu.de/dofus2/img/item/22009-200.png"
-            hq: "https://api.dofusdu.de/dofus2/img/item/22009-400.png"
-            hd: "https://api.dofusdu.de/dofus2/img/item/22009-800.png"
           effects:
             - int_minimum: 201
               int_maximum: 300
               type:
                 name: Initiative
+                id: 24
               ignore_int_min: false
               ignore_int_max: false
               formatted: 201 to 300 Initiative
@@ -2923,6 +3005,7 @@ components:
               int_maximum: 350
               type:
                 name: Vitality
+                id: 9
               ignore_int_min: false
               ignore_int_max: false
               formatted: 301 to 350 Vitality
@@ -2930,6 +3013,7 @@ components:
               int_maximum: 40
               type:
                 name: Intelligence
+                id: 13
               ignore_int_min: false
               ignore_int_max: false
               formatted: 31 to 40 Intelligence
@@ -2937,6 +3021,7 @@ components:
               int_maximum: 40
               type:
                 name: Chance
+                id: 22
               ignore_int_min: false
               ignore_int_max: false
               formatted: 31 to 40 Chance
@@ -2944,6 +3029,7 @@ components:
               int_maximum: 20
               type:
                 name: Power
+                id: 32
               ignore_int_min: false
               ignore_int_max: false
               formatted: 16 to 20 Power
@@ -2951,6 +3037,7 @@ components:
               int_maximum: 35
               type:
                 name: Wisdom
+                id: 10
               ignore_int_min: false
               ignore_int_max: false
               formatted: 26 to 35 Wisdom
@@ -2958,6 +3045,7 @@ components:
               int_maximum: 12
               type:
                 name: Lock
+                id: 26
               ignore_int_min: false
               ignore_int_max: false
               formatted: 9 to 12 Lock
@@ -2965,6 +3053,7 @@ components:
               int_maximum: 18
               type:
                 name: Fire Damage
+                id: 61
               ignore_int_min: false
               ignore_int_max: false
               formatted: 14 to 18 Fire Damage
@@ -2972,6 +3061,7 @@ components:
               int_maximum: 18
               type:
                 name: Water Damage
+                id: 27
               ignore_int_min: false
               ignore_int_max: false
               formatted: 14 to 18 Water Damage
@@ -2979,6 +3069,7 @@ components:
               int_maximum: 10
               type:
                 name: "% Water Resistance"
+                id: 17
               ignore_int_min: false
               ignore_int_max: false
               formatted: 7 to 10% Water Resistance
@@ -2986,6 +3077,7 @@ components:
               int_maximum: 12
               type:
                 name: Heals
+                id: 11
               ignore_int_min: false
               ignore_int_max: false
               formatted: 9 to 12 Heals
@@ -2993,6 +3085,7 @@ components:
               int_maximum: 0
               type:
                 name: Critical Damage
+                id: 38
               ignore_int_min: false
               ignore_int_max: true
               formatted: "-15 Critical Damage"
@@ -3000,6 +3093,7 @@ components:
               int_maximum: 0
               type:
                 name: Range
+                id: 31
               ignore_int_min: false
               ignore_int_max: true
               formatted: "-1 Range"
@@ -3007,6 +3101,7 @@ components:
               int_maximum: 0
               type:
                 name: MP
+                id: 8
               ignore_int_min: false
               ignore_int_max: true
               formatted: 1 MP
@@ -3014,6 +3109,7 @@ components:
               int_maximum: 25
               type:
                 name: (Neutral damage)
+                id: 42
               ignore_int_min: false
               ignore_int_max: false
               formatted: 21 to 25 (Neutral damage)
@@ -3021,6 +3117,7 @@ components:
               int_maximum: 20
               type:
                 name: (Fire steal)
+                id: 57
               ignore_int_min: false
               ignore_int_max: false
               formatted: 16 to 20 (Fire steal)
@@ -3028,6 +3125,7 @@ components:
               int_maximum: 20
               type:
                 name: (Water steal)
+                id: 44
               ignore_int_min: false
               ignore_int_max: false
               formatted: 16 to 20 (Water steal)
@@ -3036,6 +3134,7 @@ components:
               int_value: 12
               element:
                 name: AP
+                id: 12
           critical_hit_probability: 10
           critical_hit_bonus: 3
           is_two_handed: false
@@ -3115,12 +3214,14 @@ components:
           nullable: true
           items:
             $ref: "#/components/schemas/Recipe-Entry"
+      description: ""
   securitySchemes: {}
 tags:
   - name: all items
   - name: consumables
   - name: cosmetics
   - name: equipment
+  - name: meta
   - name: mounts
   - name: quest items
   - name: resources
