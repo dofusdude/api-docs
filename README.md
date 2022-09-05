@@ -1,12 +1,12 @@
 # API Documentation
 
-This is the OpenAPI Specification for https://dofusdu.de.
+This is the OpenAPI Specification for the [Dofusdude API](https://docs.dofusdu.de).
 
 The Swagger instance on the main page links directly to this document on GitHub.
 
 If you find errors or want to propose features (never break backwards compatibility), you are welcome to contribute.
 
-The original yaml was created with a GUI Tool named [Stoplight Studio](https://stoplight.io). There are many tools for working with OpenAPI, checkout https://openapi.tools for more.
+The original yaml was created with a GUI Tool named [Stoplight Studio](https://stoplight.io). There are many tools for working with OpenAPI, checkout [OpenAPI.Tools](https://openapi.tools) for more.
 
 For now, the Spec will stay in 3.0 until more tools support 3.1.
 
