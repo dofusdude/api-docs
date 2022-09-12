@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Dofusdude API
   version: "0.5"
-  description: "The last API for everything Dofus <span style=\"font-size:1.8rem;\">\U0001F92F</span>\n<h2>Main Features</h2>\n<ul>\n<li><span style=\"font-size:1.8rem;\">\U0001F977</span> <b>seamless auto-update</b> load data in the background when a new Dofus version is released and serving it within 2 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.</li>\n\n<li><span style=\"font-size:1.8rem;\">⚡</span> <b>blazingly fast</b> all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in <span style=\"font-size:1.8rem;\">\U0001F1E9\U0001F1EA</span>.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001FA78</span> <b>Dofus 2 Beta</b> from stable to bleeding edge by replacing /dofus2 with /dofus2beta.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F5E3️</span> <b>multilingual</b> supporting <em>en</em>, <em>fr</em>, <em>es</em>, <em>pt</em> including the dropped languages from the Dofus website <em>de</em> and <em>it</em>.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F9E0</span> <b>search by relevance</b> allowing typos in name and description, handled by language specific text analysis and indexing by the powerful <a href=\"https://www.meilisearch.com\">Meilisearch</a> written in Rust.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F575️</span> <b>complete</b> actual data from the game including items invisible to the encyclopedia like quest items.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F5BC️</span> <b>HD images</b> rendering vector graphics into PNGs up to 800x800 px in the background.</li>\n\n</ul>\n\n\n<h2>Current state</h2>\n<div style=\"display:flex;justify-content:space-around;flex-wrap:wrap\">\n<ul style=\"font-size:1.6rem;\">\n<li>Weapons ✅</li>\n<li>Equipment ✅</li>\n<li>Sets ✅</li>\n<li>Resources ✅</li>\n<li>Consumables ✅</li>\n<li>Pets ✅</li>\n<li>Mounts ✅</li>\n<li>Cosmetics/Ceremonial Items ✅</li>\n<li>Harnesses ✅</li>\n<li>Quest Items ✅</li>\n</ul>\n\n<ul style=\"font-size:1.6rem;\">\n<li>Monsters ❌</li>\n<li>Classes ❌</li>\n<li>Spells ❌</li>\n<li>Professions ❌ </li>\n</ul>\n</div>\n\n\n<h3>Maybes? I don't know what for <span style=\"font-size:1.8rem;\">\U0001F937</span></h3>\n<ul>\n<li>Sidekicks ❌</li>\n<li>Haven Bags ❌</li>\n<li>Map ❌</li>\n</ul>\n\n\n<h2>Future</h2>\nI want this project to be useful and not just add plain categories no one needs. More and more features will be added to enhance the quality based on the needs of you, the developers.\n<br>Examples:\n<p><em>I need to know where I can drop the all the items I need to craft set X!</em></p>\n<p><em>Please get a detailed always up-to-date spell description so I can calculate the damage for my set builder site!</em></p>\n<p>Nearly everything can be done. But I want to make sure somebody also wants it.\nIf you have anything or you are just interested in the project, join the <a href=\"https://discord.gg/3EtHskZD8h\">Discord</a>.</p>\n\n<h3>Versioning</h3>\n<p>Updating an API is a hard problem. This is why we'll keep it simple: \nEverything you see here on this site, you can use now and forever. Updates could introduce new fields, new paths or parameter but never break backwards compatibility, so no field or parameter will be deleted. Ever.\n</p>\n<p>There is one exception! <b>The API will <em>always</em> choose being up-to-date over everything else</b>. So if Ankama decides to drop languages from the game like they did with their website, the API will loose support for them, too.\n</p>\n<p>\nWe can prevent this specific use case with a nice community but even then, it would be hidden behind a feature flag.\n</p>\n\n<h2>Get started! \U0001F973</h2>\n<p>Scroll down and try it for yourself.</p>\n<p>If you are ready to use them in your project, think about <a href=\"https://github.com/OpenAPITools/openapi-generator\">generating a client <span style=\"font-size:1.8rem;\">\U0001F9D9</span></a> from the <a href=\"https://raw.githubusercontent.com/dofusdude/api-docs/main/openapi-3.0.yaml\">OpenAPI 3.0 Spec</a> to get started quickly.</p>\n\n<p>Examples for consumers:</p>\n<ul>\n<li><a href=\"https://alm.dofusdu.de/swagger\">Almanax API v1</a> by Dofusdude</li>\n<li><a href=\"https://dofuscraftlist-dev.netlify.app\">Dofus Craftlist</a> by Lystina</li>\n</ul>\n\nThe Almanax API is an example for using a <a href=\"https://github.com/dofusdude/almanax-api/tree/main/src/main/java/org/acme/openapi\">generated Client</a> from the OpenAPI Spec.\n\n"
+  description: "The last API for everything Dofus <span style=\"font-size:1.8rem;\">\U0001F92F</span>\n<h2>Main Features</h2>\n<ul>\n<li><span style=\"font-size:1.8rem;\">\U0001F977</span> <b>seamless auto-update</b> load data in the background when a new Dofus version is released and serving it within 2 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.</li>\n\n<li><span style=\"font-size:1.8rem;\">⚡</span> <b>blazingly fast</b> all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in <span style=\"font-size:1.8rem;\">\U0001F1E9\U0001F1EA</span>.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001FA78</span> <b>Dofus 2 Beta</b> from stable to bleeding edge by replacing /dofus2 with /dofus2beta.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F5E3️</span> <b>multilingual</b> supporting <em>en</em>, <em>fr</em>, <em>es</em>, <em>pt</em> including the dropped languages from the Dofus website <em>de</em> and <em>it</em>.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F9E0</span> <b>search by relevance</b> allowing typos in name and description, handled by language specific text analysis and indexing by the powerful <a href=\"https://www.meilisearch.com\">Meilisearch</a> written in Rust.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F575️</span> <b>complete</b> actual data from the game including items invisible to the encyclopedia like quest items.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F5BC️</span> <b>HD images</b> rendering vector graphics into PNGs up to 800x800 px in the background.</li>\n\n</ul>\n\n\n<h2>Current state</h2>\n<div style=\"display:flex;justify-content:space-around;flex-wrap:wrap\">\n<ul style=\"font-size:1.6rem;\">\n<li>Weapons ✅</li>\n<li>Equipment ✅</li>\n<li>Sets ✅</li>\n<li>Resources ✅</li>\n<li>Consumables ✅</li>\n<li>Pets ✅</li>\n<li>Mounts ✅</li>\n<li>Cosmetics/Ceremonial Items ✅</li>\n<li>Harnesses ✅</li>\n<li>Quest Items ✅</li>\n<li>Almanax ✅</li>\n</ul>\n\n<ul style=\"font-size:1.6rem;\">\n<li>Monsters ❌</li>\n<li>Classes ❌</li>\n<li>Spells ❌</li>\n<li>Professions ❌ </li>\n</ul>\n</div>\n\n\n<h3>Maybes? I don't know what for <span style=\"font-size:1.8rem;\">\U0001F937</span></h3>\n<ul>\n<li>Sidekicks ❌</li>\n<li>Haven Bags ❌</li>\n<li>Map ❌</li>\n</ul>\n\n\n<h2>Future</h2>\nI want this project to be useful and not just add plain categories no one needs. More and more features will be added to enhance the quality based on the needs of you, the developers.\n<br>Examples:\n<p><em>I need to know where I can drop the all the items I need to craft set X!</em></p>\n<p><em>Please get a detailed always up-to-date spell description so I can calculate the damage for my set builder site!</em></p>\n<p>Nearly everything can be done. But I want to make sure somebody also wants it.\nIf you have anything or you are just interested in the project, join the <a href=\"https://discord.gg/3EtHskZD8h\">Discord</a>.</p>\n\n<h3>Versioning</h3>\n<p>Updating an API is a hard problem. This is why we'll keep it simple: \nEverything you see here on this site, you can use now and forever. Updates could introduce new fields, new paths or parameter but never break backwards compatibility, so no field or parameter will be deleted. Ever.\n</p>\n<p>There is one exception! <b>The API will <em>always</em> choose being up-to-date over everything else</b>. So if Ankama decides to drop languages from the game like they did with their website, the API will loose support for them, too.\n</p>\n<p>\nWe can prevent this specific use case with a nice community but even then, it would be hidden behind a feature flag.\n</p>\n\n<h2>Get started! \U0001F973</h2>\n<p>Scroll down and try it for yourself!</p>\n<p>If you are ready to use them in your project, think about <a href=\"https://github.com/OpenAPITools/openapi-generator\">generating a client <span style=\"font-size:1.8rem;\">\U0001F9D9</span></a> from the <a href=\"https://raw.githubusercontent.com/dofusdude/api-docs/main/openapi-3.0.yaml\">OpenAPI 3.0 Spec</a> to get started quickly.</p>\n\n<p>Awesome Projects using this API:</p>\n<ul>\n<li><a href=\"https://github.com/Kaysoro/KaellyBot\">KaellyBot</a> by Kaysoro</li>\n<li><a href=\"https://dofuscraftlist-dev.netlify.app\">Dofus Craftlist</a> by Lystina</li>\n<li><a href=\"https://almanaxapp.netlify.app\">AlmanaxApp</a> by Lystina</li>\n<li><a href=\"https://luwnarya.fr\">luwnarya.fr</a></li>\n</ul>\n\nMy old <a href=\"https://alm.dofusdu.de/swagger\">Almanax API v1</a> is an example for using a <a href=\"https://github.com/dofusdude/almanax-api/tree/main/src/main/java/org/acme/openapi\">generated Client</a> from the OpenAPI Spec.\n\n"
   contact:
     name: Survival
     url: "https://discord.gg/3EtHskZD8h"
@@ -2439,6 +2439,166 @@ paths:
           in: query
           name: "page[number]"
           description: "page number based on the current page[size]. So you could get page 1 with 8 entrys and page 2 would have entries 8 to 16."
+  "/{language}/almanax":
+    parameters:
+      - schema:
+          type: string
+          enum:
+            - en
+            - fr
+            - de
+            - it
+            - es
+        name: language
+        in: path
+        required: true
+        description: code
+    get:
+      summary: Almanax Range
+      tags:
+        - almanax
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Almanax-Entry"
+              examples:
+                "range[size] 2":
+                  value:
+                    - bonus:
+                        description: "The experience points awarded for completing alignment quests and city order quests are increased by 100%. What's more, a special repeatable quest is available today inside the militias of Bonta and Brakmar. It is available to aligned players of level 20 or higher and is not attached to the offering quest."
+                        type:
+                          id: bonta-and-brakmar
+                          name: Bonta and Brakmar
+                      date: "2022-09-12"
+                      tribute:
+                        item:
+                          ankama_id: 14284
+                          image_urls:
+                            hd: "https://api.dofusdu.de/dofus2/img/item/15247-800.png"
+                            hq: "https://api.dofusdu.de/dofus2/img/item/15247-400.png"
+                            icon: "https://api.dofusdu.de/dofus2/img/item/15247.png"
+                            sd: "https://api.dofusdu.de/dofus2/img/item/15247-200.png"
+                          name: Spectral Flame
+                          subtype: resources
+                        quantity: 2
+                    - bonus:
+                        description: The quantity of Flax harvested by farmers is increased by 125%.
+                        type:
+                          id: plenty-to-harvest
+                          name: Plenty to harvest
+                      date: "2022-09-13"
+                      tribute:
+                        item:
+                          ankama_id: 423
+                          image_urls:
+                            hd: "https://api.dofusdu.de/dofus2/img/item/34122-800.png"
+                            hq: "https://api.dofusdu.de/dofus2/img/item/34122-400.png"
+                            icon: "https://api.dofusdu.de/dofus2/img/item/34122.png"
+                            sd: "https://api.dofusdu.de/dofus2/img/item/34122-200.png"
+                          name: Flax
+                          subtype: resources
+                        quantity: 20
+      operationId: get-almanax-range
+      description: |-
+        Get a range of dates, defaults to today + 6 following days but can specified by the query parameters. 
+
+        filter[bonus_type] can be used seperately and does not have an effect on the other parameters.
+
+        range[from] changes the start date, everything else defaults to 6 following dates from this start date.
+
+        range[to] when used without anything else, it will use today as start date and this parameter as end. All ranges are inclusive.
+
+        range[from] + range[to] = inclusive range over the specified dates, should never be farther apart than 35 days.
+
+        range[from|to] + range[size] no need to specify the date, just following days with [from] (0 is today) or go backwards in time with only [to] and [size].
+
+        Not all combinations are listed but this should give you an idea how to they could work.
+      parameters:
+        - schema:
+            type: string
+            example: experience-points
+          in: query
+          name: "filter[bonus_type]"
+          description: "ids from meta/{language}/almanax/bonuses"
+        - schema:
+            type: string
+          in: query
+          name: "range[from]"
+          description: yyyy-mm-dd
+        - schema:
+            type: string
+          in: query
+          name: "range[to]"
+          description: yyyy-mm-dd
+        - schema:
+            type: integer
+          in: query
+          name: "range[size]"
+          description: size of the returned range
+        - schema:
+            type: string
+            default: Europe/Paris
+          in: query
+          name: timezone
+          description: 'determine what the current time is. If you live in Brazil, "today" will be hours apart from Paris. Use your timezone to get results relative to your location.'
+  "/{language}/almanax/{date}":
+    parameters:
+      - schema:
+          type: string
+          enum:
+            - en
+            - fr
+            - de
+            - it
+            - es
+        name: language
+        in: path
+        required: true
+        description: code
+      - schema:
+          type: string
+        name: date
+        in: path
+        required: true
+        description: yyyy-mm-dd
+    get:
+      summary: Single Almanax Date
+      tags:
+        - almanax
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Almanax-Entry"
+              examples:
+                9/11:
+                  value:
+                    bonus:
+                      description: "Les quantités de ressources récupérées par les récolteurs et les chasseurs sont augmentées de 50 % dans toutes les zones influencées par une anomalie temporelle. De plus, les gains d'expérience et les chances d'obtenir du butin sont augmentés de 25 % dans la zone du Sanctuaire des Dragoeufs."
+                      type:
+                        id: reward-bonus
+                        name: Bonus des anomalies
+                    date: "2022-09-11"
+                    tribute:
+                      item:
+                        ankama_id: 8362
+                        image_urls:
+                          hd: "https://api.dofusdu.de/dofus2/img/item/59611-800.png"
+                          hq: "https://api.dofusdu.de/dofus2/img/item/59611-400.png"
+                          icon: "https://api.dofusdu.de/dofus2/img/item/59611.png"
+                          sd: "https://api.dofusdu.de/dofus2/img/item/59611-200.png"
+                        name: Peau de Dragnarok
+                        subtype: resources
+                      quantity: 2
+      operationId: get-almanax-date
+      description: Get a single date. There are not more details in the returned object than the normal range endpoint.
   /meta/elements:
     get:
       summary: Effects and Condition Elements
@@ -2461,6 +2621,57 @@ paths:
       operationId: get-meta-elements
       description: Get the mappings for all specific elements that are linked in the dataset. All names are english. Translations are not needed because of a global unique id which is the index inside the array. Future elements will get a higher id.
       parameters: []
+  "/meta/{language}/almanax/bonuses":
+    get:
+      summary: Available Almanax Bonuses
+      tags:
+        - meta
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                x-examples:
+                  example-1:
+                    - id: reward-bonus
+                      name: Reward Bonus
+                    - id: loot
+                      name: Loot
+                    - id: plenty-of-fish
+                      name: Plenty of fish
+              examples:
+                en:
+                  value:
+                    - id: reward-bonus
+                      name: Reward Bonus
+                    - id: loot
+                      name: Loot
+                    - id: plenty-of-fish
+                      name: Plenty of fish
+      operationId: get-meta-almanax-bonuses
+      description: Get all the available bonuses and their id for filtering them in the range endpoint.
+      parameters: []
+    parameters:
+      - schema:
+          type: string
+          enum:
+            - en
+            - fr
+            - de
+            - it
+            - es
+        name: language
+        in: path
+        required: true
 components:
   schemas:
     Items-List-Entry-Typed:
@@ -2931,9 +3142,44 @@ components:
               type: integer
             name:
               type: string
+    Almanax-Entry:
+      type: object
+      x-examples: {}
+      properties:
+        bonus:
+          type: object
+          properties:
+            description:
+              type: string
+            type:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+        date:
+          type: string
+        tribute:
+          type: object
+          properties:
+            item:
+              type: object
+              properties:
+                ankama_id:
+                  type: integer
+                image_urls:
+                  $ref: "#/components/schemas/Image-Urls"
+                name:
+                  type: string
+                subtype:
+                  type: string
+            quantity:
+              type: integer
   securitySchemes: {}
 tags:
   - name: all items
+  - name: almanax
   - name: consumables
   - name: cosmetics
   - name: equipment
