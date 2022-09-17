@@ -1859,7 +1859,6 @@ paths:
           description: only results where the equipment with the highest level is below or equal to this value
         - schema:
             type: integer
-            example: -1
             minimum: -1
           in: query
           name: "page[size]"
@@ -2047,7 +2046,6 @@ paths:
         - schema:
             type: integer
             minimum: -1
-            example: -1
           in: query
           name: "page[size]"
           description: size of the results from the list. -1 disables pagination and gets all in one response.
