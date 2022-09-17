@@ -1859,10 +1859,11 @@ paths:
           description: only results where the equipment with the highest level is below or equal to this value
         - schema:
             type: integer
-            minimum: 0
+            example: -1
+            minimum: -1
           in: query
           name: "page[size]"
-          description: size of the results from the list
+          description: size of the results from the list. -1 disables pagination and gets all in one response.
         - schema:
             type: integer
             minimum: 0
@@ -1945,10 +1946,10 @@ paths:
           description: only results with the translated family name
         - schema:
             type: integer
-            minimum: 0
+            minimum: -1
           in: query
           name: "page[size]"
-          description: size of the results from the list
+          description: size of the results from the list. -1 disables pagination and gets all in one response.
         - schema:
             type: integer
             minimum: 0
@@ -2045,17 +2046,23 @@ paths:
           description: only results which level is equal or below this value
         - schema:
             type: integer
-            maximum: 32
-            minimum: 0
+            minimum: -1
+            example: -1
           in: query
           name: "page[size]"
-          description: size of the results from the list
+          description: size of the results from the list. -1 disables pagination and gets all in one response.
         - schema:
             type: integer
             minimum: 0
           in: query
           name: "page[number]"
           description: "page number based on the current page[size]. So you could get page 1 with 8 entrys and page 2 would have entries 8 to 16."
+        - schema:
+            type: string
+            example: recipe
+          in: query
+          name: "fields[item]"
+          description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
       tags:
         - equipment
   "/{language}/items/resources":
@@ -2141,16 +2148,22 @@ paths:
           description: only results which level is equal or below this value
         - schema:
             type: integer
-            minimum: 0
+            minimum: -1
           in: query
           name: "page[size]"
-          description: size of the results from the list
+          description: size of the results from the list. -1 disables pagination and gets all in one response.
         - schema:
             type: integer
             minimum: 0
           in: query
           name: "page[number]"
           description: "page number based on the current page[size]. So you could get page 1 with 8 entrys and page 2 would have entries 8 to 16."
+        - schema:
+            type: string
+            example: recipe
+          in: query
+          name: "fields[item]"
+          description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
   "/{language}/items/consumables":
     parameters:
       - schema:
@@ -2242,15 +2255,22 @@ paths:
           description: only results which level is equal or below this value
         - schema:
             type: integer
+            minimum: -1
           in: query
           name: "page[size]"
-          description: size of the results from the list
+          description: size of the results from the list. -1 disables pagination and gets all in one response.
         - schema:
             type: integer
             minimum: 0
           in: query
           name: "page[number]"
           description: "page number based on the current page[size]. So you could get page 1 with 8 entrys and page 2 would have entries 8 to 16."
+        - schema:
+            type: string
+            example: recipe
+          in: query
+          description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
+          name: "fields[item]"
   "/{language}/items/quest":
     parameters:
       - schema:
@@ -2335,16 +2355,22 @@ paths:
           description: only results which level is equal or below this value
         - schema:
             type: integer
-            minimum: 0
+            minimum: -1
           in: query
           name: "page[size]"
-          description: size of the results from the list
+          description: size of the results from the list. -1 disables pagination and gets all in one response.
         - schema:
             type: integer
             minimum: 0
           in: query
           description: "page number based on the current page[size]. So you could get page 1 with 8 entrys and page 2 would have entries 8 to 16."
           name: "page[number]"
+        - schema:
+            type: string
+            example: recipe
+          in: query
+          description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
+          name: "fields[item]"
   "/{language}/items/cosmetics":
     parameters:
       - schema:
@@ -2429,16 +2455,22 @@ paths:
           description: only results which level is equal or below this value
         - schema:
             type: integer
-            minimum: 0
+            minimum: -1
           in: query
           name: "page[size]"
-          description: size of the results from the list
+          description: size of the results from the list. -1 disables pagination and gets all in one response.
         - schema:
             type: integer
             minimum: 0
           in: query
           name: "page[number]"
           description: "page number based on the current page[size]. So you could get page 1 with 8 entrys and page 2 would have entries 8 to 16."
+        - schema:
+            type: string
+            example: recipe
+          in: query
+          description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
+          name: "fields[item]"
   "/{language}/almanax":
     parameters:
       - schema:
