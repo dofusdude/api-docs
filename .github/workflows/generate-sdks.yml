@@ -12,19 +12,35 @@ jobs:
     name: Generate js sdk
     steps:
 
-      - name: Checkout
+      - name: Checkout OpenAPI
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+          
+      - name: Checkout js sdk
+        uses: actions/checkout@v2
+        with:
+          repository: dofusdude/js-lib-test
+          path: javascript-client
 
-      - name: Generate JS Client
+      - name: Generate JS sdk
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: javascript
           openapi-file: openapi-3.0.yaml
           
-      - name: Push to Repo
+      - name: Commit js sdk
+        run: |
+          cd javascript-client
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Add changes" -a
+          
+      - name: Push js sdk
         uses: ad-m/github-push-action@v0.6.0
         with:
-          github_token: ${{ secrets.PUSH_GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           repository: dofusdude/js-lib-test
           branch: main
           force: true
