@@ -24,7 +24,7 @@ jobs:
       - name: Push to Repo
         uses: ad-m/github-push-action@v0.6.0
         with:
-          github_token: ${{ secrets.PUSH_GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           repository: dofusdude/js-lib-test
           branch: main
           force: true
