@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  generate-angular-client:
+  generate-js-client:
     runs-on: ubuntu-latest
     name: Generate js sdk
     steps:
@@ -52,4 +52,49 @@ jobs:
           destination-repository-name: 'dofusdude-js'
           user-email: stelzo@steado.de
           target-branch: main
-  
+          
+  generate-ts-client:
+    runs-on: ubuntu-latest
+    name: Generate ts sdk
+    steps:
+
+      - name: Checkout OpenAPI
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Generate TS sdk
+        uses: openapi-generators/openapitools-generator-action@v1
+        with:
+          generator: typescript-axios
+          openapi-file: openapi-3.0.yaml
+          command-args: --additional-properties=npmName=dofusdude-ts
+      
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.4.1
+        with:
+          node-version: 16.x
+      
+      - name: Generate package-lock.json
+        run: |
+          cp -r typescript-axios-client typescript-axios-client-cp
+          cd typescript-axios-client-cp
+          npm i
+          cp package-lock.json ../typescript-axios-client/package-lock.json
+          cd ../typescript-axios-client
+          mkdir -p .github/workflows/
+          printf '%s\n' 'name: Node.js CI' 'on:' '  push:' '    branches: [ "main" ]' '  pull_request:' '    branches: [ "main" ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    strategy:' '      matrix:' '        node-version: [14.x, 16.x, 18.x]' '    steps:' '    - uses: actions/checkout@v3' '    - name: Use Node.js ${{ matrix.node-version }}' '      uses: actions/setup-node@v3' '      with:' '        node-version: ${{ matrix.node-version }}' '        cache: npm' '    - run: npm ci' '    - run: npm run build --if-present' '' > .github/workflows/build.yml
+          cd ..
+
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY_TS }}
+          API_TOKEN_GITHUB: ${{ secrets.PUSH_GITHUB_TOKEN }}
+        with:
+          source-directory: 'typescript-axios-client'
+          destination-github-username: 'dofusdude'
+          destination-repository-name: 'dofusdude-ts'
+          user-email: stelzo@steado.de
+          target-branch: main
