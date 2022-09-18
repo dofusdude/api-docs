@@ -1,19 +1,17 @@
 openapi: 3.0.0
 info:
-  title: Dofusdude API
-  version: "0.5"
-  description: "The last API for everything Dofus <span style=\"font-size:1.8rem;\">\U0001F92F</span>\n<h2>Main Features</h2>\n<ul>\n<li><span style=\"font-size:1.8rem;\">\U0001F977</span> <b>seamless auto-update</b> load data in the background when a new Dofus version is released and serving it within 2 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.</li>\n\n<li><span style=\"font-size:1.8rem;\">⚡</span> <b>blazingly fast</b> all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in <span style=\"font-size:1.8rem;\">\U0001F1E9\U0001F1EA</span>.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001FA78</span> <b>Dofus 2 Beta</b> from stable to bleeding edge by replacing /dofus2 with /dofus2beta.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F5E3️</span> <b>multilingual</b> supporting <em>en</em>, <em>fr</em>, <em>es</em>, <em>pt</em> including the dropped languages from the Dofus website <em>de</em> and <em>it</em>.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F9E0</span> <b>search by relevance</b> allowing typos in name and description, handled by language specific text analysis and indexing by the powerful <a href=\"https://www.meilisearch.com\">Meilisearch</a> written in Rust.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F575️</span> <b>complete</b> actual data from the game including items invisible to the encyclopedia like quest items.</li>\n\n<li><span style=\"font-size:1.8rem;\">\U0001F5BC️</span> <b>HD images</b> rendering vector graphics into PNGs up to 800x800 px in the background.</li>\n\n</ul>\n\n\n<h2>Current state</h2>\n<div style=\"display:flex;justify-content:space-around;flex-wrap:wrap\">\n<ul style=\"font-size:1.6rem;\">\n<li>Weapons ✅</li>\n<li>Equipment ✅</li>\n<li>Sets ✅</li>\n<li>Resources ✅</li>\n<li>Consumables ✅</li>\n<li>Pets ✅</li>\n<li>Mounts ✅</li>\n<li>Cosmetics/Ceremonial Items ✅</li>\n<li>Harnesses ✅</li>\n<li>Quest Items ✅</li>\n<li>Almanax ✅</li>\n</ul>\n\n<ul style=\"font-size:1.6rem;\">\n<li>Monsters ❌</li>\n<li>Classes ❌</li>\n<li>Spells ❌</li>\n<li>Professions ❌ </li>\n</ul>\n</div>\n\n\n<h3>Maybes? I don't know what for <span style=\"font-size:1.8rem;\">\U0001F937</span></h3>\n<ul>\n<li>Sidekicks ❌</li>\n<li>Haven Bags ❌</li>\n<li>Map ❌</li>\n</ul>\n\n\n<h2>Future</h2>\nI want this project to be useful and not just add plain categories no one needs. More and more features will be added to enhance the quality based on the needs of you, the developers.\n<br>Examples:\n<p><em>I need to know where I can drop the all the items I need to craft set X!</em></p>\n<p><em>Please get a detailed always up-to-date spell description so I can calculate the damage for my set builder site!</em></p>\n<p>Nearly everything can be done. But I want to make sure somebody also wants it.\nIf you have anything or you are just interested in the project, join the <a href=\"https://discord.gg/3EtHskZD8h\">Discord</a>.</p>\n\n<h3>Versioning</h3>\n<p>Updating an API is a hard problem. This is why we'll keep it simple: \nEverything you see here on this site, you can use now and forever. Updates could introduce new fields, new paths or parameter but never break backwards compatibility, so no field or parameter will be deleted. Ever.\n</p>\n<p>There is one exception! <b>The API will <em>always</em> choose being up-to-date over everything else</b>. So if Ankama decides to drop languages from the game like they did with their website, the API will loose support for them, too.\n</p>\n<p>\nWe can prevent this specific use case with a nice community but even then, it would be hidden behind a feature flag.\n</p>\n\n<h2>Get started! \U0001F973</h2>\n<p>Scroll down and try it for yourself!</p>\n<p>If you are ready to use them in your project, think about <a href=\"https://github.com/OpenAPITools/openapi-generator\">generating a client <span style=\"font-size:1.8rem;\">\U0001F9D9</span></a> from the <a href=\"https://raw.githubusercontent.com/dofusdude/api-docs/main/openapi-3.0.yaml\">OpenAPI 3.0 Spec</a> to get started quickly.</p>\n\n<p>Awesome Projects using this API:</p>\n<ul>\n<li><a href=\"https://github.com/Kaysoro/KaellyBot\">KaellyBot</a> by Kaysoro</li>\n<li><a href=\"https://dofuscraftlist-dev.netlify.app\">Dofus Craftlist</a> by Lystina</li>\n<li><a href=\"https://almanaxapp.netlify.app\">AlmanaxApp</a> by Lystina</li>\n<li><a href=\"https://luwnarya.fr\">luwnarya.fr</a></li>\n</ul>\n\nMy old <a href=\"https://alm.dofusdu.de/swagger\">Almanax API v1</a> is an example for using a <a href=\"https://github.com/dofusdude/almanax-api/tree/main/src/main/java/org/acme/openapi\">generated Client</a> from the OpenAPI Spec.\n\n"
+  title: Dofusdude
+  version: 0.5.1
+  description: "The last API for everything Dofus \U0001F92F\n<h2>Main Features</h2>\n<ul>\n<li>\U0001F977 <b>seamless auto-update</b> load data in the background when a new Dofus version is released and serving it within 2 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.</li>\n\n<li>⚡ <b>blazingly fast</b> all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in \U0001F1E9\U0001F1EA.</li>\n\n<li>\U0001FA78 <b>Dofus 2 Beta</b> from stable to bleeding edge by replacing /dofus2 with /dofus2beta.</li>\n\n<li>\U0001F5E3️ <b>multilingual</b> supporting <em>en</em>, <em>fr</em>, <em>es</em>, <em>pt</em> including the dropped languages from the Dofus website <em>de</em> and <em>it</em>.</li>\n\n<li>\U0001F9E0 <b>search by relevance</b> allowing typos in name and description, handled by language specific text analysis and indexing by the powerful <a href=\"https://www.meilisearch.com\">Meilisearch</a> written in Rust.</li>\n\n<li>\U0001F575️ <b>complete</b> actual data from the game including items invisible to the encyclopedia like quest items.</li>\n\n<li>\U0001F5BC️ <b>HD images</b> rendering vector graphics into PNGs up to 800x800 px in the background.</li>\n\n</ul>\n\n\n<h2>Current state</h2>\n<ul>\n<li>Weapons ✅</li>\n<li>Equipment ✅</li>\n<li>Sets ✅</li>\n<li>Resources ✅</li>\n<li>Consumables ✅</li>\n<li>Pets ✅</li>\n<li>Mounts ✅</li>\n<li>Cosmetics/Ceremonial Items ✅</li>\n<li>Harnesses ✅</li>\n<li>Quest Items ✅</li>\n<li>Almanax ✅</li>\n</ul>\n\n<ul>\n<li>Monsters ❌</li>\n<li>Classes ❌</li>\n<li>Spells ❌</li>\n<li>Professions ❌ </li>\n</ul>\n\n\n<h3>Maybes? I don't know what for \U0001F937</h3>\n<ul>\n<li>Sidekicks ❌</li>\n<li>Haven Bags ❌</li>\n<li>Map ❌</li>\n</ul>\n\n\n<h2>Future</h2>\nI want this project to be useful and not just add plain categories no one needs. More and more features will be added to enhance the quality based on the needs of you, the developers.\n<br>Examples:\n<p><em>I need to know where I can drop the all the items I need to craft set X!</em></p>\n<p><em>Please get a detailed always up-to-date spell description so I can calculate the damage for my set builder site!</em></p>\n<p>Nearly everything can be done. But I want to make sure somebody also wants it.\nIf you have anything or you are just interested in the project, join the <a href=\"https://discord.gg/3EtHskZD8h\">Discord</a>.</p>\n\n<h3>Versioning</h3>\n<p>Updating an API is a hard problem. This is why we'll keep it simple: \nEverything you see here on this site, you can use now and forever. Updates could introduce new fields, new paths or parameter but never break backwards compatibility, so no field or parameter will be deleted. Ever.\n</p>\n<p>There is one exception! <b>The API will <em>always</em> choose being up-to-date over everything else</b>. So if Ankama decides to drop languages from the game like they did with their website, the API will loose support for them, too.\n</p>\n<p>\nWe can prevent this specific use case with a nice community but even then, it would be hidden behind a feature flag.\n</p>\n\n<h2>Get started! \U0001F973</h2>\n<p>Scroll down and try it for yourself!</p>\n<p>If you are ready to use them in your project, think about <a href=\"https://github.com/OpenAPITools/openapi-generator\">generating a client \U0001F9D9</a> from the <a href=\"https://raw.githubusercontent.com/dofusdude/api-docs/main/openapi-3.0.yaml\">OpenAPI 3.0 Spec</a> to get started quickly.</p>\n\n<p>Awesome Projects using this API:</p>\n<ul>\n<li><a href=\"https://github.com/Kaysoro/KaellyBot\">KaellyBot</a> by Kaysoro</li>\n<li><a href=\"https://dofuscraftlist-dev.netlify.app\">Dofus Craftlist</a> by Lystina</li>\n<li><a href=\"https://almanaxapp.netlify.app\">AlmanaxApp</a> by Lystina</li>\n<li><a href=\"https://luwnarya.fr\">luwnarya.fr</a></li>\n</ul>\n\nMy old <a href=\"https://alm.dofusdu.de/swagger\">Almanax API v1</a> is an example for using a <a href=\"https://github.com/dofusdude/almanax-api/tree/main/src/main/java/org/acme/openapi\">generated Client</a> from the OpenAPI Spec.\n\n"
   contact:
     name: Survival
     url: "https://discord.gg/3EtHskZD8h"
     email: stelzo@steado.de
 servers:
-  - url: "https://api.dofusdu.de/dofus2"
-    description: Dofus 2.x
-  - url: "https://api.dofusdu.de/dofus2beta"
-    description: Dofus 2.x beta
+  - url: "https://api.dofusdu.de"
+    description: API
 paths:
-  "/{language}/items/search":
+  "/{game}/{language}/items/search":
     parameters:
       - schema:
           type: string
@@ -30,6 +28,15 @@ paths:
         in: path
         required: true
         description: a valid language code
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: Search All Items
       responses:
@@ -105,7 +112,7 @@ paths:
           description: only results which level is equal or below this value
       tags:
         - all items
-  "/{language}/mounts/search":
+  "/{game}/{language}/mounts/search":
     parameters:
       - schema:
           type: string
@@ -122,6 +129,15 @@ paths:
         in: path
         required: true
         description: a valid language code
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: Search Mounts
       tags:
@@ -182,7 +198,7 @@ paths:
           in: query
           name: "filter[family_name]"
           description: only results with the translated family name
-  "/{language}/sets/search":
+  "/{game}/{language}/sets/search":
     parameters:
       - schema:
           type: string
@@ -199,6 +215,15 @@ paths:
         in: path
         required: true
         description: a valid language code
+      - schema:
+          type: string
+          example: dofus2
+          enum:
+            - dofus2
+            - dofus2beta
+        name: game
+        in: path
+        required: true
     get:
       summary: Search Sets
       responses:
@@ -259,7 +284,7 @@ paths:
           description: only results where the equipment with the highest level is below or equal to this value
       tags:
         - sets
-  "/{language}/items/quest/search":
+  "/{game}/{language}/items/quest/search":
     parameters:
       - schema:
           type: string
@@ -276,6 +301,15 @@ paths:
         in: path
         required: true
         description: a valid language code
+      - schema:
+          type: string
+          example: dofus2
+          enum:
+            - dofus2
+            - dofus2beta
+        name: game
+        in: path
+        required: true
     get:
       summary: Search Quest Items
       tags:
@@ -349,7 +383,7 @@ paths:
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
-  "/{language}/items/consumables/search":
+  "/{game}/{language}/items/consumables/search":
     parameters:
       - schema:
           type: string
@@ -366,6 +400,15 @@ paths:
         in: path
         required: true
         description: a valid language code
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: Search Consumables
       responses:
@@ -440,7 +483,7 @@ paths:
           description: only results which level is equal or below this value
       tags:
         - consumables
-  "/{language}/items/resources/search":
+  "/{game}/{language}/items/resources/search":
     parameters:
       - schema:
           type: string
@@ -457,6 +500,15 @@ paths:
         in: path
         required: true
         description: a valid language code
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: Search Resources
       tags:
@@ -530,7 +582,7 @@ paths:
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
-  "/{language}/items/equipment/search":
+  "/{game}/{language}/items/equipment/search":
     parameters:
       - schema:
           type: string
@@ -547,6 +599,15 @@ paths:
         in: path
         required: true
         description: a valid language code
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: Search Equipment
       tags:
@@ -620,7 +681,7 @@ paths:
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
-  "/{language}/items/cosmetics/search":
+  "/{game}/{language}/items/cosmetics/search":
     parameters:
       - schema:
           type: string
@@ -637,6 +698,15 @@ paths:
         in: path
         required: true
         description: a valid language code
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: Search Cosmetics
       tags:
@@ -710,7 +780,7 @@ paths:
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
-  "/{language}/items/cosmetics/{ankama_id}":
+  "/{game}/{language}/items/cosmetics/{ankama_id}":
     parameters:
       - schema:
           type: string
@@ -734,6 +804,15 @@ paths:
         in: path
         required: true
         description: identifier
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: Single Cosmetics
       tags:
@@ -807,7 +886,7 @@ paths:
       description: Retrieve a specific cosmetic item with id.
       parameters: []
       x-internal: false
-  "/{language}/items/resources/{ankama_id}":
+  "/{game}/{language}/items/resources/{ankama_id}":
     parameters:
       - schema:
           type: string
@@ -831,6 +910,15 @@ paths:
         in: path
         required: true
         description: identifier
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: Single Resources
       tags:
@@ -882,7 +970,7 @@ paths:
       operationId: get-items-resources-single
       description: Retrieve a specific resource item with id.
       parameters: []
-  "/{language}/items/equipment/{ankama_id}":
+  "/{game}/{language}/items/equipment/{ankama_id}":
     parameters:
       - schema:
           type: string
@@ -906,6 +994,15 @@ paths:
         in: path
         required: true
         description: identifier
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: Single Equipment
       tags:
@@ -1323,7 +1420,7 @@ paths:
       operationId: get-items-equipment-single
       description: Retrieve a specific equipment item with id.
       parameters: []
-  "/{language}/items/consumables/{ankama_id}":
+  "/{game}/{language}/items/consumables/{ankama_id}":
     parameters:
       - schema:
           type: string
@@ -1347,6 +1444,15 @@ paths:
         in: path
         required: true
         description: identifier
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: Single Consumables
       tags:
@@ -1411,7 +1517,7 @@ paths:
       operationId: get-items-consumables-single
       description: Retrieve a specific consumable item with id.
       parameters: []
-  "/{language}/items/quest/{ankama_id}":
+  "/{game}/{language}/items/quest/{ankama_id}":
     parameters:
       - schema:
           type: string
@@ -1435,6 +1541,15 @@ paths:
         in: path
         required: true
         description: identifier
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: Single Quest Items
       responses:
@@ -1481,7 +1596,7 @@ paths:
       parameters: []
       tags:
         - quest items
-  "/{language}/mounts/{ankama_id}":
+  "/{game}/{language}/mounts/{ankama_id}":
     parameters:
       - schema:
           type: string
@@ -1505,6 +1620,15 @@ paths:
         in: path
         required: true
         description: identifier
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: Single Mounts
       tags:
@@ -1571,7 +1695,7 @@ paths:
       operationId: get-mounts-single
       description: Retrieve a specific mount with id.
       parameters: []
-  "/{language}/sets/{ankama_id}":
+  "/{game}/{language}/sets/{ankama_id}":
     parameters:
       - schema:
           type: string
@@ -1595,6 +1719,15 @@ paths:
         in: path
         required: true
         description: identifier
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: Single Sets
       tags:
@@ -1728,7 +1861,7 @@ paths:
       operationId: get-sets-single
       description: Retrieve a specific set with id.
       parameters: []
-  "/{language}/sets":
+  "/{game}/{language}/sets":
     parameters:
       - schema:
           type: string
@@ -1745,6 +1878,15 @@ paths:
         in: path
         required: true
         description: a valid language code
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: List Sets
       tags:
@@ -1869,7 +2011,7 @@ paths:
           in: query
           name: "page[number]"
           description: "page number based on the current page[size]. So you could get page 1 with 8 entrys and page 2 would have entries 8 to 16."
-  "/{language}/mounts":
+  "/{game}/{language}/mounts":
     parameters:
       - schema:
           type: string
@@ -1886,6 +2028,15 @@ paths:
         in: path
         required: true
         description: a valid language code
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: List Mounts
       tags:
@@ -1955,7 +2106,7 @@ paths:
           in: query
           name: "page[number]"
           description: "page number based on the current page[size]. So you could get page 1 with 8 entrys and page 2 would have entries 8 to 16."
-  "/{language}/items/equipment":
+  "/{game}/{language}/items/equipment":
     parameters:
       - schema:
           type: string
@@ -1972,6 +2123,15 @@ paths:
         in: path
         required: true
         description: a valid language code
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: List Equipment
       responses:
@@ -2063,7 +2223,7 @@ paths:
           description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
       tags:
         - equipment
-  "/{language}/items/resources":
+  "/{game}/{language}/items/resources":
     parameters:
       - schema:
           type: string
@@ -2080,6 +2240,15 @@ paths:
         in: path
         required: true
         description: a valid language code
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: List Resources
       tags:
@@ -2162,7 +2331,7 @@ paths:
           in: query
           name: "fields[item]"
           description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
-  "/{language}/items/consumables":
+  "/{game}/{language}/items/consumables":
     parameters:
       - schema:
           type: string
@@ -2179,6 +2348,15 @@ paths:
         in: path
         required: true
         description: a valid language code
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: List Consumables
       tags:
@@ -2269,7 +2447,7 @@ paths:
           in: query
           description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
           name: "fields[item]"
-  "/{language}/items/quest":
+  "/{game}/{language}/items/quest":
     parameters:
       - schema:
           type: string
@@ -2286,6 +2464,15 @@ paths:
         in: path
         required: true
         description: a valid language code
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: List Quest Items
       tags:
@@ -2369,7 +2556,7 @@ paths:
           in: query
           description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
           name: "fields[item]"
-  "/{language}/items/cosmetics":
+  "/{game}/{language}/items/cosmetics":
     parameters:
       - schema:
           type: string
@@ -2386,6 +2573,15 @@ paths:
         in: path
         required: true
         description: a valid language code
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
     get:
       summary: List Cosmetics
       tags:
@@ -2469,7 +2665,7 @@ paths:
           in: query
           description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
           name: "fields[item]"
-  "/{language}/almanax":
+  "/dofus2/{language}/almanax":
     parameters:
       - schema:
           type: string
@@ -2576,7 +2772,7 @@ paths:
           in: query
           name: timezone
           description: 'determine what the current time is. If you live in Brazil, "today" will be hours apart from Paris. Use your timezone to get results relative to your location.'
-  "/{language}/almanax/{date}":
+  "/dofus2/{language}/almanax/{date}":
     parameters:
       - schema:
           type: string
@@ -2629,7 +2825,7 @@ paths:
                       quantity: 2
       operationId: get-almanax-date
       description: Get a single date. There are not more details in the returned object than the normal range endpoint.
-  /meta/elements:
+  /dofus2/meta/elements:
     get:
       summary: Effects and Condition Elements
       tags:
@@ -2651,7 +2847,8 @@ paths:
       operationId: get-meta-elements
       description: Get the mappings for all specific elements that are linked in the dataset. All names are english. Translations are not needed because of a global unique id which is the index inside the array. Future elements will get a higher id.
       parameters: []
-  "/meta/{language}/almanax/bonuses":
+    parameters: []
+  "/dofus2/meta/{language}/almanax/bonuses":
     get:
       summary: Available Almanax Bonuses
       tags:
@@ -3017,12 +3214,16 @@ components:
       properties:
         first:
           type: string
+          nullable: true
         prev:
           type: string
+          nullable: true
         next:
           type: string
+          nullable: true
         last:
           type: string
+          nullable: true
     Condition-Entry:
       title: ""
       x-stoplight:
