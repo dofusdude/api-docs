@@ -17,32 +17,22 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-          
-      - name: Checkout js sdk
-        uses: actions/checkout@v2
-        with:
-          repository: dofusdude/js-lib-test
-          path: javascript-client
 
       - name: Generate JS sdk
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: javascript
           openapi-file: openapi-3.0.yaml
-          
-      - name: Commit js sdk
-        run: |
-          cd javascript-client
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git commit -m "Add changes" -a
-          
-      - name: Push js sdk
-        uses: ad-m/github-push-action@v0.6.0
+
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+          API_TOKEN_GITHUB: ${{ secrets.PUSH_GITHUB_TOKEN }}
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          repository: dofusdude/js-lib-test
-          branch: main
-          force: true
-          directory: javascript-client
+          source-directory: 'javascript-client'
+          destination-github-username: 'dofusdude'
+          destination-repository-name: 'dofusdude-js'
+          user-email: stelzo@steado.de
+          target-branch: main
   
