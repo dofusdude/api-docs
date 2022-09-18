@@ -1,0 +1,32 @@
+name: Generate SDKs
+
+on:
+  push:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  generate-angular-client:
+    runs-on: ubuntu-latest
+    name: Generate js sdk
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Generate JS Client
+        uses: openapi-generators/openapitools-generator-action@v1
+        with:
+          generator: javascript
+          openapi-file: openapi-3.0.yaml
+          
+      - name: Push to Repo
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.PUSH_GITHUB_TOKEN }}
+          repository: dofusdude/js-lib-test
+          branch: main
+          force: true
+          directory: javascript-client
+  
