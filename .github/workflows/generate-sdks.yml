@@ -37,7 +37,7 @@ jobs:
           cp package-lock.json ../javascript-client/package-lock.json
           cd ../javascript-client
           mkdir -p .github/workflows/
-          echo 'name: Node.js CI \non:\n  push:\n    branches: [ "main" ]\n  pull_request:\n    branches: [ "main" ]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        node-version: [14.x, 16.x, 18.x]\n    steps:\n    - uses: actions/checkout@v3\n    - name: Use Node.js ${{ matrix.node-version }}\n      uses: actions/setup-node@v3\n      with:\n        node-version: ${{ matrix.node-version }}\n        cache: 'npm'\n    - run: npm ci\n    - run: npm run build --if-present\n    - run: npm test\n' >> .github/workflows/testing.yml
+          printf '%s\n' 'name: Node.js CI' 'on:' '  push:' '    branches: [ "main" ]' '  pull_request:' '    branches: [ "main" ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    strategy:' '      matrix:' '        node-version: [14.x, 16.x, 18.x]' '    steps:' '    - uses: actions/checkout@v3' '    - name: Use Node.js ${{ matrix.node-version }}' '      uses: actions/setup-node@v3' '      with:' '        node-version: ${{ matrix.node-version }}' '        cache: npm' '    - run: npm ci' '    - run: npm run build --if-present' '    - run: npm test' '' > .github/workflows/testing.yml
           cd ..
 
       - name: Pushes to another repository
