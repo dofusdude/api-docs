@@ -34,7 +34,7 @@ jobs:
           cp -r javascript-client javascript-client-cp
           cd javascript-client-cp
           npm i
-          cp package-log.json ./javascript-client/package-log.json
+          cp package-lock.json ./javascript-client/package-lock.json
           cd ..
 
       - name: Pushes to another repository
