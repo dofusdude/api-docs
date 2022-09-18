@@ -29,12 +29,12 @@ jobs:
         with:
           node-version: 16.x
       
-      - name: Generate package.log
+      - name: Generate package-lock.json
         run: |
           cp -r javascript-client javascript-client-cp
           cd javascript-client-cp
           npm i
-          cp package-lock.json ./javascript-client/package-lock.json
+          cp package-lock.json ../javascript-client/package-lock.json
           cd ..
 
       - name: Pushes to another repository
