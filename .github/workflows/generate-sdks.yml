@@ -23,6 +23,7 @@ jobs:
         with:
           generator: javascript
           openapi-file: openapi-3.0.yaml
+          command-args: --additional-properties=moduleName=dofusdude,projectName=dofusdude-js,licenseName=MIT
       
       - name: Setup Node.js environment
         uses: actions/setup-node@v3.4.1
