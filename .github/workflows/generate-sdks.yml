@@ -23,6 +23,19 @@ jobs:
         with:
           generator: javascript
           openapi-file: openapi-3.0.yaml
+      
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.4.1
+        with:
+          node-version: 16.x
+      
+      - name: Generate package.log
+        run: |
+          cp -r javascript-client javascript-client-cp
+          cd javascript-client-cp
+          npm i
+          cp package-log.json ./javascript-client/package-log.json
+          cd ..
 
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
