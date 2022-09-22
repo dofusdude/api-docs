@@ -41,6 +41,7 @@ jobs:
           printf '%s\n' 'name: Node.js CI' 'on:' '  push:' '    branches: [ "main" ]' '  pull_request:' '    branches: [ "main" ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    strategy:' '      matrix:' '        node-version: [14.x, 16.x, 18.x]' '    steps:' '    - uses: actions/checkout@v3' '    - name: Use Node.js ${{ matrix.node-version }}' '      uses: actions/setup-node@v3' '      with:' '        node-version: ${{ matrix.node-version }}' '        cache: npm' '    - run: npm ci' '    - run: npm run build --if-present' '    - run: npm test' '' > .github/workflows/testing.yml
           printf '%s\n' 'name: Node.js Package' 'on:' '  release:' '    types: [created]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '      - uses: actions/checkout@v3' '      - uses: actions/setup-node@v3' '        with:' '          node-version: 16' '      - run: npm ci' '      - run: npm test' '  publish-npm:' '    needs: build' '    runs-on: ubuntu-latest' '    steps:' '      - uses: actions/checkout@v3' '      - uses: actions/setup-node@v3' '        with:' '          node-version: 16' '          registry-url: https://registry.npmjs.org/' '      - run: npm ci' '      - run: npm publish' '        env:' '          NODE_AUTH_TOKEN: secrets.NPM_TOKEN' > .github/workflows/publish.yml 
           sed -i 's/secrets.NPM_TOKEN/\$\{\{secrets.NPM_TOKEN\}\}/g' .github/workflows/publish.yml
+          sed -i 's/\\"/"/g' README.md
           cd ..
 
       - name: Pushes to another repository
@@ -89,6 +90,7 @@ jobs:
           printf '%s\n' 'name: Node.js CI' 'on:' '  push:' '    branches: [ "main" ]' '  pull_request:' '    branches: [ "main" ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    strategy:' '      matrix:' '        node-version: [14.x, 16.x, 18.x]' '    steps:' '    - uses: actions/checkout@v3' '    - name: Use Node.js ${{ matrix.node-version }}' '      uses: actions/setup-node@v3' '      with:' '        node-version: ${{ matrix.node-version }}' '        cache: npm' '    - run: npm ci' '    - run: npm run build --if-present' '' > .github/workflows/build.yml
           printf '%s\n' 'name: Node.js Package' 'on:' '  release:' '    types: [created]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '      - uses: actions/checkout@v3' '      - uses: actions/setup-node@v3' '        with:' '          node-version: 16' '      - run: npm ci' '  publish-npm:' '    needs: build' '    runs-on: ubuntu-latest' '    steps:' '      - uses: actions/checkout@v3' '      - uses: actions/setup-node@v3' '        with:' '          node-version: 16' '          registry-url: https://registry.npmjs.org/' '      - run: npm ci' '      - run: npm publish' '        env:' '          NODE_AUTH_TOKEN: secrets.NPM_TOKEN' > .github/workflows/publish.yml 
           sed -i 's/secrets.NPM_TOKEN/\$\{\{secrets.NPM_TOKEN\}\}/g' .github/workflows/publish.yml
+          sed -i 's/\\"/"/g' README.md
           cd ..
 
       - name: Pushes to another repository
@@ -137,6 +139,7 @@ jobs:
           printf '%s\n' 'name: Go' 'on:' '  push:' '    branches: [ main ]' '  pull_request:' '    branches: [ main ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v2' '    - name: Set up Go' '      uses: actions/setup-go@v2' '      with:' '        go-version: 1.19' '    - name: Build' '      run: go build -v ./...' '    - name: Test' '      run: go test -v ./...' > .github/workflows/build.yml
           sed -i 's/GIT_USER_ID\/GIT_REPO_ID/\dofusdude\/dodugo/g' go.mod
           sed -i 's/GIT_USER_ID\/GIT_REPO_ID/\dofusdude\/dodugo/g' README.md
+          sed -i 's/\\"/"/g' README.md
           go get -u ./...
           go mod tidy
           cd ..
