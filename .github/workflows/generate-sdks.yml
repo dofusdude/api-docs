@@ -127,6 +127,9 @@ jobs:
         with:
           check-latest: true
           cache: true
+          go-version-file: go-client/go.mod
+          cache-dependency-path: go-client/go.sum
+          
     
       - name: Add actions
         run: |
