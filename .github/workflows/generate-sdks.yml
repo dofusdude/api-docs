@@ -102,3 +102,41 @@ jobs:
           destination-repository-name: 'dofusdude-ts'
           user-email: stelzo@steado.de
           target-branch: main
+          
+          
+  generate-go-client:
+    runs-on: ubuntu-latest
+    name: Generate go sdk
+    steps:
+
+      - name: Checkout OpenAPI
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Generate go sdk
+        uses: openapi-generators/openapitools-generator-action@v1
+        with:
+          generator: go
+          openapi-file: openapi-3.0.yaml
+          command-args: --additional-properties=packageName=dofusdude-go
+      
+      - name: Add actions
+        run: |
+          cd go-client
+          mkdir -p .github/workflows/
+          printf '%s\n' 'name: Go' 'on:' '  push:' '    branches: [ main ]' '  pull_request:' '    branches: [ main ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v2' '    - name: Set up Go' '      uses: actions/setup-go@v2' '      with:' '        go-version: 1.19' '    - name: Build' '      run: go build -v ./...' '    - name: Test' '      run: go test -v ./...' > .github/workflows/build.yml
+          cd ..
+
+      - name: Pushes to sdk repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY_GO }}
+          API_TOKEN_GITHUB: ${{ secrets.PUSH_GITHUB_TOKEN }}
+        with:
+          source-directory: 'go-client'
+          destination-github-username: 'dofusdude'
+          destination-repository-name: 'dofusdude-go'
+          user-email: stelzo@steado.de
+          target-branch: main
