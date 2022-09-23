@@ -155,3 +155,45 @@ jobs:
           destination-repository-name: 'dodugo'
           user-email: stelzo@steado.de
           target-branch: main
+          
+      
+  generate-python-client:
+    runs-on: ubuntu-latest
+    name: Generate python sdk
+    steps:
+
+      - name: Checkout OpenAPI
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+          
+      - name: OpenAPI API Version Print
+        uses: stelzo/openapi-api-version-print@v1
+        id: api-version-print
+        with:
+          specFile: openapi-3.0.yaml
+
+      - name: Generate python sdk
+        uses: openapi-generators/openapitools-generator-action@v1
+        with:
+          generator: python
+          openapi-file: openapi-3.0.yaml
+          command-args: --additional-properties=packageName=dofusdude-py,projectName=dofusdude,packageUrl=https://github.com/dofusdude/dofusdude-py,packageVersion=${{steps.api-version-print.outputs.apiVersion}}
+      
+      - name: Setup Python environment
+        uses: actions/setup-python@v4.2.0
+        with:
+          python-version: 3.8
+
+      - name: Pushes to sdk repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY_PY }}
+          API_TOKEN_GITHUB: ${{ secrets.PUSH_GITHUB_TOKEN }}
+        with:
+          source-directory: 'python-client'
+          destination-github-username: 'dofusdude'
+          destination-repository-name: 'dofusdude-py'
+          user-email: stelzo@steado.de
+          target-branch: main
