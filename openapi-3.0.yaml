@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
   title: Dofusdude
-  version: 0.5.5
-  description: "The last API for everything Dofus \U0001F92F\n\n### JS Quickstart\n```js\nvar dofusdude = require(\"dofusdude-js\");\n\nnew dofusdude.AllItemsApi().getItemsAllSearch(\n  \"en\",\n  \"dofus2\",\n  \"nidas\",\n  { filterTypeName: \"hat\" },\n  (err, data, response) => {\n    console.log(data[0]);\n  }\n);\n```\n\n### Client SDKs\n- [Javascript](https://github.com/dofusdude/dofusdude-js) npm i dofusdude-js --save\n- [Typescript](https://github.com/dofusdude/dofusdude-ts) npm i dofusdude-ts --save\n- [Go](https://github.com/dofusdude/dodugo) go get -u github.com/dofusdude/dodugo\n- [Python](https://github.com/dofusdude/dofusdude-py) pip install dofusdude\n\nEverything, including this site, is generated out of the [Docs Repo](https://github.com/dofusdude/api-docs). Consider it the Single Source of Truth. If there is a problem with the SDKs, create an issue at the Docs Repo.\n\n## Main Features\n- \U0001F977 **seamless auto-update** load data in the background when a new Dofus version is released and serving it within 2 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.\n\n- ⚡ **blazingly fast** all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in \U0001F1E9\U0001F1EA.\n\n- \U0001FA78 **Dofus 2 Beta** from stable to bleeding edge by replacing /dofus2 with /dofus2beta.\n\n- \U0001F5E3️ **multilingual** supporting _en_, _fr_, _es_, _pt_ including the dropped languages from the Dofus website _de_ and _it_.\n\n- \U0001F9E0 **search by relevance** allowing typos in name and description, handled by language specific text analysis and indexing by the powerful [Meilisearch](https://www.meilisearch.com) written in Rust.\n\n- \U0001F575️ **complete** actual data from the game including items invisible to the encyclopedia like quest items.\n\n- \U0001F5BC️ **HD images** rendering vector graphics into PNGs up to 800x800 px in the background.\n\n\n## Current state\n- Weapons ✅\n- Equipment ✅\n- Sets ✅\n- Resources ✅\n- Consumables ✅\n- Pets ✅\n- Mounts ✅\n- Cosmetics/Ceremonial Items ✅\n- Harnesses ✅\n- Quest Items ✅\n- Almanax ✅\n\n- Monsters ❌\n- Classes ❌\n- Spells ❌\n- Professions ❌\n\n\n### Maybes? I don't know what for \U0001F937\n- Sidekicks ❌\n- Haven Bags ❌\n- Map ❌\n\n\n## Future\nI want this project to be useful and not just add plain categories no one needs. More and more features will be added to enhance the quality based on the needs of you, the developers.\n\nExamples:\n_I need to know where I can drop the all the items I need to craft set X!_\n\n_Please get a detailed always up-to-date spell description so I can calculate the damage for my set builder site!_\n\nNearly everything can be done. But I want to make sure somebody also wants it.\n\nIf you have anything or you are just interested in the project, join the [Discord](https://discord.gg/3EtHskZD8h).\n\n### Versioning\nUpdating an API is a hard problem. This is why we'll keep it simple:\n\nEverything you see here on this site, you can use now and forever. Updates could introduce new fields, new paths or parameter but never break backwards compatibility, so no field or parameter will be deleted. Ever.\n\nThere is one exception! **The API will _always_ choose being up-to-date over everything else**. So if Ankama decides to drop languages from the game like they did with their website, the API will loose support for them, too.\n\nWe can prevent this specific use case with a nice community but even then, it would be hidden behind a feature flag.\n\n## Get started! \U0001F973\nScroll down and try it for yourself!\n\nIf you are ready to use them in your project, think about [generating a client \U0001F9D9](https://github.com/OpenAPITools/openapi-generator) or use one of our pre generated SDKs linked at the top.\n\nAwesome Projects using this API:\n\n- [KaellyBot](https://github.com/Kaysoro/KaellyBot) by Kaysoro\n- [Dofus Craftlist](https://dofuscraftlist-dev.netlify.app) by Lystina\n- [AlmanaxApp](https://almanaxapp.netlify.app) by Lystina\n- [luwnarya.fr](https://luwnarya.fr)\n\n"
+  version: 0.5.6
+  description: "# A project for you - the developer.\nThe free, always-up-to-date, low-latency, insert-buzzword-here Ankama API for your next cool project!\n\n## Client SDKs\nDon't write types or functions yourself - I already (kinda) did! \U0001F609\n- [Javascript](https://github.com/dofusdude/dofusdude-js) npm i dofusdude-js --save\n- [Typescript](https://github.com/dofusdude/dofusdude-ts) npm i dofusdude-ts --save\n- [Go](https://github.com/dofusdude/dodugo) go get -u github.com/dofusdude/dodugo\n- [Python](https://github.com/dofusdude/dofusdude-py) pip install dofusdude\n\nEverything, including this site, is generated out of the [Docs Repo](https://github.com/dofusdude/api-docs). Consider it the Single Source of Truth. If there is a problem with the SDKs, create an issue there.\n\nYour favorite language is missing? Please let me know!\n\n# Main Features\n- \U0001F977 **Seamless Auto-Update** load data in the background when a new Dofus version is released and serving it within 2 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.\n\n- ⚡ **Blazingly Fast** all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in \U0001F1E9\U0001F1EA.\n\n- \U0001FA78 **Dofus 2 Beta** from stable to bleeding edge by replacing /dofus2 with /dofus2beta.\n\n- \U0001F5E3️ **Multilingual** supporting _en_, _fr_, _es_, _pt_ including the dropped languages from the Dofus website _de_ and _it_.\n\n- \U0001F9E0 **Search by Relevance** allowing typos in name and description, handled by language specific text analysis and indexing by the powerful [Meilisearch](https://www.meilisearch.com) written in Rust.\n\n- \U0001F575️ **Complete** actual data from the game including items invisible to the encyclopedia like quest items.\n\n- \U0001F5BC️ **HD Images** rendering vector graphics into PNGs up to 800x800 px in the background.\n\n\n## Current state\n- Weapons ✅\n- Equipment ✅\n- Sets ✅\n- Resources ✅\n- Consumables ✅\n- Pets ✅\n- Mounts ✅\n- Cosmetics/Ceremonial Items ✅\n- Harnesses ✅\n- Quest Items ✅\n- Almanax ✅\n- Monsters ❌\n- Spells ❌\n\n... and much more on the Roadmap on my Discord. \n\n## Deploy now. Use forever.\nEverything you see here on this site, you can use now and forever. Updates could introduce new fields, new paths or parameter but never break backwards compatibility, so no field or parameter will be deleted.\n\nThere is one exception! **The API will _always_ choose being up-to-date over everything else**. So if Ankama decides to drop languages from the game like they did with their website, the API will loose support for them, too.\n\n## Only the beginning... \U0001F92F\nI want this project to be useful and not just add plain GET-categories no one needs.\n\nThere is a long list of features I want to add (see the Roadmap on my [Discord](https://discord.gg/3EtHskZD8h)). But they are all focussed on you, the developers. So please let me know what you need. I will change the list based on demand.\n\n# Get started! \U0001F973\nScroll down and try it for yourself!\n\nOr see how these other awesome projects use it:\n- [KaellyBot](https://github.com/Kaysoro/KaellyBot) by Kaysoro\n- [Dofus Craftlist](https://dofuscraftlist-dev.netlify.app) by Lystina\n- [AlmanaxApp](https://almanaxapp.netlify.app) by Lystina\n- [luwnarya.fr](https://luwnarya.fr)\n\nI highly recommend using the SDKs for quick results. I use them myself for microservices for the API.\n\n## Thank you!\nI highly welcome everyone on my [Discord](https://discord.gg/3EtHskZD8h) to just talk about projects and use cases or give feedback of any kind.\n\nThe servers have a fixed monthly cost to provide very fast responses. If you want to help me keeping them running or simply  donate, consider becoming a [GitHub Sponsor](https://github.com/sponsors/dofusdude).\n\n"
   contact:
     name: Survival
     url: "https://discord.gg/3EtHskZD8h"
@@ -90,23 +90,32 @@ paths:
       parameters:
         - schema:
             type: string
-            example: hat
+            example: atcham
           in: query
           name: query
           description: case sensitive search query
           required: true
         - schema:
             type: string
+            example: Bottes
           in: query
           name: "filter[type_name]"
           description: only results with the translated type name across all item_subtypes
         - schema:
             type: integer
+            format: int32
+            example: 190
+            maximum: 200
+            minimum: 0
           in: query
           name: "filter[min_level]"
           description: only results which level is equal or above this value
         - schema:
             type: integer
+            example: 200
+            maximum: 200
+            format: int32
+            minimum: 0
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
@@ -125,6 +134,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: fr
         name: language
         in: path
         required: true
@@ -187,14 +197,14 @@ paths:
       parameters:
         - schema:
             type: string
-            example: almond
+            example: Dorée
           in: query
           name: query
           description: case sensitive search query
           required: true
         - schema:
             type: string
-            example: rhineetle
+            example: Dragodinde
           in: query
           name: "filter[family_name]"
           description: only results with the translated family name
@@ -274,11 +284,19 @@ paths:
           required: true
         - schema:
             type: integer
+            minimum: 1
+            maximum: 200
+            format: int32
+            example: 195
           in: query
           name: "filter[min_highest_equipment_level]"
           description: only results where the equipment with the highest level is above or equal to this value
         - schema:
             type: integer
+            minimum: 1
+            maximum: 200
+            format: int32
+            example: 200
           in: query
           name: "filter[max_highest_equipment_level]"
           description: only results where the equipment with the highest level is below or equal to this value
@@ -297,6 +315,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: es
         name: language
         in: path
         required: true
@@ -363,23 +382,32 @@ paths:
       parameters:
         - schema:
             type: string
-            example: sufo
+            example: Ficha
           in: query
           name: query
           description: case sensitive search query
           required: true
         - schema:
             type: string
+            example: Justicieros
           in: query
           name: "filter[type_name]"
           description: only results with the translated type name
         - schema:
             type: integer
+            example: 60
+            minimum: 0
+            maximum: 200
+            format: int32
           in: query
           name: "filter[min_level]"
           description: only results which level is equal or above this value
         - schema:
             type: integer
+            format: int32
+            minimum: 0
+            maximum: 200
+            example: 70
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
@@ -460,24 +488,32 @@ paths:
       parameters:
         - schema:
             type: string
-            example: bar
+            example: Wholewrite
           in: query
           name: query
           description: case sensitive search query
           required: true
         - schema:
             type: string
-            example: beer
+            example: Bread
           in: query
           name: "filter[type_name]"
           description: only results with the translated type name
         - schema:
             type: integer
+            format: int32
+            maximum: 200
+            example: 1
+            minimum: 1
           in: query
           name: "filter[min_level]"
           description: only results which level is equal or above this value
         - schema:
             type: integer
+            format: int32
+            maximum: 200
+            minimum: 1
+            example: 200
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
@@ -562,23 +598,32 @@ paths:
       parameters:
         - schema:
             type: string
-            example: farak
+            example: snowdew
           in: query
           name: query
           description: case sensitive search query
           required: true
         - schema:
             type: string
+            example: plant
           in: query
           name: "filter[type_name]"
           description: only results with the translated type name
         - schema:
             type: integer
+            format: int32
+            minimum: 1
+            maximum: 200
+            example: 150
           in: query
           name: "filter[min_level]"
           description: only results which level is equal or above this value
         - schema:
             type: integer
+            format: int32
+            minimum: 1
+            maximum: 200
+            example: 200
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
@@ -668,16 +713,25 @@ paths:
           required: true
         - schema:
             type: string
+            example: boots
           in: query
           description: only results with the translated type name
           name: "filter[type_name]"
         - schema:
             type: integer
+            format: int32
+            minimum: 1
+            maximum: 200
+            example: 150
           in: query
           name: "filter[min_level]"
           description: only results which level is equal or above this value
         - schema:
             type: integer
+            format: int32
+            example: 200
+            minimum: 1
+            maximum: 200
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
@@ -760,23 +814,32 @@ paths:
       parameters:
         - schema:
             type: string
-            example: cape
+            example: nedora
           in: query
           name: query
           description: case sensitive search query
           required: true
         - schema:
             type: string
+            example: Costume
           in: query
           description: only results with the translated type name
           name: "filter[type_name]"
         - schema:
             type: integer
+            format: int32
+            minimum: 1
+            maximum: 200
+            example: 1
           in: query
           name: "filter[min_level]"
           description: only results which level is equal or above this value
         - schema:
             type: integer
+            format: int32
+            minimum: 1
+            maximum: 200
+            example: 2
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
@@ -839,7 +902,6 @@ paths:
                       sd: "https://api.dofusdu.de/dofus2/img/item/17481-200.png"
                       hq: "https://api.dofusdu.de/dofus2/img/item/17481-400.png"
                       hd: "https://api.dofusdu.de/dofus2/img/item/17481-800.png"
-                    has_effects: true
                     effects:
                       - int_minimum: 0
                         int_maximum: 0
@@ -859,17 +921,6 @@ paths:
                         ignore_int_min: true
                         ignore_int_max: true
                         formatted: "Compatible with: 0"
-                      - int_minimum: 0
-                        int_maximum: 0
-                        type:
-                          name: "Compatible with:"
-                          id: 1
-                          is_meta: false
-                        ignore_int_min: true
-                        ignore_int_max: true
-                        formatted: "Compatible with: 0"
-                    has_conditions: false
-                    has_recipe: false
         "400":
           description: |
             Bad Request
@@ -945,9 +996,6 @@ paths:
                       sd: "https://api.dofusdu.de/dofus2/img/item/48137-200.png"
                       hq: "https://api.dofusdu.de/dofus2/img/item/48137-400.png"
                       hd: "https://api.dofusdu.de/dofus2/img/item/48137-800.png"
-                    has_effects: false
-                    has_conditions: false
-                    has_recipe: true
                     recipe:
                       - item_ankama_id: 519
                         item_subtype: resources
@@ -1033,7 +1081,6 @@ paths:
                       sd: "https://api.dofusdu.de/dofus2/img/item/22009-200.png"
                       hq: "https://api.dofusdu.de/dofus2/img/item/22009-400.png"
                       hd: "https://api.dofusdu.de/dofus2/img/item/22009-800.png"
-                    has_effects: true
                     effects:
                       - int_minimum: 201
                         int_maximum: 300
@@ -1188,7 +1235,6 @@ paths:
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 16 to 20 (Water steal)
-                    has_conditions: true
                     conditions:
                       - operator: <
                         int_value: 12
@@ -1204,7 +1250,6 @@ paths:
                     range:
                       min: 1
                       max: 2
-                    has_recipe: true
                     recipe:
                       - item_ankama_id: 26033
                         item_subtype: resources
@@ -1230,7 +1275,6 @@ paths:
                       - item_ankama_id: 24144
                         item_subtype: resources
                         quantity: 2
-                    has_parent_set: false
                 Equipment:
                   value:
                     ankama_id: 14076
@@ -1246,7 +1290,6 @@ paths:
                       sd: "https://api.dofusdu.de/dofus2/img/item/16362-200.png"
                       hq: "https://api.dofusdu.de/dofus2/img/item/16362-400.png"
                       hd: "https://api.dofusdu.de/dofus2/img/item/16362-800.png"
-                    has_effects: true
                     effects:
                       - int_minimum: 451
                         int_maximum: 500
@@ -1374,8 +1417,6 @@ paths:
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 16 to 20 Lock
-                    has_conditions: false
-                    has_recipe: true
                     recipe:
                       - item_ankama_id: 13990
                         item_subtype: resources
@@ -1401,7 +1442,6 @@ paths:
                       - item_ankama_id: 12740
                         item_subtype: resources
                         quantity: 3
-                    has_parent_set: true
                     parent_set:
                       id: 270
                       name: Count Harebourg Set
@@ -1479,7 +1519,6 @@ paths:
                       sd: "https://api.dofusdu.de/dofus2/img/item/12039-200.png"
                       hq: "https://api.dofusdu.de/dofus2/img/item/12039-400.png"
                       hd: "https://api.dofusdu.de/dofus2/img/item/12039-800.png"
-                    has_effects: true
                     effects:
                       - int_minimum: 70
                         int_maximum: 0
@@ -1490,8 +1529,6 @@ paths:
                         ignore_int_min: false
                         ignore_int_max: true
                         formatted: 70 HP
-                    has_conditions: false
-                    has_recipe: true
                     recipe:
                       - item_ankama_id: 380
                         item_subtype: resources
@@ -1576,9 +1613,6 @@ paths:
                       sd: "https://api.dofusdu.de/dofus2/img/item/24041-200.png"
                       hq: "https://api.dofusdu.de/dofus2/img/item/24041-400.png"
                       hd: "https://api.dofusdu.de/dofus2/img/item/24041-800.png"
-                    has_effects: false
-                    has_conditions: false
-                    has_recipe: false
         "400":
           description: |
             Bad Request
@@ -1651,7 +1685,6 @@ paths:
                       sd: "https://api.dofusdu.de/dofus2/img/mount/33-200.png"
                       hq: "https://api.dofusdu.de/dofus2/img/mount/33-400.png"
                       hd: "https://api.dofusdu.de/dofus2/img/mount/33-800.png"
-                    has_effects: true
                     effects:
                       - int_minimum: 0
                         int_maximum: 300
@@ -1748,7 +1781,6 @@ paths:
                       - 17584
                       - 17585
                       - 17586
-                    has_effects: true
                     effects:
                       - - int_minimum: 30
                           int_maximum: 0
@@ -1984,30 +2016,41 @@ paths:
             enum:
               - asc
               - desc
+            example: asc
           in: query
           name: "sort[level]"
           description: "sort the resulting list by level, default unsorted"
         - schema:
             type: integer
-            minimum: 0
+            minimum: 1
+            format: int32
+            maximum: 200
+            example: 190
           in: query
           name: "filter[min_highest_equipment_level]"
           description: only results where the equipment with the highest level is above or equal to this value
         - schema:
             type: integer
-            minimum: 0
+            minimum: 1
+            maximum: 200
+            example: 200
+            format: int32
           in: query
           name: "filter[max_highest_equipment_level]"
           description: only results where the equipment with the highest level is below or equal to this value
         - schema:
             type: integer
             minimum: -1
+            example: 20
+            format: int32
           in: query
           name: "page[size]"
           description: size of the results from the list. -1 disables pagination and gets all in one response.
         - schema:
             type: integer
+            format: int32
             minimum: 0
+            example: 1
           in: query
           name: "page[number]"
           description: "page number based on the current page[size]. So you could get page 1 with 8 entrys and page 2 would have entries 8 to 16."
@@ -2091,18 +2134,21 @@ paths:
       parameters:
         - schema:
             type: string
+            example: Dragoturkey
           in: query
           name: "filter[family_name]"
           description: only results with the translated family name
         - schema:
             type: integer
             minimum: -1
+            example: 10
           in: query
           name: "page[size]"
           description: size of the results from the list. -1 disables pagination and gets all in one response.
         - schema:
             type: integer
             minimum: 0
+            example: 1
           in: query
           name: "page[number]"
           description: "page number based on the current page[size]. So you could get page 1 with 8 entrys and page 2 would have entries 8 to 16."
@@ -2119,6 +2165,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -2146,7 +2193,7 @@ paths:
                   value:
                     _links:
                       first: "https://api.dofusdu.de/dofus2/es/items/equipment?page%5Bnumber%5D%3D1%26page%5Bsize%5D%3D3"
-                      prev: ""
+                      prev: null
                       next: "https://api.dofusdu.de/dofus2/es/items/equipment?page%5Bnumber%5D%3D2%26page%5Bsize%5D%3D3"
                       last: "https://api.dofusdu.de/dofus2/es/items/equipment?page%5Bnumber%5D%3D1241%26page%5Bsize%5D%3D3"
                     items:
@@ -2184,34 +2231,40 @@ paths:
             enum:
               - asc
               - desc
+            example: desc
           in: query
           name: "sort[level]"
           description: "sort the resulting list by level, default unsorted"
         - schema:
             type: string
+            example: Sword
           in: query
           name: "filter[type_name]"
           description: only results with the translated type name
         - schema:
             type: integer
+            example: 10
           in: query
           name: "filter[min_level]"
           description: only results which level is equal or above this value
         - schema:
             type: integer
             minimum: 0
+            example: 60
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
         - schema:
             type: integer
             minimum: -1
+            example: 5
           in: query
           name: "page[size]"
           description: size of the results from the list. -1 disables pagination and gets all in one response.
         - schema:
             type: integer
             minimum: 0
+            example: 1
           in: query
           name: "page[number]"
           description: "page number based on the current page[size]. So you could get page 1 with 8 entrys and page 2 would have entries 8 to 16."
@@ -2265,7 +2318,7 @@ paths:
                   value:
                     _links:
                       first: "https://api.dofusdu.de/dofus2/de/items/resources?page%5Bnumber%5D%3D1%26page%5Bsize%5D%3D2"
-                      prev: ""
+                      prev: null
                       next: "https://api.dofusdu.de/dofus2/de/items/resources?page%5Bnumber%5D%3D2%26page%5Bsize%5D%3D2"
                       last: "https://api.dofusdu.de/dofus2/de/items/resources?page%5Bnumber%5D%3D1534%26page%5Bsize%5D%3D2"
                     items:
@@ -2295,33 +2348,45 @@ paths:
             enum:
               - asc
               - desc
+            example: desc
           in: query
           name: "sort[level]"
           description: "sort the resulting list by level, default unsorted"
         - schema:
             type: string
+            example: miscellaneous resources
           in: query
           name: "filter[type_name]"
           description: only results with the translated type name
         - schema:
             type: integer
+            format: int32
+            minimum: 1
+            maximum: 200
+            example: 160
           in: query
           name: "filter[min_level]"
           description: only results which level is equal or above this value
         - schema:
             type: integer
+            format: int32
+            minimum: 1
+            maximum: 200
+            example: 190
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
         - schema:
             type: integer
             minimum: -1
+            example: 10
           in: query
           name: "page[size]"
           description: size of the results from the list. -1 disables pagination and gets all in one response.
         - schema:
             type: integer
             minimum: 0
+            example: 1
           in: query
           name: "page[number]"
           description: "page number based on the current page[size]. So you could get page 1 with 8 entrys and page 2 would have entries 8 to 16."
@@ -2373,7 +2438,7 @@ paths:
                   value:
                     _links:
                       first: "https://api.dofusdu.de/dofus2/en/items/consumables?page%5Bnumber%5D%3D1%26page%5Bsize%5D%3D16"
-                      prev: ""
+                      prev: null
                       next: "https://api.dofusdu.de/dofus2/en/items/consumables?page%5Bnumber%5D%3D2%26page%5Bsize%5D%3D16"
                       last: "https://api.dofusdu.de/dofus2/en/items/consumables?page%5Bnumber%5D%3D213%26page%5Bsize%5D%3D16"
                     items:
@@ -2411,33 +2476,39 @@ paths:
             enum:
               - asc
               - desc
+            example: asc
           in: query
           name: "sort[level]"
           description: "sort the resulting list by level, default unsorted"
         - schema:
             type: string
+            example: Chest
           in: query
           name: "filter[type_name]"
           description: only results with the translated type name
         - schema:
             type: integer
+            example: 150
           in: query
           name: "filter[min_level]"
           description: only results which level is equal or above this value
         - schema:
             type: integer
+            example: 180
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
         - schema:
             type: integer
             minimum: -1
+            example: 2
           in: query
           name: "page[size]"
           description: size of the results from the list. -1 disables pagination and gets all in one response.
         - schema:
             type: integer
             minimum: 0
+            example: 1
           in: query
           name: "page[number]"
           description: "page number based on the current page[size]. So you could get page 1 with 8 entrys and page 2 would have entries 8 to 16."
@@ -2460,6 +2531,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: fr
         name: language
         in: path
         required: true
@@ -2520,33 +2592,45 @@ paths:
             enum:
               - asc
               - desc
+            example: desc
           in: query
           name: "sort[level]"
           description: "sort the resulting list by level, default unsorted"
         - schema:
             type: string
+            example: Sufokia
           in: query
           name: "filter[type_name]"
           description: only results with the translated type name
         - schema:
             type: integer
+            example: 1
+            format: int32
+            minimum: 0
+            maximum: 200
           in: query
           name: "filter[min_level]"
           description: only results which level is equal or above this value
         - schema:
             type: integer
+            example: 50
+            minimum: 0
+            maximum: 200
+            format: int32
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
         - schema:
             type: integer
             minimum: -1
+            example: 5
           in: query
           name: "page[size]"
           description: size of the results from the list. -1 disables pagination and gets all in one response.
         - schema:
             type: integer
             minimum: 0
+            example: 1
           in: query
           description: "page number based on the current page[size]. So you could get page 1 with 8 entrys and page 2 would have entries 8 to 16."
           name: "page[number]"
@@ -2569,6 +2653,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: fr
         name: language
         in: path
         required: true
@@ -2598,7 +2683,7 @@ paths:
                   value:
                     _links:
                       first: "https://api.dofusdu.de/dofus2/fr/items/cosmetics?page%5Bnumber%5D%3D1%26page%5Bsize%5D%3D2"
-                      prev: ""
+                      prev: null
                       next: "https://api.dofusdu.de/dofus2/fr/items/cosmetics?page%5Bnumber%5D%3D2%26page%5Bsize%5D%3D2"
                       last: "https://api.dofusdu.de/dofus2/fr/items/cosmetics?page%5Bnumber%5D%3D704%26page%5Bsize%5D%3D2"
                     items:
@@ -2629,33 +2714,39 @@ paths:
             enum:
               - asc
               - desc
+            example: asc
           in: query
           name: "sort[level]"
           description: "sort the resulting list by level, default unsorted"
         - schema:
             type: string
+            example: Chapeau d'apparat
           in: query
           name: "filter[type_name]"
           description: only results with the translated type name
         - schema:
             type: integer
+            example: 1
           in: query
           name: "filter[min_level]"
           description: only results which level is equal or above this value
         - schema:
             type: integer
+            example: 5
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
         - schema:
             type: integer
             minimum: -1
+            example: 5
           in: query
           name: "page[size]"
           description: size of the results from the list. -1 disables pagination and gets all in one response.
         - schema:
             type: integer
             minimum: 0
+            example: 1
           in: query
           name: "page[number]"
           description: "page number based on the current page[size]. So you could get page 1 with 8 entrys and page 2 would have entries 8 to 16."
@@ -2675,6 +2766,7 @@ paths:
             - de
             - it
             - es
+          example: fr
         name: language
         in: path
         required: true
@@ -2753,22 +2845,31 @@ paths:
           description: "ids from meta/{language}/almanax/bonuses"
         - schema:
             type: string
+            example: "2016-09-15"
+            format: date
           in: query
           name: "range[from]"
           description: yyyy-mm-dd
         - schema:
             type: string
+            example: "2016-09-28"
+            format: date
           in: query
           name: "range[to]"
           description: yyyy-mm-dd
         - schema:
             type: integer
+            format: int32
+            example: -1
+            minimum: -1
+            maximum: 35
           in: query
           name: "range[size]"
           description: size of the returned range
         - schema:
             type: string
             default: Europe/Paris
+            example: Europe/Paris
           in: query
           name: timezone
           description: 'determine what the current time is. If you live in Brazil, "today" will be hours apart from Paris. Use your timezone to get results relative to your location.'
@@ -2782,12 +2883,15 @@ paths:
             - de
             - it
             - es
+          example: fr
         name: language
         in: path
         required: true
         description: code
       - schema:
           type: string
+          example: "2020-07-14"
+          format: date
         name: date
         in: path
         required: true
@@ -2896,6 +3000,7 @@ paths:
             - de
             - it
             - es
+          example: fr
         name: language
         in: path
         required: true
