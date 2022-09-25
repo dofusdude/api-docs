@@ -25,3 +25,8 @@ If your feature is really complicated or you want to talk about it, visit the [D
 A feature can be discussed in the PR and will be merged as soon as it goes online.
 
 The first way is much simpler but the chances of actually getting the feature implemented is higher because you already did the initial part of designing the API.
+
+## Thank you!
+I highly welcome everyone on my Discord to just talk about projects and use cases or give feedback of any kind.
+
+The servers have a fixed monthly cost to provide very fast responses. If you want to help me keeping them running or simply  donate, consider becoming a [GitHub Sponsor](https://github.com/sponsors/dofusdude).
