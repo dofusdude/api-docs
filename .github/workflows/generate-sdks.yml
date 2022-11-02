@@ -122,7 +122,6 @@ jobs:
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: go
-          generator-tag: v6.2.1
           openapi-file: openapi-3.0.yaml
           command-args: --additional-properties=packageName=dodugo
       
@@ -138,7 +137,7 @@ jobs:
         run: |
           cd go-client
           mkdir -p .github/workflows/
-          printf '%s\n' 'name: Go' 'on:' '  push:' '    branches: [ main ]' '  pull_request:' '    branches: [ main ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v3' '    - name: Set up Go' '      uses: actions/setup-go@v2' '      with:' '        go-version: 1.19' '    - name: Build' '      run: go build -v ./...' '    - name: Test' '      run: go test -v ./...' > .github/workflows/build.yml
+          printf '%s\n' 'name: Go' 'on:' '  push:' '    branches: [ main ]' '  pull_request:' '    branches: [ main ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v3' '    - name: Set up Go' '      uses: actions/setup-go@v2' '      with:' '        go-version: 1.19' '    - name: Build' '      run: go build -v ./...' > .github/workflows/build.yml
           sed -i 's/GIT_USER_ID\/GIT_REPO_ID/\dofusdude\/dodugo/g' go.mod
           sed -i 's/GIT_USER_ID\/GIT_REPO_ID/\dofusdude\/dodugo/g' README.md
           sed -i 's/\\"/"/g' README.md
