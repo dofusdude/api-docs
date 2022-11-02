@@ -143,6 +143,7 @@ jobs:
           sed -i 's/\\"/"/g' README.md
           go get -u ./...
           go mod tidy
+          echo "* linguist-vendored\n*.go linguist-vendored=false" > .gitattributes
           cd ..
 
       - name: Pushes to sdk repository
