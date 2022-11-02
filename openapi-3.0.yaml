@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
   title: Dofusdude
-  version: 0.6.0
-  description: "# A project for you - the developer.\nThe free, always-up-to-date, low-latency, insert-buzzword-here Ankama API for your next cool project!\n\n## Client SDKs\nDon't write types or functions yourself - I already (kinda) did! \U0001F609\n- [Javascript](https://github.com/dofusdude/dofusdude-js) npm i dofusdude-js --save\n- [Typescript](https://github.com/dofusdude/dofusdude-ts) npm i dofusdude-ts --save\n- [Go](https://github.com/dofusdude/dodugo) go get -u github.com/dofusdude/dodugo\n- [Python](https://github.com/dofusdude/dofusdude-py) pip install dofusdude\n\nEverything, including this site, is generated out of the [Docs Repo](https://github.com/dofusdude/api-docs). Consider it the Single Source of Truth. If there is a problem with the SDKs, create an issue there.\n\nYour favorite language is missing? Please let me know!\n\n# Main Features\n- \U0001F977 **Seamless Auto-Update** load data in the background when a new Dofus version is released and serving it within 2 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.\n\n- ⚡ **Blazingly Fast** all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in \U0001F1E9\U0001F1EA.\n\n- \U0001FA78 **Dofus 2 Beta** from stable to bleeding edge by replacing /dofus2 with /dofus2beta.\n\n- \U0001F5E3️ **Multilingual** supporting _en_, _fr_, _es_, _pt_ including the dropped languages from the Dofus website _de_ and _it_.\n\n- \U0001F9E0 **Search by Relevance** allowing typos in name and description, handled by language specific text analysis and indexing by the powerful [Meilisearch](https://www.meilisearch.com) written in Rust.\n\n- \U0001F575️ **Complete** actual data from the game including items invisible to the encyclopedia like quest items.\n\n- \U0001F5BC️ **HD Images** rendering vector graphics into PNGs up to 800x800 px in the background.\n\n\n## Current state\n- Weapons ✅\n- Equipment ✅\n- Sets ✅\n- Resources ✅\n- Consumables ✅\n- Pets ✅\n- Mounts ✅\n- Cosmetics/Ceremonial Items ✅\n- Harnesses ✅\n- Quest Items ✅\n- Almanax ✅\n- Monsters ❌\n- Spells ❌\n\n... and much more on the Roadmap on my Discord. \n\n## Deploy now. Use forever.\nEverything you see here on this site, you can use now and forever. Updates could introduce new fields, new paths or parameter but never break backwards compatibility, so no field or parameter will be deleted.\n\nThere is one exception! **The API will _always_ choose being up-to-date over everything else**. So if Ankama decides to drop languages from the game like they did with their website, the API will loose support for them, too.\n\n## Only the beginning... \U0001F92F\nI want this project to be useful and not just add plain GET-categories no one needs.\n\nThere is a long list of features I want to add (see the Roadmap on my [Discord](https://discord.gg/3EtHskZD8h)). But they are all focussed on you, the developers. So please let me know what you need. I will change the list based on demand.\n\n# Get started! \U0001F973\nScroll down and try it for yourself!\n\nOr see how these other awesome projects use it:\n- [KaellyBot](https://github.com/Kaysoro/KaellyBot) by Kaysoro\n- [Dofus Craftlist](https://dofuscraftlist-dev.netlify.app) by Lystina\n- [AlmanaxApp](https://almanaxapp.netlify.app) by Lystina\n- [luwnarya.fr](https://luwnarya.fr)\n\nI highly recommend using the SDKs for quick results. I use them myself for microservices for the API.\n\n## Thank you!\nI highly welcome everyone on my [Discord](https://discord.gg/3EtHskZD8h) to just talk about projects and use cases or give feedback of any kind.\n\nThe servers have a fixed monthly cost to provide very fast responses. If you want to help me keeping them running or simply  donate, consider becoming a [GitHub Sponsor](https://github.com/sponsors/dofusdude).\n\n"
+  version: 0.7.0
+  description: "# A project for you - the developer.\nThe free, always-up-to-date, low-latency, insert-buzzword-here Ankama API for your next cool project!\n\n## Client SDKs\nDon't write types or functions yourself - I already (kinda) did! \U0001F609\n- [Javascript](https://github.com/dofusdude/dofusdude-js) npm i dofusdude-js --save\n- [Typescript](https://github.com/dofusdude/dofusdude-ts) npm i dofusdude-ts --save\n- [Go](https://github.com/dofusdude/dodugo) go get -u github.com/dofusdude/dodugo\n- [Python](https://github.com/dofusdude/dofusdude-py) pip install dofusdude\n\nEverything, including this site, is generated out of the [Docs Repo](https://github.com/dofusdude/api-docs). Consider it the Single Source of Truth. If there is a problem with the SDKs, create an issue there.\n\nYour favorite language is missing? Please let me know!\n\n# Main Features\n- \U0001F977 **Seamless Auto-Update** load data in the background when a new Dofus version is released and serving it within 2 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.\n\n- ⚡ **Blazingly Fast** all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in \U0001F1E9\U0001F1EA.\n\n- \U0001F4E8 **Discord Integration** Ankama related Twitter, RSS and Almanax feeds to post to Discord servers with advanced features like filters or mentions. Use the endpoints as a dev or the official [Web Client](https://discord.dofusdude.com) as a user.\n\n- \U0001FA78 **Dofus 2 Beta** from stable to bleeding edge by replacing /dofus2 with /dofus2beta.\n\n- \U0001F5E3️ **Multilingual** supporting _en_, _fr_, _es_, _pt_ including the dropped languages from the Dofus website _de_ and _it_.\n\n- \U0001F9E0 **Search by Relevance** allowing typos in name and description, handled by language specific text analysis and indexing by the powerful [Meilisearch](https://www.meilisearch.com) written in Rust.\n\n- \U0001F575️ **Complete** actual data from the game including items invisible to the encyclopedia like quest items.\n\n- \U0001F5BC️ **HD Images** rendering vector graphics into PNGs up to 800x800 px in the background.\n\n\n## Current state\n- Weapons ✅\n- Equipment ✅\n- Sets ✅\n- Resources ✅\n- Consumables ✅\n- Pets ✅\n- Mounts ✅\n- Cosmetics/Ceremonial Items ✅\n- Harnesses ✅\n- Quest Items ✅\n- Almanax ✅\n- Monsters ❌\n- Spells ❌\n\n... and much more on the Roadmap on my Discord. \n\n## Deploy now. Use forever.\nEverything you see here on this site, you can use now and forever. Updates could introduce new fields, new paths or parameter but never break backwards compatibility, so no field or parameter will be deleted.\n\nThere is one exception! **The API will _always_ choose being up-to-date over everything else**. So if Ankama decides to drop languages from the game like they did with their website, the API will loose support for them, too.\n\n## Only the beginning... \U0001F92F\nI want this project to be useful and not just add plain GET-categories no one needs.\n\nThere is a long list of features I want to add (see the Roadmap on my [Discord](https://discord.gg/3EtHskZD8h)). But they are all focussed on you, the developers. So please let me know what you need. I will change the list based on demand.\n\n# Get started! \U0001F973\nScroll down and try it for yourself!\n\nOr see how these other awesome projects use it:\n- [KaellyBot](https://github.com/Kaysoro/KaellyBot) by Kaysoro\n- [Dofus Craftlist](https://dofuscraftlist-dev.netlify.app) by Lystina\n- [AlmanaxApp](https://almanaxapp.netlify.app) by Lystina\n- [luwnarya.fr](https://luwnarya.fr)\n\nI highly recommend using the SDKs for quick results. I use them myself for microservices for the API.\n\n## Thank you!\nI highly welcome everyone on my [Discord](https://discord.gg/3EtHskZD8h) to just talk about projects and use cases or give feedback of any kind.\n\nThe servers have a fixed monthly cost to provide very fast responses. If you want to help me keeping them running or simply  donate, consider becoming a [GitHub Sponsor](https://github.com/sponsors/dofusdude).\n\n"
   contact:
     name: Survival
     url: "https://discord.gg/3EtHskZD8h"
@@ -3859,6 +3859,463 @@ paths:
         name: language
         in: path
         required: true
+  /meta/webhooks/twitter:
+    get:
+      summary: Get Twitter Hook Metainfo
+      tags:
+        - webhooks
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscriptions:
+                    type: array
+                    items:
+                      type: string
+                x-examples:
+                  example-1:
+                    subscriptions:
+                      - dofus2_en
+                      - dofus2_fr
+                      - dofus2_es
+                      - dofus2_it
+                      - dofus2_de
+      operationId: get-meta-webhooks-twitter
+      description: "Get a list of all available subscriptions. "
+  /meta/webhooks/rss:
+    get:
+      summary: Get RSS Hook Metainfo
+      tags:
+        - webhooks
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscriptions:
+                    type: array
+                    items:
+                      type: string
+                x-examples:
+                  example-1:
+                    subscriptions:
+                      - dofus2_en
+                      - dofus2_fr
+                      - dofus2_es
+                      - dofus2_it
+                      - dofus2_de
+      operationId: get-meta-webhooks-rss
+      description: "Get a list of all available subscriptions. "
+  /meta/webhooks/almanax:
+    get:
+      summary: Get Almanax Hook Metainfo
+      tags:
+        - webhooks
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscriptions:
+                    type: array
+                    items:
+                      type: string
+                x-examples:
+                  example-1:
+                    subscriptions:
+                      - dofus2_en
+                      - dofus2_fr
+                      - dofus2_es
+                      - dofus2_it
+                      - dofus2_de
+              examples:
+                example-1:
+                  value:
+                    subscriptions:
+                      - string
+      operationId: get-meta-webhooks-almanax
+      description: "Get a list of all available subscriptions. "
+  "/webhooks/rss/{id}":
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Get RSS Hook
+      tags:
+        - webhooks
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RssWebhook"
+              examples:
+                Example:
+                  value:
+                    id: string
+                    whitelist: null
+                    blacklist: null
+                    subscriptions:
+                      - dofus2-fr-official-news
+                    format: discord
+                    preview_length: 150
+                    created_at: "2022-10-25T15:32:37.406281+02:00"
+                    last_fired_at: "2022-10-25T15:35:37.103240+02:00"
+                    updated_at: "2022-10-25T15:32:37.406281+02:00"
+      operationId: get-webhooks-rss-id
+      description: Retrieve details about an existing RSS Webhook with a given uuid.
+    put:
+      summary: Update RSS Hook
+      operationId: put-webhooks-rss-id
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RssWebhook"
+              examples:
+                Example:
+                  value:
+                    id: string
+                    whitelist: null
+                    blacklist: null
+                    subscriptions:
+                      - dofus2-fr-official-news
+                    format: discord
+                    preview_length: 150
+                    created_at: "2022-10-25T15:32:37.406281+02:00"
+                    last_fired_at: "2022-10-25T15:35:37.103240+02:00"
+                    updated_at: "2022-10-25T15:32:37.406281+02:00"
+      description: "Update the details of a RSS Webhook. All fields are optional and arrays will be overwritten, so always put all selected items of an array."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PutRSSWebhook"
+            examples:
+              Example:
+                value:
+                  whitelist: null
+                  blacklist: null
+                  subscriptions: null
+                  preview_length: 60
+        description: ""
+      tags:
+        - webhooks
+    delete:
+      summary: Unregister RSS Hook
+      operationId: delete-webhooks-rss-id
+      responses:
+        "204":
+          description: No Content
+      description: Delete a Webhook from the service.
+      tags:
+        - webhooks
+  "/webhooks/twitter/{id}":
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Get Twitter Hook
+      tags:
+        - webhooks
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TwitterWebhook"
+              examples:
+                Example:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    whitelist:
+                      - unity
+                    blacklist:
+                      - retro
+                    subscriptions:
+                      - DOFUS_EN
+                    format: discord
+                    preview_length: 280
+                    created_at: "2022-10-25T15:32:37.406281+02:00"
+                    last_fired_at: "2022-10-25T15:35:37.103240+02:00"
+                    updated_at: "2022-10-25T15:32:37.406281+02:00"
+      operationId: get-webhooks-twitter-id
+      description: Retrieve details about an existing Twitter Webhook with a given uuid.
+    put:
+      summary: Update Twitter Hook
+      operationId: put-webhooks-twitter-id
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TwitterWebhook"
+              examples:
+                Example:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    whitelist:
+                      - unity
+                    blacklist:
+                      - retro
+                    subscriptions:
+                      - DOFUS_EN
+                    format: discord
+                    preview_length: 280
+                    created_at: "2022-10-25T15:32:37.406281+02:00"
+                    last_fired_at: "2022-10-25T15:35:37.103240+02:00"
+                    updated_at: "2022-10-25T15:32:37.406281+02:00"
+      description: "Update the details of a Twitter Webhook. All fields are optional and arrays will be overwritten, so always put all selected items of an array."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PutTwitterWebhook"
+            examples:
+              Example:
+                value:
+                  whitelist:
+                    - retro
+                  blacklist: null
+                  subscriptions:
+                    - dofus2-en-official-changelog
+                  preview_length: null
+        description: ""
+      tags:
+        - webhooks
+    delete:
+      summary: Unregister Twitter Hook
+      operationId: delete-webhooks-twitter-id
+      responses:
+        "204":
+          description: No Content
+      description: Delete a Webhook from the service.
+      tags:
+        - webhooks
+  "/webhooks/almanax/{id}":
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Get Almanax Hook
+      tags:
+        - webhooks
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AlmanaxWebhook"
+              examples:
+                Example:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    daily_settings:
+                      timezone: Europe/Paris
+                      midnight_offset: 0
+                    bonus_whitelist:
+                      - plenty-to-harvest
+                    bonus_blacklist: null
+                    subscriptions:
+                      - dofus2_en
+                    iso_date: false
+                    mentions:
+                      kolossium-experience:
+                        - discord_id: 1234
+                          is_role: true
+                          ping_days_before: null
+                    intervals:
+                      - daily
+                    weekly_weekday: sunday
+                    created_at: "2019-08-24T14:15:22Z"
+                    last_fired_at: "2019-08-24T14:15:22Z"
+                    updated_at: "2019-08-24T14:15:22Z"
+      operationId: get-webhooks-almanax-id
+      description: Retrieve details about an existing Almanax Webhook with a given uuid.
+    put:
+      summary: Update Almanax Hook
+      operationId: put-webhooks-almanax-id
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AlmanaxWebhook"
+              examples:
+                Example:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    daily_settings:
+                      timezone: Europe/Paris
+                      midnight_offset: 0
+                    bonus_whitelist:
+                      - plenty-to-harvest
+                    bonus_blacklist: null
+                    subscriptions:
+                      - dofus2_en
+                    iso_date: false
+                    mentions:
+                      kolossium-experience:
+                        - discord_id: 1234
+                          is_role: true
+                          ping_days_before: null
+                    intervals:
+                      - daily
+                    weekly_weekday: sunday
+                    created_at: "2019-08-24T14:15:22Z"
+                    last_fired_at: "2019-08-24T14:15:22Z"
+                    updated_at: "2019-08-24T14:15:22Z"
+      description: "Update the details of an Almanax Webhook. All fields are optional and arrays will be overwritten, so always put all selected items of an array."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PutAlmanaxWebhook"
+            examples:
+              Example:
+                value:
+                  bonus_whitelist: []
+                  bonus_blacklist: null
+                  subscriptions: null
+                  daily_settings:
+                    timezone: Europe/Paris
+                    midnight_offset: 0
+                  iso_date: false
+                  mentions:
+                    kolossium-experience:
+                      - discord_id: 1234
+                        is_role: true
+                        ping_days_before: null
+                  intervals:
+                    - daily
+                  weekly_weekday: sunday
+      tags:
+        - webhooks
+    delete:
+      summary: Unregister Almanax Hook
+      operationId: delete-webhooks-almanax-id
+      responses:
+        "204":
+          description: No Content
+      description: Delete a Webhook from the service.
+      tags:
+        - webhooks
+  /webhooks/rss:
+    post:
+      summary: Register RSS Hook
+      operationId: post-webhooks-rss
+      responses:
+        "200":
+          description: OK
+      description: Register a new Webhook to post RSS news as soon as they are posted.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateRSSWebhook"
+            examples:
+              Example:
+                value:
+                  whitelist:
+                    - retro
+                  blacklist: null
+                  subscriptions:
+                    - dofus2-en-official-news
+                  format: discord
+                  preview_length: 2000
+                  callback: "https://discord.com/api/webhooks/XYZ"
+        description: ""
+      tags:
+        - webhooks
+  /webhooks/twitter:
+    post:
+      summary: Register Twitter Hook
+      operationId: post-webhooks-twitter
+      responses:
+        "200":
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTwitterWebhook"
+            examples:
+              Example:
+                value:
+                  whitelist: null
+                  blacklist: null
+                  subscriptions:
+                    - DOFUSfr
+                  format: discord
+                  preview_length: 280
+                  callback: "https://discord.com/api/webhooks/XYZ"
+        description: ""
+      description: Register a new Webhook to post Twitter updates as soon as they are posted.
+      tags:
+        - webhooks
+  /webhooks/almanax:
+    post:
+      summary: Register Almanax Hook
+      operationId: post-webhooks-almanax
+      responses:
+        "200":
+          description: OK
+      description: Register a new Webhook to post Almanax updates.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateAlmanaxWebhook"
+            examples:
+              Example:
+                value:
+                  bonus_whitelist: null
+                  bonus_blacklist: null
+                  subscriptions:
+                    - dofus2_fr
+                  format: discord
+                  callback: "https://discord.com/api/webhooks/XYZ"
+                  daily_settings:
+                    timezone: Europe/Paris
+                    midnight_offset: 0
+                  iso_date: false
+                  mentions:
+                    kolossium-experience:
+                      - discord_id: 1234
+                        is_role: true
+                        ping_days_before: null
+                  intervals:
+                    - daily
+                  weekly_weekday: sunday
+        description: ""
+      tags:
+        - webhooks
 components:
   schemas:
     Items-List-Entry-Typed:
@@ -4340,6 +4797,687 @@ components:
                   type: string
             quantity:
               type: integer
+    CreateTwitterWebhook:
+      type: object
+      x-examples:
+        Example:
+          whitelist: null
+          blacklist: null
+          subscriptions:
+            - DOFUSfr
+          format: discord
+          preview_length: 280
+          callback: "https://discord.com/api/webhooks/XYZ"
+      title: CreateTwitterWebhook
+      description: ""
+      properties:
+        whitelist:
+          type: array
+          nullable: true
+          items:
+            type: string
+        blacklist:
+          type: array
+          nullable: true
+          items:
+            type: string
+        subscriptions:
+          type: array
+          description: Get the available subscriptions with /meta/webhooks/twitter
+          uniqueItems: true
+          minItems: 1
+          items:
+            type: string
+        format:
+          type: string
+          enum:
+            - discord
+        preview_length:
+          type: integer
+          example: 280
+          format: int32
+          minimum: 0
+          maximum: 280
+          nullable: true
+        callback:
+          type: string
+          description: Discord Webhook URL
+          format: uri
+          example: "https://discord.com/api/webhooks/XYZ"
+      required:
+        - subscriptions
+        - format
+        - callback
+    CreateRSSWebhook:
+      type: object
+      x-examples:
+        Example:
+          whitelist:
+            - retro
+          blacklist: null
+          subscriptions:
+            - dofus2-en-official-news
+          format: discord
+          preview_length: 2000
+          callback: "https://discord.com/api/webhooks/XYZ"
+      title: CreateRSSWebhook
+      description: ""
+      properties:
+        whitelist:
+          type: array
+          nullable: true
+          items:
+            type: string
+        blacklist:
+          type: array
+          nullable: true
+          items:
+            type: string
+        subscriptions:
+          type: array
+          description: Get the available subscriptions with /meta/webhooks/rss
+          uniqueItems: true
+          minItems: 1
+          items:
+            type: string
+        format:
+          type: string
+          enum:
+            - discord
+        preview_length:
+          type: integer
+          example: 2000
+          format: int32
+          minimum: 0
+          maximum: 4000
+          nullable: true
+        callback:
+          type: string
+          description: Discord Webhook URL
+          format: uri
+          example: "https://discord.com/api/webhooks/XYZ"
+      required:
+        - subscriptions
+        - format
+        - callback
+    PutRSSWebhook:
+      type: object
+      x-examples:
+        Example:
+          whitelist: null
+          blacklist: null
+          subscriptions: null
+          preview_length: 60
+      title: PutRSSWebhook
+      description: ""
+      properties:
+        whitelist:
+          type: array
+          nullable: true
+          items:
+            type: string
+        blacklist:
+          type: array
+          nullable: true
+          items:
+            type: string
+        subscriptions:
+          type: array
+          description: Get the available subscriptions with /meta/webhooks/rss
+          uniqueItems: true
+          nullable: true
+          items:
+            type: string
+        preview_length:
+          type: integer
+          example: 2000
+          format: int32
+          minimum: 0
+          maximum: 4000
+          nullable: true
+    PutTwitterWebhook:
+      type: object
+      x-examples:
+        Example:
+          whitelist:
+            - retro
+          blacklist: null
+          subscriptions:
+            - dofus2-en-official-changelog
+          preview_length: null
+      title: PutTwitterWebhook
+      description: ""
+      properties:
+        whitelist:
+          type: array
+          nullable: true
+          items:
+            type: string
+        blacklist:
+          type: array
+          nullable: true
+          items:
+            type: string
+        subscriptions:
+          type: array
+          description: Get the available subscriptions with /meta/webhooks/twitter
+          uniqueItems: true
+          nullable: true
+          items:
+            type: string
+        preview_length:
+          type: integer
+          example: 280
+          format: int32
+          minimum: 0
+          maximum: 280
+          nullable: true
+    CreateAlmanaxWebhook:
+      type: object
+      x-examples:
+        Example:
+          bonus_whitelist: null
+          bonus_blacklist: null
+          subscriptions:
+            - dofus2_fr
+          format: discord
+          callback: "https://discord.com/api/webhooks/XYZ"
+          daily_settings:
+            timezone: Europe/Paris
+            midnight_offset: 0
+          iso_date: false
+          mentions:
+            kolossium-experience:
+              - discord_id: 1234
+                is_role: true
+                ping_days_before: null
+          intervals:
+            - daily
+          weekly_weekday: sunday
+      title: CreateAlmanaxWebhook
+      properties:
+        bonus_whitelist:
+          type: array
+          description: "from all available bonuses (ids) from /dofus2/meta/{language}/almanax/bonuses"
+          nullable: true
+          items:
+            type: string
+        bonus_blacklist:
+          type: array
+          description: "from all available bonuses (ids) from /dofus2/meta/{language}/almanax/bonuses"
+          nullable: true
+          items:
+            type: string
+        subscriptions:
+          type: array
+          description: Get the available subscriptions with /meta/webhooks/almanax
+          items:
+            type: string
+        format:
+          type: string
+          enum:
+            - discord
+        callback:
+          type: string
+          description: Discord Webhook URL
+          example: "https://discord.com/api/webhooks/XYZ"
+          format: uri
+        daily_settings:
+          type: object
+          nullable: true
+          properties:
+            timezone:
+              type: string
+              default: Europe/Paris
+              example: Europe/Paris
+              description: Timezone of your community to determine midnight.
+              nullable: true
+            midnight_offset:
+              type: integer
+              minimum: 0
+              maximum: 23
+              default: 0
+              example: 0
+              description: "Hours added to midnight at the selected timezone. 8 = 8:00 in the morning."
+              nullable: true
+        iso_date:
+          type: boolean
+          default: false
+          description: "If false, it will use common local time formats and weekday translations. If true, the format is YYYY-MM-DD."
+          nullable: true
+        mentions:
+          type: object
+          description: Almanax bonus ids mapped to array of mentions.
+          example:
+            kolossium-experience:
+              - discord_id: 1234
+                is_role: true
+                ping_days_before: null
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              description: Mention
+              properties:
+                discord_id:
+                  description: User or role ID directly from Discord. Activate developer mode and right click a user or role to get them.
+                  example: 1234
+                  type: integer
+                is_role:
+                  description: Whether an ID describes a role (true) or user (false). This is needed for formatting the mention command so Discord understands it.
+                  example: true
+                  type: boolean
+                ping_days_before:
+                  description: Get a mention days before the bonus comes up. It will post on the specified time. Also works when the interval is not daily.
+                  type: integer
+                  example: 1
+                  minimum: 1
+                  maximum: 31
+                  nullable: true
+          nullable: true
+        intervals:
+          type: array
+          uniqueItems: true
+          example:
+            - daily
+          description: |-
+            - Daily posts each day, filtering with Black/Whitelist and mentions are applied daily.
+            - Weekly posts the next 7 days (excluding the posting day) once per week at the specified time. With only weekly selected, of all mentions, only prior notices will come through daily. The 7 day preview gets filtered by the Black/Whitelist.
+            - Monthly posts a preview of the next month from first to last date. The post will be on the last day of a month (ignoring day of the week) at the specified time. Mentions and filtering works like weekly.
+            The biggest difference between daily and the other two is that daily always posts the current day while monthly and weekly only show future days. You can always combine the intervals by selecting multiple intervals for one hook or create multiple hooks for the same channel with different settings to get every highly specific combination you want.
+          items:
+            type: string
+            enum:
+              - daily
+              - weekly
+              - monthly
+        weekly_weekday:
+          type: string
+          enum:
+            - sunday
+            - monday
+            - tuesday
+            - wednesday
+            - thursday
+            - friday
+            - saturday
+          example: sunday
+          description: When to post the weekly preview at the specified time.
+          nullable: true
+      required:
+        - subscriptions
+        - format
+        - callback
+        - intervals
+    PutAlmanaxWebhook:
+      type: object
+      x-examples:
+        Example:
+          bonus_whitelist: []
+          bonus_blacklist: null
+          subscriptions: null
+          daily_settings:
+            timezone: Europe/Paris
+            midnight_offset: 0
+          iso_date: false
+          mentions:
+            kolossium-experience:
+              - discord_id: 1234
+                is_role: true
+                ping_days_before: null
+          intervals:
+            - daily
+          weekly_weekday: sunday
+      title: PutAlmanaxWebhook
+      properties:
+        bonus_whitelist:
+          type: array
+          description: |-
+            from all available bonuses (ids) from /dofus2/meta/{language}/almanax/bonuses.
+            Delete old entries with empty array []. Just null changes nothing.
+          nullable: true
+          items:
+            type: string
+        bonus_blacklist:
+          type: array
+          description: "from all available bonuses (ids) from /dofus2/meta/{language}/almanax/bonuses. Delete old entries with empty array []. Just null changes nothing."
+          nullable: true
+          items:
+            type: string
+        subscriptions:
+          type: array
+          description: Get the available subscriptions with /meta/webhooks/almanax
+          nullable: true
+          items:
+            type: string
+        daily_settings:
+          type: object
+          nullable: true
+          properties:
+            timezone:
+              type: string
+              default: Europe/Paris
+              example: Europe/Paris
+              description: Timezone of your community to determine midnight.
+              nullable: true
+            midnight_offset:
+              type: integer
+              minimum: 0
+              maximum: 23
+              default: 0
+              example: 0
+              description: "Hours added to midnight at the selected timezone. 8 = 8:00 in the morning."
+              nullable: true
+        iso_date:
+          type: boolean
+          default: false
+          description: "If false, it will use common local time formats and weekday translations. If true, the format is YYYY-MM-DD."
+          nullable: true
+        mentions:
+          type: object
+          description: Almanax bonus ids mapped to array of mentions.
+          example:
+            kolossium-experience:
+              - discord_id: 1234
+                is_role: true
+                ping_days_before: null
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              description: Mention
+              properties:
+                discord_id:
+                  description: User or role ID directly from Discord. Activate developer mode and right click a user or role to get them.
+                  example: 1234
+                  type: integer
+                is_role:
+                  description: Whether an ID describes a role (true) or user (false). This is needed for formatting the mention command so Discord understands it.
+                  example: true
+                  type: boolean
+                ping_days_before:
+                  description: Get a mention days before the bonus comes up. It will post on the specified time. Also works when the interval is not daily.
+                  type: integer
+                  example: 1
+                  minimum: 1
+                  maximum: 31
+                  nullable: true
+        intervals:
+          type: array
+          uniqueItems: true
+          example:
+            - daily
+          nullable: true
+          items:
+            type: string
+            enum:
+              - daily
+              - weekly
+              - monthly
+        weekly_weekday:
+          type: string
+          enum:
+            - sunday
+            - monday
+            - tuesday
+            - wednesday
+            - thursday
+            - friday
+            - saturday
+          example: sunday
+          description: When to post the weekly preview at the specified time.
+          nullable: true
+    RssWebhook:
+      type: object
+      x-examples:
+        Example:
+          id: string
+          whitelist: null
+          blacklist: null
+          subscriptions:
+            - dofus2-fr-official-news
+          format: discord
+          preview_length: 150
+          created_at: "2022-10-25T15:32:37.406281+02:00"
+          last_fired_at: "2022-10-25T15:35:37.103240+02:00"
+          updated_at: "2022-10-25T15:32:37.406281+02:00"
+      properties:
+        id:
+          type: string
+        whitelist:
+          type: array
+          nullable: true
+          items:
+            type: string
+        blacklist:
+          type: array
+          nullable: true
+          items:
+            type: string
+        subscriptions:
+          type: array
+          items:
+            type: string
+        format:
+          type: string
+          enum:
+            - discord
+        preview_length:
+          type: integer
+          example: 2000
+          format: int32
+          minimum: 0
+          maximum: 4000
+        created_at:
+          type: string
+          example: "2022-10-25T15:32:37.406281+02:00"
+          format: date-time
+        last_fired_at:
+          type: string
+          format: date-time
+          example: "2022-10-25T15:35:37.103240+02:00"
+          nullable: true
+        updated_at:
+          type: string
+          format: date-time
+          example: "2022-10-25T15:32:37.406281+02:00"
+      title: RSSWebhook
+    TwitterWebhook:
+      type: object
+      x-examples:
+        Example:
+          id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          whitelist:
+            - unity
+          blacklist:
+            - retro
+          subscriptions:
+            - DOFUS_EN
+          format: discord
+          preview_length: 280
+          created_at: "2022-10-25T15:32:37.406281+02:00"
+          last_fired_at: "2022-10-25T15:35:37.103240+02:00"
+          updated_at: "2022-10-25T15:32:37.406281+02:00"
+      title: TwitterWebhook
+      properties:
+        id:
+          type: string
+          format: uuid
+        whitelist:
+          type: array
+          nullable: true
+          items:
+            type: string
+        blacklist:
+          type: array
+          nullable: true
+          items:
+            type: string
+        subscriptions:
+          type: array
+          items:
+            type: string
+        format:
+          type: string
+          enum:
+            - discord
+        preview_length:
+          type: integer
+          example: 280
+          format: int32
+          minimum: 0
+          maximum: 280
+        created_at:
+          type: string
+          example: "2022-10-25T15:32:37.406281+02:00"
+          format: date-time
+        last_fired_at:
+          type: string
+          format: date-time
+          example: "2022-10-25T15:35:37.103240+02:00"
+          nullable: true
+        updated_at:
+          type: string
+          format: date-time
+          example: "2022-10-25T15:32:37.406281+02:00"
+    AlmanaxWebhook:
+      type: object
+      x-examples:
+        Example:
+          id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          daily_settings:
+            timezone: Europe/Paris
+            midnight_offset: 0
+          bonus_whitelist:
+            - plenty-to-harvest
+          bonus_blacklist: null
+          subscriptions:
+            - dofus2_en
+          iso_date: false
+          mentions:
+            kolossium-experience:
+              - discord_id: 1234
+                is_role: true
+                ping_days_before: null
+          intervals:
+            - daily
+          weekly_weekday: sunday
+          created_at: "2019-08-24T14:15:22Z"
+          last_fired_at: "2019-08-24T14:15:22Z"
+          updated_at: "2019-08-24T14:15:22Z"
+      title: AlmanaxWebhook
+      description: ""
+      properties:
+        id:
+          type: string
+          format: uuid
+        daily_settings:
+          type: object
+          properties:
+            timezone:
+              type: string
+              default: Europe/Paris
+              example: Europe/Paris
+              description: Timezone of your community to determine midnight.
+            midnight_offset:
+              type: integer
+              default: 0
+              example: 0
+              description: "Hours added to midnight at the selected timezone. 8 = 8:00 in the morning."
+        bonus_whitelist:
+          type: array
+          description: |-
+            Only post when these bonuses come up.
+            From all available bonuses (ids) from /dofus2/meta/{language}/almanax/bonuses.
+          nullable: true
+          items:
+            type: string
+        bonus_blacklist:
+          type: array
+          description: |-
+            Skip the day when these bonuses come up.
+            From all available bonuses (ids) from /dofus2/meta/{language}/almanax/bonuses
+          nullable: true
+          items:
+            type: string
+        subscriptions:
+          type: array
+          description: Get the available subscriptions with /meta/webhooks/almanax
+          items:
+            type: string
+        iso_date:
+          type: boolean
+          default: false
+          description: "If false, it will use common local time formats and weekday translations. If true, the format is YYYY-MM-DD."
+        mentions:
+          type: object
+          description: Almanax bonus ids mapped to array of mentions.
+          example:
+            kolossium-experience:
+              - discord_id: 1234
+                is_role: true
+                ping_days_before: null
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              description: Mention
+              properties:
+                discord_id:
+                  description: User or role ID directly from Discord. Activate developer mode and right click a user or role to get them.
+                  example: 1234
+                  type: integer
+                is_role:
+                  description: Whether an ID describes a role (true) or user (false). This is needed for formatting the mention command so Discord understands it.
+                  example: true
+                  type: boolean
+                ping_days_before:
+                  description: Get a mention days before the bonus comes up. It will post on the specified time. Also works when the interval is not daily.
+                  type: integer
+                  example: 1
+                  minimum: 1
+                  maximum: 31
+                  nullable: true
+          nullable: true
+        intervals:
+          type: array
+          uniqueItems: true
+          example:
+            - daily
+          description: |-
+            - Daily posts each day, filtering with Black/Whitelist and mentions are applied daily.
+            - Weekly posts the next 7 days (excluding the posting day) once per week at the specified time. With only weekly selected, of all mentions, only prior notices will come through daily. The 7 day preview gets filtered by the Black/Whitelist.
+            - Monthly posts a preview of the next month from first to last date. The post will be on the last day of a month (ignoring day of the week) at the specified time. Mentions and filtering works like weekly.
+            The biggest difference between daily and the other two is that daily always posts the current day while monthly and weekly only show future days. You can always combine the intervals by selecting multiple intervals for one hook or create multiple hooks for the same channel with different settings to get every highly specific combination you want.
+          items:
+            type: string
+            enum:
+              - daily
+              - weekly
+              - monthly
+        weekly_weekday:
+          type: string
+          enum:
+            - sunday
+            - monday
+            - tuesday
+            - wednesday
+            - thursday
+            - friday
+            - saturday
+          example: sunday
+          description: When to post the weekly preview at the specified time.
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        last_fired_at:
+          type: string
+          format: date-time
+          nullable: true
+        updated_at:
+          type: string
+          format: date-time
   securitySchemes: {}
 tags:
   - name: all items
@@ -4352,3 +5490,4 @@ tags:
   - name: quest items
   - name: resources
   - name: sets
+  - name: webhooks
