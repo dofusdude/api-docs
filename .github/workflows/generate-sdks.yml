@@ -122,6 +122,7 @@ jobs:
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: go
+          generator-tag: v6.2.1
           openapi-file: openapi-3.0.yaml
           command-args: --additional-properties=packageName=dodugo
       
