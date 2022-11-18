@@ -209,3 +209,34 @@ jobs:
           destination-repository-name: 'dofusdude-py'
           user-email: stelzo@steado.de
           target-branch: main
+
+  generate-php-client:
+    runs-on: ubuntu-latest
+    name: Generate php sdk
+    steps:
+
+      - name: Checkout OpenAPI
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Generate php sdk
+        uses: openapi-generators/openapitools-generator-action@v1
+        with:
+          generator: php
+          openapi-file: openapi-3.0.yaml
+          command-args: --additional-properties=packageName=dofusdude-php
+
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY_PHP }}
+          API_TOKEN_GITHUB: ${{ secrets.PUSH_GITHUB_TOKEN }}
+        with:
+          source-directory: 'php-client'
+          destination-github-username: 'dofusdude'
+          destination-repository-name: 'dofusdude-php'
+          user-email: stelzo@steado.de
+          target-branch: main
+          
