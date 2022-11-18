@@ -138,8 +138,7 @@ jobs:
           cd go-client
           mkdir -p .github/workflows/
           printf '%s\n' 'name: Go' 'on:' '  push:' '    branches: [ main ]' '  pull_request:' '    branches: [ main ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v3' '    - name: Set up Go' '      uses: actions/setup-go@v2' '      with:' '        go-version: 1.19' '    - name: Build' '      run: go build -v ./...' > .github/workflows/build.yml
-          sed -i 's/GIT_USER_ID\/GIT_REPO_ID/\dofusdude\/dodugo/g' go.mod
-          sed -i 's/GIT_USER_ID\/GIT_REPO_ID/\dofusdude\/dodugo/g' README.md
+          grep -rl GIT_USER_ID . | xargs sed -i 's/GIT_USER_ID\/GIT_REPO_ID/\dofusdude\/dodugo/g'          
           sed -i 's/\\"/"/g' README.md
           go get -u ./...
           go mod tidy
@@ -227,6 +226,13 @@ jobs:
           generator: php
           openapi-file: openapi-3.0.yaml
           command-args: --additional-properties=packageName=dofusdude-php
+
+      - name: Add actions
+        run: |
+          cd php-client
+          grep -rl GIT_USER_ID . | xargs sed -i 's/GIT_USER_ID\/GIT_REPO_ID/\dofusdude\/dofusdude-php/g'
+          sed -i 's/\\"/"/g' README.md
+          cd ..
 
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
