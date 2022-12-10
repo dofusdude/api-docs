@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
   title: Dofusdude
-  version: 0.7.0
-  description: "# A project for you - the developer.\nThe free, always-up-to-date, low-latency, insert-buzzword-here Ankama API for your next cool project!\n\n## Client SDKs\nDon't write types or functions yourself - I already (kinda) did! \U0001F609\n- [Javascript](https://github.com/dofusdude/dofusdude-js) npm i dofusdude-js --save\n- [Typescript](https://github.com/dofusdude/dofusdude-ts) npm i dofusdude-ts --save\n- [Go](https://github.com/dofusdude/dodugo) go get -u github.com/dofusdude/dodugo\n- [Python](https://github.com/dofusdude/dofusdude-py) pip install dofusdude\n\nEverything, including this site, is generated out of the [Docs Repo](https://github.com/dofusdude/api-docs). Consider it the Single Source of Truth. If there is a problem with the SDKs, create an issue there.\n\nYour favorite language is missing? Please let me know!\n\n# Main Features\n- \U0001F977 **Seamless Auto-Update** load data in the background when a new Dofus version is released and serving it within 2 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.\n\n- ⚡ **Blazingly Fast** all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in \U0001F1E9\U0001F1EA.\n\n- \U0001F4E8 **Discord Integration** Ankama related Twitter, RSS and Almanax feeds to post to Discord servers with advanced features like filters or mentions. Use the endpoints as a dev or the official [Web Client](https://discord.dofusdude.com) as a user.\n\n- \U0001FA78 **Dofus 2 Beta** from stable to bleeding edge by replacing /dofus2 with /dofus2beta.\n\n- \U0001F5E3️ **Multilingual** supporting _en_, _fr_, _es_, _pt_ including the dropped languages from the Dofus website _de_ and _it_.\n\n- \U0001F9E0 **Search by Relevance** allowing typos in name and description, handled by language specific text analysis and indexing by the powerful [Meilisearch](https://www.meilisearch.com) written in Rust.\n\n- \U0001F575️ **Complete** actual data from the game including items invisible to the encyclopedia like quest items.\n\n- \U0001F5BC️ **HD Images** rendering vector graphics into PNGs up to 800x800 px in the background.\n\n\n## Current state\n- Weapons ✅\n- Equipment ✅\n- Sets ✅\n- Resources ✅\n- Consumables ✅\n- Pets ✅\n- Mounts ✅\n- Cosmetics/Ceremonial Items ✅\n- Harnesses ✅\n- Quest Items ✅\n- Almanax ✅\n- Monsters ❌\n- Spells ❌\n\n... and much more on the Roadmap on my Discord. \n\n## Deploy now. Use forever.\nEverything you see here on this site, you can use now and forever. Updates could introduce new fields, new paths or parameter but never break backwards compatibility, so no field or parameter will be deleted.\n\nThere is one exception! **The API will _always_ choose being up-to-date over everything else**. So if Ankama decides to drop languages from the game like they did with their website, the API will loose support for them, too.\n\n## Only the beginning... \U0001F92F\nI want this project to be useful and not just add plain GET-categories no one needs.\n\nThere is a long list of features I want to add (see the Roadmap on my [Discord](https://discord.gg/3EtHskZD8h)). But they are all focussed on you, the developers. So please let me know what you need. I will change the list based on demand.\n\n# Get started! \U0001F973\nScroll down and try it for yourself!\n\nOr see how these other awesome projects use it:\n- [KaellyBot](https://github.com/Kaysoro/KaellyBot) by Kaysoro\n- [Dofus Craftlist](https://dofuscraftlist-dev.netlify.app) by Lystina\n- [AlmanaxApp](https://almanaxapp.netlify.app) by Lystina\n- [luwnarya.fr](https://luwnarya.fr)\n\nI highly recommend using the SDKs for quick results. I use them myself for microservices for the API.\n\n## Thank you!\nI highly welcome everyone on my [Discord](https://discord.gg/3EtHskZD8h) to just talk about projects and use cases or give feedback of any kind.\n\nThe servers have a fixed monthly cost to provide very fast responses. If you want to help me keeping them running or simply  donate, consider becoming a [GitHub Sponsor](https://github.com/sponsors/dofusdude).\n\n"
+  version: 0.7.1
+  description: "# A project for you - the developer.\nThe free, always-up-to-date, low-latency, insert-buzzword-here Ankama API for your next cool project!\n\n## Client SDKs\nDon't write types or functions yourself - I already (kinda) did! \U0001F609\n- [Javascript](https://github.com/dofusdude/dofusdude-js) npm i dofusdude-js --save\n- [Typescript](https://github.com/dofusdude/dofusdude-ts) npm i dofusdude-ts --save\n- [Go](https://github.com/dofusdude/dodugo) go get -u github.com/dofusdude/dodugo\n- [Python](https://github.com/dofusdude/dofusdude-py) pip install dofusdude\n- [PHP](https://github.com/dofusdude/dofusdude-php)\n\nEverything, including this site, is generated out of the [Docs Repo](https://github.com/dofusdude/api-docs). Consider it the Single Source of Truth. If there is a problem with the SDKs, create an issue there.\n\nYour favorite language is missing? Please let me know!\n\n# Main Features\n- \U0001F977 **Seamless Auto-Update** load data in the background when a new Dofus version is released and serving it within 2 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.\n\n- ⚡ **Blazingly Fast** all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in \U0001F1E9\U0001F1EA.\n\n- \U0001F4E8 **Discord Integration** Ankama related Twitter, RSS and Almanax feeds to post to Discord servers with advanced features like filters or mentions. Use the endpoints as a dev or the official [Web Client](https://discord.dofusdude.com) as a user.\n\n- \U0001FA78 **Dofus 2 Beta** from stable to bleeding edge by replacing /dofus2 with /dofus2beta.\n\n- \U0001F5E3️ **Multilingual** supporting _en_, _fr_, _es_, _pt_ including the dropped languages from the Dofus website _de_ and _it_.\n\n- \U0001F9E0 **Search by Relevance** allowing typos in name and description, handled by language specific text analysis and indexing by the powerful [Meilisearch](https://www.meilisearch.com) written in Rust.\n\n- \U0001F575️ **Complete** actual data from the game including items invisible to the encyclopedia like quest items.\n\n- \U0001F5BC️ **HD Images** rendering vector graphics into PNGs up to 800x800 px in the background.\n\n\n## Current state\n- Weapons ✅\n- Equipment ✅\n- Sets ✅\n- Resources ✅\n- Consumables ✅\n- Pets ✅\n- Mounts ✅\n- Cosmetics/Ceremonial Items ✅\n- Harnesses ✅\n- Quest Items ✅\n- Almanax ✅\n- Monsters ❌\n- Spells ❌\n\n... and much more on the Roadmap on my Discord. \n\n## Deploy now. Use forever.\nEverything you see here on this site, you can use now and forever. Updates could introduce new fields, new paths or parameter but never break backwards compatibility, so no field or parameter will be deleted.\n\nThere is one exception! **The API will _always_ choose being up-to-date over everything else**. So if Ankama decides to drop languages from the game like they did with their website, the API will loose support for them, too.\n\n## Only the beginning... \U0001F92F\nI want this project to be useful and not just add plain GET-categories no one needs.\n\nThere is a long list of features I want to add (see the Roadmap on my [Discord](https://discord.gg/3EtHskZD8h)). But they are all focussed on you, the developers. So please let me know what you need. I will change the list based on demand.\n\n# Get started! \U0001F973\nScroll down and try it for yourself!\n\nOr see how these other awesome projects use it:\n- [KaellyBot](https://github.com/Kaysoro/KaellyBot) by Kaysoro\n- [Dofus Craftlist](https://dofuscraftlist-dev.netlify.app) by Lystina\n- [AlmanaxApp](https://almanaxapp.netlify.app) by Lystina\n\nI highly recommend using the SDKs for quick results. I use them myself for microservices for the API.\n\n## Thank you!\nI highly welcome everyone on my [Discord](https://discord.gg/3EtHskZD8h) to just talk about projects and use cases or give feedback of any kind.\n\nThe servers have a fixed monthly cost to provide very fast responses. If you want to help me keeping them running or simply  donate, consider becoming a [GitHub Sponsor](https://github.com/sponsors/dofusdude).\n"
   contact:
     name: Survival
     url: "https://discord.gg/3EtHskZD8h"
@@ -24,6 +24,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: fr
         name: language
         in: path
         required: true
@@ -119,6 +120,15 @@ paths:
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
+        - schema:
+            type: integer
+            default: 8
+            minimum: 1
+            maximum: 100
+            example: 8
+          in: query
+          name: limit
+          description: maximum number of returned results
       tags:
         - all items
   "/{game}/{language}/mounts/search":
@@ -208,6 +218,15 @@ paths:
           in: query
           name: "filter[family_name]"
           description: only results with the translated family name
+        - schema:
+            type: integer
+            default: 8
+            example: 8
+            minimum: 1
+            maximum: 100
+          in: query
+          name: limit
+          description: maximum number of returned results
   "/{game}/{language}/sets/search":
     parameters:
       - schema:
@@ -300,6 +319,15 @@ paths:
           in: query
           name: "filter[max_highest_equipment_level]"
           description: only results where the equipment with the highest level is below or equal to this value
+        - schema:
+            type: integer
+            default: 8
+            example: 8
+            minimum: 1
+            maximum: 100
+          in: query
+          name: limit
+          description: maximum number of returned results
       tags:
         - sets
   "/{game}/{language}/items/quest/search":
@@ -411,6 +439,15 @@ paths:
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
+        - schema:
+            type: integer
+            default: 8
+            example: 8
+            minimum: 1
+            maximum: 100
+          in: query
+          description: maximum number of returned results
+          name: limit
   "/{game}/{language}/items/consumables/search":
     parameters:
       - schema:
@@ -517,6 +554,15 @@ paths:
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
+        - schema:
+            type: integer
+            default: 8
+            example: 8
+            minimum: 1
+            maximum: 100
+          in: query
+          name: limit
+          description: maximum number of returned results
       tags:
         - consumables
   "/{game}/{language}/items/resources/search":
@@ -627,6 +673,15 @@ paths:
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
+        - schema:
+            type: integer
+            default: 8
+            example: 8
+            minimum: 1
+            maximum: 100
+          in: query
+          name: limit
+          description: maximum number of returned results
   "/{game}/{language}/items/equipment/search":
     parameters:
       - schema:
@@ -735,6 +790,15 @@ paths:
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
+        - schema:
+            type: integer
+            default: 8
+            example: 8
+            minimum: 1
+            maximum: 100
+          in: query
+          name: limit
+          description: maximum number of returned results
   "/{game}/{language}/items/cosmetics/search":
     parameters:
       - schema:
@@ -843,6 +907,15 @@ paths:
           in: query
           name: "filter[max_level]"
           description: only results which level is equal or below this value
+        - schema:
+            type: integer
+            default: 8
+            example: 8
+            minimum: 1
+            maximum: 100
+          in: query
+          name: limit
+          description: maximum number of returned results
   "/{game}/{language}/items/cosmetics/{ankama_id}":
     parameters:
       - schema:
@@ -909,6 +982,7 @@ paths:
                           name: "Exchangeable:"
                           id: 0
                           is_meta: false
+                          is_active: false
                         ignore_int_min: true
                         ignore_int_max: true
                         formatted: "Exchangeable: 0"
@@ -1088,6 +1162,7 @@ paths:
                           name: Initiative
                           id: 24
                           is_meta: false
+                          is_active: false
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 201 to 300 Initiative
@@ -1097,6 +1172,7 @@ paths:
                           name: Vitality
                           id: 9
                           is_meta: false
+                          is_active: false
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 301 to 350 Vitality
@@ -1115,6 +1191,7 @@ paths:
                           name: Chance
                           id: 22
                           is_meta: false
+                          is_active: false
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 31 to 40 Chance
@@ -1133,6 +1210,7 @@ paths:
                           name: Wisdom
                           id: 10
                           is_meta: false
+                          is_active: false
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 26 to 35 Wisdom
@@ -1142,6 +1220,7 @@ paths:
                           name: Lock
                           id: 26
                           is_meta: false
+                          is_active: false
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 9 to 12 Lock
@@ -1151,6 +1230,7 @@ paths:
                           name: Fire Damage
                           id: 61
                           is_meta: false
+                          is_active: false
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 14 to 18 Fire Damage
@@ -1160,6 +1240,7 @@ paths:
                           name: Water Damage
                           id: 27
                           is_meta: false
+                          is_active: false
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 14 to 18 Water Damage
@@ -1169,6 +1250,7 @@ paths:
                           name: "% Water Resistance"
                           id: 17
                           is_meta: false
+                          is_active: false
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 7 to 10% Water Resistance
@@ -1178,6 +1260,7 @@ paths:
                           name: Heals
                           id: 11
                           is_meta: false
+                          is_active: false
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 9 to 12 Heals
@@ -1187,6 +1270,7 @@ paths:
                           name: Critical Damage
                           id: 38
                           is_meta: false
+                          is_active: false
                         ignore_int_min: false
                         ignore_int_max: true
                         formatted: "-15 Critical Damage"
@@ -1196,6 +1280,7 @@ paths:
                           name: Range
                           id: 31
                           is_meta: false
+                          is_active: false
                         ignore_int_min: false
                         ignore_int_max: true
                         formatted: "-1 Range"
@@ -1205,6 +1290,7 @@ paths:
                           name: MP
                           id: 8
                           is_meta: false
+                          is_active: false
                         ignore_int_min: false
                         ignore_int_max: true
                         formatted: 1 MP
@@ -1214,6 +1300,7 @@ paths:
                           name: (Neutral damage)
                           id: 42
                           is_meta: false
+                          is_active: true
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 21 to 25 (Neutral damage)
@@ -1223,6 +1310,7 @@ paths:
                           name: (Fire steal)
                           id: 57
                           is_meta: false
+                          is_active: true
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 16 to 20 (Fire steal)
@@ -1232,6 +1320,7 @@ paths:
                           name: (Water steal)
                           id: 44
                           is_meta: false
+                          is_active: true
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 16 to 20 (Water steal)
@@ -1526,6 +1615,7 @@ paths:
                           name: HP
                           id: 21
                           is_meta: false
+                          is_active: true
                         ignore_int_min: false
                         ignore_int_max: true
                         formatted: 70 HP
@@ -1692,6 +1782,7 @@ paths:
                           name: Vitalidade
                           id: 9
                           is_meta: false
+                          is_active: false
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 0 a 300 Vitalidade
@@ -1701,6 +1792,7 @@ paths:
                           name: invocaç
                           id: 28
                           is_meta: false
+                          is_active: false
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 0 a 1 invocaç
@@ -1710,6 +1802,7 @@ paths:
                           name: Iniciativa
                           id: 24
                           is_meta: false
+                          is_active: false
                         ignore_int_min: false
                         ignore_int_max: false
                         formatted: 0 a 1000 Iniciativa
@@ -1788,6 +1881,7 @@ paths:
                             name: Intelligenz
                             id: 13
                             is_meta: false
+                            is_active: false
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 30 Intelligenz
@@ -1797,6 +1891,7 @@ paths:
                             name: Flinkheit
                             id: 36
                             is_meta: false
+                            is_active: false
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 30 Flinkheit
@@ -1806,6 +1901,7 @@ paths:
                             name: Glück
                             id: 22
                             is_meta: false
+                            is_active: false
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 30 Glück
@@ -1815,6 +1911,7 @@ paths:
                             name: AP-Entzug
                             id: 64
                             is_meta: false
+                            is_active: false
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 5 AP-Entzug
@@ -1824,6 +1921,7 @@ paths:
                             name: Kritischer Schaden
                             id: 38
                             is_meta: false
+                            is_active: false
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 10 Kritischer Schaden
@@ -1833,6 +1931,7 @@ paths:
                             name: Intelligenz
                             id: 13
                             is_meta: false
+                            is_active: false
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 30 Intelligenz
@@ -1842,6 +1941,7 @@ paths:
                             name: Flinkheit
                             id: 36
                             is_meta: false
+                            is_active: false
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 30 Flinkheit
@@ -1851,6 +1951,7 @@ paths:
                             name: Glück
                             id: 22
                             is_meta: false
+                            is_active: false
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 30 Glück
@@ -1860,6 +1961,7 @@ paths:
                             name: AP-Entzug
                             id: 64
                             is_meta: false
+                            is_active: false
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 5 AP-Entzug
@@ -1869,6 +1971,7 @@ paths:
                             name: Kritischer Schaden
                             id: 38
                             is_meta: false
+                            is_active: false
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 10 Kritischer Schaden
@@ -1878,6 +1981,7 @@ paths:
                             name: AP
                             id: 12
                             is_meta: false
+                            is_active: false
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 1 AP
@@ -3884,6 +3988,11 @@ paths:
                       - dofus2_es
                       - dofus2_it
                       - dofus2_de
+              examples:
+                Example 1:
+                  value:
+                    subscriptions:
+                      - string
       operationId: get-meta-webhooks-twitter
       description: "Get a list of all available subscriptions. "
   /meta/webhooks/rss:
@@ -4407,6 +4516,9 @@ components:
             is_meta:
               type: boolean
               description: 'true if a type is generated from the Api instead of Ankama. In that case, always prefer showing the templated string and omit everything else. The "name" field will have an english description of the meta type. An example for such effects are class sets effects.'
+            is_active:
+              type: boolean
+              description: Affects target or source actively.
         ignore_int_min:
           type: boolean
           description: "ignore the int min field because the actual value is a string. For readability the templated field is the only important field in this case. "
