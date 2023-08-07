@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Dofusdude
-  version: 0.7.2
+  version: 0.8.0
   description: "# A project for you - the developer.\nThe free, always-up-to-date, low-latency, insert-buzzword-here Ankama API for your next cool project!\n\n## Client SDKs\nDon't write types or functions yourself - I already (kinda) did! \U0001F609\n- [Javascript](https://github.com/dofusdude/dofusdude-js) npm i dofusdude-js --save\n- [Typescript](https://github.com/dofusdude/dofusdude-ts) npm i dofusdude-ts --save\n- [Go](https://github.com/dofusdude/dodugo) go get -u github.com/dofusdude/dodugo\n- [Python](https://github.com/dofusdude/dofusdude-py) pip install dofusdude\n- [PHP](https://github.com/dofusdude/dofusdude-php)\n\nEverything, including this site, is generated out of the [Docs Repo](https://github.com/dofusdude/api-docs). Consider it the Single Source of Truth. If there is a problem with the SDKs, create an issue there.\n\nYour favorite language is missing? Please let me know!\n\n# Main Features\n- \U0001F977 **Seamless Auto-Update** load data in the background when a new Dofus version is released and serving it within 2 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.\n\n- ⚡ **Blazingly Fast** all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in \U0001F1E9\U0001F1EA.\n\n- \U0001F4E8 **Discord Integration** Ankama related Twitter, RSS and Almanax feeds to post to Discord servers with advanced features like filters or mentions. Use the endpoints as a dev or the official [Web Client](https://discord.dofusdude.com) as a user.\n\n- \U0001FA78 **Dofus 2 Beta** from stable to bleeding edge by replacing /dofus2 with /dofus2beta.\n\n- \U0001F5E3️ **Multilingual** supporting _en_, _fr_, _es_, _pt_ including the dropped languages from the Dofus website _de_ and _it_.\n\n- \U0001F9E0 **Search by Relevance** allowing typos in name and description, handled by language specific text analysis and indexing by the powerful [Meilisearch](https://www.meilisearch.com) written in Rust.\n\n- \U0001F575️ **Complete** actual data from the game including items invisible to the encyclopedia like quest items.\n\n- \U0001F5BC️ **HD Images** rendering vector graphics into PNGs up to 800x800 px in the background.\n\n\n## Current state\n- Weapons ✅\n- Equipment ✅\n- Sets ✅\n- Resources ✅\n- Consumables ✅\n- Pets ✅\n- Mounts ✅\n- Cosmetics/Ceremonial Items ✅\n- Harnesses ✅\n- Quest Items ✅\n- Almanax ✅\n- Monsters ❌\n- Spells ❌\n\n... and much more on the Roadmap on my Discord. \n\n## Deploy now. Use forever.\nEverything you see here on this site, you can use now and forever. Updates could introduce new fields, new paths or parameter but never break backwards compatibility, so no field or parameter will be deleted.\n\nThere is one exception! **The API will _always_ choose being up-to-date over everything else**. So if Ankama decides to drop languages from the game like they did with their website, the API will loose support for them, too.\n\n## Only the beginning... \U0001F92F\nI want this project to be useful and not just add plain GET-categories no one needs.\n\nThere is a long list of features I want to add (see the Roadmap on my [Discord](https://discord.gg/3EtHskZD8h)). But they are all focussed on you, the developers. So please let me know what you need. I will change the list based on demand.\n\n# Get started! \U0001F973\nScroll down and try it for yourself!\n\nOr see how these other awesome projects use it:\n- [KaellyBot](https://github.com/Kaysoro/KaellyBot) by Kaysoro\n- [Dofus Craftlist](https://dofuscraftlist-dev.netlify.app) by Lystina\n- [AlmanaxApp](https://almanaxapp.netlify.app) by Lystina\n- [DofuStuffSimulator](https://dofusstuffsimulator.netlify.app/)\n\nI highly recommend using the SDKs for quick results. I use them myself for parts of the API.\n\n## Thank you!\nI highly welcome everyone on my [Discord](https://discord.gg/3EtHskZD8h) to just talk about projects and use cases or give feedback of any kind.\n\nThe servers have a fixed monthly cost to provide very fast responses. If you want to help me keeping them running or simply  donate, consider becoming a [GitHub Sponsor](https://github.com/sponsors/dofusdude).\n"
   contact:
     name: Survival
@@ -131,7 +131,7 @@ paths:
           name: limit
           description: maximum number of returned results
       tags:
-        - all items
+        - game
   '/{game}/{language}/mounts/search':
     parameters:
       - schema:
@@ -686,6 +686,128 @@ paths:
           in: query
           name: limit
           description: maximum number of returned results
+  '/{game}/{language}/search':
+    parameters:
+      - schema:
+          type: string
+          enum:
+            - en
+            - fr
+            - de
+            - it
+            - es
+            - pt
+          maxLength: 2
+          minLength: 2
+        name: language
+        in: path
+        required: true
+        description: a valid language code
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
+    get:
+      summary: Game Search
+      responses:
+        '200':
+          description: Game Search Result
+          content:
+            application/json:
+              schema:
+                type: array
+                x-examples:
+                  Example 1:
+                    - name: Paztek Sandals
+                      ankama_id: 20463
+                      type: items-equipment
+                    - name: Paztek Mask
+                      ankama_id: 20465
+                      type: items-equipment
+                    - name: Paztek Cloak
+                      ankama_id: 20464
+                      type: items-equipment
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: Name of the hit. The query could still have matched with the description only.
+                    ankama_id:
+                      type: integer
+                      description: Ankama ID for retrieving more details in the type specific endpoint.
+                    type:
+                      type: string
+                      description: Type classification
+              examples:
+                'query "paztek", filter[type] "beer"':
+                  value:
+                    - name: Paztek Sandals
+                      ankama_id: 20463
+                      type: items-equipment
+                    - name: Paztek Mask
+                      ankama_id: 20465
+                      type: items-equipment
+                    - name: Paztek Cloak
+                      ankama_id: 20464
+                      type: items-equipment
+        '400':
+          description: |
+            Bad Request
+
+            Possibilities:
+            - empty or no query
+            - filter[type] does not exist
+        '404':
+          description: |-
+            Not Found
+
+            Possibilities:
+            - no hits for query
+      operationId: get-game-search
+      description: Search in all names and descriptions of all supported types in the game. For the list of supported types see the endpoint /dofus2/meta/search/types.
+      parameters:
+        - schema:
+            type: string
+            example: paztek
+          in: query
+          name: query
+          description: search query
+          required: true
+        - schema:
+            type: array
+            uniqueItems: true
+            example:
+              - items-equipment
+            items:
+              type: string
+              enum:
+                - items-consumables
+                - items-cosmetics
+                - items-resources
+                - items-equipment
+                - items-quest_items
+                - mounts
+                - sets
+          in: query
+          name: 'filter[type]'
+          description: only results with all specific type
+        - schema:
+            type: integer
+            default: 8
+            example: 8
+            minimum: 1
+            maximum: 100
+          in: query
+          name: limit
+          description: maximum number of returned results
+      tags:
+        - game
   '/{game}/{language}/items/equipment/search':
     parameters:
       - schema:
@@ -3932,6 +4054,34 @@ paths:
       description: Get the mappings for all specific elements that are linked in the dataset. All names are english. Translations are not needed because of a global unique id which is the index inside the array. Future elements will get a higher id.
       parameters: []
     parameters: []
+  /dofus2/meta/search/types:
+    get:
+      summary: Available Game Search Types
+      tags:
+        - meta
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+              examples:
+                List:
+                  value:
+                    - items-consumables
+                    - items-cosmetics
+                    - items-resources
+                    - items-equipment
+                    - items-quest_items
+                    - mounts
+                    - sets
+      operationId: get-game-search-types
+      description: 'Get all types for /{game}/{lang}/search available for filtering. All names are english for comparing them inside applications. Order is fixed so you can compare indices instead of strings.'
+      parameters: []
+    parameters: []
   '/dofus2/meta/{language}/almanax/bonuses':
     get:
       summary: Available Almanax Bonuses
@@ -5622,11 +5772,11 @@ components:
           format: date-time
   securitySchemes: {}
 tags:
-  - name: all items
   - name: almanax
   - name: consumables
   - name: cosmetics
   - name: equipment
+  - name: game
   - name: meta
   - name: mounts
   - name: quest items
