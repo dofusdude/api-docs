@@ -797,6 +797,7 @@ paths:
           in: query
           name: 'filter[type]'
           description: only results with all specific type
+          explode: false
         - schema:
             type: integer
             default: 8
@@ -806,6 +807,21 @@ paths:
           in: query
           name: limit
           description: maximum number of returned results
+        - schema:
+            type: array
+            uniqueItems: true
+            example:
+              - level
+            items:
+              type: string
+              enum:
+                - level
+                - image_urls
+                - type
+          explode: false
+          in: query
+          name: 'fields[item]'
+          description: adds fields from the item search to the list entries if the hit is a item. Multiple comma separated values allowed.
       tags:
         - game
   '/{game}/{language}/items/equipment/search':
