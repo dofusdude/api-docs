@@ -1,9 +1,9 @@
 openapi: 3.0.0
 x-stoplight:
-  id: 3oy8uk16m6tss
+  id: ezdjxlif28ceb
 info:
   title: dofusdude
-  version: 0.8.2
+  version: 0.8.3
   description: "# A project for you - the developer.\nThe all-in-one toolbelt for your next Ankama related project.\n\n## Client SDKs\n- [Javascript](https://github.com/dofusdude/dofusdude-js) npm i dofusdude-js --save\n- [Typescript](https://github.com/dofusdude/dofusdude-ts) npm i dofusdude-ts --save\n- [Go](https://github.com/dofusdude/dodugo) go get -u github.com/dofusdude/dodugo\n- [Python](https://github.com/dofusdude/dofusdude-py) pip install dofusdude\n- [PHP](https://github.com/dofusdude/dofusdude-php)\n\nEverything, including this site, is generated out of the [Docs Repo](https://github.com/dofusdude/api-docs). Consider it the Single Source of Truth. If there is a problem with the SDKs, create an issue there.\n\nYour favorite language is missing? Please let me know!\n\n# Main Features\n- \U0001F977 **Seamless Auto-Update** load data in the background when a new Dofus version is released and serving it within 2 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.\n\n- ⚡ **Blazingly Fast** all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in \U0001F1E9\U0001F1EA.\n\n- \U0001F4E8 **Discord Integration** Ankama related RSS and Almanax feeds to post to Discord servers with advanced features like filters or mentions. Use the endpoints as a dev or the official [Web Client](https://discord.dofusdude.com) as a user.\n\n- \U0001FA78 **Dofus 2 Beta** from stable to bleeding edge by replacing /dofus2 with /dofus2beta.\n\n- \U0001F5E3️ **Multilingual** supporting _en_, _fr_, _es_, _pt_ including the dropped languages from the Dofus website _de_ and _it_.\n\n- \U0001F9E0 **Search by Relevance** allowing typos in name and description, handled by language specific text analysis and indexing.\n\n- \U0001F575️ **Complete** actual data from the game including items invisible to the encyclopedia like quest items.\n\n- \U0001F5BC️ **HD Images** rendering game assets to high-res images with up to 800x800 px.\n\n... and much more on the Roadmap on my Discord. \n\n## Deploy now. Use forever.\nEverything you see here on this site, you can use now and forever. Updates could introduce new fields, new paths or parameter but never break backwards compatibility.\n\nThere is one exception! **The API will _always_ choose being up-to-date over everything else**. So if Ankama decides to drop languages from the game like they did with their website, the API will loose support for them, too.\n\n## Thank you!\nI highly welcome everyone on my [Discord](https://discord.gg/3EtHskZD8h) to just talk about projects and use cases or give feedback of any kind.\n\nThe servers have a fixed monthly cost to provide very fast responses. If you want to help me keeping them running or simply donate to that cause, consider becoming a [GitHub Sponsor](https://github.com/sponsors/dofusdude)."
   contact:
     name: Survival
@@ -135,7 +135,7 @@ paths:
       tags:
         - game
       x-stoplight:
-        id: bs7m6mm579s8g
+        id: eeoi1h7wagrmw
   "/{game}/{language}/mounts/search":
     parameters:
       - schema:
@@ -233,7 +233,7 @@ paths:
           name: limit
           description: maximum number of returned results
       x-stoplight:
-        id: e7vrzwaxlhgv9
+        id: 55fkjddmfhh7n
   "/{game}/{language}/sets/search":
     parameters:
       - schema:
@@ -338,7 +338,7 @@ paths:
       tags:
         - sets
       x-stoplight:
-        id: bsgcr495558lu
+        id: 7pwfbuzuxnnuq
   "/{game}/{language}/items/quest/search":
     parameters:
       - schema:
@@ -459,7 +459,7 @@ paths:
           description: maximum number of returned results
           name: limit
       x-stoplight:
-        id: w7p1uzuakeyop
+        id: e7dmshthuyg5m
   "/{game}/{language}/items/consumables/search":
     parameters:
       - schema:
@@ -579,7 +579,7 @@ paths:
       tags:
         - consumables
       x-stoplight:
-        id: b1cp9a59ob30b
+        id: 6ogh4aj4k3vns
   "/{game}/{language}/items/resources/search":
     parameters:
       - schema:
@@ -699,7 +699,7 @@ paths:
           name: limit
           description: maximum number of returned results
       x-stoplight:
-        id: azw1ewb8uetly
+        id: l2f1uw9hdicac
   "/{game}/{language}/search":
     parameters:
       - schema:
@@ -839,7 +839,7 @@ paths:
       tags:
         - game
       x-stoplight:
-        id: 0yml4juh19a25
+        id: zxx3tt0z25gz8
   "/{game}/{language}/items/equipment/search":
     parameters:
       - schema:
@@ -959,7 +959,7 @@ paths:
           name: limit
           description: maximum number of returned results
       x-stoplight:
-        id: 6psar2h1uiobx
+        id: 4lzcb55gkjj2z
   "/{game}/{language}/items/cosmetics/search":
     parameters:
       - schema:
@@ -1079,7 +1079,7 @@ paths:
           name: limit
           description: maximum number of returned results
       x-stoplight:
-        id: 7kcen3uwgm2gx
+        id: mw8gyg65z17wf
   "/{game}/{language}/items/cosmetics/{ankama_id}":
     parameters:
       - schema:
@@ -1177,7 +1177,7 @@ paths:
       parameters: []
       x-internal: false
       x-stoplight:
-        id: tk9pa3me4mc05
+        id: a0ks17l0zqqaj
   "/{game}/{language}/items/resources/{ankama_id}":
     parameters:
       - schema:
@@ -1261,7 +1261,7 @@ paths:
       description: Retrieve a specific resource item with id.
       parameters: []
       x-stoplight:
-        id: pxrclsglno23f
+        id: viqn5ujmwoi9s
   "/{game}/{language}/items/equipment/{ankama_id}":
     parameters:
       - schema:
@@ -1745,7 +1745,7 @@ paths:
       description: Retrieve a specific equipment item with id.
       parameters: []
       x-stoplight:
-        id: nmllp5tev7ekb
+        id: e2j6pr8n8112g
   "/{game}/{language}/items/consumables/{ankama_id}":
     parameters:
       - schema:
@@ -1843,7 +1843,7 @@ paths:
       description: Retrieve a specific consumable item with id.
       parameters: []
       x-stoplight:
-        id: 2cb7ev0xox3yz
+        id: n40tefsprc7oq
   "/{game}/{language}/items/quest/{ankama_id}":
     parameters:
       - schema:
@@ -1922,7 +1922,7 @@ paths:
       tags:
         - quest items
       x-stoplight:
-        id: brkh571dyhd06
+        id: 74dxhpw46pxzc
   "/{game}/{language}/mounts/{ankama_id}":
     parameters:
       - schema:
@@ -2025,7 +2025,7 @@ paths:
       description: Retrieve a specific mount with id.
       parameters: []
       x-stoplight:
-        id: dbj3f2b0y9iju
+        id: pzqoy2btp2qkn
   "/{game}/{language}/sets/{ankama_id}":
     parameters:
       - schema:
@@ -2090,6 +2090,7 @@ paths:
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 30 Intelligenz
+                          item_combination: 2
                         - int_minimum: 30
                           int_maximum: 0
                           type:
@@ -2100,6 +2101,7 @@ paths:
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 30 Flinkheit
+                          item_combination: 2
                         - int_minimum: 30
                           int_maximum: 0
                           type:
@@ -2110,6 +2112,7 @@ paths:
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 30 Glück
+                          item_combination: 2
                         - int_minimum: 5
                           int_maximum: 0
                           type:
@@ -2120,6 +2123,7 @@ paths:
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 5 AP-Entzug
+                          item_combination: 2
                         - int_minimum: 10
                           int_maximum: 0
                           type:
@@ -2130,6 +2134,7 @@ paths:
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 10 Kritischer Schaden
+                          item_combination: 2
                       - - int_minimum: 30
                           int_maximum: 0
                           type:
@@ -2140,6 +2145,7 @@ paths:
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 30 Intelligenz
+                          item_combination: 3
                         - int_minimum: 30
                           int_maximum: 0
                           type:
@@ -2150,6 +2156,7 @@ paths:
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 30 Flinkheit
+                          item_combination: 3
                         - int_minimum: 30
                           int_maximum: 0
                           type:
@@ -2160,6 +2167,7 @@ paths:
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 30 Glück
+                          item_combination: 3
                         - int_minimum: 5
                           int_maximum: 0
                           type:
@@ -2170,6 +2178,7 @@ paths:
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 5 AP-Entzug
+                          item_combination: 3
                         - int_minimum: 10
                           int_maximum: 0
                           type:
@@ -2180,6 +2189,7 @@ paths:
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 10 Kritischer Schaden
+                          item_combination: 3
                         - int_minimum: 1
                           int_maximum: 0
                           type:
@@ -2190,6 +2200,7 @@ paths:
                           ignore_int_min: false
                           ignore_int_max: true
                           formatted: 1 AP
+                          item_combination: 3
                     highest_equipment_level: 200
         "400":
           description: |
@@ -2203,7 +2214,7 @@ paths:
       description: Retrieve a specific set with id.
       parameters: []
       x-stoplight:
-        id: ebmqrate36nwx
+        id: 7h3o04n689qab
   "/{game}/{language}/sets":
     parameters:
       - schema:
@@ -2380,7 +2391,7 @@ paths:
           description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
           explode: false
       x-stoplight:
-        id: h1d7jnvzy2s0r
+        id: s3zlet293u7sh
   "/{game}/{language}/mounts":
     parameters:
       - schema:
@@ -2493,7 +2504,7 @@ paths:
           explode: false
           description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
       x-stoplight:
-        id: hlqcgs1xannjd
+        id: gy9ldukmg67hy
   "/{game}/{language}/items/equipment":
     parameters:
       - schema:
@@ -2639,7 +2650,7 @@ paths:
       tags:
         - equipment
       x-stoplight:
-        id: ji3tbfqryao0m
+        id: z7ihi4fuba4rk
   "/{game}/{language}/items/resources":
     parameters:
       - schema:
@@ -2773,7 +2784,7 @@ paths:
           name: "fields[item]"
           description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
       x-stoplight:
-        id: 3tz3aodovfy5r
+        id: z2jx5o5pjumhs
   "/{game}/{language}/items/consumables":
     parameters:
       - schema:
@@ -2910,7 +2921,7 @@ paths:
           description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
           name: "fields[item]"
       x-stoplight:
-        id: dhoajgkaxyrsp
+        id: g2xcp6fribgyf
   "/{game}/{language}/items/quest":
     parameters:
       - schema:
@@ -3046,7 +3057,7 @@ paths:
           description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
           name: "fields[item]"
       x-stoplight:
-        id: e0ea9t2s5u9yu
+        id: qsq51akecj0r0
   "/{game}/{language}/items/cosmetics":
     parameters:
       - schema:
@@ -3176,7 +3187,7 @@ paths:
           description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
           name: "fields[item]"
       x-stoplight:
-        id: 1hioa8q9787xg
+        id: mlmwp9s8utn2j
   "/{game}/{language}/mounts/all":
     parameters:
       - schema:
@@ -3264,7 +3275,7 @@ paths:
           name: Accept-Encoding
           description: optional compression for saving bandwidth
       x-stoplight:
-        id: nz5gsdzhiabxg
+        id: 35hwizajcz3g7
   "/{game}/{language}/sets/all":
     parameters:
       - schema:
@@ -3369,7 +3380,7 @@ paths:
           name: Accept-Encoding
           description: optional compression for saving bandwidth
       x-stoplight:
-        id: 0pwjz7ynq9fe3
+        id: rzxp5sotapqe6
   "/{game}/{language}/items/cosmetics/all":
     parameters:
       - schema:
@@ -3485,7 +3496,7 @@ paths:
           name: Accept-Encoding
           description: optional compression for saving bandwidth
       x-stoplight:
-        id: kgdnx7l9n6mtd
+        id: 07si7hjof1qpt
   "/{game}/{language}/items/quest/all":
     parameters:
       - schema:
@@ -3607,7 +3618,7 @@ paths:
           name: Accept-Encoding
           description: optional compression for saving bandwidth
       x-stoplight:
-        id: dk2dp9l0xayec
+        id: mgmt97sgtrhja
   "/{game}/{language}/items/consumables/all":
     parameters:
       - schema:
@@ -3722,7 +3733,7 @@ paths:
           name: Accept-Encoding
           description: optional compression for saving bandwidth
       x-stoplight:
-        id: gjvfdxdl4qord
+        id: llcg4hmp9wucr
   "/{game}/{language}/items/resources/all":
     parameters:
       - schema:
@@ -3842,7 +3853,7 @@ paths:
           name: Accept-Encoding
           description: optional compression for saving bandwidth
       x-stoplight:
-        id: qy1rbtn91nr2n
+        id: 1wtcbwhh04jmq
   "/{game}/{language}/items/equipment/all":
     parameters:
       - schema:
@@ -3959,7 +3970,7 @@ paths:
       tags:
         - equipment
       x-stoplight:
-        id: e4v6e2gogltsb
+        id: wbxzhlcid1l0w
   "/dofus2/{language}/almanax":
     parameters:
       - schema:
@@ -4078,7 +4089,7 @@ paths:
           name: timezone
           description: 'determine what the current time is. If you live in Brazil, "today" will be hours apart from Paris. Use your timezone to get results relative to your location.'
       x-stoplight:
-        id: up5emyrssialv
+        id: fy8l7o3sz1jyo
   "/dofus2/{language}/almanax/{date}":
     parameters:
       - schema:
@@ -4136,7 +4147,7 @@ paths:
       operationId: get-almanax-date
       description: Get a single date. There are not more details in the returned object than the normal range endpoint.
       x-stoplight:
-        id: rtcy4tn18y20i
+        id: d0000xjgaenyh
   /dofus2/meta/elements:
     get:
       summary: Effects and Condition Elements
@@ -4160,7 +4171,7 @@ paths:
       description: Get the mappings for all specific elements that are linked in the dataset. All names are english. Translations are not needed because of a global unique id which is the index inside the array. Future elements will get a higher id.
       parameters: []
       x-stoplight:
-        id: elgw539co0qsm
+        id: 4oyiu8nbwwgds
     parameters: []
   /dofus2/meta/search/types:
     get:
@@ -4190,7 +4201,7 @@ paths:
       description: "Get all types for /{game}/{lang}/search available for filtering. All names are english for comparing them inside applications. Order is fixed so you can compare indices instead of strings."
       parameters: []
       x-stoplight:
-        id: mid2pytmmpasy
+        id: v67mknkhaif2h
     parameters: []
   "/dofus2/meta/{language}/almanax/bonuses":
     get:
@@ -4232,7 +4243,7 @@ paths:
       description: Get all the available bonuses and their id for filtering them in the range endpoint.
       parameters: []
       x-stoplight:
-        id: 0si3syerdipxs
+        id: y3rp6gd28quli
     parameters:
       - schema:
           type: string
@@ -4298,7 +4309,7 @@ paths:
           name: limit
           description: maximum number of returned results
       x-stoplight:
-        id: 60nsk2osmamnj
+        id: wacmug1sb1oe9
     parameters:
       - schema:
           type: string
@@ -4346,7 +4357,7 @@ paths:
       operationId: get-meta-webhooks-twitter
       description: "Get a list of all available subscriptions. "
       x-stoplight:
-        id: yv17xgpu6s2zs
+        id: x2su9os7cdw6n
   /meta/webhooks/rss:
     get:
       summary: Get RSS Hook Metainfo
@@ -4375,7 +4386,7 @@ paths:
       operationId: get-meta-webhooks-rss
       description: "Get a list of all available subscriptions. "
       x-stoplight:
-        id: f7wmitf5otq7g
+        id: ryea84v1mw1ak
   /meta/webhooks/almanax:
     get:
       summary: Get Almanax Hook Metainfo
@@ -4409,7 +4420,7 @@ paths:
       operationId: get-meta-webhooks-almanax
       description: "Get a list of all available subscriptions. "
       x-stoplight:
-        id: hv72ql6n9t3zj
+        id: 4lrj2cmhjnm2s
   "/webhooks/rss/{id}":
     parameters:
       - schema:
@@ -4444,7 +4455,7 @@ paths:
       operationId: get-webhooks-rss-id
       description: Retrieve details about an existing RSS Webhook with a given uuid.
       x-stoplight:
-        id: syrf6cxpiaf2a
+        id: u2trp6aa29zke
     put:
       summary: Update RSS Hook
       operationId: put-webhooks-rss-id
@@ -4485,7 +4496,7 @@ paths:
       tags:
         - webhooks
       x-stoplight:
-        id: phtkbq6pmyd8a
+        id: gxa2aqic6jm2e
     delete:
       summary: Unregister RSS Hook
       operationId: delete-webhooks-rss-id
@@ -4496,7 +4507,7 @@ paths:
       tags:
         - webhooks
       x-stoplight:
-        id: fyyqlyg58bftr
+        id: dzqt93ubm594i
   "/webhooks/twitter/{id}":
     parameters:
       - schema:
@@ -4533,7 +4544,7 @@ paths:
       operationId: get-webhooks-twitter-id
       description: Retrieve details about an existing Twitter Webhook with a given uuid.
       x-stoplight:
-        id: jfnxrbq5qthkz
+        id: b17dskp86rnqw
     put:
       summary: Update Twitter Hook
       operationId: put-webhooks-twitter-id
@@ -4578,7 +4589,7 @@ paths:
       tags:
         - webhooks
       x-stoplight:
-        id: si505i93c01ye
+        id: qp6uqqs05jye4
     delete:
       summary: Unregister Twitter Hook
       operationId: delete-webhooks-twitter-id
@@ -4589,7 +4600,7 @@ paths:
       tags:
         - webhooks
       x-stoplight:
-        id: 9jiu4trzv93mr
+        id: 4o1c8msan9y9v
   "/webhooks/almanax/{id}":
     parameters:
       - schema:
@@ -4635,7 +4646,7 @@ paths:
       operationId: get-webhooks-almanax-id
       description: Retrieve details about an existing Almanax Webhook with a given uuid.
       x-stoplight:
-        id: s7d026fjay96v
+        id: tsnn86pyx3vu8
     put:
       summary: Update Almanax Hook
       operationId: put-webhooks-almanax-id
@@ -4697,7 +4708,7 @@ paths:
       tags:
         - webhooks
       x-stoplight:
-        id: byvpkt15y4gjt
+        id: okizp8l5z3on3
     delete:
       summary: Unregister Almanax Hook
       operationId: delete-webhooks-almanax-id
@@ -4708,7 +4719,7 @@ paths:
       tags:
         - webhooks
       x-stoplight:
-        id: yl3ahn2jej0ua
+        id: plnosst21p855
   /webhooks/rss:
     post:
       summary: Register RSS Hook
@@ -4737,7 +4748,7 @@ paths:
       tags:
         - webhooks
       x-stoplight:
-        id: 4rvi2htpw6875
+        id: x27z57xp45wte
   /webhooks/twitter:
     post:
       summary: Register Twitter Hook
@@ -4765,7 +4776,7 @@ paths:
       tags:
         - webhooks
       x-stoplight:
-        id: sjhpc8irl8j2s
+        id: n7hruj6bwd63z
   /webhooks/almanax:
     post:
       summary: Register Almanax Hook
@@ -4804,7 +4815,7 @@ paths:
       tags:
         - webhooks
       x-stoplight:
-        id: hvv1yiiqwj83f
+        id: rgb2d0j47fr0l
 components:
   schemas:
     Items-List-Entry-Typed:
@@ -4830,12 +4841,12 @@ components:
         image_urls:
           $ref: "#/components/schemas/Image-Urls"
       x-stoplight:
-        id: ox3d1o70kkwnn
+        id: r5b3ia3ectz8q
     Cosmetic:
       type: object
       x-examples: {}
       x-stoplight:
-        id: 8si9abvpqf95g
+        id: rfawtzjwbqvco
       properties:
         ankama_id:
           type: integer
@@ -4888,7 +4899,44 @@ components:
       x-examples: {}
       title: ""
       x-stoplight:
-        id: xdadfxdzg3gsv
+        id: mb2ht06tym8se
+    Set-Effects-Entry:
+      type: object
+      x-examples: {}
+      x-tags:
+        - meta
+      properties:
+        int_minimum:
+          type: integer
+          description: "minimum int value, can be a single if ignore_int_max and no ignore_int_min"
+        int_maximum:
+          type: integer
+          description: "maximum int value, if not ignore_int_max and not ignore_int_min, the effect has a range value"
+        type:
+          type: object
+          properties:
+            name:
+              type: string
+            id:
+              type: integer
+            is_meta:
+              type: boolean
+              description: 'true if a type is generated from the Api instead of Ankama. In that case, always prefer showing the templated string and omit everything else. The "name" field will have an english description of the meta type. An example for such effects are class sets effects.'
+            is_active:
+              type: boolean
+              description: Affects target or source actively.
+        ignore_int_min:
+          type: boolean
+          description: "ignore the int min field because the actual value is a string. For readability the templated field is the only important field in this case. "
+        ignore_int_max:
+          type: boolean
+          description: "ignore the int max field, if ignore_int_min is true, int min is a single value"
+        formatted:
+          type: string
+          description: all fields from above encoded in a single string
+        item_combination:
+          type: integer
+          description: how many items it needs to trigger this effect with the given set
     Effects-Entry:
       type: object
       x-examples: {}
@@ -4924,7 +4972,7 @@ components:
           type: string
           description: all fields from above encoded in a single string
       x-stoplight:
-        id: wu24vt5vz6r42
+        id: frixo5s02x57v
     Image-Urls:
       type: object
       x-examples:
@@ -4957,12 +5005,12 @@ components:
           nullable: true
       title: ""
       x-stoplight:
-        id: 7itke5mom5dhx
+        id: ebvisb0pnf46t
     Resource:
       type: object
       x-examples: {}
       x-stoplight:
-        id: 346lkp0ymnytt
+        id: 10otndsm7bw3k
       properties:
         ankama_id:
           type: integer
@@ -5007,6 +5055,8 @@ components:
     Item-List-Entry:
       type: object
       x-examples: {}
+      x-stoplight:
+        id: t7g4fratmdgkx
       properties:
         ankama_id:
           type: integer
@@ -5028,12 +5078,66 @@ components:
           nullable: true
           items:
             $ref: "#/components/schemas/Recipe-Entry"
-      x-stoplight:
-        id: 62if77urw3c29
+        description:
+          type: string
+          x-stoplight:
+            id: t04qfhnlgc4kw
+          nullable: true
+        conditions:
+          type: array
+          deprecated: true
+          nullable: true
+          items:
+            $ref: "#/components/schemas/Condition-Entry"
+        condition_tree:
+          nullable: true
+          $ref: "#/components/schemas/Condition-Tree-Node"
+        effects:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/Effects-Entry"
+        is_weapon:
+          nullable: true
+          type: boolean
+        pods:
+          nullable: true
+          type: integer
+        parent_set:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        critical_hit_probability:
+          nullable: true
+          type: integer
+        critical_hit_bonus:
+          nullable: true
+          type: integer
+        is_two_handed:
+          nullable: true
+          type: boolean
+        max_cast_per_turn:
+          nullable: true
+          type: integer
+        ap_cost:
+          nullable: true
+          type: integer
+        range:
+          nullable: true
+          type: object
+          properties:
+            min:
+              type: integer
+            max:
+              type: integer
     Equipment-Set:
       title: ""
       x-stoplight:
-        id: 5dz3jq04cro7p
+        id: xmkp08r20yq44
       type: object
       properties:
         ankama_id:
@@ -5050,7 +5154,7 @@ components:
           items:
             type: array
             items:
-              $ref: "#/components/schemas/Effects-Entry"
+              $ref: "#/components/schemas/Set-Effects-Entry"
         highest_equipment_level:
           type: integer
     Set-List-Entry:
@@ -5066,13 +5170,25 @@ components:
           description: amount
         level:
           type: integer
+        effects:
+          type: array
+          nullable: true
+          items:
+            type: array
+            items:
+              $ref: "#/components/schemas/Set-Effects-Entry"
+        equipment_ids:
+          nullable: true
+          type: array
+          items:
+            type: integer
       title: ""
       x-stoplight:
-        id: ge83fa7ycoy7u
+        id: jzo6pgvj144er
     Mount:
       title: ""
       x-stoplight:
-        id: ub35ova6c05ct
+        id: t56c7qu8hapx4
       type: object
       properties:
         ankama_id:
@@ -5101,12 +5217,17 @@ components:
           type: string
         image_urls:
           $ref: "#/components/schemas/Image-Urls"
+        effects:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/Effects-Entry"
       x-stoplight:
-        id: war4b8430wdde
+        id: rie41mn8llctq
     Items-List-Paged:
       title: ""
       x-stoplight:
-        id: o8g6474tsf8fe
+        id: wp54br61flkau
       type: object
       properties:
         _links:
@@ -5118,7 +5239,7 @@ components:
     Sets-List-Paged:
       title: ""
       x-stoplight:
-        id: 47l4rc783fkqv
+        id: kr369f842c2w9
       type: object
       properties:
         _links:
@@ -5130,7 +5251,7 @@ components:
     Mounts-List-Paged:
       title: ""
       x-stoplight:
-        id: gpk4st074rdlz
+        id: 67iikn0tj64zs
       type: object
       properties:
         _links:
@@ -5142,7 +5263,7 @@ components:
     Links-Paged:
       title: ""
       x-stoplight:
-        id: el0hhmf393fzf
+        id: 60s06npdim49u
       type: object
       properties:
         first:
@@ -5159,7 +5280,7 @@ components:
           nullable: true
     Condition-Entry:
       x-stoplight:
-        id: aeaid659jdkvj
+        id: cfe46yvylz0b5
       type: object
       properties:
         operator:
@@ -5176,7 +5297,7 @@ components:
       description: ""
     Condition-Tree-Node:
       x-stoplight:
-        id: j4vfod2b9xp0x
+        id: kv2rib65himdt
       x-examples: {}
       oneOf:
         - $ref: "#/components/schemas/Condition-Tree-Relation"
@@ -5184,7 +5305,7 @@ components:
     Condition-Tree-Leaf:
       type: object
       x-stoplight:
-        id: os7s47h6ylpw1
+        id: qpb8of1ljcb4y
       x-examples: {}
       properties:
         is_operand:
@@ -5196,7 +5317,7 @@ components:
     Condition-Tree-Relation:
       type: object
       x-stoplight:
-        id: raelhdlixta0s
+        id: 1ubaw97npzw7b
       x-examples: {}
       properties:
         is_operand:
@@ -5216,7 +5337,7 @@ components:
       type: object
       x-examples: {}
       x-stoplight:
-        id: 0idcz9ozx0wjy
+        id: wl02ch9nip85b
       properties:
         ankama_id:
           type: integer
@@ -5270,7 +5391,7 @@ components:
       type: object
       x-examples: {}
       x-stoplight:
-        id: u8lgrwvskwwev
+        id: 904f1afmcifdp
       properties:
         ankama_id:
           type: integer
@@ -5373,7 +5494,7 @@ components:
             quantity:
               type: integer
       x-stoplight:
-        id: wmjv9ejxbzmb3
+        id: vrmvy5zbqek3g
     CreateTwitterWebhook:
       type: object
       x-examples:
@@ -5426,7 +5547,7 @@ components:
         - format
         - callback
       x-stoplight:
-        id: bejf2mpu2yb1v
+        id: 7k5ozheexjnxv
     CreateRSSWebhook:
       type: object
       x-examples:
@@ -5480,7 +5601,7 @@ components:
         - format
         - callback
       x-stoplight:
-        id: g42j02d7tjkzh
+        id: j8vhvwqn3jeoe
     PutRSSWebhook:
       type: object
       x-examples:
@@ -5517,7 +5638,7 @@ components:
           maximum: 4000
           nullable: true
       x-stoplight:
-        id: 2yww0rytssdlg
+        id: 7uavm6v1r9v4y
     PutTwitterWebhook:
       type: object
       x-examples:
@@ -5556,7 +5677,7 @@ components:
           maximum: 280
           nullable: true
       x-stoplight:
-        id: 8z40rjn9badoc
+        id: omtuayunn9wfk
     CreateAlmanaxWebhook:
       type: object
       x-examples:
@@ -5695,7 +5816,7 @@ components:
         - callback
         - intervals
       x-stoplight:
-        id: mcnc9wi9h2hp9
+        id: pyyh22g8b7mk0
     PutAlmanaxWebhook:
       type: object
       x-examples:
@@ -5815,7 +5936,7 @@ components:
           description: When to post the weekly preview at the specified time.
           nullable: true
       x-stoplight:
-        id: o49u2pkzt2401
+        id: htkpa9vrybcye
     RssWebhook:
       type: object
       x-examples:
@@ -5872,7 +5993,7 @@ components:
           example: "2022-10-25T15:32:37.406281+02:00"
       title: RSSWebhook
       x-stoplight:
-        id: agyu93zx7r9bl
+        id: e4x9508e2otmo
     TwitterWebhook:
       type: object
       x-examples:
@@ -5932,7 +6053,7 @@ components:
           format: date-time
           example: "2022-10-25T15:32:37.406281+02:00"
       x-stoplight:
-        id: nzg926yp1c3i4
+        id: n7ja34vr6bc0v
     AlmanaxWebhook:
       type: object
       x-examples:
@@ -6072,7 +6193,7 @@ components:
           type: string
           format: date-time
       x-stoplight:
-        id: 85cgwbeo0toii
+        id: x3oc9iaxf57wv
   securitySchemes: {}
 tags:
   - name: almanax
