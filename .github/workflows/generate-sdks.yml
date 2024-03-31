@@ -123,10 +123,11 @@ jobs:
 
       - name: Add actions
         run: |
-          cd go-client
+          cd java-client
           mkdir -p .github/workflows/
           printf '%s\n' 'name: Go' 'on:' '  push:' '    branches: [ main ]' '  pull_request:' '    branches: [ main ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v3' '    - name: Set up Java' '      uses: actions/setup-java@v4' '      with:' '        java-version: "17"' '        distribution: "temurin"' '    - name: Run the Maven verify phase' '      run: mvn --batch-mode --update-snapshots verify' > .github/workflows/build.yml
           sed -i 's/\\"/"/g' README.md
+          cd ..
 
       - name: Pushes to sdk repository
         uses: cpina/github-action-push-to-another-repository@main
