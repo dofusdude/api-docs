@@ -2,7 +2,7 @@ name: Generate SDKs
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
   workflow_dispatch:
 
@@ -11,10 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Generate js sdk
     steps:
-
       - name: Checkout OpenAPI
         uses: actions/checkout@v3
-        
+
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -25,12 +24,12 @@ jobs:
           generator: javascript
           openapi-file: openapi-3.0.yaml
           command-args: --additional-properties=moduleName=dofusdude,projectName=dofusdude-js,licenseName=MIT
-      
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v3.4.1
         with:
           node-version: 16.x
-      
+
       - name: Generate package-lock.json
         run: |
           cp -r javascript-client javascript-client-cp
@@ -51,17 +50,16 @@ jobs:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
           API_TOKEN_GITHUB: ${{ secrets.PUSH_GITHUB_TOKEN }}
         with:
-          source-directory: 'javascript-client'
-          destination-github-username: 'dofusdude'
-          destination-repository-name: 'dofusdude-js'
+          source-directory: "javascript-client"
+          destination-github-username: "dofusdude"
+          destination-repository-name: "dofusdude-js"
           user-email: stelzo@steado.de
           target-branch: main
-          
+
   generate-ts-client:
     runs-on: ubuntu-latest
     name: Generate ts sdk
     steps:
-
       - name: Checkout OpenAPI
         uses: actions/checkout@v3
         with:
@@ -74,12 +72,12 @@ jobs:
           generator: typescript-axios
           openapi-file: openapi-3.0.yaml
           command-args: --additional-properties=npmName=dofusdude-ts
-      
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v3.4.1
         with:
           node-version: 16.x
-      
+
       - name: Generate package-lock.json
         run: |
           cp -r typescript-axios-client typescript-axios-client-cp
@@ -100,18 +98,52 @@ jobs:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY_TS }}
           API_TOKEN_GITHUB: ${{ secrets.PUSH_GITHUB_TOKEN }}
         with:
-          source-directory: 'typescript-axios-client'
-          destination-github-username: 'dofusdude'
-          destination-repository-name: 'dofusdude-ts'
+          source-directory: "typescript-axios-client"
+          destination-github-username: "dofusdude"
+          destination-repository-name: "dofusdude-ts"
           user-email: stelzo@steado.de
           target-branch: main
-          
-          
+
+  generate-java-client:
+    runs-on: ubuntu-latest
+    name: Generate java sdk
+    steps:
+      - name: Checkout OpenAPI
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Generate java sdk
+        uses: openapi-generators/openapitools-generator-action@v1
+        with:
+          generator: java
+          openapi-file: openapi-3.0.yaml
+          command-args: --additional-properties=apiPackage=de.dofusdude.client.api,artifactDescription="Dofusdude mappings for Java",artifactId=dofusdude-java,artifactUrl=https://github.com/dofusdude/dofusdude-java,developerEmail=stelzo@steado.de,developerName="Christopher Sieh",developerOrganization="dofusdude",developerOrganizationUrl=https://github.com/dofusdude,library=microprofile,invokerPackage=de.dofusdude.client,modelPackage=de.dofusdude.client.model
+
+      - name: Add actions
+        run: |
+          cd go-client
+          mkdir -p .github/workflows/
+          printf '%s\n' 'name: Go' 'on:' '  push:' '    branches: [ main ]' '  pull_request:' '    branches: [ main ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v3' '    - name: Set up Java' '      uses: actions/setup-java@v4' '      with:' '        java-version: "17"' '        distribution: "temurin"' '    - name: Run the Maven verify phase' '      run: mvn --batch-mode --update-snapshots verify' > .github/workflows/build.yml
+          sed -i 's/\\"/"/g' README.md
+
+      - name: Pushes to sdk repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY_JAVA }}
+          API_TOKEN_GITHUB: ${{ secrets.PUSH_GITHUB_TOKEN }}
+        with:
+          source-directory: "java-client"
+          destination-github-username: "dofusdude"
+          destination-repository-name: "dofusdude-java"
+          user-email: stelzo@steado.de
+          target-branch: main
+
   generate-go-client:
     runs-on: ubuntu-latest
     name: Generate go sdk
     steps:
-
       - name: Checkout OpenAPI
         uses: actions/checkout@v3
         with:
@@ -124,15 +156,14 @@ jobs:
           generator: go
           openapi-file: openapi-3.0.yaml
           command-args: --additional-properties=packageName=dodugo
-      
+
       - name: Setup Go environment
         uses: actions/setup-go@v3.3.0
         with:
           check-latest: true
           go-version-file: go-client/go.mod
           cache-dependency-path: go-client/go.sum
-          
-    
+
       - name: Add actions
         run: |
           cd go-client
@@ -151,24 +182,22 @@ jobs:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY_GO }}
           API_TOKEN_GITHUB: ${{ secrets.PUSH_GITHUB_TOKEN }}
         with:
-          source-directory: 'go-client'
-          destination-github-username: 'dofusdude'
-          destination-repository-name: 'dodugo'
+          source-directory: "go-client"
+          destination-github-username: "dofusdude"
+          destination-repository-name: "dodugo"
           user-email: stelzo@steado.de
           target-branch: main
-          
-      
+
   generate-python-client:
     runs-on: ubuntu-latest
     name: Generate python sdk
     steps:
-
       - name: Checkout OpenAPI
         uses: actions/checkout@v3
         with:
           persist-credentials: false
           fetch-depth: 0
-          
+
       - name: OpenAPI API Version Print
         uses: stelzo/openapi-api-version-print@v1
         id: api-version-print
@@ -181,7 +210,7 @@ jobs:
           generator: python
           openapi-file: openapi-3.0.yaml
           command-args: --additional-properties=packageName=dofusdude,projectName=dofusdude,packageUrl=https://github.com/dofusdude/dofusdude-py,packageVersion=${{steps.api-version-print.outputs.apiVersion}}
-      
+
       - name: Setup Python environment
         uses: actions/setup-python@v4.2.0
         with:
@@ -203,9 +232,9 @@ jobs:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY_PY }}
           API_TOKEN_GITHUB: ${{ secrets.PUSH_GITHUB_TOKEN }}
         with:
-          source-directory: 'python-client'
-          destination-github-username: 'dofusdude'
-          destination-repository-name: 'dofusdude-py'
+          source-directory: "python-client"
+          destination-github-username: "dofusdude"
+          destination-repository-name: "dofusdude-py"
           user-email: stelzo@steado.de
           target-branch: main
 
@@ -213,7 +242,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Generate php sdk
     steps:
-
       - name: Checkout OpenAPI
         uses: actions/checkout@v3
         with:
@@ -243,9 +271,8 @@ jobs:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY_PHP }}
           API_TOKEN_GITHUB: ${{ secrets.PUSH_GITHUB_TOKEN }}
         with:
-          source-directory: 'php-client'
-          destination-github-username: 'dofusdude'
-          destination-repository-name: 'dofusdude-php'
+          source-directory: "php-client"
+          destination-github-username: "dofusdude"
+          destination-repository-name: "dofusdude-php"
           user-email: stelzo@steado.de
           target-branch: main
-          
