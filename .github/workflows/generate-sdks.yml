@@ -119,7 +119,7 @@ jobs:
         with:
           generator: java
           openapi-file: openapi-3.0.yaml
-          command-args: --additional-properties=apiPackage=de.dofusdude.client.api,artifactDescription=dofusdude-client,artifactId=dofusdude-java,artifactUrl=https://github.com/dofusdude/dofusdude-java,developerEmail=stelzo@steado.de,developerName=stelzo,developerOrganization=dofusdude,developerOrganizationUrl=https://github.com/dofusdude,library=microprofile,invokerPackage=de.dofusdude.client,modelPackage=de.dofusdude.client.model
+          command-args: --additional-properties=apiPackage=de.dofusdude.client.api,artifactDescription=dofusdude-client,artifactId=dofusdude-java,artifactUrl=https://github.com/dofusdude/dofusdude-java,developerEmail=stelzo@steado.de,developerName=stelzo,developerOrganization=dofusdude,developerOrganizationUrl=https://github.com/dofusdude,library=microprofile,invokerPackage=de.dofusdude.client,modelPackage=de.dofusdude.client.model,groupId=de.dofusdude,useJakartaEe=true
 
       - name: Add actions
         run: |
