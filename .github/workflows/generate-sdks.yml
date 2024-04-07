@@ -118,7 +118,7 @@ jobs:
         with:
           generator: java
           openapi-file: openapi-3.0.yaml
-          command-args: --additional-properties=apiPackage=com.dofusdude.client.api,artifactDescription=dofusdude-client,artifactId=dofusdude-java,artifactUrl=https://github.com/dofusdude/dofusdude-java,developerEmail=stelzo@steado.de,developerName=stelzo,developerOrganization=dofusdude,developerOrganizationUrl=https://github.com/dofusdude,library=microprofile,invokerPackage=com.dofusdude.client,modelPackage=com.dofusdude.client.model,groupId=com.dofusdude,useJakartaEe=true
+          command-args: --additional-properties=apiPackage=com.dofusdude.client.api,artifactDescription=dofusdude-client,artifactId=dofusdude-java,artifactUrl=https://github.com/dofusdude/dofusdude-java,developerEmail=stelzo@steado.de,developerName=stelzo,developerOrganization=dofusdude,developerOrganizationUrl=https://github.com/dofusdude,invokerPackage=com.dofusdude.client,modelPackage=com.dofusdude.client.model,groupId=com.dofusdude,useJakartaEe=true
 
       - name: Add actions and patch pom.xml
         run: |
