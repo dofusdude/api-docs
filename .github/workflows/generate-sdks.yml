@@ -143,6 +143,49 @@ jobs:
           user-email: stelzo@steado.de
           target-branch: main
 
+  generate-csharp-client:
+    runs-on: ubuntu-latest
+    name: Generate csharp sdk
+    steps:
+      - name: Checkout OpenAPI
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: OpenAPI API Version Print
+        uses: stelzo/openapi-api-version-print@v1
+        id: api-version-print
+        with:
+          specFile: openapi-3.0.yaml
+
+      - name: Generate csharp sdk
+        uses: openapi-generators/openapitools-generator-action@v1
+        with:
+          generator: csharp
+          openapi-file: openapi-3.0.yaml
+          command-args: --additional-properties=apiName=DofusdudeApi,packageName=Dofusdude.Api,packageVersion=packageVersion=${{steps.api-version-print.outputs.apiVersion}}
+
+      - name: Add actions and patch pom.xml
+        run: |
+          cd csharp-client
+          mkdir -p .github/workflows/
+          printf '%s\n' 'name: Build' 'on:' '  push:' '    branches: [ main ]' '  pull_request:' '    branches: [ main ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v4' '    - name: Set up dotnet' '      uses: actions/setup-dotnet@v3' '      with:' '        dotnet-version: "8.x"' '    - name: Install deps' '      run: dotnet restore' '    - name: Build' '      run: dotnet build' '    - name: Test' '      run: dotnet test' > .github/workflows/build.yml
+          sed -i 's/\\"/"/g' README.md
+          cd ..
+
+      - name: Pushes to sdk repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY_CSHARP }}
+          API_TOKEN_GITHUB: ${{ secrets.PUSH_GITHUB_TOKEN }}
+        with:
+          source-directory: "csharp-client"
+          destination-github-username: "dofusdude"
+          destination-repository-name: "dofusdude-csharp"
+          user-email: stelzo@steado.de
+          target-branch: main
+
   generate-go-client:
     runs-on: ubuntu-latest
     name: Generate go sdk
