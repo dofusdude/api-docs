@@ -164,14 +164,21 @@ jobs:
         with:
           generator: csharp
           openapi-file: openapi-3.0.yaml
-          command-args: --additional-properties=apiName=DofusdudeApi,packageName=Dofusdude.Api,packageVersion=packageVersion=${{steps.api-version-print.outputs.apiVersion}}
+          command-args: --additional-properties=apiName=DofusdudeApi,packageName=Dofusdude.Api,packageVersion=${{steps.api-version-print.outputs.apiVersion}}
 
       - name: Add actions and patch pom.xml
         run: |
           cd csharp-client
           mkdir -p .github/workflows/
           printf '%s\n' 'name: Build' 'on:' '  push:' '    branches: [ main ]' '  pull_request:' '    branches: [ main ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v4' '    - name: Set up dotnet' '      uses: actions/setup-dotnet@v3' '      with:' '        dotnet-version: "8.x"' '    - name: Install deps' '      run: dotnet restore' '    - name: Build' '      run: dotnet build' '    - name: Test' '      run: dotnet test' > .github/workflows/build.yml
+          printf '%s\n' 'name: Build' 'on:' '  release:' '    types: [ created ]' 'jobs:' '  deploy:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v4' '    - name: Set up dotnet' '      uses: actions/setup-dotnet@v3' '      with:' '        dotnet-version: "8.x"' '      env:' '        NUGET_AUTH_TOKEN: secrets.NUGET_TOKEN' '    - name: Build' '      run: dotnet build --configuration Release' '    - name: Package' '      run: dotnet pack --configuration Release' '    - name: Publish' '      run: dotnet nuget push src/Dofusdude.Api/bin/Release/Dofusdude.Api.${{steps.api-version-print.outputs.apiVersion}}.nupkg' > .github/workflows/publish.yml
+          sed -i 's/<Authors>OpenAPI<\/Authors>/<Authors>stelzo<\/Authors>/g' Dofusdude.Api.csproj
+          sed -i 's/GIT_USER_ID/dofusdude/g' Dofusdude.Api.csproj
+          sed -i 's/GIT_REPO_ID/dofusdude-csharp/g' Dofusdude.Api.csproj
+          sed -i 's/<AssemblyTitle>OpenAPI Library<\/AssemblyTitle>/<AssemblyTitle>Dofusdude API<\/AssemblyTitle>/g' Dofusdude.Api.csproj
+          sed -i 's/<Description>A library generated from a OpenAPI doc<\/Description>/<Description>A project for you - the developer.<\/Description>/g' Dofusdude.Api.csproj
           sed -i 's/\\"/"/g' README.md
+          sed -i 's/secrets.NUGET_TOKEN/\$\{\{secrets.NUGET_TOKEN\}\}/g' .github/workflows/publish.yml          
           cd ..
 
       - name: Pushes to sdk repository
