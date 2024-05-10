@@ -221,7 +221,6 @@ jobs:
           cd swift-combine-client
           mkdir -p .github/workflows/
           printf '%s\n' 'name: Build' 'on:' '  push:' '    branches: [ main ]' '  pull_request:' '    branches: [ main ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v4' '    - name: Set up Swift' '      uses: swift-actions/setup-swift@v2' '    - name: Build' '      run: swift build' '    - name: Test' '      run: swift test' > .github/workflows/build.yml
-          sed -i 's/\\"/"/g' README.md
           cd ..
 
       - name: Pushes to sdk repository
@@ -255,13 +254,13 @@ jobs:
       - name: Generate Dart sdk
         uses: openapi-generators/openapitools-generator-action@v1
         with:
-          generator: dart
+          generator: dart-dio
           openapi-file: openapi-3.0.yaml
           command-args: --additional-properties=pubAuthor=stelzo,pubAuthorEmail=stelzo@steado.de,pubHomepage=https://github.com/dofusdude,pubLibrary=dofusdude.api,pubName=Dofusdude,pubVersion=${{steps.api-version-print.outputs.apiVersion}},pubRepository=https://github.com/dofusdude/dofusdude-dart
 
       - name: Add actions
         run: |
-          cd dart-client
+          cd dart-dio-client
           mkdir -p .github/workflows/
           printf '%s\n' 'name: Build' 'on:' '  push:' '    branches: [ main ]' '  pull_request:' '    branches: [ main ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v4' '    - name: Set up Dart' '      uses: dart-lang/setup-dart@v1' '    - name: Install deps' '      run: dart pub get' '    - name: Test' '      run: dart test' > .github/workflows/build.yml
           printf '%s\n' 'name: Publish' 'on:' '  push:' '    tags:' '    - 'v[0-9]+.[0-9]+.[0-9]+*'' 'jobs:' '  publish:' '    permissions:' '      id-token: write' '    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1' > .github/workflows/publish.yml
@@ -274,7 +273,7 @@ jobs:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY_DART }}
           API_TOKEN_GITHUB: ${{ secrets.PUSH_GITHUB_TOKEN }}
         with:
-          source-directory: "dart-client"
+          source-directory: "dart-dio-client"
           destination-github-username: "dofusdude"
           destination-repository-name: "dofusdude-dart"
           user-email: stelzo@steado.de
