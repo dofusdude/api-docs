@@ -220,7 +220,7 @@ jobs:
         run: |
           cd swift-combine-client
           mkdir -p .github/workflows/
-          printf '%s\n' 'name: Build' 'on:' '  push:' '    branches: [ main ]' '  pull_request:' '    branches: [ main ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v4' '    - name: Set up Swift' '      uses: swift-actions/setup-swift@v2' '    - name: Build' '      run: cd Dofusdude && swift build' '    - name: Test' '      run: cd Dofusdude && swift test' > .github/workflows/build.yml
+          printf '%s\n' 'name: Build' 'on:' '  push:' '    branches: [ main ]' '  pull_request:' '    branches: [ main ]' 'jobs:' '  build:' '    runs-on: macos-latest' '    steps:' '    - uses: actions/checkout@v4' '    - name: Set up Swift' '      uses: swift-actions/setup-swift@v2' '    - name: Build' '      run: cd Dofusdude && swift build' '    - name: Test' '      run: cd Dofusdude && swift test' > .github/workflows/build.yml
           cd ..
 
       - name: Pushes to sdk repository
@@ -261,8 +261,8 @@ jobs:
       - name: Add actions
         run: |
           cd dart-client
-          mkdir -p .github/workflows/
-          printf '%s\n' 'name: Build' 'on:' '  push:' '    branches: [ main ]' '  pull_request:' '    branches: [ main ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v4' '    - name: Set up Dart' '      uses: dart-lang/setup-dart@v1' '    - name: Install deps' '      run: dart pub get' '    - name: Test' '      run: dart test' > .github/workflows/build.yml
+          #mkdir -p .github/workflows/
+          #printf '%s\n' 'name: Build' 'on:' '  push:' '    branches: [ main ]' '  pull_request:' '    branches: [ main ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v4' '    - name: Set up Dart' '      uses: dart-lang/setup-dart@v1' '    - name: Install deps' '      run: dart pub get' '    - name: Test' '      run: dart test' > .github/workflows/build.yml
           printf '%s\n' 'name: Publish' 'on:' '  push:' '    tags:' '    - 'v[0-9]+.[0-9]+.[0-9]+*'' 'jobs:' '  publish:' '    permissions:' '      id-token: write' '    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1' > .github/workflows/publish.yml
           sed -i 's/\\"/"/g' README.md
           cd ..
@@ -278,6 +278,41 @@ jobs:
           destination-repository-name: "dofusdude-dart"
           user-email: stelzo@steado.de
           target-branch: main
+
+  generate-c-client:
+    runs-on: ubuntu-latest
+    name: Generate C sdk
+    steps:
+      - name: Checkout OpenAPI
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Generate Dart sdk
+        uses: openapi-generators/openapitools-generator-action@v1
+        with:
+          generator: c
+          openapi-file: openapi-3.0.yaml
+
+      - name: Add actions
+        run: |
+          cd c-client
+          sed -i 's/\\"/"/g' README.md
+          cd ..
+
+      - name: Pushes to sdk repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY_C }}
+          API_TOKEN_GITHUB: ${{ secrets.PUSH_GITHUB_TOKEN }}
+        with:
+          source-directory: "c-client"
+          destination-github-username: "dofusdude"
+          destination-repository-name: "dofusdude-c"
+          user-email: stelzo@steado.de
+          target-branch: main
+        
 
   generate-go-client:
     runs-on: ubuntu-latest
