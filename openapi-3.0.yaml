@@ -3,7 +3,7 @@ x-stoplight:
   id: ezdjxlif28ceb
 info:
   title: dofusdude
-  version: 0.9.0
+  version: 0.9.1
   description: "# A project for you - the developer.\nThe all-in-one toolbelt for your next Ankama related project.\n\n## Client SDKs\n- [Javascript](https://github.com/dofusdude/dofusdude-js) `npm i dofusdude-js --save`\n- [Typescript](https://github.com/dofusdude/dofusdude-ts) `npm i dofusdude-ts --save`\n- [Go](https://github.com/dofusdude/dodugo) `go get -u github.com/dofusdude/dodugo`\n- [Python](https://github.com/dofusdude/dofusdude-py) `pip install dofusdude`\n- [PHP](https://github.com/dofusdude/dofusdude-php)\n- [Java](https://github.com/dofusdude/dofusdude-java) Maven with GitHub packages setup\n\nEverything, including this site, is generated out of the [Docs Repo](https://github.com/dofusdude/api-docs). Consider it the Single Source of Truth. If there is a problem with the SDKs, create an issue there.\n\nYour favorite language is missing? Please let me know!\n\n# Main Features\n- \U0001F977 **Seamless Auto-Update** load data in the background when a new Dofus version is released and serving it within 10 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.\n\n- ⚡ **Blazingly Fast** all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in \U0001F1E9\U0001F1EA.\n\n- \U0001F4E8 **Discord Integration** Ankama related RSS and Almanax feeds to post to Discord servers with advanced features like filters or mentions. Use the endpoints as a dev or the official [Web Client](https://discord.dofusdude.com) as a user.\n\n- \U0001FA78 **Dofus 2 Beta** from stable to bleeding edge by replacing /dofus2 with /dofus2beta.\n\n- \U0001F5E3️ **Multilingual** supporting _en_, _fr_, _es_, _pt_ including the dropped languages from the Dofus website _de_ and _it_.\n\n- \U0001F9E0 **Search by Relevance** allowing typos in name and description, handled by language specific text analysis and indexing.\n\n- \U0001F575️ **Complete** actual data from the game including items invisible to the encyclopedia like quest items.\n\n- \U0001F5BC️ **HD Images** rendering game assets to high-res images with up to 800x800 px.\n\n... and much more on the Roadmap on my [Discord](https://discord.gg/3EtHskZD8h).\n"
   contact:
     name: Survival
@@ -132,6 +132,17 @@ paths:
           in: query
           name: limit
           description: maximum number of returned results
+        - schema:
+            type: array
+            items:
+              type: string
+            example:
+              - boots
+            uniqueItems: true
+          in: query
+          name: "filter[type_enum]"
+          description: multi-filter results with the english type name. Add with "wood" or "+wood" and exclude with "-wood".
+          explode: false
       tags:
         - game
       x-stoplight:
@@ -458,6 +469,17 @@ paths:
           in: query
           description: maximum number of returned results
           name: limit
+        - schema:
+            type: array
+            items:
+              type: string
+            example:
+              - vigilantes
+            uniqueItems: true
+          in: query
+          name: "filter[type_enum]"
+          description: multi-filter results with the english type name. Add with "wood" or "+wood" and exclude with "-wood".
+          explode: false
       x-stoplight:
         id: e7dmshthuyg5m
   "/{game}/{language}/items/consumables/search":
@@ -576,6 +598,17 @@ paths:
           in: query
           name: limit
           description: maximum number of returned results
+        - schema:
+            type: array
+            items:
+              type: string
+            example:
+              - bread
+            uniqueItems: true
+          in: query
+          name: "filter[type_enum]"
+          description: multi-filter results with the english type name. Add with "wood" or "+wood" and exclude with "-wood".
+          explode: false
       tags:
         - consumables
       x-stoplight:
@@ -698,34 +731,20 @@ paths:
           in: query
           name: limit
           description: maximum number of returned results
+        - schema:
+            type: array
+            items:
+              type: string
+            example:
+              - plant
+            uniqueItems: true
+          in: query
+          name: "filter[type_enum]"
+          description: multi-filter results with the english type name. Add with "wood" or "+wood" and exclude with "-wood".
+          explode: false
       x-stoplight:
         id: l2f1uw9hdicac
   "/{game}/{language}/search":
-    parameters:
-      - schema:
-          type: string
-          enum:
-            - en
-            - fr
-            - de
-            - it
-            - es
-            - pt
-          maxLength: 2
-          minLength: 2
-        name: language
-        in: path
-        required: true
-        description: a valid language code
-      - schema:
-          type: string
-          enum:
-            - dofus2
-            - dofus2beta
-          example: dofus2
-        name: game
-        in: path
-        required: true
     get:
       summary: Game Search
       responses:
@@ -836,10 +855,46 @@ paths:
           in: query
           name: "fields[item]"
           description: adds fields from the item search to the list entries if the hit is a item. Multiple comma separated values allowed.
+        - schema:
+            type: array
+            items:
+              type: string
+            example:
+              - boots
+            uniqueItems: true
+          in: query
+          name: "filter[type_enum]"
+          description: multi-filter results with the english item type name, including "mount" and "set" from filter[type]. Add with "wood" or "+wood" and exclude with "-wood".
+          explode: false
       tags:
         - game
       x-stoplight:
         id: zxx3tt0z25gz8
+    parameters:
+      - schema:
+          type: string
+          enum:
+            - en
+            - fr
+            - de
+            - it
+            - es
+            - pt
+          maxLength: 2
+          minLength: 2
+        name: language
+        in: path
+        required: true
+        description: a valid language code
+      - schema:
+          type: string
+          enum:
+            - dofus2
+            - dofus2beta
+          example: dofus2
+        name: game
+        in: path
+        required: true
   "/{game}/{language}/items/equipment/search":
     parameters:
       - schema:
@@ -958,6 +1013,17 @@ paths:
           in: query
           name: limit
           description: maximum number of returned results
+        - schema:
+            type: array
+            items:
+              type: string
+            example:
+              - boots
+            uniqueItems: true
+          in: query
+          name: "filter[type_enum]"
+          description: multi-filter results with the english type name. Add with "wood" or "+wood" and exclude with "-wood".
+          explode: false
       x-stoplight:
         id: 4lzcb55gkjj2z
   "/{game}/{language}/items/cosmetics/search":
@@ -1047,7 +1113,7 @@ paths:
           required: true
         - schema:
             type: string
-            example: Costume
+            example: Wings
           in: query
           description: only results with the translated type name
           name: "filter[type_name]"
@@ -1078,6 +1144,17 @@ paths:
           in: query
           name: limit
           description: maximum number of returned results
+        - schema:
+            type: array
+            items:
+              type: string
+            example:
+              - wings
+            uniqueItems: true
+          in: query
+          name: "filter[type_enum]"
+          description: multi-filter results with the english type name. Add with "wood" or "+wood" and exclude with "-wood".
+          explode: false
       x-stoplight:
         id: mw8gyg65z17wf
   "/{game}/{language}/items/cosmetics/{ankama_id}":
@@ -2647,6 +2724,17 @@ paths:
           in: query
           name: "fields[item]"
           description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
+        - schema:
+            type: array
+            items:
+              type: string
+            example:
+              - sword
+            uniqueItems: true
+          in: query
+          name: "filter[type_enum]"
+          description: multi-filter results with the english type name. Add with "wood" or "+wood" and exclude with "-wood".
+          explode: false
       tags:
         - equipment
       x-stoplight:
@@ -2783,6 +2871,17 @@ paths:
           in: query
           name: "fields[item]"
           description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
+        - schema:
+            type: array
+            items:
+              type: string
+            example:
+              - wood
+            uniqueItems: true
+          in: query
+          name: "filter[type_enum]"
+          description: multi-filter results with the english type name. Add with "wood" or "+wood" and exclude with "-wood".
+          explode: false
       x-stoplight:
         id: z2jx5o5pjumhs
   "/{game}/{language}/items/consumables":
@@ -2920,6 +3019,17 @@ paths:
           in: query
           description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
           name: "fields[item]"
+        - schema:
+            type: array
+            items:
+              type: string
+            example:
+              - chest
+            uniqueItems: true
+          in: query
+          name: "filter[type_enum]"
+          description: multi-filter results with the english type name. Add with "wood" or "+wood" and exclude with "-wood".
+          explode: false
       x-stoplight:
         id: g2xcp6fribgyf
   "/{game}/{language}/items/quest":
@@ -3056,6 +3166,17 @@ paths:
           in: query
           description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
           name: "fields[item]"
+        - schema:
+            type: array
+            items:
+              type: string
+            example:
+              - sufokia
+            uniqueItems: true
+          in: query
+          name: "filter[type_enum]"
+          description: multi-filter results with the english type name. Add with "wood" or "+wood" and exclude with "-wood".
+          explode: false
       x-stoplight:
         id: qsq51akecj0r0
   "/{game}/{language}/items/cosmetics":
@@ -3186,6 +3307,17 @@ paths:
           in: query
           description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
           name: "fields[item]"
+        - schema:
+            type: array
+            items:
+              type: string
+            example:
+              - ceremonial-hat
+            uniqueItems: true
+          in: query
+          name: "filter[type_enum]"
+          description: multi-filter results with the english type name. Add with "wood" or "+wood" and exclude with "-wood".
+          explode: false
       x-stoplight:
         id: mlmwp9s8utn2j
   "/{game}/{language}/mounts/all":
@@ -4173,6 +4305,42 @@ paths:
       x-stoplight:
         id: 4oyiu8nbwwgds
     parameters: []
+  /dofus2/meta/version:
+    get:
+      summary: Game Version
+      tags:
+        - meta
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                  release:
+                    type: string
+                  update_stamp:
+                    type: string
+                x-examples:
+                  Example 1:
+                    version: 2.73.3.5
+                    release: main
+                    update_stamp: "2024-10-03T22:43:10.420677+02:00"
+              examples:
+                Main:
+                  value:
+                    version: 2.73.3.5
+                    release: main
+                    update_stamp: "2024-10-03T22:43:10.420677+02:00"
+      operationId: get-meta-version
+      description: The current game version of the hosted data.
+      parameters: []
+      x-stoplight:
+        id: ha9mde87rn0in
+    parameters: []
   /dofus2/meta/search/types:
     get:
       summary: Available Game Search Types
@@ -4202,6 +4370,39 @@ paths:
       parameters: []
       x-stoplight:
         id: v67mknkhaif2h
+    parameters: []
+  /dofus2/meta/items/types:
+    get:
+      summary: Available Item Types
+      tags:
+        - meta
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+              examples:
+                List:
+                  value:
+                    - items-consumables
+                    - items-cosmetics
+                    - items-resources
+                    - items-equipment
+                    - items-quest_items
+                    - mounts
+                    - sets
+      operationId: get-item-types
+      description: |-
+        Get all types of all items. Primarily used for filtering more detailed types in listings or search endpoints.
+        All names are english for comparing them inside applications.
+        Ordering is not guaranteed to persist with game updates.
+      parameters: []
+      x-stoplight:
+        id: j8a5zpi8i20xe
     parameters: []
   "/dofus2/meta/{language}/almanax/bonuses":
     get:
