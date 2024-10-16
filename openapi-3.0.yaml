@@ -3,7 +3,7 @@ x-stoplight:
   id: ezdjxlif28ceb
 info:
   title: dofusdude
-  version: 0.9.2
+  version: 0.9.3
   description: "# A project for you - the developer.\nThe all-in-one toolbelt for your next Ankama related project.\n\n## Client SDKs\n- [Javascript](https://github.com/dofusdude/dofusdude-js) `npm i dofusdude-js --save`\n- [Typescript](https://github.com/dofusdude/dofusdude-ts) `npm i dofusdude-ts --save`\n- [Go](https://github.com/dofusdude/dodugo) `go get -u github.com/dofusdude/dodugo`\n- [Python](https://github.com/dofusdude/dofusdude-py) `pip install dofusdude`\n- [PHP](https://github.com/dofusdude/dofusdude-php)\n- [Java](https://github.com/dofusdude/dofusdude-java) Maven with GitHub packages setup\n\nEverything, including this site, is generated out of the [Docs Repo](https://github.com/dofusdude/api-docs). Consider it the Single Source of Truth. If there is a problem with the SDKs, create an issue there.\n\nYour favorite language is missing? Please let me know!\n\n# Main Features\n- \U0001F977 **Seamless Auto-Update** load data in the background when a new Dofus version is released and serving it within 10 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.\n\n- ⚡ **Blazingly Fast** all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in \U0001F1E9\U0001F1EA.\n\n- \U0001F4E8 **Discord Integration** Ankama related RSS and Almanax feeds to post to Discord servers with advanced features like filters or mentions. Use the endpoints as a dev or the official [Web Client](https://discord.dofusdude.com) as a user.\n\n- \U0001FA78 **Dofus 2 Beta** from stable to bleeding edge by replacing /dofus2 with /dofus2beta.\n\n- \U0001F5E3️ **Multilingual** supporting _en_, _fr_, _es_, _pt_ including the dropped languages from the Dofus website _de_ and _it_.\n\n- \U0001F9E0 **Search by Relevance** allowing typos in name and description, handled by language specific text analysis and indexing.\n\n- \U0001F575️ **Complete** actual data from the game including items invisible to the encyclopedia like quest items.\n\n- \U0001F5BC️ **HD Images** rendering game assets to high-res images with up to 800x800 px.\n\n... and much more on the Roadmap on my [Discord](https://discord.gg/3EtHskZD8h).\n"
   contact:
     name: Survival
@@ -346,6 +346,11 @@ paths:
           in: query
           name: limit
           description: maximum number of returned results
+        - schema:
+            type: boolean
+          in: query
+          name: "filter[is_cosmetic]"
+          description: "filter sets based on if they only got cosmetic items in it. If true, the item ids are for the cosmetic endpoints instead of equipment."
       tags:
         - sets
       x-stoplight:
@@ -2467,6 +2472,11 @@ paths:
           name: "fields[set]"
           description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
           explode: false
+        - schema:
+            type: boolean
+          in: query
+          name: "filter[is_cosmetic]"
+          description: "filter sets based on if they only got cosmetic items in it. If true, the item ids are for the cosmetic endpoints instead of equipment."
       x-stoplight:
         id: s3zlet293u7sh
   "/{game}/{language}/mounts":
@@ -3511,6 +3521,11 @@ paths:
           in: header
           name: Accept-Encoding
           description: optional compression for saving bandwidth
+        - schema:
+            type: boolean
+          in: query
+          description: "filter sets based on if they only got cosmetic items in it. If true, the item ids are for the cosmetic endpoints instead of equipment."
+          name: "filter[is_cosmetic]"
       x-stoplight:
         id: rzxp5sotapqe6
   "/{game}/{language}/items/cosmetics/all":
@@ -3627,6 +3642,17 @@ paths:
           in: header
           name: Accept-Encoding
           description: optional compression for saving bandwidth
+        - schema:
+            type: array
+            items:
+              type: string
+            example:
+              - boots
+            uniqueItems: true
+          in: query
+          name: "filter[type_enum]"
+          description: multi-filter results with the english type name. Add with "wood" or "+wood" and exclude with "-wood".
+          explode: false
       x-stoplight:
         id: 07si7hjof1qpt
   "/{game}/{language}/items/quest/all":
@@ -3749,6 +3775,17 @@ paths:
           in: header
           name: Accept-Encoding
           description: optional compression for saving bandwidth
+        - schema:
+            type: array
+            items:
+              type: string
+            example:
+              - boots
+            uniqueItems: true
+          in: query
+          name: "filter[type_enum]"
+          description: multi-filter results with the english type name. Add with "wood" or "+wood" and exclude with "-wood".
+          explode: false
       x-stoplight:
         id: mgmt97sgtrhja
   "/{game}/{language}/items/consumables/all":
@@ -3864,6 +3901,17 @@ paths:
           in: header
           name: Accept-Encoding
           description: optional compression for saving bandwidth
+        - schema:
+            type: array
+            items:
+              type: string
+            example:
+              - boots
+            uniqueItems: true
+          in: query
+          name: "filter[type_enum]"
+          description: multi-filter results with the english type name. Add with "wood" or "+wood" and exclude with "-wood".
+          explode: false
       x-stoplight:
         id: llcg4hmp9wucr
   "/{game}/{language}/items/resources/all":
@@ -3984,6 +4032,17 @@ paths:
           in: header
           name: Accept-Encoding
           description: optional compression for saving bandwidth
+        - schema:
+            type: array
+            items:
+              type: string
+            example:
+              - boots
+            uniqueItems: true
+          in: query
+          name: "filter[type_enum]"
+          description: multi-filter results with the english type name. Add with "wood" or "+wood" and exclude with "-wood".
+          explode: false
       x-stoplight:
         id: 1wtcbwhh04jmq
   "/{game}/{language}/items/equipment/all":
@@ -4099,6 +4158,17 @@ paths:
           in: header
           name: Accept-Encoding
           description: optional compression for saving bandwidth
+        - schema:
+            type: array
+            items:
+              type: string
+            example:
+              - boots
+            uniqueItems: true
+          in: query
+          name: "filter[type_enum]"
+          description: multi-filter results with the english type name. Add with "wood" or "+wood" and exclude with "-wood".
+          explode: false
       tags:
         - equipment
       x-stoplight:
@@ -5336,7 +5406,6 @@ components:
             max:
               type: integer
     Equipment-Set:
-      title: ""
       x-stoplight:
         id: xmkp08r20yq44
       type: object
@@ -5358,9 +5427,15 @@ components:
               $ref: "#/components/schemas/Set-Effects-Entry"
         highest_equipment_level:
           type: integer
+        is_cosmetic:
+          type: boolean
+          x-stoplight:
+            id: 7d1w5073pqtt7
     Set-List-Entry:
       type: object
       x-examples: {}
+      x-stoplight:
+        id: jzo6pgvj144er
       properties:
         ankama_id:
           type: integer
@@ -5379,13 +5454,14 @@ components:
             items:
               $ref: "#/components/schemas/Set-Effects-Entry"
         equipment_ids:
-          nullable: true
           type: array
+          nullable: true
           items:
             type: integer
-      title: ""
-      x-stoplight:
-        id: jzo6pgvj144er
+        is_cosmetic:
+          type: boolean
+          x-stoplight:
+            id: uztiykrx0bobf
     Mount:
       title: ""
       x-stoplight:
