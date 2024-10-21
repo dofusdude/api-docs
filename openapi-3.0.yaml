@@ -3315,6 +3315,15 @@ paths:
                 - description
                 - conditions
                 - effects
+                - is_weapon
+                - pods
+                - parent_set
+                - critical_hit_probability
+                - critical_hit_bonus
+                - is_two_handed
+                - max_cast_per_turn
+                - ap_cost
+                - range
           explode: false
           in: query
           description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
@@ -3323,8 +3332,6 @@ paths:
             type: array
             items:
               type: string
-            example:
-              - ceremonial-hat
             uniqueItems: true
           in: query
           name: "filter[type_enum]"
