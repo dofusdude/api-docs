@@ -3,7 +3,7 @@ x-stoplight:
   id: ezdjxlif28ceb
 info:
   title: dofusdude
-  version: 0.9.3
+  version: 0.9.4
   description: "# A project for you - the developer.\nThe all-in-one toolbelt for your next Ankama related project.\n\n## Client SDKs\n- [Javascript](https://github.com/dofusdude/dofusdude-js) `npm i dofusdude-js --save`\n- [Typescript](https://github.com/dofusdude/dofusdude-ts) `npm i dofusdude-ts --save`\n- [Go](https://github.com/dofusdude/dodugo) `go get -u github.com/dofusdude/dodugo`\n- [Python](https://github.com/dofusdude/dofusdude-py) `pip install dofusdude`\n- [PHP](https://github.com/dofusdude/dofusdude-php)\n- [Java](https://github.com/dofusdude/dofusdude-java) Maven with GitHub packages setup\n\nEverything, including this site, is generated out of the [Docs Repo](https://github.com/dofusdude/api-docs). Consider it the Single Source of Truth. If there is a problem with the SDKs, create an issue there.\n\nYour favorite language is missing? Please let me know!\n\n# Main Features\n- \U0001F977 **Seamless Auto-Update** load data in the background when a new Dofus version is released and serving it within 10 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.\n\n- ⚡ **Blazingly Fast** all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in \U0001F1E9\U0001F1EA.\n\n- \U0001F4E8 **Discord Integration** Ankama related RSS and Almanax feeds to post to Discord servers with advanced features like filters or mentions. Use the endpoints as a dev or the official [Web Client](https://discord.dofusdude.com) as a user.\n\n- \U0001FA78 **Dofus 2 Beta** from stable to bleeding edge by replacing /dofus2 with /dofus2beta.\n\n- \U0001F5E3️ **Multilingual** supporting _en_, _fr_, _es_, _pt_ including the dropped languages from the Dofus website _de_ and _it_.\n\n- \U0001F9E0 **Search by Relevance** allowing typos in name and description, handled by language specific text analysis and indexing.\n\n- \U0001F575️ **Complete** actual data from the game including items invisible to the encyclopedia like quest items.\n\n- \U0001F5BC️ **HD Images** rendering game assets to high-res images with up to 800x800 px.\n\n... and much more on the Roadmap on my [Discord](https://discord.gg/3EtHskZD8h).\n"
   contact:
     name: Survival
@@ -1205,7 +1205,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Cosmetic"
+                $ref: "#/components/schemas/Equipment"
               examples:
                 Master Tor:
                   value:
@@ -1215,8 +1215,9 @@ paths:
                     type:
                       name: Ceremonial cape
                       id: 18
+                    is_weapon: false
                     level: 180
-                    pods: 0
+                    pods: 1
                     image_urls:
                       icon: "https://api.dofusdu.de/dofus2/img/item/17481.png"
                       sd: "https://api.dofusdu.de/dofus2/img/item/17481-200.png"
@@ -1239,6 +1240,7 @@ paths:
                           name: "Compatible with:"
                           id: 1
                           is_meta: false
+                          is_active: false
                         ignore_int_min: true
                         ignore_int_max: true
                         formatted: "Compatible with: 0"
@@ -5113,51 +5115,6 @@ components:
           $ref: "#/components/schemas/Image-Urls"
       x-stoplight:
         id: r5b3ia3ectz8q
-    Cosmetic:
-      type: object
-      x-examples: {}
-      x-stoplight:
-        id: rfawtzjwbqvco
-      properties:
-        ankama_id:
-          type: integer
-        name:
-          type: string
-        description:
-          type: string
-        type:
-          type: object
-          properties:
-            name:
-              type: string
-            id:
-              type: integer
-              minimum: 0
-        level:
-          type: integer
-        pods:
-          type: integer
-        image_urls:
-          $ref: "#/components/schemas/Image-Urls"
-        effects:
-          type: array
-          nullable: true
-          items:
-            $ref: "#/components/schemas/Effects-Entry"
-        conditions:
-          type: array
-          deprecated: true
-          nullable: true
-          items:
-            $ref: "#/components/schemas/Condition-Entry"
-        condition_tree:
-          nullable: true
-          $ref: "#/components/schemas/Condition-Tree-Node"
-        recipe:
-          type: array
-          nullable: true
-          items:
-            $ref: "#/components/schemas/Recipe-Entry"
     Recipe-Entry:
       type: object
       properties:
