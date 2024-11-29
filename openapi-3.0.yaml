@@ -239,7 +239,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/ListSet"
+                  $ref: "#/components/schemas/ListEquipmentSet"
               examples: {}
         "400":
           description: ""
@@ -1373,7 +1373,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Set"
+                $ref: "#/components/schemas/EquipmentSet"
               examples: {}
         "400":
           description: ""
@@ -1429,80 +1429,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListSets"
-              examples:
-                'filter[min_highest_equipment_level] >= 150, sort[level] "desc"':
-                  value:
-                    _links:
-                      first: "https://api.dofusdu.de/dofus3/fr/sets/?page%5Bnumber%5D%3D1%26page%5Bsize%5D%3D16"
-                      prev: ""
-                      next: "https://api.dofusdu.de/dofus3/fr/sets/?page%5Bnumber%5D%3D2%26page%5Bsize%5D%3D16"
-                      last: "https://api.dofusdu.de/dofus3/fr/sets/?page%5Bnumber%5D%3D11%26page%5Bsize%5D%3D16"
-                    sets:
-                      - ankama_id: 406
-                        name: Panoplie d'Atcham
-                        items: 3
-                        level: 200
-                      - ankama_id: 460
-                        name: Panoplie Volkorne
-                        items: 4
-                        level: 200
-                      - ankama_id: 499
-                        name: Reliques de l'Aurore Pourpre
-                        items: 6
-                        level: 200
-                      - ankama_id: 498
-                        name: Panoplie des Ravageurs
-                        items: 3
-                        level: 200
-                      - ankama_id: 496
-                        name: Panoplie du Pandamonium
-                        items: 3
-                        level: 200
-                      - ankama_id: 495
-                        name: Panoplie Possédée
-                        items: 3
-                        level: 200
-                      - ankama_id: 491
-                        name: Panoplie de Wulan
-                        items: 3
-                        level: 200
-                      - ankama_id: 489
-                        name: Panoplie du Wukang
-                        items: 3
-                        level: 200
-                      - ankama_id: 488
-                        name: Panoplie du Wukin
-                        items: 3
-                        level: 200
-                      - ankama_id: 477
-                        name: Panoplie de Corruption
-                        items: 3
-                        level: 200
-                      - ankama_id: 476
-                        name: Panoplie de Servitude
-                        items: 3
-                        level: 200
-                      - ankama_id: 475
-                        name: Panoplie de Guerre
-                        items: 3
-                        level: 200
-                      - ankama_id: 474
-                        name: Panoplie de Misère
-                        items: 3
-                        level: 200
-                      - ankama_id: 472
-                        name: Panoplie de Torkélonia
-                        items: 3
-                        level: 200
-                      - ankama_id: 471
-                        name: Panoplie Lunaire
-                        items: 3
-                        level: 200
-                      - ankama_id: 343
-                        name: Panoplie de Gein
-                        items: 3
-                        level: 200
+                $ref: "#/components/schemas/ListEquipmentSet"
         "400":
           description: ""
           content:
@@ -2434,7 +2361,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListSets"
+                $ref: "#/components/schemas/ListEquipmentSets"
               examples:
                 defaults:
                   value:
@@ -4164,10 +4091,11 @@ components:
           nullable: true
           items:
             $ref: "#/components/schemas/Recipe"
-    Set:
+    EquipmentSet:
       x-stoplight:
         id: xmkp08r20yq44
       type: object
+      title: EquipmentSet
       properties:
         ankama_id:
           type: integer
@@ -4178,16 +4106,14 @@ components:
           items:
             type: integer
         effects:
-          $ref: "#/components/schemas/SetEffects"
-          nullable: true
+          $ref: "#/components/schemas/EquipmentSetEffects"
         highest_equipment_level:
           type: integer
         is_cosmetic:
           type: boolean
           x-stoplight:
             id: 7d1w5073pqtt7
-      title: Set
-    ListSet:
+    ListEquipmentSet:
       type: object
       x-examples: {}
       x-stoplight:
@@ -4204,8 +4130,7 @@ components:
         level:
           type: integer
         effects:
-          $ref: "#/components/schemas/SetEffects"
-          nullable: true
+          $ref: "#/components/schemas/EquipmentSetEffects"
         equipment_ids:
           type: array
           nullable: true
@@ -4246,7 +4171,7 @@ components:
           items:
             $ref: "#/components/schemas/ListItem"
       title: ListItems
-    ListSets:
+    ListEquipmentSets:
       x-stoplight:
         id: kr369f842c2w9
       type: object
@@ -4257,7 +4182,7 @@ components:
         sets:
           type: array
           items:
-            $ref: "#/components/schemas/ListSet"
+            $ref: "#/components/schemas/ListEquipmentSet"
     ListMounts:
       x-stoplight:
         id: 67iikn0tj64zs
@@ -4451,7 +4376,7 @@ components:
           x-stoplight:
             id: 914m1fu53jptk
           description: unique
-    SetEffects:
+    EquipmentSetEffects:
       title: SetEffects
       x-stoplight:
         id: kdx5a0h3kp09h
