@@ -43,7 +43,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: Search All Items
       responses:
@@ -148,7 +148,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: Search Mounts
       tags:
@@ -228,7 +228,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: Search Sets
       responses:
@@ -326,7 +326,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: Search Quest Items
       tags:
@@ -434,7 +434,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: Search Consumables
       responses:
@@ -537,7 +537,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: Search Resources
       tags:
@@ -743,7 +743,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
   "/{game}/v1/{language}/items/equipment/search":
     parameters:
       - schema:
@@ -770,7 +770,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: Search Equipment
       tags:
@@ -873,7 +873,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: Search Cosmetics
       tags:
@@ -983,7 +983,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: Single Cosmetics
       tags:
@@ -1047,7 +1047,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: Single Resources
       tags:
@@ -1110,7 +1110,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: Single Equipment
       tags:
@@ -1173,7 +1173,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: Single Consumables
       tags:
@@ -1236,7 +1236,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: Single Quest Items
       responses:
@@ -1299,7 +1299,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: Single Mounts
       tags:
@@ -1362,7 +1362,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: Single Sets
       tags:
@@ -1418,7 +1418,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: List Sets
       tags:
@@ -1540,7 +1540,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: List Mounts
       tags:
@@ -1635,7 +1635,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: List Equipment
       responses:
@@ -1761,7 +1761,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: List Resources
       tags:
@@ -1884,7 +1884,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: List Consumables
       tags:
@@ -2002,7 +2002,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: List Quest Items
       tags:
@@ -2126,7 +2126,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: List Cosmetics
       tags:
@@ -2249,7 +2249,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: List All Mounts
       tags:
@@ -2350,7 +2350,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: List All Sets
       tags:
@@ -2474,7 +2474,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: List All Cosmetics
       tags:
@@ -2580,7 +2580,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: List All Quest Items
       tags:
@@ -2691,7 +2691,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: List All Consumables
       tags:
@@ -2796,7 +2796,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: List All Resources
       tags:
@@ -2908,7 +2908,7 @@ paths:
         name: game
         in: path
         required: true
-        description: dofus3 | dofus3beta
+        description: game main 'dofus3' or beta channel 'dofus3beta'
     get:
       summary: List All Equipment
       responses:
@@ -3016,43 +3016,7 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Almanax"
-              examples:
-                "range[size] 2":
-                  value:
-                    - bonus:
-                        description: "The experience points awarded for completing alignment quests and city order quests are increased by 100%. What's more, a special repeatable quest is available today inside the militias of Bonta and Brakmar. It is available to aligned players of level 20 or higher and is not attached to the offering quest."
-                        type:
-                          id: bonta-and-brakmar
-                          name: Bonta and Brakmar
-                      date: "2022-09-12"
-                      tribute:
-                        item:
-                          ankama_id: 14284
-                          image_urls:
-                            hd: "https://api.dofusdu.de/dofus3/img/item/15247-800.png"
-                            hq: "https://api.dofusdu.de/dofus3/img/item/15247-400.png"
-                            icon: "https://api.dofusdu.de/dofus3/img/item/15247.png"
-                            sd: "https://api.dofusdu.de/dofus3/img/item/15247-200.png"
-                          name: Spectral Flame
-                          subtype: resources
-                        quantity: 2
-                    - bonus:
-                        description: The quantity of Flax harvested by farmers is increased by 125%.
-                        type:
-                          id: plenty-to-harvest
-                          name: Plenty to harvest
-                      date: "2022-09-13"
-                      tribute:
-                        item:
-                          ankama_id: 423
-                          image_urls:
-                            hd: "https://api.dofusdu.de/dofus3/img/item/34122-800.png"
-                            hq: "https://api.dofusdu.de/dofus3/img/item/34122-400.png"
-                            icon: "https://api.dofusdu.de/dofus3/img/item/34122.png"
-                            sd: "https://api.dofusdu.de/dofus3/img/item/34122-200.png"
-                          name: Flax
-                          subtype: resources
-                        quantity: 20
+              examples: {}
       operationId: get-almanax-range
       description: |-
         Get a range of dates, defaults to today + 6 following days but can specified by the query parameters. 
@@ -3141,26 +3105,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Almanax"
-              examples:
-                9/11:
-                  value:
-                    bonus:
-                      description: "Les quantités de ressources récupérées par les récolteurs et les chasseurs sont augmentées de 50 % dans toutes les zones influencées par une anomalie temporelle. De plus, les gains d'expérience et les chances d'obtenir du butin sont augmentés de 25 % dans la zone du Sanctuaire des Dragoeufs."
-                      type:
-                        id: reward-bonus
-                        name: Bonus des anomalies
-                    date: "2022-09-11"
-                    tribute:
-                      item:
-                        ankama_id: 8362
-                        image_urls:
-                          hd: "https://api.dofusdu.de/dofus3/img/item/59611-800.png"
-                          hq: "https://api.dofusdu.de/dofus3/img/item/59611-400.png"
-                          icon: "https://api.dofusdu.de/dofus3/img/item/59611.png"
-                          sd: "https://api.dofusdu.de/dofus3/img/item/59611-200.png"
-                        name: Peau de Dragnarok
-                        subtype: resources
-                      quantity: 2
+              examples: {}
       operationId: get-almanax-date
       description: Get a single date. There are not more details in the returned object than the normal range endpoint.
       x-stoplight:
@@ -3482,11 +3427,7 @@ paths:
                       - dofus3_es
                       - dofus3_it
                       - dofus3_de
-              examples:
-                example-1:
-                  value:
-                    subscriptions:
-                      - string
+              examples: {}
       operationId: get-meta-webhooks-almanax
       description: "Get a list of all available subscriptions. "
       x-stoplight:
