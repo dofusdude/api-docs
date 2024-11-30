@@ -39,7 +39,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -144,7 +144,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -221,7 +221,7 @@ paths:
         description: a valid language code
       - schema:
           type: string
-          example: dofus3
+          example: dofus3beta
           enum:
             - dofus3
             - dofus3beta
@@ -319,7 +319,7 @@ paths:
         description: a valid language code
       - schema:
           type: string
-          example: dofus3
+          example: dofus3beta
           enum:
             - dofus3
             - dofus3beta
@@ -430,7 +430,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -533,7 +533,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -739,7 +739,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -766,7 +766,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -869,7 +869,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -979,7 +979,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -1043,7 +1043,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -1106,7 +1106,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -1169,7 +1169,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -1232,7 +1232,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -1295,7 +1295,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -1358,7 +1358,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -1414,7 +1414,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -1536,7 +1536,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -1631,7 +1631,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -1757,7 +1757,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -1880,7 +1880,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -1998,7 +1998,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -2122,7 +2122,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -2245,7 +2245,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -2346,7 +2346,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -2470,7 +2470,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -2576,7 +2576,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -2687,7 +2687,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -2792,7 +2792,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -2904,7 +2904,7 @@ paths:
           enum:
             - dofus3
             - dofus3beta
-          example: dofus3
+          example: dofus3beta
         name: game
         in: path
         required: true
@@ -2988,7 +2988,7 @@ paths:
         - equipment
       x-stoplight:
         id: wbxzhlcid1l0w
-  "/dofus3/{language}/almanax":
+  "/dofus2/{language}/almanax":
     parameters:
       - schema:
           type: string
@@ -3071,7 +3071,7 @@ paths:
           description: 'determine what the current time is. If you live in Brazil, "today" will be hours apart from Paris. Use your timezone to get results relative to your location.'
       x-stoplight:
         id: fy8l7o3sz1jyo
-  "/dofus3/{language}/almanax/{date}":
+  "/dofus2/{language}/almanax/{date}":
     parameters:
       - schema:
           type: string
@@ -3110,7 +3110,7 @@ paths:
       description: Get a single date. There are not more details in the returned object than the normal range endpoint.
       x-stoplight:
         id: d0000xjgaenyh
-  /dofus3/meta/elements:
+  /dofus3beta/v1/meta/elements:
     get:
       summary: Effects and Condition Elements
       tags:
@@ -3135,7 +3135,7 @@ paths:
       x-stoplight:
         id: 4oyiu8nbwwgds
     parameters: []
-  /dofus3/meta/version:
+  /dofus3beta/v1/meta/version:
     get:
       summary: Game Version
       tags:
@@ -3154,7 +3154,7 @@ paths:
       x-stoplight:
         id: ha9mde87rn0in
     parameters: []
-  /dofus3/meta/search/types:
+  /dofus3beta/v1/meta/search/types:
     get:
       summary: Available Game Search Types
       tags:
@@ -3184,7 +3184,7 @@ paths:
       x-stoplight:
         id: v67mknkhaif2h
     parameters: []
-  /dofus3/meta/items/types:
+  /dofus3beta/v1/meta/items/types:
     get:
       summary: Available Item Types
       tags:
@@ -3217,7 +3217,7 @@ paths:
       x-stoplight:
         id: j8a5zpi8i20xe
     parameters: []
-  "/dofus3/meta/{language}/almanax/bonuses":
+  "/dofus2/meta/{language}/almanax/bonuses":
     get:
       summary: Available Almanax Bonuses
       tags:
@@ -3272,7 +3272,7 @@ paths:
         in: path
         required: true
         description: a valid language code
-  "/dofus3/meta/{language}/almanax/bonuses/search":
+  "/dofus2/meta/{language}/almanax/bonuses/search":
     get:
       summary: Search Available Almanax Bonuses
       tags:
