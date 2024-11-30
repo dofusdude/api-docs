@@ -3,7 +3,7 @@ x-stoplight:
   id: ezdjxlif28ceb
 info:
   title: dofusdude
-  version: 1.0.0-rc.3
+  version: 1.0.0-rc.4
   description: "# Open Ankama Developer Community\nThe all-in-one toolbelt for your next Ankama related project.\n\n## Versions\n- [Dofus 2](https://docs.dofusdu.de/dofus2/)\n- [Dofus 3](https://docs.dofusdu.de/dofus3/)\n  - v1 [latest] (you are here) \n\n## Client SDKs\n- [Javascript](https://github.com/dofusdude/dofusdude-js) `npm i dofusdude-js --save`\n- [Typescript](https://github.com/dofusdude/dofusdude-ts) `npm i dofusdude-ts --save`\n- [Go](https://github.com/dofusdude/dodugo) `go get -u github.com/dofusdude/dodugo`\n- [Python](https://github.com/dofusdude/dofusdude-py) `pip install dofusdude`\n- [Java](https://github.com/dofusdude/dofusdude-java) Maven with GitHub packages setup\n\nEverything, including this site, is generated out of the [Docs Repo](https://github.com/dofusdude/api-docs). Consider it the Single Source of Truth. If there is a problem with the SDKs, create an issue there.\n\nYour favorite language is missing? Please let me know!\n\n# Main Features\n- \U0001F977 **Seamless Auto-Update** load data in the background when a new Dofus version is released and serving it within 10 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.\n\n- ⚡ **Blazingly Fast** all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in \U0001F1E9\U0001F1EA.\n\n- \U0001F4E8 **Almanax Discord Integration** Use the endpoints as a dev or the official [Web Client](https://discord.dofusdude.com) as a user.\n\n- \U0001FA78 **Dofus 3 Beta** from stable to bleeding edge by replacing /dofus3 with /dofus3beta.\n\n- \U0001F5E3️ **Multilingual** supporting _en_, _fr_, _es_, _pt_, _de_.\n\n- \U0001F9E0 **Search by Relevance** allowing typos in name and description, handled by language specific text analysis and indexing.\n\n- \U0001F575️ **Official Sources** generated from actual data from the game.\n\n... and much more on the Roadmap on my [Discord](https://discord.gg/3EtHskZD8h).\n"
   contact:
     name: Survival
@@ -1429,7 +1429,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListEquipmentSet"
+                $ref: "#/components/schemas/ListEquipmentSets"
         "400":
           description: ""
           content:
