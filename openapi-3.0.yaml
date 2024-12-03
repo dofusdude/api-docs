@@ -3,7 +3,7 @@ x-stoplight:
   id: ezdjxlif28ceb
 info:
   title: dofusdude
-  version: 1.0.0-rc.7
+  version: 1.0.0-rc.8
   description: "# Open Ankama Developer Community\nThe all-in-one toolbelt for your next Ankama related project.\n\n## Versions\n- [Dofus 2](https://docs.dofusdu.de/dofus2/)\n- [Dofus 3](https://docs.dofusdu.de/dofus3/)\n  - v1 [latest] (you are here) \n\n## Client SDKs\n- [Javascript](https://github.com/dofusdude/dofusdude-js) `npm i dofusdude-js --save`\n- [Typescript](https://github.com/dofusdude/dofusdude-ts) `npm i dofusdude-ts --save`\n- [Go](https://github.com/dofusdude/dodugo) `go get -u github.com/dofusdude/dodugo`\n- [Python](https://github.com/dofusdude/dofusdude-py) `pip install dofusdude`\n- [Java](https://github.com/dofusdude/dofusdude-java) Maven with GitHub packages setup\n\nEverything, including this site, is generated out of the [Docs Repo](https://github.com/dofusdude/api-docs). Consider it the Single Source of Truth. If there is a problem with the SDKs, create an issue there.\n\nYour favorite language is missing? Please let me know!\n\n# Main Features\n- \U0001F977 **Seamless Auto-Update** load data in the background when a new Dofus version is released and serving it within 10 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.\n\n- ⚡ **Blazingly Fast** all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in \U0001F1E9\U0001F1EA.\n\n- \U0001F4E8 **Almanax Discord Integration** Use the endpoints as a dev or the official [Web Client](https://discord.dofusdude.com) as a user.\n\n- \U0001FA78 **Dofus 3 Beta** from stable to bleeding edge by replacing /dofus3 with /dofus3beta.\n\n- \U0001F5E3️ **Multilingual** supporting _en_, _fr_, _es_, _pt_, _de_.\n\n- \U0001F9E0 **Search by Relevance** allowing typos in name and description, handled by language specific text analysis and indexing.\n\n- \U0001F575️ **Official Sources** generated from actual data from the game.\n\n... and much more on the Roadmap on my [Discord](https://discord.gg/3EtHskZD8h).\n"
   contact:
     name: Survival
@@ -2945,7 +2945,7 @@ paths:
         - equipment
       x-stoplight:
         id: wbxzhlcid1l0w
-  "/dofus2/{language}/almanax":
+  "/dofus3/v1/{language}/almanax":
     parameters:
       - schema:
           type: string
@@ -3028,7 +3028,7 @@ paths:
           description: 'determine what the current time is. If you live in Brazil, "today" will be hours apart from Paris. Use your timezone to get results relative to your location.'
       x-stoplight:
         id: fy8l7o3sz1jyo
-  "/dofus2/{language}/almanax/{date}":
+  "/dofus3/v1/{language}/almanax/{date}":
     parameters:
       - schema:
           type: string
@@ -3067,7 +3067,7 @@ paths:
       description: Get a single date. There are not more details in the returned object than the normal range endpoint.
       x-stoplight:
         id: d0000xjgaenyh
-  /dofus3beta/v1/meta/elements:
+  "/{game}/v1/meta/elements":
     get:
       summary: Effects and Condition Elements
       tags:
@@ -3091,7 +3091,13 @@ paths:
       parameters: []
       x-stoplight:
         id: 4oyiu8nbwwgds
-    parameters: []
+    parameters:
+      - schema:
+          type: string
+        name: game
+        in: path
+        required: true
+        description: game main 'dofus3' or beta channel 'dofus3beta'
   "/{game}/v1/meta/version":
     get:
       summary: Game Version
@@ -3121,7 +3127,7 @@ paths:
         in: path
         required: true
         description: game main 'dofus3' or beta channel 'dofus3beta'
-  /dofus3beta/v1/meta/search/types:
+  "/{game}/v1/meta/search/types":
     get:
       summary: Available Game Search Types
       tags:
@@ -3150,8 +3156,14 @@ paths:
       parameters: []
       x-stoplight:
         id: v67mknkhaif2h
-    parameters: []
-  /dofus3beta/v1/meta/items/types:
+    parameters:
+      - schema:
+          type: string
+        name: game
+        in: path
+        required: true
+        description: game main 'dofus3' or beta channel 'dofus3beta'
+  "/{game}/v1/meta/items/types":
     get:
       summary: Available Item Types
       tags:
@@ -3183,8 +3195,14 @@ paths:
       parameters: []
       x-stoplight:
         id: j8a5zpi8i20xe
-    parameters: []
-  "/dofus2/meta/{language}/almanax/bonuses":
+    parameters:
+      - schema:
+          type: string
+        name: game
+        in: path
+        required: true
+        description: game main 'dofus3' or beta channel 'dofus3beta'
+  "/dofus3/v1/meta/{language}/almanax/bonuses":
     get:
       summary: Available Almanax Bonuses
       tags:
@@ -3239,7 +3257,7 @@ paths:
         in: path
         required: true
         description: a valid language code
-  "/dofus2/meta/{language}/almanax/bonuses/search":
+  "/dofus3/v1/meta/{language}/almanax/bonuses/search":
     get:
       summary: Search Available Almanax Bonuses
       tags:
