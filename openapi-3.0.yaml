@@ -2998,14 +2998,12 @@ paths:
           description: "ids from meta/{language}/almanax/bonuses"
         - schema:
             type: string
-            example: "2016-09-15"
             format: date
           in: query
           name: "range[from]"
           description: yyyy-mm-dd
         - schema:
             type: string
-            example: "2016-09-28"
             format: date
           in: query
           name: "range[to]"
