@@ -3067,7 +3067,7 @@ paths:
       description: Get a single date. There are not more details in the returned object than the normal range endpoint.
       x-stoplight:
         id: d0000xjgaenyh
-  /dofus3beta/v1/meta/elements:
+  "/{game}/v1/meta/elements":
     get:
       summary: Effects and Condition Elements
       tags:
@@ -3091,7 +3091,13 @@ paths:
       parameters: []
       x-stoplight:
         id: 4oyiu8nbwwgds
-    parameters: []
+    parameters:
+      - schema:
+          type: string
+        name: game
+        in: path
+        required: true
+        description: game main 'dofus3' or beta channel 'dofus3beta'
   "/{game}/v1/meta/version":
     get:
       summary: Game Version
@@ -3121,7 +3127,7 @@ paths:
         in: path
         required: true
         description: game main 'dofus3' or beta channel 'dofus3beta'
-  /dofus3beta/v1/meta/search/types:
+  "/{game}/v1/meta/search/types":
     get:
       summary: Available Game Search Types
       tags:
@@ -3150,8 +3156,14 @@ paths:
       parameters: []
       x-stoplight:
         id: v67mknkhaif2h
-    parameters: []
-  /dofus3beta/v1/meta/items/types:
+    parameters:
+      - schema:
+          type: string
+        name: game
+        in: path
+        required: true
+        description: game main 'dofus3' or beta channel 'dofus3beta'
+  "/{game}/v1/meta/items/types":
     get:
       summary: Available Item Types
       tags:
@@ -3183,7 +3195,13 @@ paths:
       parameters: []
       x-stoplight:
         id: j8a5zpi8i20xe
-    parameters: []
+    parameters:
+      - schema:
+          type: string
+        name: game
+        in: path
+        required: true
+        description: game main 'dofus3' or beta channel 'dofus3beta'
   "/dofus3/v1/meta/{language}/almanax/bonuses":
     get:
       summary: Available Almanax Bonuses
