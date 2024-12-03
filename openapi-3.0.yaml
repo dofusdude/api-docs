@@ -3012,11 +3012,10 @@ paths:
             type: integer
             format: int32
             example: -1
-            minimum: -1
             maximum: 370
           in: query
           name: "range[size]"
-          description: size of the returned range
+          description: Size of the returned range. Disable to fully use the range by setting size to -1.
         - schema:
             type: string
             default: Europe/Paris
