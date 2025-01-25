@@ -3047,7 +3047,7 @@ paths:
         description: code
       - schema:
           type: string
-          example: "2020-07-14"
+          example: "2025-01-25"
           format: date
         name: date
         in: path
