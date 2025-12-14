@@ -55,6 +55,48 @@ jobs:
           user-email: stelzo@steado.de
           target-branch: main
 
+  generate-rs-client:
+    runs-on: ubuntu-latest
+    name: Generate Rust sdk
+    steps:
+      - name: Checkout OpenAPI
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Generate Rust sdk
+        uses: openapi-generators/openapitools-generator-action@v1
+        with:
+          generator: rust
+          openapi-file: openapi-3.0.yaml
+          command-args: --additional-properties=packageName=dofusdude,packageVersion=1.0.0-beta.1 # TODO rm beta when ready
+
+      - name: Setup Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Generate CI
+        run: |
+          cd rust-client
+          mkdir -p .github/workflows/
+          printf '%s\n' 'name: Rust CI' 'on:' '  push:' '    branches: [ "main" ]' '  pull_request:' '    branches: [ "main" ]' 'jobs:' '  rust-stable-test:' '      - uses: actions/checkout@v4' '      - uses: dtolnay/rust-toolchain@stable' '      - name: Test' '        run: cargo test --verbose' '' > .github/workflows/testing.yml
+          sed -i 's/"authors": \[\]/"authors": ["Christopher Sieh <stelzo@steado.de>"]/g' Cargo.toml
+          sed -i 's/"description": \\".*\\"/"description": \\"Rust SDK for the dofusdude API.\\"/g' Cargo.toml
+          rm git_push.sh
+          cd ..
+
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY_RUST }}
+          API_TOKEN_GITHUB: ${{ secrets.PUSH_GITHUB_TOKEN }}
+        with:
+          source-directory: "rust-client"
+          destination-github-username: "dofusdude"
+          destination-repository-name: "dofusdude-rs"
+          user-email: stelzo@steado.de
+          target-branch: main
+
   generate-ts-client:
     runs-on: ubuntu-latest
     name: Generate ts sdk
