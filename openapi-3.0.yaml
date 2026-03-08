@@ -1274,7 +1274,7 @@ paths:
         description: a valid language code
       - schema:
           type: integer
-          example: 180
+          example: 33216
         name: ankama_id
         in: path
         required: true
