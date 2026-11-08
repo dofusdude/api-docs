@@ -12,7 +12,7 @@ info:
     ## Versions
     - [Dofus 2](https://docs.dofusdu.de/dofus2/)
     - [Dofus 3](https://docs.dofusdu.de/dofus3/)
-      - v1.1.0 beta [preview] (you are here) 
+      - v1.1.0 beta [preview] (you are here)
 
     ## Client SDKs
     - [Javascript](https://github.com/dofusdude/dofusdude-js) `npm i dofusdude-js@beta --save`
@@ -4497,7 +4497,7 @@ paths:
               examples: {}
       operationId: get-almanax-range
       description: |-
-        Get a range of dates, defaults to today + 6 following days but can specified by the query parameters. 
+        Get a range of dates, defaults to today + 6 following days but can specified by the query parameters.
 
         filter[bonus_type] can be used seperately and does not have an effect on the other parameters.
 

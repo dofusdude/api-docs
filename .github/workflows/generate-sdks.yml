@@ -172,7 +172,7 @@ jobs:
           generator: typescript-axios
           generator-tag: v7.27.0
           openapi-file: openapi-3.0.yaml
-          command-args: --additional-properties=npmName=dofusdude-ts,npmVersion=${{ needs.release-context.outputs.version }}
+          command-args: --additional-properties=npmName=dofusdude-ts,supportsES6=true,npmVersion=${{ needs.release-context.outputs.version }}
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v3.4.1
@@ -563,15 +563,15 @@ jobs:
           command-args: --additional-properties=packageName=dofusdude,projectName=dofusdude,packageUrl=https://github.com/dofusdude/dofusdude-py,packageVersion=${{ needs.release-context.outputs.python_version }}
 
       - name: Setup Python environment
-        uses: actions/setup-python@v4.2.0
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.8
+          python-version: "3.12"
 
       - name: Add actions
         run: |
           cd python-client
           mkdir -p .github/workflows/
-          printf '%s\n' 'name: Upload Python Package' 'on:' '  release:' '    types: [created]' 'permissions:' '  contents: read' 'jobs:' '  deploy:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v4' '    - name: Set up Python' '      uses: actions/setup-python@v3' '      with:' '        python-version: 3.8' '    - name: Install dependencies' '      run: |' '        python -m pip install --upgrade pip' '        pip install build' '    - name: Build package' '      run: python -m build' '    - name: Publish package' '      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29' '      with:' '        user: __token__' '        password: secrets.PYPI_API_TOKEN' > .github/workflows/publish.yml
+          printf '%s\n' 'name: Upload Python Package' 'on:' '  release:' '    types: [created]' 'permissions:' '  contents: read' 'jobs:' '  deploy:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v4' '    - name: Set up Python' '      uses: actions/setup-python@v3' '      with:' '        python-version: "3.12"' '    - name: Install dependencies' '      run: |' '        python -m pip install --upgrade pip' '        pip install build' '    - name: Build package' '      run: python -m build' '    - name: Publish package' '      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29' '      with:' '        user: __token__' '        password: secrets.PYPI_API_TOKEN' > .github/workflows/publish.yml
           sed -i 's/GIT_USER_ID\/GIT_REPO_ID/\dofusdude\/dofusdude-py/g' README.md
           sed -i 's/\\"/"/g' README.md
           sed -i 's/secrets.PYPI_API_TOKEN/\$\{\{secrets.PYPI_API_TOKEN\}\}/g' .github/workflows/publish.yml
