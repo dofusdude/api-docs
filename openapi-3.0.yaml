@@ -3,8 +3,8 @@ x-stoplight:
   id: ezdjxlif28ceb
 info:
   title: dofusdude
-  version: 1.0.0
-  description: "# Open Ankama Developer Community\nThe all-in-one toolbelt for your next Ankama related project.\n\n## Versions\n- [Dofus 2](https://docs.dofusdu.de/dofus2/)\n- [Dofus 3](https://docs.dofusdu.de/dofus3/)\n  - v1 [latest] (you are here) \n\n## Client SDKs\n- [Javascript](https://github.com/dofusdude/dofusdude-js) `npm i dofusdude-js --save`\n- [Typescript](https://github.com/dofusdude/dofusdude-ts) `npm i dofusdude-ts --save`\n- [Go](https://github.com/dofusdude/dodugo) `go get -u github.com/dofusdude/dodugo`\n- [Python](https://github.com/dofusdude/dofusdude-py) `pip install dofusdude`\n- [Java](https://github.com/dofusdude/dofusdude-java) Maven with GitHub packages setup\n\nEverything, including this site, is generated out of the [Docs Repo](https://github.com/dofusdude/api-docs). Consider it the Single Source of Truth. If there is a problem with the SDKs, create an issue there.\n\nYour favorite language is missing? Please let me know!\n\n# Main Features\n- \U0001F977 **Seamless Auto-Update** load data in the background when a new Dofus version is released and serving it within 10 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.\n\n- ⚡ **Blazingly Fast** all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in \U0001F1E9\U0001F1EA.\n\n- \U0001F4E8 **Almanax Discord Integration** Use the endpoints as a dev or the official [Web Client](https://discord.dofusdude.com) as a user.\n\n- \U0001FA78 **Dofus 3 Beta** from stable to bleeding edge by replacing /dofus3 with /dofus3beta.\n\n- \U0001F5E3️ **Multilingual** supporting _en_, _fr_, _es_, _pt_, _de_.\n\n- \U0001F9E0 **Search by Relevance** allowing typos in name and description, handled by language specific text analysis and indexing.\n\n- \U0001F575️ **Official Sources** generated from actual data from the game.\n\n... and much more on the Roadmap on my [Discord](https://discord.gg/3EtHskZD8h).\n"
+  version: 1.1.0-beta.1
+  description: "# Open Ankama Developer Community\nThe all-in-one toolbelt for your next Ankama related project.\n\n## Versions\n- [Dofus 2](https://docs.dofusdu.de/dofus2/)\n- [Dofus 3](https://docs.dofusdu.de/dofus3/)\n  - v1.1.0 beta [preview] (you are here) \n\n## Client SDKs\n- [Javascript](https://github.com/dofusdude/dofusdude-js) `npm i dofusdude-js@beta --save`\n- [Typescript](https://github.com/dofusdude/dofusdude-ts) `npm i dofusdude-ts@beta --save`\n- [Go](https://github.com/dofusdude/dodugo) `go get github.com/dofusdude/dodugo@v1.1.0-beta.1`\n- [Python](https://github.com/dofusdude/dofusdude-py) `pip install --pre dofusdude`\n- [Java](https://github.com/dofusdude/dofusdude-java) Maven with GitHub packages setup\n\nEverything, including this site, is generated out of the [Docs Repo](https://github.com/dofusdude/api-docs). Consider it the Single Source of Truth. If there is a problem with the SDKs, create an issue there.\n\nYour favorite language is missing? Please let me know!\n\n# Main Features\n- \U0001F977 **Seamless Auto-Update** load data in the background when a new Dofus version is released and serving it within 10 minutes with atomic data source switching. No downtime and no effects for the user, just always up-to-date.\n\n- ⚡ **Blazingly Fast** all data in-memory, aggressive caching over short time spans, HTTP/2 multiplexing, written in Go, optimized for low latency, hosted on bare metal in \U0001F1E9\U0001F1EA.\n\n- \U0001F4E8 **Almanax Discord Integration** Use the endpoints as a dev or the official [Web Client](https://discord.dofusdude.com) as a user.\n\n- \U0001FA78 **Dofus 3 Beta** from stable to bleeding edge by replacing /dofus3 with /dofus3beta.\n\n- \U0001F5E3️ **Multilingual** supporting _en_, _fr_, _es_, _pt_, _de_.\n\n- \U0001F9E0 **Search by Relevance** allowing typos in name and description, handled by language specific text analysis and indexing.\n\n- \U0001F575️ **Official Sources** generated from actual data from the game.\n\n... and much more on the Roadmap on my [Discord](https://discord.gg/3EtHskZD8h).\n"
   contact:
     name: Survival
     url: "https://discord.gg/3EtHskZD8h"
@@ -15,6 +15,7 @@ info:
 servers:
   - url: "https://api.dofusdu.de"
     description: API
+security: []
 paths:
   "/{game}/v1/{language}/items/search":
     parameters:
@@ -3835,8 +3836,1270 @@ paths:
         - webhooks
       x-stoplight:
         id: rgb2d0j47fr0l
+  "/{game}/v1/{language}/classes":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+    get:
+      summary: List classes
+      operationId: get-classes
+      tags: [game data]
+      parameters:
+        - $ref: "#/components/parameters/PageNumber"
+        - $ref: "#/components/parameters/PageSize"
+        - name: "fields[classes]"
+          in: query
+          schema: {type: string, enum: [all]}
+      responses:
+        "200":
+          description: Paginated classes.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/MappedEntityCollection"}
+        "400":
+          description: Invalid pagination or field selection.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Error"}
+  "/{game}/v1/{language}/classes/all":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+    get:
+      summary: Get all classes
+      operationId: get-all-classes
+      tags: [game data]
+      responses:
+        "200":
+          description: Every complete localized class document.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/MappedEntityCollection"}
+  "/{game}/v1/{language}/classes/search":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+    get:
+      summary: Search classes
+      operationId: search-classes
+      tags: [game data]
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema: {type: string}
+        - name: limit
+          in: query
+          schema: {type: integer, minimum: 1, maximum: 100, default: 8}
+      responses:
+        "200":
+          description: Matching localized summaries.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: "#/components/schemas/MappedEntityListEntry"}
+        "404":
+          description: No matching entities.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Error"}
+  "/{game}/v1/{language}/classes/{ankama_id}":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+      - name: ankama_id
+        in: path
+        required: true
+        schema: {type: integer}
+    get:
+      summary: Get one class
+      operationId: get-class-by-id
+      tags: [game data]
+      responses:
+        "200":
+          description: Complete localized class document.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Class"}
+        "404":
+          description: Entity not found.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Error"}
+  "/{game}/v1/{language}/spells":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+    get:
+      summary: List spells
+      operationId: get-spells
+      tags: [game data]
+      parameters:
+        - $ref: "#/components/parameters/PageNumber"
+        - $ref: "#/components/parameters/PageSize"
+        - name: "fields[spells]"
+          in: query
+          schema: {type: string, enum: [all]}
+      responses:
+        "200":
+          description: Paginated spells.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/MappedEntityCollection"}
+        "400":
+          description: Invalid pagination or field selection.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Error"}
+  "/{game}/v1/{language}/spells/all":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+    get:
+      summary: Get all spells
+      operationId: get-all-spells
+      tags: [game data]
+      responses:
+        "200":
+          description: Every complete localized spell document.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/MappedEntityCollection"}
+  "/{game}/v1/{language}/spells/search":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+    get:
+      summary: Search spells
+      operationId: search-spells
+      tags: [game data]
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema: {type: string}
+        - name: limit
+          in: query
+          schema: {type: integer, minimum: 1, maximum: 100, default: 8}
+      responses:
+        "200":
+          description: Matching localized summaries.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: "#/components/schemas/MappedEntityListEntry"}
+        "404":
+          description: No matching entities.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Error"}
+  "/{game}/v1/{language}/spells/{ankama_id}":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+      - name: ankama_id
+        in: path
+        required: true
+        schema: {type: integer}
+    get:
+      summary: Get one spell
+      operationId: get-spell-by-id
+      tags: [game data]
+      parameters:
+        - name: grade
+          in: query
+          description: Return only the requested mapped spell grade in `levels`.
+          schema: {type: integer, minimum: 1}
+      responses:
+        "200":
+          description: Complete localized spell document.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Spell"}
+        "404":
+          description: Entity not found.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Error"}
+  "/{game}/v1/{language}/monsters":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+    get:
+      summary: List monsters
+      operationId: get-monsters
+      tags: [game data]
+      parameters:
+        - $ref: "#/components/parameters/PageNumber"
+        - $ref: "#/components/parameters/PageSize"
+        - name: "fields[monsters]"
+          in: query
+          schema: {type: string, enum: [all]}
+        - $ref: "#/components/parameters/MonsterSpellInclude"
+      responses:
+        "200":
+          description: Paginated monsters.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/MappedEntityCollection"}
+        "400":
+          description: Invalid pagination or field selection.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Error"}
+  "/{game}/v1/{language}/monsters/all":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+    get:
+      summary: Get all monsters
+      operationId: get-all-monsters
+      tags: [game data]
+      parameters:
+        - $ref: "#/components/parameters/MonsterSpellInclude"
+      responses:
+        "200":
+          description: Every complete localized monster document.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/MappedEntityCollection"}
+  "/{game}/v1/{language}/monsters/search":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+    get:
+      summary: Search monsters
+      operationId: search-monsters
+      tags: [game data]
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema: {type: string}
+        - name: limit
+          in: query
+          schema: {type: integer, minimum: 1, maximum: 100, default: 8}
+      responses:
+        "200":
+          description: Matching localized summaries.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: "#/components/schemas/MappedEntityListEntry"}
+        "404":
+          description: No matching entities.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Error"}
+  "/{game}/v1/{language}/monsters/{ankama_id}":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+      - name: ankama_id
+        in: path
+        required: true
+        schema: {type: integer}
+    get:
+      summary: Get one monster
+      operationId: get-monster-by-id
+      tags: [game data]
+      parameters:
+        - $ref: "#/components/parameters/MonsterSpellInclude"
+      responses:
+        "200":
+          description: Complete localized monster document.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Monster"}
+        "404":
+          description: Entity not found.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Error"}
+  "/{game}/v1/{language}/super-areas":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+    get:
+      summary: List super-areas
+      operationId: get-super-areas
+      tags: [game data]
+      parameters:
+        - $ref: "#/components/parameters/PageNumber"
+        - $ref: "#/components/parameters/PageSize"
+        - name: "fields[super_areas]"
+          in: query
+          schema: {type: string, enum: [all]}
+      responses:
+        "200":
+          description: Paginated super-areas.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/MappedEntityCollection"}
+        "400":
+          description: Invalid pagination or field selection.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Error"}
+  "/{game}/v1/{language}/super-areas/all":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+    get:
+      summary: Get all super-areas
+      operationId: get-all-super-areas
+      tags: [game data]
+      responses:
+        "200":
+          description: Every complete localized super-area document.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/MappedEntityCollection"}
+  "/{game}/v1/{language}/super-areas/search":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+    get:
+      summary: Search super-areas
+      operationId: search-super-areas
+      tags: [game data]
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema: {type: string}
+        - name: limit
+          in: query
+          schema: {type: integer, minimum: 1, maximum: 100, default: 8}
+      responses:
+        "200":
+          description: Matching localized summaries.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: "#/components/schemas/MappedEntityListEntry"}
+        "404":
+          description: No matching entities.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Error"}
+  "/{game}/v1/{language}/super-areas/{ankama_id}":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+      - name: ankama_id
+        in: path
+        required: true
+        schema: {type: integer}
+    get:
+      summary: Get one super-area
+      operationId: get-super-area-by-id
+      tags: [game data]
+      responses:
+        "200":
+          description: Complete localized super-area document.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/WorldArea"}
+        "404":
+          description: Entity not found.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Error"}
+  "/{game}/v1/{language}/areas":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+    get:
+      summary: List areas
+      operationId: get-areas
+      tags: [game data]
+      parameters:
+        - $ref: "#/components/parameters/PageNumber"
+        - $ref: "#/components/parameters/PageSize"
+        - name: "fields[areas]"
+          in: query
+          schema: {type: string, enum: [all]}
+      responses:
+        "200":
+          description: Paginated areas.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/MappedEntityCollection"}
+        "400":
+          description: Invalid pagination or field selection.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Error"}
+  "/{game}/v1/{language}/areas/all":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+    get:
+      summary: Get all areas
+      operationId: get-all-areas
+      tags: [game data]
+      responses:
+        "200":
+          description: Every complete localized area document.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/MappedEntityCollection"}
+  "/{game}/v1/{language}/areas/search":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+    get:
+      summary: Search areas
+      operationId: search-areas
+      tags: [game data]
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema: {type: string}
+        - name: limit
+          in: query
+          schema: {type: integer, minimum: 1, maximum: 100, default: 8}
+      responses:
+        "200":
+          description: Matching localized summaries.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: "#/components/schemas/MappedEntityListEntry"}
+        "404":
+          description: No matching entities.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Error"}
+  "/{game}/v1/{language}/areas/{ankama_id}":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+      - name: ankama_id
+        in: path
+        required: true
+        schema: {type: integer}
+    get:
+      summary: Get one area
+      operationId: get-area-by-id
+      tags: [game data]
+      responses:
+        "200":
+          description: Complete localized area document.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/WorldArea"}
+        "404":
+          description: Entity not found.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Error"}
+  "/{game}/v1/{language}/subareas":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+    get:
+      summary: List subareas
+      operationId: get-subareas
+      tags: [game data]
+      parameters:
+        - $ref: "#/components/parameters/PageNumber"
+        - $ref: "#/components/parameters/PageSize"
+        - name: "fields[subareas]"
+          in: query
+          schema: {type: string, enum: [all]}
+      responses:
+        "200":
+          description: Paginated subareas.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/MappedEntityCollection"}
+        "400":
+          description: Invalid pagination or field selection.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Error"}
+  "/{game}/v1/{language}/subareas/all":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+    get:
+      summary: Get all subareas
+      operationId: get-all-subareas
+      tags: [game data]
+      responses:
+        "200":
+          description: Every complete localized subarea document.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/MappedEntityCollection"}
+  "/{game}/v1/{language}/subareas/search":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+    get:
+      summary: Search subareas
+      operationId: search-subareas
+      tags: [game data]
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema: {type: string}
+        - name: limit
+          in: query
+          schema: {type: integer, minimum: 1, maximum: 100, default: 8}
+      responses:
+        "200":
+          description: Matching localized summaries.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: "#/components/schemas/MappedEntityListEntry"}
+        "404":
+          description: No matching entities.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Error"}
+  "/{game}/v1/{language}/subareas/{ankama_id}":
+    parameters:
+      - $ref: "#/components/parameters/Game"
+      - $ref: "#/components/parameters/Language"
+      - name: ankama_id
+        in: path
+        required: true
+        schema: {type: integer}
+    get:
+      summary: Get one subarea
+      operationId: get-subarea-by-id
+      tags: [game data]
+      responses:
+        "200":
+          description: Complete localized subarea document.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/WorldArea"}
+        "404":
+          description: Entity not found.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Error"}
+
 components:
+  parameters:
+    Game:
+      name: game
+      in: path
+      required: true
+      schema:
+        type: string
+        enum: [dofus3, dofus3beta]
+    Language:
+      name: language
+      in: path
+      required: true
+      schema:
+        type: string
+        enum: [en, fr, de, es, pt]
+    PageNumber:
+      name: page[number]
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    PageSize:
+      name: page[size]
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    MonsterSpellInclude:
+      name: include
+      in: query
+      description: >-
+        Controls monster spell relationships. By default each monster grade contains a compact
+        relationship whose URL selects the assigned spell grade. `spells.grade` inlines that
+        grade only; `spells` inlines the complete spell with every available grade.
+      schema:
+        type: string
+        enum: [spells.grade, spells]
   schemas:
+    MappedEntityListEntry:
+      type: object
+      required: [ankama_id, name]
+      properties:
+        ankama_id:
+          type: integer
+        name:
+          type: string
+        image_urls:
+          $ref: "#/components/schemas/Images"
+    MappedEntityCollection:
+      type: object
+      description: The populated array property matches the selected resource.
+      properties:
+        classes:
+          type: array
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/MappedEntityListEntry"
+              - $ref: "#/components/schemas/Class"
+        spells:
+          type: array
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/MappedEntityListEntry"
+              - $ref: "#/components/schemas/Spell"
+        monsters:
+          type: array
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/MappedEntityListEntry"
+              - $ref: "#/components/schemas/Monster"
+        super_areas:
+          type: array
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/MappedEntityListEntry"
+              - $ref: "#/components/schemas/WorldArea"
+        areas:
+          type: array
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/MappedEntityListEntry"
+              - $ref: "#/components/schemas/WorldArea"
+        subareas:
+          type: array
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/MappedEntityListEntry"
+              - $ref: "#/components/schemas/WorldArea"
+        _links:
+          type: object
+          additionalProperties: true
+    CombatReference:
+      type: object
+      description: A resolved game reference used by selectors, conditions, and triggers.
+      properties:
+        ankama_id:
+          type: integer
+        name:
+          type: string
+        kind:
+          type: string
+      additionalProperties: true
+    CombatCondition:
+      type: object
+      properties:
+        operator:
+          type: string
+        negated:
+          type: boolean
+        subject:
+          type: string
+        reference:
+          $ref: "#/components/schemas/CombatReference"
+      additionalProperties: true
+    TargetSelector:
+      type: object
+      properties:
+        kind:
+          type: string
+          description: Human-readable target category or relationship.
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        subject:
+          type: string
+        negated:
+          type: boolean
+        reference:
+          $ref: "#/components/schemas/CombatReference"
+        conditions:
+          type: array
+          items:
+            $ref: "#/components/schemas/CombatCondition"
+      additionalProperties: true
+    TargetMask:
+      type: object
+      required: [raw, selectors]
+      properties:
+        raw:
+          type: string
+          description: Original game mask retained for lossless debugging.
+        logic:
+          type: string
+        conditions:
+          type: array
+          items:
+            $ref: "#/components/schemas/CombatCondition"
+        selectors:
+          type: array
+          items:
+            $ref: "#/components/schemas/TargetSelector"
+    SpellTrigger:
+      type: object
+      properties:
+        kind:
+          type: string
+          description: Resolved event that activates the effect.
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        subject:
+          type: string
+        reference:
+          $ref: "#/components/schemas/CombatReference"
+      additionalProperties: true
+    SpellTriggers:
+      type: object
+      required: [raw, events]
+      properties:
+        raw:
+          type: string
+          description: Original trigger tokens retained for lossless debugging.
+        logic:
+          type: string
+        events:
+          type: array
+          items:
+            $ref: "#/components/schemas/SpellTrigger"
+    ZoneShape:
+      type: object
+      required: [code, name]
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+          description: Resolved shape name, such as point, circle, cross, line, or cone.
+    EffectZone:
+      type: object
+      required: [shape, cell_ids]
+      properties:
+        raw:
+          type: string
+          description: Original compact zone encoding when the source provides one.
+        shape:
+          $ref: "#/components/schemas/ZoneShape"
+        size:
+          type: integer
+          nullable: true
+          description: Effective outer size of the area. A point has size 0; whole-map and custom-cell shapes omit it.
+        min_size:
+          type: integer
+          nullable: true
+          description: Effective inner size for hollow or minimum-size shapes. Omitted when the shape has no inner boundary.
+        cell_ids:
+          type: array
+          items:
+            type: integer
+        damage_decrease_step_percent:
+          type: integer
+        max_damage_decrease_apply_count:
+          type: integer
+        forced_direction:
+          type: integer
+        include_carried:
+          type: boolean
+        stop_at_target:
+          type: boolean
+        only_affect_in_sight_line:
+          type: boolean
+    WeaponCombat:
+      type: object
+      required: [zone, cast_in_line, cast_in_diagonal, requires_line_of_sight]
+      properties:
+        zone:
+          $ref: "#/components/schemas/EffectZone"
+        cast_in_line:
+          type: boolean
+        cast_in_diagonal:
+          type: boolean
+        requires_line_of_sight:
+          type: boolean
+    SpellEffect:
+      type: object
+      properties:
+        type:
+          $ref: "#/components/schemas/CombatReference"
+        min:
+          type: integer
+        max:
+          type: integer
+        duration:
+          type: integer
+        delay:
+          type: integer
+        random:
+          type: integer
+        group:
+          type: integer
+        dispellable:
+          type: integer
+        effect_uid:
+          type: integer
+          description: Stable identifier of this concrete effect instance.
+        target_id:
+          type: integer
+        triggered_duration:
+          type: integer
+        display_zero:
+          type: boolean
+        modifier:
+          type: integer
+        zone:
+          $ref: "#/components/schemas/EffectZone"
+        target_mask:
+          $ref: "#/components/schemas/TargetMask"
+        triggers:
+          $ref: "#/components/schemas/SpellTriggers"
+        templated:
+          type: object
+          additionalProperties: true
+      additionalProperties: true
+    SpellLevel:
+      type: object
+      properties:
+        ankama_id:
+          type: integer
+        grade:
+          type: integer
+        ap_cost:
+          type: integer
+        min_range:
+          type: integer
+        max_range:
+          type: integer
+        max_cast_per_turn:
+          type: integer
+        max_cast_per_target:
+          type: integer
+        max_global_cast_per_turn:
+          type: integer
+        max_global_cast_per_target:
+          type: integer
+        min_cast_interval:
+          type: integer
+        initial_cooldown:
+          type: integer
+        global_cooldown:
+          type: integer
+        ignore_prison_glyph:
+          type: boolean
+        spell_breed:
+          type: integer
+        effects:
+          type: array
+          items:
+            $ref: "#/components/schemas/SpellEffect"
+        critical_effects:
+          type: array
+          items:
+            $ref: "#/components/schemas/SpellEffect"
+      additionalProperties: true
+    Spell:
+      type: object
+      required: [ankama_id, name, levels]
+      properties:
+        ankama_id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        icon_id:
+          type: integer
+        admin_name:
+          type: string
+        order:
+          type: integer
+        image_urls:
+          $ref: "#/components/schemas/Images"
+        type:
+          $ref: "#/components/schemas/CombatReference"
+        classes:
+          type: array
+          items:
+            $ref: "#/components/schemas/CombatReference"
+        monsters:
+          type: array
+          items:
+            $ref: "#/components/schemas/CombatReference"
+        levels:
+          type: array
+          items:
+            $ref: "#/components/schemas/SpellLevel"
+        scripts:
+          type: array
+          items:
+            $ref: "#/components/schemas/SpellScriptUsage"
+        critical_scripts:
+          type: array
+          items:
+            $ref: "#/components/schemas/SpellScriptUsage"
+      additionalProperties: true
+    SpellScriptUsage:
+      type: object
+      description: Resolved client-side spell script binding, including target selection and areas.
+      properties:
+        ankama_id: {type: integer}
+        script_id: {type: integer}
+        order: {type: integer}
+        random: {type: integer}
+        random_group: {type: integer}
+        sequence_group: {type: integer}
+        activation_mask: {$ref: "#/components/schemas/TargetMask"}
+        caster_mask: {$ref: "#/components/schemas/TargetMask"}
+        target_mask: {$ref: "#/components/schemas/TargetMask"}
+        activation_zone: {$ref: "#/components/schemas/EffectZone"}
+        target_zone: {$ref: "#/components/schemas/EffectZone"}
+        condition:
+          type: object
+          nullable: true
+          additionalProperties: true
+        targets_affected_concurrently: {type: boolean}
+        target_treated_as_caster: {type: boolean}
+        spell_level_ids:
+          type: array
+          items: {type: integer}
+    Class:
+      type: object
+      required: [ankama_id, name, looks, spells]
+      properties:
+        ankama_id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        gameplay_description:
+          type: string
+        complexity:
+          type: integer
+        sort_index:
+          type: integer
+        creature_bones_id:
+          type: integer
+        roles:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        characteristic_costs:
+          type: object
+          description: Characteristic point-cost tiers keyed by characteristic name.
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              properties:
+                from: {type: integer}
+                cost: {type: integer}
+        image_urls:
+          $ref: "#/components/schemas/Images"
+        looks:
+          $ref: "#/components/schemas/ClassLooks"
+        spells:
+          type: array
+          description: Fully mapped class spells, including levels, effects, targeting, and zones.
+          items:
+            $ref: "#/components/schemas/Spell"
+      additionalProperties: true
+    ClassLooks:
+      type: object
+      required: [male, female]
+      properties:
+        male:
+          $ref: "#/components/schemas/ClassAppearance"
+        female:
+          $ref: "#/components/schemas/ClassAppearance"
+    ClassAppearance:
+      type: object
+      required: [bones_id, skin_ids, scale_percent, default_colors]
+      properties:
+        bones_id:
+          type: integer
+        skin_ids:
+          type: array
+          items:
+            type: integer
+        scale_percent:
+          type: object
+          required: [x, y]
+          properties:
+            x:
+              type: integer
+            y:
+              type: integer
+        default_colors:
+          type: array
+          items:
+            type: integer
+    Monster:
+      type: object
+      required: [ankama_id, name, race, grades, spawn_locations, drops]
+      properties:
+        ankama_id:
+          type: integer
+        name:
+          type: string
+        image_urls:
+          $ref: "#/components/schemas/Images"
+        race:
+          $ref: "#/components/schemas/MonsterRace"
+        grades:
+          type: array
+          description: Monster statistics and spells grouped by the monster grade that uses them.
+          items:
+            $ref: "#/components/schemas/MonsterGrade"
+        spawn_locations:
+          type: array
+          description: Spawn subareas taken from the monster's authoritative subarea list.
+          items:
+            $ref: "#/components/schemas/MonsterSpawnLocation"
+        drops:
+          type: array
+          items:
+            $ref: "#/components/schemas/MonsterDrop"
+        global_drops:
+          type: array
+          items:
+            $ref: "#/components/schemas/MonsterGlobalDrop"
+        appearance:
+          $ref: "#/components/schemas/ClassAppearance"
+        is_bounty:
+          type: boolean
+        corresponding_mini_boss:
+          $ref: "#/components/schemas/CombatReference"
+        summon_cost:
+          type: integer
+        speed_adjust:
+          type: integer
+        scale_grade_reference:
+          type: integer
+        achievements:
+          type: array
+          items:
+            $ref: "#/components/schemas/CombatReference"
+        souls:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        characteristic_ratios:
+          type: array
+          items:
+            type: array
+            items: {type: number, format: double}
+      additionalProperties: true
+    MonsterRace:
+      type: object
+      required: [ankama_id, name, super_race]
+      properties:
+        ankama_id:
+          type: integer
+        name:
+          type: string
+        super_race:
+          $ref: "#/components/schemas/CombatReference"
+    MonsterGrade:
+      type: object
+      required: [grade, level, spells]
+      properties:
+        grade:
+          type: integer
+        level:
+          type: integer
+        life_points: {type: integer}
+        action_points: {type: integer}
+        movement_points: {type: integer}
+        grade_xp: {type: integer}
+        neutral_resistance: {type: integer}
+        earth_resistance: {type: integer}
+        fire_resistance: {type: integer}
+        water_resistance: {type: integer}
+        air_resistance: {type: integer}
+        pa_dodge: {type: integer}
+        pm_dodge: {type: integer}
+        damage_bonus: {type: integer}
+        percent_damage_bonus: {type: integer}
+        critical_hit_bonus: {type: integer}
+        initiative_bonus: {type: integer}
+        tackle_bonus: {type: integer}
+        tackle_evade: {type: integer}
+        max_summon: {type: integer}
+        bonus_characteristics:
+          type: object
+          additionalProperties: {type: integer}
+        spells:
+          type: array
+          description: Spells assigned to this exact monster grade.
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/MonsterSpellRelationship"
+              - $ref: "#/components/schemas/Spell"
+      additionalProperties: true
+    MonsterSpellRelationship:
+      type: object
+      required: [ankama_id, name, grade, url]
+      properties:
+        ankama_id:
+          type: integer
+        name:
+          type: string
+        grade:
+          type: integer
+          description: The spell grade assigned to this monster grade.
+        url:
+          type: string
+          format: uri
+          description: Grade-specific spell URL; already includes the `grade` query parameter.
+        image_urls:
+          $ref: "#/components/schemas/Images"
+    MonsterSpawnLocation:
+      type: object
+      required: [subarea, area, super_area, subarea_maps, preferred]
+      properties:
+        subarea:
+          $ref: "#/components/schemas/CombatReference"
+        area:
+          $ref: "#/components/schemas/CombatReference"
+        super_area:
+          $ref: "#/components/schemas/CombatReference"
+        subarea_maps:
+          type: array
+          items:
+            type: object
+            required: [ankama_id, position_x, position_y, world_map_id]
+            properties:
+              ankama_id:
+                type: integer
+              position_x:
+                type: integer
+              position_y:
+                type: integer
+              world_map_id:
+                type: integer
+        preferred:
+          type: boolean
+          description: Whether the game marks this as the monster's preferred subarea.
+    EligibilityNode:
+      type: object
+      description: Client-side conditions using the v1 condition-node structure. Confirmed server-owned predicates are excluded during mapping. This is not the complete server eligibility formula, and the API does not dynamically remove fields based on interpretation status.
+      properties:
+        is_operand: {type: boolean}
+        relation: {type: string, enum: [and, or]}
+        children:
+          type: array
+          items: {$ref: "#/components/schemas/EligibilityNode"}
+        condition:
+          type: object
+          properties:
+            operator: {type: string}
+            int_value: {type: integer}
+            quantity: {type: integer}
+            kind:
+              type: string
+              description: Verified semantic requirement type, for example item_received_age or profession_level.
+            unit: {type: string}
+            string_value: {type: string}
+            value_label: {type: string}
+            element:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: Existing persisted item-condition element ID, or -1 for a condition without a persisted ID.
+                name: {type: string}
+            reference: {$ref: "#/components/schemas/CombatReference"}
+            secondary_reference: {$ref: "#/components/schemas/CombatReference"}
+    MonsterDrop:
+      type: object
+      required: [item, rates_percent, has_conditions]
+      properties:
+        item:
+          $ref: "#/components/schemas/CombatReference"
+        rates_percent:
+          type: array
+          description: Base drop percentage for each monster grade.
+          items:
+            type: object
+            required: [grade, percent]
+            properties:
+              grade:
+                type: integer
+              percent:
+                type: number
+                format: double
+        has_conditions:
+          type: boolean
+        drop_id: {type: integer}
+        count: {type: integer}
+        condition:
+          type: object
+          nullable: true
+          additionalProperties: true
+        hidden_if_invalid_conditions: {type: boolean}
+        disable_drop_modifier: {type: boolean}
+        specific_coefficients:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    MonsterGlobalDrop:
+      type: object
+      required: [item, min_percent, max_percent]
+      properties:
+        has_conditions: {type: boolean}
+        item:
+          $ref: "#/components/schemas/CombatReference"
+        min_percent: {type: number, format: double}
+        max_percent: {type: number, format: double}
+        condition:
+          type: object
+          nullable: true
+          additionalProperties: true
+        alteration_id: {type: integer}
+        disable_drop_modifier: {type: boolean}
+    WorldArea:
+      type: object
+      required: [ankama_id, name]
+      properties:
+        ankama_id:
+          type: integer
+        name:
+          type: string
+        super_area:
+          $ref: "#/components/schemas/CombatReference"
+        area:
+          $ref: "#/components/schemas/CombatReference"
+        subareas:
+          type: array
+          items:
+            $ref: "#/components/schemas/CombatReference"
+        monsters:
+          type: array
+          items:
+            $ref: "#/components/schemas/CombatReference"
+      additionalProperties: true
     ListItemGeneral:
       type: object
       x-examples: {}
@@ -3884,6 +5147,7 @@ components:
             id: t04qfhnlgc4kw
           nullable: true
         conditions:
+          type: object
           nullable: true
           allOf:
             - $ref: "#/components/schemas/ConditionNode"
@@ -3899,6 +5163,7 @@ components:
           type: integer
           nullable: true
         parent_set:
+          type: object
           nullable: true
           allOf:
             - $ref: "#/components/schemas/TranslatedId"
@@ -3916,6 +5181,8 @@ components:
           nullable: true
         range:
           $ref: "#/components/schemas/Range"
+        combat:
+          $ref: "#/components/schemas/WeaponCombat"
     Recipe:
       type: object
       properties:
@@ -4029,6 +5296,7 @@ components:
           items:
             $ref: "#/components/schemas/Effect"
         conditions:
+          type: object
           nullable: true
           allOf:
             - $ref: "#/components/schemas/ConditionNode"
@@ -4219,6 +5487,7 @@ components:
           items:
             x-stoplight:
               id: i3dqn2ib2hjfl
+            type: object
             nullable: true
             allOf:
               - $ref: "#/components/schemas/ConditionNode"
@@ -4252,6 +5521,7 @@ components:
           items:
             $ref: "#/components/schemas/Effect"
         conditions:
+          type: object
           nullable: true
           allOf:
             - $ref: "#/components/schemas/ConditionNode"
@@ -4261,9 +5531,12 @@ components:
           items:
             $ref: "#/components/schemas/Recipe"
         parent_set:
+          type: object
           nullable: true
           allOf:
             - $ref: "#/components/schemas/TranslatedId"
+        combat:
+          $ref: "#/components/schemas/WeaponCombat"
     Weapon:
       type: object
       x-examples: {}
@@ -4293,6 +5566,7 @@ components:
           items:
             $ref: "#/components/schemas/Effect"
         conditions:
+          type: object
           nullable: true
           allOf:
             - $ref: "#/components/schemas/ConditionNode"
@@ -4312,9 +5586,12 @@ components:
           items:
             $ref: "#/components/schemas/Recipe"
         parent_set:
+          type: object
           nullable: true
           allOf:
             - $ref: "#/components/schemas/TranslatedId"
+        combat:
+          $ref: "#/components/schemas/WeaponCombat"
     ItemSubtype:
       title: ItemSubtype
       x-stoplight:
@@ -5226,6 +6503,8 @@ components:
       title: Version
   securitySchemes: {}
 tags:
+  - name: game data
+    description: Classes, spells, monsters, and the world-area hierarchy
   - name: almanax
     description: The Dofus Almanax
   - name: consumables

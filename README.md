@@ -2,13 +2,42 @@
 
 This is the OpenAPI Specification for the [Dofusdude API](https://docs.dofusdu.de).
 
-The Swagger instance on the main page links directly to this document on GitHub.
-
 If you find errors or want to propose features (never break backwards compatibility), you are welcome to contribute.
 
 The original yaml was created with a GUI Tool named [Stoplight Studio](https://stoplight.io). There are many tools for working with OpenAPI, checkout [OpenAPI.Tools](https://openapi.tools) for more.
 
-For now, the Spec will stay in 3.0 until more tools support 3.1.
+Edit `openapi-3.0.yaml` for GET/response schemas and
+`scripts/build-openapi.mjs` for QUERY schemas. `openapi-3.2.yaml` is generated;
+do not edit it directly. `query-contract.json` is generated from DoduAPI's
+`query/contract.go` registry:
+
+```sh
+# Set these to your checkout locations:
+DODUAPI_DIR=/absolute/path/to/doduapi
+API_DOCS_DIR=/absolute/path/to/api-docs
+(cd "$DODUAPI_DIR" && go run ./cmd/query-contract -output "$API_DOCS_DIR/query-contract.json")
+cd "$API_DOCS_DIR"
+npm ci
+npm run build
+npm run check
+```
+
+Serve this directory over HTTP and open `index.html`. Deploy the bundled UI
+with `openapi-3.2.yaml` for QUERY support. SDK generators without OpenAPI 3.2
+support can use `openapi-3.0.yaml` for GET operations. Both describe API v1.
+
+## Release channels
+
+`main` generates stable SDKs on their `main` branches. `beta` generates
+prerelease SDKs on their `beta` branches. Set `info.version` to a stable version
+on `main` or `X.Y.Z-beta.N` on `beta`; the workflow rejects mismatches.
+Both channels run the same generator jobs. SDKs currently expose GET operations
+only; the complete documentation also describes HTTP QUERY.
+
+Generated SDK workflows run on both branches. Publish beta SDK GitHub releases
+as prereleases from their `beta` branch. Their npm publishers use the `beta`
+dist-tag, leaving `latest` unchanged. Python versions are normalized to
+`X.Y.ZbN`. Run `npm test` and `npm run check` before pushing.
 
 ## Propose Features
 
