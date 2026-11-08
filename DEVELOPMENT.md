@@ -17,5 +17,5 @@ response, including searches. Webhook administration is
 excluded because it requires credentials and user-owned subscription IDs.
 The same check is available as the **Check live documentation examples**
 workflow. For deployment checks before DNS propagation, optionally set
-`API_TEST_ADDRESS` to the server's IPv4 address; TLS hostname verification
+`API_TEST_ADDRESS` to the server's IPv4 address. TLS hostname verification
 remains enabled.

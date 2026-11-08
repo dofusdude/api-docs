@@ -43,6 +43,22 @@ test('recursive filter examples never contain Swagger string placeholders',()=> 
   }
 });
 
+test('documentation prose has no semicolons and filter descriptions stay resource-specific',()=> {
+  function check(value) {
+    if(!value || typeof value!=='object')return;
+    for(const [key,child]of Object.entries(value)) {
+      if(['description','summary','title'].includes(key) && typeof child==='string') assert.ok(!child.includes(';'),child);
+      check(child);
+    }
+  }
+  check(spec);
+  for(const name of ['Class','SuperArea','Area','Subarea']) {
+    assert.doesNotMatch(spec.components.schemas[`${name}QueryFilter`].description,/\b(spell|monster)\b/i);
+  }
+  assert.doesNotMatch(spec.components.schemas.MonsterQueryFilter.description,/\bspell\b/i);
+  assert.doesNotMatch(spec.components.schemas.SpellQueryFilter.description,/\bmonster\b/i);
+});
+
 test('live checker consumes and validates complete streamed JSON',async()=> {
   const server=createServer((_req,res)=>{res.setHeader('Content-Type','application/json');res.write('{"items":[');res.write('"'+ 'x'.repeat(2*1024*1024)+'"');res.end(']}');});
   server.listen(0,'127.0.0.1');await once(server,'listening');
