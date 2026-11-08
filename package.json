@@ -1,0 +1,11 @@
+{
+  "name": "dofusdude-api-docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test scripts/*.test.mjs",
+    "build": "node scripts/build-openapi.mjs",
+    "check": "node scripts/build-openapi.mjs --check"
+  },
+  "devDependencies": { "yaml": "2.9.1" }
+}

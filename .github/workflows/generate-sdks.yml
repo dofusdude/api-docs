@@ -2,27 +2,59 @@ name: Generate SDKs
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "beta"]
 
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: sdk-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
+  release-context:
+    runs-on: ubuntu-latest
+    outputs:
+      channel: ${{ steps.context.outputs.channel }}
+      branch: ${{ steps.context.outputs.branch }}
+      version: ${{ steps.context.outputs.version }}
+      python_version: ${{ steps.context.outputs.python_version }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm test
+      - run: npm run check
+      - id: context
+        run: node scripts/sdk-release.mjs
+
   generate-js-client:
+    needs: release-context
     runs-on: ubuntu-latest
     name: Generate js sdk
     steps:
       - name: Checkout OpenAPI
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
 
       - name: Generate JS sdk
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: javascript
+          generator-tag: v7.27.0
           openapi-file: openapi-3.0.yaml
-          command-args: --additional-properties=moduleName=dofusdude,projectName=dofusdude-js,licenseName=MIT
+          command-args: --additional-properties=moduleName=dofusdude,projectName=dofusdude-js,licenseName=MIT,projectVersion=${{ needs.release-context.outputs.version }}
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v3.4.1
@@ -37,11 +69,17 @@ jobs:
           cp package-lock.json ../javascript-client/package-lock.json
           cd ../javascript-client
           mkdir -p .github/workflows/
-          printf '%s\n' 'name: Node.js CI' 'on:' '  push:' '    branches: [ "main" ]' '  pull_request:' '    branches: [ "main" ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    strategy:' '      matrix:' '        node-version: [14.x, 16.x, 18.x]' '    steps:' '    - uses: actions/checkout@v3' '    - name: Use Node.js ${{ matrix.node-version }}' '      uses: actions/setup-node@v3' '      with:' '        node-version: ${{ matrix.node-version }}' '        cache: npm' '    - run: npm ci' '    - run: npm run build --if-present' '    - run: npm test' '' > .github/workflows/testing.yml
-          printf '%s\n' 'name: Node.js Package' 'on:' '  release:' '    types: [created]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '      - uses: actions/checkout@v3' '      - uses: actions/setup-node@v3' '        with:' '          node-version: 16' '      - run: npm ci' '      - run: npm test' '  publish-npm:' '    needs: build' '    runs-on: ubuntu-latest' '    steps:' '      - uses: actions/checkout@v3' '      - uses: actions/setup-node@v3' '        with:' '          node-version: 16' '          registry-url: https://registry.npmjs.org/' '      - run: npm ci' '      - run: npm publish' '        env:' '          NODE_AUTH_TOKEN: secrets.NPM_TOKEN' > .github/workflows/publish.yml 
+          printf '%s\n' 'name: Node.js CI' 'on:' '  push:' '    branches: [ "main" ]' '  pull_request:' '    branches: [ "main" ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    strategy:' '      matrix:' '        node-version: [14.x, 16.x, 18.x]' '    steps:' '    - uses: actions/checkout@v4' '    - name: Use Node.js ${{ matrix.node-version }}' '      uses: actions/setup-node@v3' '      with:' '        node-version: ${{ matrix.node-version }}' '        cache: npm' '    - run: npm ci' '    - run: npm run build --if-present' '    - run: npm test' '' > .github/workflows/testing.yml
+          printf '%s\n' 'name: Node.js Package' 'on:' '  release:' '    types: [created]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '      - uses: actions/checkout@v4' '      - uses: actions/setup-node@v3' '        with:' '          node-version: 16' '      - run: npm ci' '      - run: npm test' '  publish-npm:' '    needs: build' '    runs-on: ubuntu-latest' '    steps:' '      - uses: actions/checkout@v4' '      - uses: actions/setup-node@v3' '        with:' '          node-version: 16' '          registry-url: https://registry.npmjs.org/' '      - run: npm ci' '      - run: npm publish' '        env:' '          NODE_AUTH_TOKEN: secrets.NPM_TOKEN' > .github/workflows/publish.yml
           sed -i 's/secrets.NPM_TOKEN/\$\{\{secrets.NPM_TOKEN\}\}/g' .github/workflows/publish.yml
           sed -i 's/\\"/"/g' README.md
           cd ..
+
+      - name: Prepare SDK release
+        env:
+          SDK_BRANCH: ${{ needs.release-context.outputs.branch }}
+          SDK_VERSION: ${{ needs.release-context.outputs.version }}
+        run: node scripts/prepare-sdk-release.mjs "javascript-client"
 
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
@@ -53,24 +91,32 @@ jobs:
           destination-github-username: "dofusdude"
           destination-repository-name: "dofusdude-js"
           user-email: stelzo@steado.de
-          target-branch: main
+          target-branch: ${{ needs.release-context.outputs.branch }}
+          create-target-branch-if-needed: true
 
   generate-rs-client:
+    needs: release-context
     runs-on: ubuntu-latest
     name: Generate Rust sdk
     steps:
       - name: Checkout OpenAPI
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
 
       - name: Generate Rust sdk
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: rust
+          generator-tag: v7.27.0
           openapi-file: openapi-3.0.yaml
-          command-args: --additional-properties=packageName=dofusdude,packageVersion=1.0.0-beta.1 # TODO rm beta when ready
+          command-args: --additional-properties=packageName=dofusdude,packageVersion=${{ needs.release-context.outputs.version }}
 
       - name: Setup Rust Toolchain
         uses: dtolnay/rust-toolchain@stable
@@ -79,11 +125,17 @@ jobs:
         run: |
           cd rust-client
           mkdir -p .github/workflows/
-          printf '%s\n' 'name: Rust CI' 'on:' '  push:' '    branches: [ "main" ]' '  pull_request:' '    branches: [ "main" ]' 'jobs:' '  rust-stable-test:' '      - uses: actions/checkout@v4' '      - uses: dtolnay/rust-toolchain@stable' '      - name: Test' '        run: cargo test --verbose' '' > .github/workflows/testing.yml
+          printf '%s\n' 'name: Rust CI' 'on:' '  push:' '    branches: [ "main" ]' '  pull_request:' '    branches: [ "main" ]' 'jobs:' '  rust-stable-test:' '    runs-on: ubuntu-latest' '    steps:' '      - uses: actions/checkout@v4' '      - uses: dtolnay/rust-toolchain@stable' '      - name: Test' '        run: cargo test --verbose' '' > .github/workflows/testing.yml
           sed -i 's/"authors": \[\]/"authors": ["Christopher Sieh <stelzo@steado.de>"]/g' Cargo.toml
           sed -i 's/"description": \\".*\\"/"description": \\"Rust SDK for the dofusdude API.\\"/g' Cargo.toml
           rm git_push.sh
           cd ..
+
+      - name: Prepare SDK release
+        env:
+          SDK_BRANCH: ${{ needs.release-context.outputs.branch }}
+          SDK_VERSION: ${{ needs.release-context.outputs.version }}
+        run: node scripts/prepare-sdk-release.mjs "rust-client"
 
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
@@ -95,24 +147,32 @@ jobs:
           destination-github-username: "dofusdude"
           destination-repository-name: "dofusdude-rs"
           user-email: stelzo@steado.de
-          target-branch: main
+          target-branch: ${{ needs.release-context.outputs.branch }}
+          create-target-branch-if-needed: true
 
   generate-ts-client:
+    needs: release-context
     runs-on: ubuntu-latest
     name: Generate ts sdk
     steps:
       - name: Checkout OpenAPI
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
 
       - name: Generate TS sdk
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: typescript-axios
+          generator-tag: v7.27.0
           openapi-file: openapi-3.0.yaml
-          command-args: --additional-properties=npmName=dofusdude-ts
+          command-args: --additional-properties=npmName=dofusdude-ts,npmVersion=${{ needs.release-context.outputs.version }}
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v3.4.1
@@ -127,11 +187,17 @@ jobs:
           cp package-lock.json ../typescript-axios-client/package-lock.json
           cd ../typescript-axios-client
           mkdir -p .github/workflows/
-          printf '%s\n' 'name: Node.js CI' 'on:' '  push:' '    branches: [ "main" ]' '  pull_request:' '    branches: [ "main" ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    strategy:' '      matrix:' '        node-version: [14.x, 16.x, 18.x]' '    steps:' '    - uses: actions/checkout@v3' '    - name: Use Node.js ${{ matrix.node-version }}' '      uses: actions/setup-node@v3' '      with:' '        node-version: ${{ matrix.node-version }}' '        cache: npm' '    - run: npm ci' '    - run: npm run build --if-present' '' > .github/workflows/build.yml
-          printf '%s\n' 'name: Node.js Package' 'on:' '  release:' '    types: [created]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '      - uses: actions/checkout@v3' '      - uses: actions/setup-node@v3' '        with:' '          node-version: 16' '      - run: npm ci' '  publish-npm:' '    needs: build' '    runs-on: ubuntu-latest' '    steps:' '      - uses: actions/checkout@v3' '      - uses: actions/setup-node@v3' '        with:' '          node-version: 16' '          registry-url: https://registry.npmjs.org/' '      - run: npm ci' '      - run: npm publish' '        env:' '          NODE_AUTH_TOKEN: secrets.NPM_TOKEN' > .github/workflows/publish.yml 
+          printf '%s\n' 'name: Node.js CI' 'on:' '  push:' '    branches: [ "main" ]' '  pull_request:' '    branches: [ "main" ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    strategy:' '      matrix:' '        node-version: [14.x, 16.x, 18.x]' '    steps:' '    - uses: actions/checkout@v4' '    - name: Use Node.js ${{ matrix.node-version }}' '      uses: actions/setup-node@v3' '      with:' '        node-version: ${{ matrix.node-version }}' '        cache: npm' '    - run: npm ci' '    - run: npm run build --if-present' '' > .github/workflows/build.yml
+          printf '%s\n' 'name: Node.js Package' 'on:' '  release:' '    types: [created]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '      - uses: actions/checkout@v4' '      - uses: actions/setup-node@v3' '        with:' '          node-version: 16' '      - run: npm ci' '  publish-npm:' '    needs: build' '    runs-on: ubuntu-latest' '    steps:' '      - uses: actions/checkout@v4' '      - uses: actions/setup-node@v3' '        with:' '          node-version: 16' '          registry-url: https://registry.npmjs.org/' '      - run: npm ci' '      - run: npm publish' '        env:' '          NODE_AUTH_TOKEN: secrets.NPM_TOKEN' > .github/workflows/publish.yml
           sed -i 's/secrets.NPM_TOKEN/\$\{\{secrets.NPM_TOKEN\}\}/g' .github/workflows/publish.yml
           sed -i 's/\\"/"/g' README.md
           cd ..
+
+      - name: Prepare SDK release
+        env:
+          SDK_BRANCH: ${{ needs.release-context.outputs.branch }}
+          SDK_VERSION: ${{ needs.release-context.outputs.version }}
+        run: node scripts/prepare-sdk-release.mjs "typescript-axios-client"
 
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
@@ -143,24 +209,32 @@ jobs:
           destination-github-username: "dofusdude"
           destination-repository-name: "dofusdude-ts"
           user-email: stelzo@steado.de
-          target-branch: main
+          target-branch: ${{ needs.release-context.outputs.branch }}
+          create-target-branch-if-needed: true
 
   generate-java-client:
+    needs: release-context
     runs-on: ubuntu-latest
     name: Generate java sdk
     steps:
       - name: Checkout OpenAPI
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
 
       - name: Generate java sdk
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: java
+          generator-tag: v7.27.0
           openapi-file: openapi-3.0.yaml
-          command-args: --additional-properties=licenseName=GPLv3,licenseUrl=https://www.gnu.org/licenses/gpl-3.0.txt,scmDeveloperConnection=scm:git:git@github.com:dofusdude/dofusdude-java.git,scmConnection=scm:git:git@github.com:dofusdude/dofusdude-java.git,apiPackage=com.dofusdude.client.api,artifactDescription=dofusdude-client,artifactId=dofusdude-java,artifactUrl=https://github.com/dofusdude/dofusdude-java,developerEmail=stelzo@steado.de,developerName=stelzo,developerOrganization=dofusdude,developerOrganizationUrl=https://github.com/dofusdude,invokerPackage=com.dofusdude.client,modelPackage=com.dofusdude.client.model,groupId=com.dofusdude,useJakartaEe=true
+          command-args: --additional-properties=licenseName=GPLv3,licenseUrl=https://www.gnu.org/licenses/gpl-3.0.txt,scmDeveloperConnection=scm:git:git@github.com:dofusdude/dofusdude-java.git,scmConnection=scm:git:git@github.com:dofusdude/dofusdude-java.git,apiPackage=com.dofusdude.client.api,artifactDescription=dofusdude-client,artifactId=dofusdude-java,artifactUrl=https://github.com/dofusdude/dofusdude-java,developerEmail=stelzo@steado.de,developerName=stelzo,developerOrganization=dofusdude,developerOrganizationUrl=https://github.com/dofusdude,invokerPackage=com.dofusdude.client,modelPackage=com.dofusdude.client.model,groupId=com.dofusdude,useJakartaEe=true,artifactVersion=${{ needs.release-context.outputs.version }}
 
       - name: Add actions and patch pom.xml
         run: |
@@ -173,6 +247,12 @@ jobs:
           sed -i 's/\\"/"/g' README.md
           cd ..
 
+      - name: Prepare SDK release
+        env:
+          SDK_BRANCH: ${{ needs.release-context.outputs.branch }}
+          SDK_VERSION: ${{ needs.release-context.outputs.version }}
+        run: node scripts/prepare-sdk-release.mjs "java-client"
+
       - name: Pushes to sdk repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
@@ -183,37 +263,39 @@ jobs:
           destination-github-username: "dofusdude"
           destination-repository-name: "dofusdude-java"
           user-email: stelzo@steado.de
-          target-branch: main
+          target-branch: ${{ needs.release-context.outputs.branch }}
+          create-target-branch-if-needed: true
 
   generate-csharp-client:
+    needs: release-context
     runs-on: ubuntu-latest
     name: Generate csharp sdk
     steps:
       - name: Checkout OpenAPI
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
 
-      - name: OpenAPI API Version Print
-        uses: stelzo/openapi-api-version-print@v1
-        id: api-version-print
+      - uses: actions/setup-node@v4
         with:
-          specFile: openapi-3.0.yaml
+          node-version: 22
+      - run: npm ci
 
       - name: Generate csharp sdk
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: csharp
+          generator-tag: v7.27.0
           openapi-file: openapi-3.0.yaml
-          command-args: --additional-properties=apiName=DofusdudeApi,packageName=Dofusdude.Api,packageVersion=${{steps.api-version-print.outputs.apiVersion}}
+          command-args: --additional-properties=apiName=DofusdudeApi,packageName=Dofusdude.Api,packageVersion=${{ needs.release-context.outputs.version }}
 
       - name: Add actions and patch pom.xml
         run: |
           cd csharp-client
           mkdir -p .github/workflows/
           printf '%s\n' 'name: Build' 'on:' '  push:' '    branches: [ main ]' '  pull_request:' '    branches: [ main ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v4' '    - name: Set up dotnet' '      uses: actions/setup-dotnet@v3' '      with:' '        dotnet-version: "8.x"' '    - name: Install deps' '      run: dotnet restore' '    - name: Build' '      run: dotnet build' '    - name: Test' '      run: dotnet test' > .github/workflows/build.yml
-          printf '%s\n' 'name: Publish' 'on:' '  release:' '    types: [ created ]' 'jobs:' '  deploy:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v4' '    - name: Set up dotnet' '      uses: actions/setup-dotnet@v3' '      with:' '        dotnet-version: "8.x"' '    - name: Build' '      run: dotnet build --configuration Release' '    - name: Package' '      run: dotnet pack --configuration Release' '    - name: Publish' '      env:' '        NUGET_AUTH_TOKEN: secrets.NUGET_TOKEN' '      run: dotnet nuget push --api-key "$NUGET_AUTH_TOKEN" --source https://api.nuget.org/v3/index.json src/Dofusdude.Api/bin/Release/Dofusdude.Api.${{steps.api-version-print.outputs.apiVersion}}.nupkg' > .github/workflows/publish.yml
+          printf '%s\n' 'name: Publish' 'on:' '  release:' '    types: [ created ]' 'jobs:' '  deploy:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v4' '    - name: Set up dotnet' '      uses: actions/setup-dotnet@v3' '      with:' '        dotnet-version: "8.x"' '    - name: Build' '      run: dotnet build --configuration Release' '    - name: Package' '      run: dotnet pack --configuration Release' '    - name: Publish' '      env:' '        NUGET_AUTH_TOKEN: secrets.NUGET_TOKEN' '      run: dotnet nuget push --api-key "$NUGET_AUTH_TOKEN" --source https://api.nuget.org/v3/index.json src/Dofusdude.Api/bin/Release/Dofusdude.Api.${{ needs.release-context.outputs.version }}.nupkg' > .github/workflows/publish.yml
           sed -i 's/<Authors>OpenAPI<\/Authors>/<Authors>stelzo<\/Authors>/g' src/Dofusdude.Api/Dofusdude.Api.csproj
           sed -i 's/GIT_USER_ID/dofusdude/g' src/Dofusdude.Api/Dofusdude.Api.csproj
           sed -i 's/GIT_REPO_ID/dofusdude-csharp/g' src/Dofusdude.Api/Dofusdude.Api.csproj
@@ -222,6 +304,12 @@ jobs:
           sed -i 's/\\"/"/g' README.md
           sed -i 's/secrets.NUGET_TOKEN/\$\{\{secrets.NUGET_TOKEN\}\}/g' .github/workflows/publish.yml
           cd ..
+
+      - name: Prepare SDK release
+        env:
+          SDK_BRANCH: ${{ needs.release-context.outputs.branch }}
+          SDK_VERSION: ${{ needs.release-context.outputs.version }}
+        run: node scripts/prepare-sdk-release.mjs "csharp-client"
 
       - name: Pushes to sdk repository
         uses: cpina/github-action-push-to-another-repository@main
@@ -233,30 +321,32 @@ jobs:
           destination-github-username: "dofusdude"
           destination-repository-name: "dofusdude-csharp"
           user-email: stelzo@steado.de
-          target-branch: main
+          target-branch: ${{ needs.release-context.outputs.branch }}
+          create-target-branch-if-needed: true
 
   generate-swift-client:
+    needs: release-context
     runs-on: ubuntu-latest
     name: Generate Swift sdk
     steps:
       - name: Checkout OpenAPI
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
 
-      - name: OpenAPI API Version Print
-        uses: stelzo/openapi-api-version-print@v1
-        id: api-version-print
+      - uses: actions/setup-node@v4
         with:
-          specFile: openapi-3.0.yaml
+          node-version: 22
+      - run: npm ci
 
       - name: Generate Swift sdk
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: swift-combine
+          generator-tag: v7.27.0
           openapi-file: openapi-3.0.yaml
-          command-args: --additional-properties=projectName=Dofusdude
+          command-args: --additional-properties=projectName=Dofusdude,projectVersion=${{ needs.release-context.outputs.version }}
 
       - name: Add actions
         run: |
@@ -264,6 +354,12 @@ jobs:
           #mkdir -p .github/workflows/
           #printf '%s\n' 'name: Build' 'on:' '  push:' '    branches: [ main ]' '  pull_request:' '    branches: [ main ]' 'jobs:' '  build:' '    runs-on: macos-latest' '    steps:' '    - uses: actions/checkout@v4' '    - name: Set up Swift' '      uses: swift-actions/setup-swift@v2' '    - name: Build' '      run: cd Dofusdude && swift build' '    - name: Test' '      run: cd Dofusdude && swift test' > .github/workflows/build.yml
           cd ..
+
+      - name: Prepare SDK release
+        env:
+          SDK_BRANCH: ${{ needs.release-context.outputs.branch }}
+          SDK_VERSION: ${{ needs.release-context.outputs.version }}
+        run: node scripts/prepare-sdk-release.mjs "swift-combine-client"
 
       - name: Pushes to sdk repository
         uses: cpina/github-action-push-to-another-repository@main
@@ -275,30 +371,32 @@ jobs:
           destination-github-username: "dofusdude"
           destination-repository-name: "dofusdude-swift"
           user-email: stelzo@steado.de
-          target-branch: main
+          target-branch: ${{ needs.release-context.outputs.branch }}
+          create-target-branch-if-needed: true
 
   generate-dart-client:
+    needs: release-context
     runs-on: ubuntu-latest
     name: Generate Dart sdk
     steps:
       - name: Checkout OpenAPI
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
 
-      - name: OpenAPI API Version Print
-        uses: stelzo/openapi-api-version-print@v1
-        id: api-version-print
+      - uses: actions/setup-node@v4
         with:
-          specFile: openapi-3.0.yaml
+          node-version: 22
+      - run: npm ci
 
       - name: Generate Dart sdk
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: dart
+          generator-tag: v7.27.0
           openapi-file: openapi-3.0.yaml
-          command-args: --additional-properties=pubAuthor=stelzo,pubAuthorEmail=stelzo@steado.de,pubHomepage=https://github.com/dofusdude,pubLibrary=dofusdude.api,pubName=dofusdude,pubVersion=${{steps.api-version-print.outputs.apiVersion}},pubRepository=https://github.com/dofusdude/dofusdude-dart
+          command-args: --additional-properties=pubAuthor=stelzo,pubAuthorEmail=stelzo@steado.de,pubHomepage=https://github.com/dofusdude,pubLibrary=dofusdude.api,pubName=dofusdude,pubVersion=${{ needs.release-context.outputs.version }},pubRepository=https://github.com/dofusdude/dofusdude-dart
 
       - name: Add actions
         run: |
@@ -308,6 +406,12 @@ jobs:
           #printf '%s\n' 'name: Publish' 'on:' '  push:' '    tags:' '    - 'v[0-9]+.[0-9]+.[0-9]+*'' 'jobs:' '  publish:' '    permissions:' '      id-token: write' '    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1' > .github/workflows/publish.yml
           sed -i 's/\\"/"/g' README.md
           cd ..
+
+      - name: Prepare SDK release
+        env:
+          SDK_BRANCH: ${{ needs.release-context.outputs.branch }}
+          SDK_VERSION: ${{ needs.release-context.outputs.version }}
+        run: node scripts/prepare-sdk-release.mjs "dart-client"
 
       - name: Pushes to sdk repository
         uses: cpina/github-action-push-to-another-repository@main
@@ -319,29 +423,44 @@ jobs:
           destination-github-username: "dofusdude"
           destination-repository-name: "dofusdude-dart"
           user-email: stelzo@steado.de
-          target-branch: main
+          target-branch: ${{ needs.release-context.outputs.branch }}
+          create-target-branch-if-needed: true
 
   generate-c-client:
+    needs: release-context
     runs-on: ubuntu-latest
     name: Generate C sdk
     steps:
       - name: Checkout OpenAPI
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
 
       - name: Generate Dart sdk
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: c
+          generator-tag: v7.27.0
           openapi-file: openapi-3.0.yaml
+          command-args: --additional-properties=packageVersion=${{ needs.release-context.outputs.version }}
 
       - name: Add actions
         run: |
           cd c-client
           sed -i 's/\\"/"/g' README.md
           cd ..
+
+      - name: Prepare SDK release
+        env:
+          SDK_BRANCH: ${{ needs.release-context.outputs.branch }}
+          SDK_VERSION: ${{ needs.release-context.outputs.version }}
+        run: node scripts/prepare-sdk-release.mjs "c-client"
 
       - name: Pushes to sdk repository
         uses: cpina/github-action-push-to-another-repository@main
@@ -353,25 +472,33 @@ jobs:
           destination-github-username: "dofusdude"
           destination-repository-name: "dofusdude-c"
           user-email: stelzo@steado.de
-          target-branch: main
-        
+          target-branch: ${{ needs.release-context.outputs.branch }}
+          create-target-branch-if-needed: true
+
 
   generate-go-client:
+    needs: release-context
     runs-on: ubuntu-latest
     name: Generate go sdk
     steps:
       - name: Checkout OpenAPI
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
 
       - name: Generate go sdk
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: go
+          generator-tag: v7.27.0
           openapi-file: openapi-3.0.yaml
-          command-args: --additional-properties=packageName=dodugo
+          command-args: --additional-properties=packageName=dodugo,packageVersion=${{ needs.release-context.outputs.version }}
 
       - name: Setup Go environment
         uses: actions/setup-go@v6
@@ -384,13 +511,19 @@ jobs:
         run: |
           cd go-client
           mkdir -p .github/workflows/
-          printf '%s\n' 'name: Go' 'on:' '  push:' '    branches: [ main ]' '  pull_request:' '    branches: [ main ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v3' '    - name: Set up Go' '      uses: actions/setup-go@v6' '    - name: Build' '      run: go build -v ./...' > .github/workflows/build.yml
-          grep -rl GIT_USER_ID . | xargs sed -i 's/GIT_USER_ID\/GIT_REPO_ID/\dofusdude\/dodugo/g'          
+          printf '%s\n' 'name: Go' 'on:' '  push:' '    branches: [ main ]' '  pull_request:' '    branches: [ main ]' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v4' '    - name: Set up Go' '      uses: actions/setup-go@v6' '    - name: Build' '      run: go build -v ./...' > .github/workflows/build.yml
+          grep -rl GIT_USER_ID . | xargs sed -i 's/GIT_USER_ID\/GIT_REPO_ID/\dofusdude\/dodugo/g'
           sed -i 's/\\"/"/g' README.md
           go get -u ./...
           go mod tidy
           printf '%s\n' '* linguist-vendored' '*.go linguist-vendored=false' > .gitattributes
           cd ..
+
+      - name: Prepare SDK release
+        env:
+          SDK_BRANCH: ${{ needs.release-context.outputs.branch }}
+          SDK_VERSION: ${{ needs.release-context.outputs.version }}
+        run: node scripts/prepare-sdk-release.mjs "go-client"
 
       - name: Pushes to sdk repository
         uses: cpina/github-action-push-to-another-repository@main
@@ -402,30 +535,32 @@ jobs:
           destination-github-username: "dofusdude"
           destination-repository-name: "dodugo"
           user-email: stelzo@steado.de
-          target-branch: main
+          target-branch: ${{ needs.release-context.outputs.branch }}
+          create-target-branch-if-needed: true
 
   generate-python-client:
+    needs: release-context
     runs-on: ubuntu-latest
     name: Generate python sdk
     steps:
       - name: Checkout OpenAPI
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
 
-      - name: OpenAPI API Version Print
-        uses: stelzo/openapi-api-version-print@v1
-        id: api-version-print
+      - uses: actions/setup-node@v4
         with:
-          specFile: openapi-3.0.yaml
+          node-version: 22
+      - run: npm ci
 
       - name: Generate python sdk
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: python
+          generator-tag: v7.27.0
           openapi-file: openapi-3.0.yaml
-          command-args: --additional-properties=packageName=dofusdude,projectName=dofusdude,packageUrl=https://github.com/dofusdude/dofusdude-py,packageVersion=${{steps.api-version-print.outputs.apiVersion}}
+          command-args: --additional-properties=packageName=dofusdude,projectName=dofusdude,packageUrl=https://github.com/dofusdude/dofusdude-py,packageVersion=${{ needs.release-context.outputs.python_version }}
 
       - name: Setup Python environment
         uses: actions/setup-python@v4.2.0
@@ -436,11 +571,17 @@ jobs:
         run: |
           cd python-client
           mkdir -p .github/workflows/
-          printf '%s\n' 'name: Upload Python Package' 'on:' '  release:' '    types: [created]' 'permissions:' '  contents: read' 'jobs:' '  deploy:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v3' '    - name: Set up Python' '      uses: actions/setup-python@v3' '      with:' '        python-version: 3.8' '    - name: Install dependencies' '      run: |' '        python -m pip install --upgrade pip' '        pip install build' '    - name: Build package' '      run: python -m build' '    - name: Publish package' '      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29' '      with:' '        user: __token__' '        password: secrets.PYPI_API_TOKEN' > .github/workflows/publish.yml
+          printf '%s\n' 'name: Upload Python Package' 'on:' '  release:' '    types: [created]' 'permissions:' '  contents: read' 'jobs:' '  deploy:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v4' '    - name: Set up Python' '      uses: actions/setup-python@v3' '      with:' '        python-version: 3.8' '    - name: Install dependencies' '      run: |' '        python -m pip install --upgrade pip' '        pip install build' '    - name: Build package' '      run: python -m build' '    - name: Publish package' '      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29' '      with:' '        user: __token__' '        password: secrets.PYPI_API_TOKEN' > .github/workflows/publish.yml
           sed -i 's/GIT_USER_ID\/GIT_REPO_ID/\dofusdude\/dofusdude-py/g' README.md
           sed -i 's/\\"/"/g' README.md
           sed -i 's/secrets.PYPI_API_TOKEN/\$\{\{secrets.PYPI_API_TOKEN\}\}/g' .github/workflows/publish.yml
           cd ..
+
+      - name: Prepare SDK release
+        env:
+          SDK_BRANCH: ${{ needs.release-context.outputs.branch }}
+          SDK_VERSION: ${{ needs.release-context.outputs.version }}
+        run: node scripts/prepare-sdk-release.mjs "python-client"
 
       - name: Pushes to sdk repository
         uses: cpina/github-action-push-to-another-repository@main
@@ -452,34 +593,48 @@ jobs:
           destination-github-username: "dofusdude"
           destination-repository-name: "dofusdude-py"
           user-email: stelzo@steado.de
-          target-branch: main
+          target-branch: ${{ needs.release-context.outputs.branch }}
+          create-target-branch-if-needed: true
 
   generate-php-client:
+    needs: release-context
     runs-on: ubuntu-latest
     name: Generate php sdk
     steps:
       - name: Checkout OpenAPI
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
 
       - name: Generate php sdk
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: php
+          generator-tag: v7.27.0
           openapi-file: openapi-3.0.yaml
-          command-args: --additional-properties=packageName=dofusdude-php
+          command-args: --additional-properties=packageName=dofusdude-php,artifactVersion=${{ needs.release-context.outputs.version }}
 
       - name: Add actions
         run: |
           cd php-client
           mkdir -p .github/workflows/
-          printf '%s\n' 'name: PHP Composer' 'on:' '  push:' '    branches: [ "main" ]' 'permissions:' '  contents: read' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v3' '    - name: Validate composer.json and composer.lock' '      run: composer validate --strict' '    - name: Cache Composer packages' '      id: composer-cache' '      uses: actions/cache@v3' '      with:' '        path: vendor' '        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}' '        restore-keys: |' '          ${{ runner.os }}-php-' '    - name: Install dependencies' '      run: composer install --prefer-dist --no-progress' > .github/workflows/build.yml
+          printf '%s\n' 'name: PHP Composer' 'on:' '  push:' '    branches: [ "main" ]' 'permissions:' '  contents: read' 'jobs:' '  build:' '    runs-on: ubuntu-latest' '    steps:' '    - uses: actions/checkout@v4' '    - name: Validate composer.json and composer.lock' '      run: composer validate --strict' '    - name: Cache Composer packages' '      id: composer-cache' '      uses: actions/cache@v3' '      with:' '        path: vendor' '        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}' '        restore-keys: |' '          ${{ runner.os }}-php-' '    - name: Install dependencies' '      run: composer install --prefer-dist --no-progress' > .github/workflows/build.yml
           grep -rl GIT_USER_ID . | xargs sed -i 's/GIT_USER_ID\/GIT_REPO_ID/\dofusdude\/dofusdude-php/g'
           sed -i 's/\\"/"/g' README.md
           sed -i 's/"description"/"name": "dofusdude\/dofusdude-php",\n    "description"/g' composer.json
           cd ..
+
+      - name: Prepare SDK release
+        env:
+          SDK_BRANCH: ${{ needs.release-context.outputs.branch }}
+          SDK_VERSION: ${{ needs.release-context.outputs.version }}
+        run: node scripts/prepare-sdk-release.mjs "php-client"
 
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
@@ -491,4 +646,5 @@ jobs:
           destination-github-username: "dofusdude"
           destination-repository-name: "dofusdude-php"
           user-email: stelzo@steado.de
-          target-branch: main
+          target-branch: ${{ needs.release-context.outputs.branch }}
+          create-target-branch-if-needed: true
