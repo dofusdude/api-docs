@@ -18,6 +18,7 @@ test("generated SDK workflows run on beta and publish npm prereleases safely", t
   t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
   const workflows = path.join(dir, ".github", "workflows");
   fs.mkdirSync(workflows, { recursive: true });
+  fs.writeFileSync(path.join(dir, "composer.json"), JSON.stringify({name: "dofusdude/client", version: "1.1.0-beta.1"}));
   fs.writeFileSync(path.join(workflows, "publish.yml"), YAML.stringify({ on: { push: { branches: ["main"] }, release: { types: ["created"] } }, jobs: { publish: { steps: [{ run: "npm publish" }] } } }));
   prepareSDK(dir, releaseContext("beta", "1.1.0-beta.1"));
   const workflow = YAML.parse(fs.readFileSync(path.join(workflows, "publish.yml"), "utf8"));
@@ -27,6 +28,7 @@ test("generated SDK workflows run on beta and publish npm prereleases safely", t
   assert.match(workflow.jobs.publish.steps[1].run, /--tag.*prerelease.*beta.*latest/);
   assert.match(fs.readFileSync(path.join(dir, "README.md"), "utf8"), /GET operations only/);
   assert.equal(JSON.parse(fs.readFileSync(path.join(dir, "sdk-release.json"), "utf8")).query_operations, false);
+  assert.deepEqual(JSON.parse(fs.readFileSync(path.join(dir, "composer.json"), "utf8")), {name: "dofusdude/client"});
 });
 
 test("every generator uses the shared channel and keeps SDK output isolated", () => {
