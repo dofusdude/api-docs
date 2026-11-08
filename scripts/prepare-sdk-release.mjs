@@ -15,6 +15,13 @@ export function prepareSDK(directory, context) {
     }
     if (workflow.on?.release) workflow.on.release.types = ["published"];
     for (const job of Object.values(workflow.jobs ?? {})) {
+      for (const step of job.steps ?? []) {
+        if (step.uses?.startsWith("actions/setup-python@")) {
+          step.uses = "actions/setup-python@v5";
+          step.with ??= {};
+          step.with["python-version"] = "3.12";
+        }
+      }
       if (job.strategy?.matrix?.["node-version"]) {
         for (const step of job.steps ?? []) {
           if (step.uses?.startsWith("actions/setup-node@")) {
