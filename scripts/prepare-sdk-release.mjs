@@ -5,6 +5,14 @@ import YAML from "yaml";
 import { releaseContext } from "./sdk-release.mjs";
 
 export function prepareSDK(directory, context) {
+  // Composer derives library versions from Git tags; a manifest version makes
+  // its strict validation fail and can disagree with the published tag.
+  const composerFile = path.join(directory, "composer.json");
+  if (fs.existsSync(composerFile)) {
+    const composer = JSON.parse(fs.readFileSync(composerFile, "utf8"));
+    delete composer.version;
+    fs.writeFileSync(composerFile, JSON.stringify(composer, null, 2)+"\n");
+  }
   const workflows = path.join(directory, ".github", "workflows");
   if (fs.existsSync(workflows)) for (const name of fs.readdirSync(workflows)) {
     if (!/\.ya?ml$/.test(name)) continue;
