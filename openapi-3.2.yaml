@@ -67,7 +67,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
-          example: fr
+          example: en
         name: language
         in: path
         required: true
@@ -170,6 +170,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1ItemsSearch"
+            example:
+              query: a
+              limit: 8
       responses:
         "200":
           description: ""
@@ -233,7 +236,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
-          example: fr
+          example: en
         name: language
         in: path
         required: true
@@ -279,14 +282,14 @@ paths:
       parameters:
         - schema:
             type: string
-            example: Dorée
+            example: almond
           in: query
           name: query
           description: case sensitive search query
           required: true
         - schema:
             type: string
-            example: Dragodinde
+            example: Dragoturkey
           in: query
           name: filter[family.name]
           description: only results with the translated family name
@@ -317,6 +320,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1MountsSearch"
+            example:
+              query: a
+              limit: 8
       responses:
         "200":
           description: ""
@@ -379,6 +385,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -479,6 +486,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1SetsSearch"
+            example:
+              query: a
+              limit: 8
       responses:
         "200":
           description: ""
@@ -541,7 +551,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
-          example: es
+          example: en
         name: language
         in: path
         required: true
@@ -586,7 +596,7 @@ paths:
       parameters:
         - schema:
             type: string
-            example: Ficha
+            example: training
           in: query
           name: query
           description: case sensitive search query
@@ -642,6 +652,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1ItemsQuestSearch"
+            example:
+              query: a
+              limit: 8
       responses:
         "200":
           description: Quest Items Found
@@ -703,6 +716,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -804,6 +818,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1ItemsConsumablesSearch"
+            example:
+              query: a
+              limit: 8
       responses:
         "200":
           description: Consumables Found
@@ -866,6 +883,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -967,6 +985,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1ItemsResourcesSearch"
+            example:
+              query: a
+              limit: 8
       responses:
         "200":
           description: ""
@@ -1098,7 +1119,7 @@ paths:
               - level
             items:
               type: string
-              enum: &a41
+              enum: &a47
                 - type
                 - image_urls
                 - level
@@ -1132,6 +1153,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -1157,6 +1179,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1Search"
+            example:
+              query: a
+              limit: 8
       responses:
         "200":
           description: ""
@@ -1230,6 +1255,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -1331,6 +1357,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1ItemsEquipmentSearch"
+            example:
+              query: a
+              limit: 8
       responses:
         "200":
           description: ""
@@ -1393,6 +1422,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -1438,7 +1468,7 @@ paths:
       parameters:
         - schema:
             type: string
-            example: nedora
+            example: astrowig
           in: query
           name: query
           description: case sensitive search query
@@ -1475,7 +1505,7 @@ paths:
             items:
               type: string
             example:
-              - ceremonial-wings
+              - ceremonial-hat
             uniqueItems: true
           in: query
           name: filter[type.name_id]
@@ -1494,6 +1524,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1ItemsCosmeticsSearch"
+            example:
+              query: a
+              limit: 8
       responses:
         "200":
           description: ""
@@ -1556,6 +1589,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -1619,13 +1653,14 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
         description: a valid language code
       - schema:
           type: integer
-          example: 7295
+          example: 274
         name: ankama_id
         in: path
         required: true
@@ -1681,13 +1716,14 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
         description: a valid language code
       - schema:
           type: integer
-          example: 13971
+          example: 44
         name: ankama_id
         in: path
         required: true
@@ -1743,6 +1779,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -1805,6 +1842,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -1867,6 +1905,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -1929,6 +1968,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -1991,6 +2031,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -2081,7 +2122,7 @@ paths:
               - equipment_ids
             items:
               type: string
-              enum: &a40
+              enum: &a46
                 - effects
                 - equipment_ids
           in: query
@@ -2111,6 +2152,10 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1Sets"
+            example:
+              page:
+                number: 1
+                size: 20
       parameters:
         - name: page[number]
           in: query
@@ -2183,6 +2228,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -2251,7 +2297,7 @@ paths:
               - effects
             items:
               type: string
-              enum: &a39
+              enum: &a45
                 - effects
           in: query
           name: fields[mount]
@@ -2275,6 +2321,10 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1Mounts"
+            example:
+              page:
+                number: 1
+                size: 20
       parameters:
         - name: page[number]
           in: query
@@ -2430,7 +2480,7 @@ paths:
               - is_weapon
             items:
               type: string
-              enum: &a34
+              enum: &a40
                 - effects
                 - recipe
                 - description
@@ -2474,6 +2524,10 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1ItemsEquipment"
+            example:
+              page:
+                number: 1
+                size: 20
       parameters:
         - name: page[number]
           in: query
@@ -2546,6 +2600,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -2634,7 +2689,7 @@ paths:
               - recipe
             items:
               type: string
-              enum: &a36
+              enum: &a42
                 - effects
                 - recipe
                 - description
@@ -2668,6 +2723,10 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1ItemsResources"
+            example:
+              page:
+                number: 1
+                size: 20
       parameters:
         - name: page[number]
           in: query
@@ -2740,6 +2799,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -2822,7 +2882,7 @@ paths:
               - recipe
             items:
               type: string
-              enum: &a35
+              enum: &a41
                 - effects
                 - recipe
                 - description
@@ -2856,6 +2916,10 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1ItemsConsumables"
+            example:
+              page:
+                number: 1
+                size: 20
       parameters:
         - name: page[number]
           in: query
@@ -2928,7 +2992,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
-          example: fr
+          example: en
         name: language
         in: path
         required: true
@@ -3017,7 +3081,7 @@ paths:
               - recipe
             items:
               type: string
-              enum: &a37
+              enum: &a43
                 - effects
                 - recipe
                 - description
@@ -3051,6 +3115,10 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1ItemsQuest"
+            example:
+              page:
+                number: 1
+                size: 20
       parameters:
         - name: page[number]
           in: query
@@ -3123,7 +3191,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
-          example: fr
+          example: en
         name: language
         in: path
         required: true
@@ -3206,7 +3274,7 @@ paths:
               - recipe
             items:
               type: string
-              enum: &a38
+              enum: &a44
                 - effects
                 - recipe
                 - description
@@ -3246,6 +3314,10 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1ItemsCosmetics"
+            example:
+              page:
+                number: 1
+                size: 20
       parameters:
         - name: page[number]
           in: query
@@ -3318,6 +3390,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -3400,6 +3473,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1MountsAll"
+            example: {}
       responses:
         "200":
           description: ""
@@ -3459,6 +3533,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -3580,6 +3655,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1SetsAll"
+            example: {}
       responses:
         "200":
           description: ""
@@ -3652,7 +3728,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
-          example: fr
+          example: en
         name: language
         in: path
         required: true
@@ -3737,7 +3813,7 @@ paths:
             items:
               type: string
             example:
-              - ceremonial-wings
+              - ceremonial-hat
             uniqueItems: true
           in: query
           name: filter[type.name_id]
@@ -3756,6 +3832,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1ItemsCosmeticsAll"
+            example: {}
       responses:
         "200":
           description: ""
@@ -3815,7 +3892,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
-          example: fr
+          example: en
         name: language
         in: path
         required: true
@@ -3925,6 +4002,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1ItemsQuestAll"
+            example: {}
       responses:
         "200":
           description: ""
@@ -3984,6 +4062,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -4087,6 +4166,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1ItemsConsumablesAll"
+            example: {}
       responses:
         "200":
           description: ""
@@ -4146,6 +4226,7 @@ paths:
             - pt
           maxLength: 2
           minLength: 2
+          example: en
         name: language
         in: path
         required: true
@@ -4255,6 +4336,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1ItemsResourcesAll"
+            example: {}
       responses:
         "200":
           description: ""
@@ -4419,6 +4501,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1ItemsEquipmentAll"
+            example: {}
       responses:
         "200":
           description: ""
@@ -4476,7 +4559,7 @@ paths:
             - de
             - es
             - pt
-          example: fr
+          example: en
         name: language
         in: path
         required: true
@@ -4562,6 +4645,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1Almanax"
+            example: {}
       responses:
         "200":
           description: ""
@@ -4616,14 +4700,14 @@ paths:
             - de
             - es
             - pt
-          example: fr
+          example: en
         name: language
         in: path
         required: true
         description: code
       - schema:
           type: string
-          example: 2025-01-25
+          example: 2026-11-08
           format: date
         name: date
         in: path
@@ -4848,7 +4932,7 @@ paths:
             - de
             - es
             - pt
-          example: fr
+          example: en
         name: language
         in: path
         required: true
@@ -4894,7 +4978,7 @@ paths:
       parameters:
         - schema:
             type: string
-            example: abond
+            example: experience
           in: query
           name: query
           description: case sensitive search query
@@ -4915,7 +4999,7 @@ paths:
             - de
             - es
             - pt
-          example: fr
+          example: en
         name: language
         in: path
         required: true
@@ -4931,6 +5015,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1MetaAlmanaxBonusesSearch"
+            example:
+              query: a
+              limit: 8
       responses:
         "200":
           description: OK
@@ -5512,6 +5599,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ClassQueryFilter"
+              examples:
+                simple:
+                  summary: Simple filter
+                  value: &a26
+                    name: a
+                combined:
+                  summary: Combined filters
+                  value:
+                    and:
+                      - *a26
+                      - or:
+                          - name: a
+                          - name: e
         - name: sort
           in: query
           description: Comma-separated sort fields. Uses the same sorting as QUERY.
@@ -5640,7 +5740,7 @@ paths:
     get:
       summary: Search classes
       operationId: search-classes
-      tags: &a26
+      tags: &a27
         - game data
       parameters:
         - name: query
@@ -5648,6 +5748,7 @@ paths:
           required: true
           schema:
             type: string
+            example: feca
         - name: limit
           in: query
           schema:
@@ -5673,7 +5774,7 @@ paths:
     query:
       operationId: query-search-classes
       summary: Query classes
-      tags: *a26
+      tags: *a27
       description: "Read-only JSON alternative to this GET operation. The maximum body size is 64 KiB. Unknown keys and nulls are rejected. Existing v1 response and error schemas are retained, including existing empty-result behavior. Follow pagination links using QUERY with the same JSON body. URL page[number] and page[size] override body pagination. No other URL parameters are allowed. Responses use Cache-Control: no-store."
       requestBody:
         required: true
@@ -5681,6 +5782,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1ClassesSearch"
+            example:
+              query: feca
+              limit: 8
       responses:
         "200":
           description: Matching localized summaries.
@@ -5717,7 +5821,7 @@ paths:
     options:
       operationId: options-search-classes
       summary: Discover supported query methods
-      tags: *a26
+      tags: *a27
       responses:
         "204":
           description: Supported methods and query media type.
@@ -5739,6 +5843,7 @@ paths:
         required: true
         schema:
           type: integer
+          example: 1
     get:
       summary: Get one class
       operationId: get-class-by-id
@@ -5782,6 +5887,21 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SpellQueryFilter"
+              examples:
+                simple:
+                  summary: Simple filter
+                  value: &a28
+                    ap_cost:
+                      min: 2
+                      max: 4
+                combined:
+                  summary: Combined filters
+                  value:
+                    and:
+                      - *a28
+                      - or:
+                          - name: a
+                          - name: e
         - name: sort
           in: query
           description: Comma-separated sort fields. Uses the same sorting as QUERY.
@@ -5913,7 +6033,7 @@ paths:
     get:
       summary: Search spells
       operationId: search-spells
-      tags: &a27
+      tags: &a29
         - game data
       parameters:
         - name: query
@@ -5921,6 +6041,7 @@ paths:
           required: true
           schema:
             type: string
+            example: punch
         - name: limit
           in: query
           schema:
@@ -5946,7 +6067,7 @@ paths:
     query:
       operationId: query-search-spells
       summary: Query spells
-      tags: *a27
+      tags: *a29
       description: "Read-only JSON alternative to this GET operation. The maximum body size is 64 KiB. Unknown keys and nulls are rejected. Existing v1 response and error schemas are retained, including existing empty-result behavior. Follow pagination links using QUERY with the same JSON body. URL page[number] and page[size] override body pagination. No other URL parameters are allowed. Responses use Cache-Control: no-store."
       requestBody:
         required: true
@@ -5954,6 +6075,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1SpellsSearch"
+            example:
+              query: punch
+              limit: 8
       responses:
         "200":
           description: Matching localized summaries.
@@ -5990,7 +6114,7 @@ paths:
     options:
       operationId: options-search-spells
       summary: Discover supported query methods
-      tags: *a27
+      tags: *a29
       responses:
         "204":
           description: Supported methods and query media type.
@@ -6012,6 +6136,7 @@ paths:
         required: true
         schema:
           type: integer
+          example: 201
     get:
       summary: Get one spell
       operationId: get-spell-by-id
@@ -6063,6 +6188,21 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/MonsterQueryFilter"
+              examples:
+                simple:
+                  summary: Simple filter
+                  value: &a30
+                    level:
+                      min: 1
+                      max: 200
+                combined:
+                  summary: Combined filters
+                  value:
+                    and:
+                      - *a30
+                      - or:
+                          - name: a
+                          - name: e
         - name: sort
           in: query
           description: Comma-separated sort fields. Uses the same sorting as QUERY.
@@ -6113,14 +6253,11 @@ paths:
               filter:
                 and:
                   - level:
-                      min: 100
+                      min: 1
                       max: 200
                   - or:
-                      - subarea_ids:
-                          - 123
-                          - 456
-                      - spell_ids:
-                          - 10
+                      - name: a
+                      - name: e
               include:
                 - spells.grade
               sort:
@@ -6204,7 +6341,7 @@ paths:
     get:
       summary: Search monsters
       operationId: search-monsters
-      tags: &a28
+      tags: &a31
         - game data
       parameters:
         - name: query
@@ -6212,6 +6349,7 @@ paths:
           required: true
           schema:
             type: string
+            example: gobball
         - name: limit
           in: query
           schema:
@@ -6237,7 +6375,7 @@ paths:
     query:
       operationId: query-search-monsters
       summary: Query monsters
-      tags: *a28
+      tags: *a31
       description: "Read-only JSON alternative to this GET operation. The maximum body size is 64 KiB. Unknown keys and nulls are rejected. Existing v1 response and error schemas are retained, including existing empty-result behavior. Follow pagination links using QUERY with the same JSON body. URL page[number] and page[size] override body pagination. No other URL parameters are allowed. Responses use Cache-Control: no-store."
       requestBody:
         required: true
@@ -6245,6 +6383,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1MonstersSearch"
+            example:
+              query: gobball
+              limit: 8
       responses:
         "200":
           description: Matching localized summaries.
@@ -6281,7 +6422,7 @@ paths:
     options:
       operationId: options-search-monsters
       summary: Discover supported query methods
-      tags: *a28
+      tags: *a31
       responses:
         "204":
           description: Supported methods and query media type.
@@ -6303,6 +6444,7 @@ paths:
         required: true
         schema:
           type: integer
+          example: 31
     get:
       summary: Get one monster
       operationId: get-monster-by-id
@@ -6348,6 +6490,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SuperAreaQueryFilter"
+              examples:
+                simple:
+                  summary: Simple filter
+                  value: &a32
+                    name: a
+                combined:
+                  summary: Combined filters
+                  value:
+                    and:
+                      - *a32
+                      - or:
+                          - name: a
+                          - name: e
         - name: sort
           in: query
           description: Comma-separated sort fields. Uses the same sorting as QUERY.
@@ -6476,7 +6631,7 @@ paths:
     get:
       summary: Search super-areas
       operationId: search-super-areas
-      tags: &a29
+      tags: &a33
         - game data
       parameters:
         - name: query
@@ -6484,6 +6639,7 @@ paths:
           required: true
           schema:
             type: string
+            example: world
         - name: limit
           in: query
           schema:
@@ -6509,7 +6665,7 @@ paths:
     query:
       operationId: query-search-super-areas
       summary: Query super-areas
-      tags: *a29
+      tags: *a33
       description: "Read-only JSON alternative to this GET operation. The maximum body size is 64 KiB. Unknown keys and nulls are rejected. Existing v1 response and error schemas are retained, including existing empty-result behavior. Follow pagination links using QUERY with the same JSON body. URL page[number] and page[size] override body pagination. No other URL parameters are allowed. Responses use Cache-Control: no-store."
       requestBody:
         required: true
@@ -6517,6 +6673,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1SuperAreasSearch"
+            example:
+              query: world
+              limit: 8
       responses:
         "200":
           description: Matching localized summaries.
@@ -6553,7 +6712,7 @@ paths:
     options:
       operationId: options-search-super-areas
       summary: Discover supported query methods
-      tags: *a29
+      tags: *a33
       responses:
         "204":
           description: Supported methods and query media type.
@@ -6575,6 +6734,7 @@ paths:
         required: true
         schema:
           type: integer
+          example: 0
     get:
       summary: Get one super-area
       operationId: get-super-area-by-id
@@ -6618,6 +6778,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AreaQueryFilter"
+              examples:
+                simple:
+                  summary: Simple filter
+                  value: &a34
+                    name: a
+                combined:
+                  summary: Combined filters
+                  value:
+                    and:
+                      - *a34
+                      - or:
+                          - name: a
+                          - name: e
         - name: sort
           in: query
           description: Comma-separated sort fields. Uses the same sorting as QUERY.
@@ -6746,7 +6919,7 @@ paths:
     get:
       summary: Search areas
       operationId: search-areas
-      tags: &a30
+      tags: &a35
         - game data
       parameters:
         - name: query
@@ -6754,6 +6927,7 @@ paths:
           required: true
           schema:
             type: string
+            example: amakna
         - name: limit
           in: query
           schema:
@@ -6779,7 +6953,7 @@ paths:
     query:
       operationId: query-search-areas
       summary: Query areas
-      tags: *a30
+      tags: *a35
       description: "Read-only JSON alternative to this GET operation. The maximum body size is 64 KiB. Unknown keys and nulls are rejected. Existing v1 response and error schemas are retained, including existing empty-result behavior. Follow pagination links using QUERY with the same JSON body. URL page[number] and page[size] override body pagination. No other URL parameters are allowed. Responses use Cache-Control: no-store."
       requestBody:
         required: true
@@ -6787,6 +6961,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1AreasSearch"
+            example:
+              query: amakna
+              limit: 8
       responses:
         "200":
           description: Matching localized summaries.
@@ -6823,7 +7000,7 @@ paths:
     options:
       operationId: options-search-areas
       summary: Discover supported query methods
-      tags: *a30
+      tags: *a35
       responses:
         "204":
           description: Supported methods and query media type.
@@ -6845,6 +7022,7 @@ paths:
         required: true
         schema:
           type: integer
+          example: 0
     get:
       summary: Get one area
       operationId: get-area-by-id
@@ -6888,6 +7066,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SubareaQueryFilter"
+              examples:
+                simple:
+                  summary: Simple filter
+                  value: &a36
+                    name: a
+                combined:
+                  summary: Combined filters
+                  value:
+                    and:
+                      - *a36
+                      - or:
+                          - name: a
+                          - name: e
         - name: sort
           in: query
           description: Comma-separated sort fields. Uses the same sorting as QUERY.
@@ -7016,7 +7207,7 @@ paths:
     get:
       summary: Search subareas
       operationId: search-subareas
-      tags: &a31
+      tags: &a37
         - game data
       parameters:
         - name: query
@@ -7024,6 +7215,7 @@ paths:
           required: true
           schema:
             type: string
+            example: madrestam
         - name: limit
           in: query
           schema:
@@ -7049,7 +7241,7 @@ paths:
     query:
       operationId: query-search-subareas
       summary: Query subareas
-      tags: *a31
+      tags: *a37
       description: "Read-only JSON alternative to this GET operation. The maximum body size is 64 KiB. Unknown keys and nulls are rejected. Existing v1 response and error schemas are retained, including existing empty-result behavior. Follow pagination links using QUERY with the same JSON body. URL page[number] and page[size] override body pagination. No other URL parameters are allowed. Responses use Cache-Control: no-store."
       requestBody:
         required: true
@@ -7057,6 +7249,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryV1SubareasSearch"
+            example:
+              query: madrestam
+              limit: 8
       responses:
         "200":
           description: Matching localized summaries.
@@ -7093,7 +7288,7 @@ paths:
     options:
       operationId: options-search-subareas
       summary: Discover supported query methods
-      tags: *a31
+      tags: *a37
       responses:
         "204":
           description: Supported methods and query media type.
@@ -7115,6 +7310,7 @@ paths:
         required: true
         schema:
           type: integer
+          example: 1
     get:
       summary: Get one subarea
       operationId: get-subarea-by-id
@@ -7156,6 +7352,7 @@ components:
           - de
           - es
           - pt
+        example: en
     PageNumber:
       name: page[number]
       in: query
@@ -9498,6 +9695,7 @@ components:
     MonsterQueryFilter:
       type: object
       additionalProperties: false
+      example: *a30
       description: All fields in a filter object must match. ID values within a list are alternatives. 'and' requires every child filter to match. 'or' requires at least one child filter to match. Maximum depth is 8, with at most 64 total filter objects. An empty object matches every result. Level bounds match at least one monster grade. Results contain complete monsters without removing grades.
       properties:
         and:
@@ -9512,11 +9710,11 @@ components:
           maxItems: 63
           items:
             $ref: "#/components/schemas/MonsterQueryFilter"
-        ids: &a33
+        ids: &a39
           type: array
           minItems: 1
           maxItems: 100
-          items: &a32
+          items: &a38
             type: integer
             minimum: 0
           description: Match any of these Ankama IDs.
@@ -9532,13 +9730,13 @@ components:
           type: array
           minItems: 1
           maxItems: 100
-          items: *a32
+          items: *a38
           description: Match a mapped spawn subarea.
         spell_ids:
           type: array
           minItems: 1
           maxItems: 100
-          items: *a32
+          items: *a38
           description: Match a spell assigned to any monster grade, including starting spells.
     MonsterQuery:
       type: object
@@ -9584,6 +9782,7 @@ components:
     SpellQueryFilter:
       type: object
       additionalProperties: false
+      example: *a28
       description: All fields in a filter object must match. ID values within a list are alternatives. 'and' requires every child filter to match. 'or' requires at least one child filter to match. Maximum depth is 8, with at most 64 total filter objects. An empty object matches every result. AP cost and minimum player level in the same filter object must match the same spell grade. Results contain complete spells without removing grades.
       properties:
         and:
@@ -9598,7 +9797,7 @@ components:
           maxItems: 63
           items:
             $ref: "#/components/schemas/SpellQueryFilter"
-        ids: *a33
+        ids: *a39
         name:
           type: string
           minLength: 1
@@ -9649,6 +9848,7 @@ components:
     ClassQueryFilter:
       type: object
       additionalProperties: false
+      example: *a26
       description: All fields in a filter object must match. ID values within a list are alternatives. 'and' requires every child filter to match. 'or' requires at least one child filter to match. Maximum depth is 8, with at most 64 total filter objects. An empty object matches every result. Matching selects complete records.
       properties:
         and:
@@ -9663,7 +9863,7 @@ components:
           maxItems: 63
           items:
             $ref: "#/components/schemas/ClassQueryFilter"
-        ids: *a33
+        ids: *a39
         name:
           type: string
           minLength: 1
@@ -9710,6 +9910,7 @@ components:
     SuperAreaQueryFilter:
       type: object
       additionalProperties: false
+      example: *a32
       description: All fields in a filter object must match. ID values within a list are alternatives. 'and' requires every child filter to match. 'or' requires at least one child filter to match. Maximum depth is 8, with at most 64 total filter objects. An empty object matches every result. Matching selects complete records.
       properties:
         and:
@@ -9724,7 +9925,7 @@ components:
           maxItems: 63
           items:
             $ref: "#/components/schemas/SuperAreaQueryFilter"
-        ids: *a33
+        ids: *a39
         name:
           type: string
           minLength: 1
@@ -9771,6 +9972,7 @@ components:
     AreaQueryFilter:
       type: object
       additionalProperties: false
+      example: *a34
       description: All fields in a filter object must match. ID values within a list are alternatives. 'and' requires every child filter to match. 'or' requires at least one child filter to match. Maximum depth is 8, with at most 64 total filter objects. An empty object matches every result. Matching selects complete records.
       properties:
         and:
@@ -9785,7 +9987,7 @@ components:
           maxItems: 63
           items:
             $ref: "#/components/schemas/AreaQueryFilter"
-        ids: *a33
+        ids: *a39
         name:
           type: string
           minLength: 1
@@ -9832,6 +10034,7 @@ components:
     SubareaQueryFilter:
       type: object
       additionalProperties: false
+      example: *a36
       description: All fields in a filter object must match. ID values within a list are alternatives. 'and' requires every child filter to match. 'or' requires at least one child filter to match. Maximum depth is 8, with at most 64 total filter objects. An empty object matches every result. Matching selects complete records.
       properties:
         and:
@@ -9846,7 +10049,7 @@ components:
           maxItems: 63
           items:
             $ref: "#/components/schemas/SubareaQueryFilter"
-        ids: *a33
+        ids: *a39
         name:
           type: string
           minLength: 1
@@ -9949,7 +10152,7 @@ components:
               maxItems: 100
               items:
                 type: string
-                enum: *a34
+                enum: *a40
               description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
       description: "Structured JSON query. Related filter properties are nested objects: filter.type.name_id and filter.family.id/name. Literal dotted keys are rejected. GET parameter names remain unchanged. Both transports use shared typed validation and execution. No additional nested AND/OR syntax is implied for legacy filters."
     QueryV1ItemsEquipmentAll:
@@ -10108,7 +10311,7 @@ components:
               maxItems: 100
               items:
                 type: string
-                enum: *a35
+                enum: *a41
               description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
       description: "Structured JSON query. Related filter properties are nested objects: filter.type.name_id and filter.family.id/name. Literal dotted keys are rejected. GET parameter names remain unchanged. Both transports use shared typed validation and execution. No additional nested AND/OR syntax is implied for legacy filters."
     QueryV1ItemsConsumablesAll:
@@ -10259,7 +10462,7 @@ components:
               maxItems: 100
               items:
                 type: string
-                enum: *a36
+                enum: *a42
               description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
       description: "Structured JSON query. Related filter properties are nested objects: filter.type.name_id and filter.family.id/name. Literal dotted keys are rejected. GET parameter names remain unchanged. Both transports use shared typed validation and execution. No additional nested AND/OR syntax is implied for legacy filters."
     QueryV1ItemsResourcesAll:
@@ -10410,7 +10613,7 @@ components:
               maxItems: 100
               items:
                 type: string
-                enum: *a37
+                enum: *a43
               description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
       description: "Structured JSON query. Related filter properties are nested objects: filter.type.name_id and filter.family.id/name. Literal dotted keys are rejected. GET parameter names remain unchanged. Both transports use shared typed validation and execution. No additional nested AND/OR syntax is implied for legacy filters."
     QueryV1ItemsQuestAll:
@@ -10561,7 +10764,7 @@ components:
               maxItems: 100
               items:
                 type: string
-                enum: *a38
+                enum: *a44
               description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
       description: "Structured JSON query. Related filter properties are nested objects: filter.type.name_id and filter.family.id/name. Literal dotted keys are rejected. GET parameter names remain unchanged. Both transports use shared typed validation and execution. No additional nested AND/OR syntax is implied for legacy filters."
     QueryV1ItemsCosmeticsAll:
@@ -10702,7 +10905,7 @@ components:
               maxItems: 100
               items:
                 type: string
-                enum: *a39
+                enum: *a45
               description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
       description: "Structured JSON query. Related filter properties are nested objects: filter.type.name_id and filter.family.id/name. Literal dotted keys are rejected. GET parameter names remain unchanged. Both transports use shared typed validation and execution. No additional nested AND/OR syntax is implied for legacy filters."
     QueryV1MountsAll:
@@ -10815,7 +11018,7 @@ components:
               maxItems: 100
               items:
                 type: string
-                enum: *a40
+                enum: *a46
               description: adds fields from their detail endpoint to the item list entries. Multiple comma separated values allowed.
       description: "Structured JSON query. Related filter properties are nested objects: filter.type.name_id and filter.family.id/name. Literal dotted keys are rejected. GET parameter names remain unchanged. Both transports use shared typed validation and execution. No additional nested AND/OR syntax is implied for legacy filters."
     QueryV1SetsAll:
@@ -10971,7 +11174,7 @@ components:
               maxItems: 100
               items:
                 type: string
-                enum: *a41
+                enum: *a47
               description: adds fields from the item search to the list entries if the hit is an item. Multiple comma separated values allowed.
       required:
         - query

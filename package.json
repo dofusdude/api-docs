@@ -5,7 +5,13 @@
   "scripts": {
     "test": "node --test scripts/*.test.mjs",
     "build": "node scripts/build-openapi.mjs",
-    "check": "node scripts/build-openapi.mjs --check"
+    "check": "node scripts/build-openapi.mjs --check",
+    "test:examples": "node scripts/check-examples.mjs"
   },
-  "devDependencies": { "yaml": "2.9.1" }
+  "devDependencies": {
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
+    "stream-json": "^3.8.0",
+    "yaml": "2.9.1"
+  }
 }

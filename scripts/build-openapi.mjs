@@ -33,6 +33,7 @@ const output = migrate(spec);
 output.openapi = "3.2.0";
 output.servers.push({ url: "http://localhost:3000", description: "Local development" });
 const schemas = output.components.schemas;
+const searchExamples = { classes: "feca", monsters: "gobball", spells: "punch", "super-areas": "world", areas: "amakna", subareas: "madrestam" };
 const ref = name => ({ $ref: `#/components/schemas/${name}` });
 const ids = { type: "array", minItems: 1, maxItems: 100, items: { type: "integer", minimum: 0 }, description: "Match any of these Ankama IDs." };
 schemas.EntityQueryRange = {
@@ -49,6 +50,9 @@ schemas.EntityQueryPage = {
 };
 for (const [resource, title] of [["monsters", "Monster"], ["spells", "Spell"], ["classes", "Class"], ["super-areas", "SuperArea"], ["areas", "Area"], ["subareas", "Subarea"]]) {
   const filterName = `${title}QueryFilter`;
+  const filterExample = resource === "spells"
+    ? { ap_cost: { min: 2, max: 4 } }
+    : resource === "monsters" ? { level: { min: 1, max: 200 } } : { name: "a" };
   const properties = {
     and: { type: "array", minItems: 1, maxItems: 63, items: ref(filterName) },
     or: { type: "array", minItems: 1, maxItems: 63, items: ref(filterName) },
@@ -66,6 +70,7 @@ for (const [resource, title] of [["monsters", "Monster"], ["spells", "Spell"], [
   });
   schemas[filterName] = {
     type: "object", additionalProperties: false,
+    example: filterExample,
     description: "All fields in a filter object must match. ID values within a list are alternatives. 'and' requires every child filter to match. 'or' requires at least one child filter to match. Maximum depth is 8, with at most 64 total filter objects. An empty object matches every result. " + (resource === "spells"
       ? "AP cost and minimum player level in the same filter object must match the same spell grade. Results contain complete spells without removing grades."
       : resource === "monsters" ? "Level bounds match at least one monster grade. Results contain complete monsters without removing grades."
@@ -87,7 +92,10 @@ for (const [resource, title] of [["monsters", "Monster"], ["spells", "Spell"], [
   };
   const item = output.paths[`/{game}/v1/{language}/${resource}`];
   item.get.parameters.push(
-    { name: "filter", in: "query", description: "JSON-encoded filter, evaluated identically to QUERY. Prefer QUERY for complex filters. Advanced filters/sorting limit page size to 100.", content: { "application/json": { schema: ref(filterName) } } },
+    { name: "filter", in: "query", description: "JSON-encoded filter, evaluated identically to QUERY. Prefer QUERY for complex filters. Advanced filters/sorting limit page size to 100.", content: { "application/json": { schema: ref(filterName), examples: {
+      simple: { summary: "Simple filter", value: filterExample },
+      combined: { summary: "Combined filters", value: { and: [filterExample, { or: [{ name: "a" }, { name: "e" }] }] } }
+    } } } },
     { name: "sort", in: "query", description: "Comma-separated sort fields. Uses the same sorting as QUERY.", schema: { type: "string", example: "name,-ankama_id" } }
   );
   item.query = {
@@ -100,7 +108,7 @@ for (const [resource, title] of [["monsters", "Monster"], ["spells", "Spell"], [
     requestBody: { required: true, content: { "application/json": {
       schema: ref(requestName),
       example: resource === "monsters"
-        ? { filter: { and: [{ level: { min: 100, max: 200 } }, { or: [{ subarea_ids: [123, 456] }, { spell_ids: [10] }] }] }, include: ["spells.grade"], sort: ["name"], page: { number: 1, size: 20 } }
+        ? { filter: { and: [{ level: { min: 1, max: 200 } }, { or: [{ name: "a" }, { name: "e" }] }] }, include: ["spells.grade"], sort: ["name"], page: { number: 1, size: 20 } }
         : resource === "spells" ? { filter: { ap_cost: { max: 3 }, min_player_level: { max: 100 } }, sort: ["name"], page: { number: 1, size: 20 } } : { filter: { name: "a" }, sort: ["name"], page: { number: 1, size: 20 } }
     } } },
     responses: Object.fromEntries([
@@ -158,7 +166,7 @@ for (const endpoint of endpoints.filter(entry => !entry.mapped)) {
   item.query = {
     operationId: `query-${item.get.operationId}`, summary: item.get.summary.replace(/^(List|Get|Search)/, "Query"), tags: item.get.tags,
     description: "Read-only JSON alternative to this GET operation. The maximum body size is 64 KiB. Unknown keys and nulls are rejected. Existing v1 response and error schemas are retained, including existing empty-result behavior. Follow pagination links using QUERY with the same JSON body. URL page[number] and page[size] override body pagination. No other URL parameters are allowed. Responses use Cache-Control: no-store.",
-    requestBody: { required: true, content: { "application/json": { schema: ref(schemaName) } } },
+    requestBody: { required: true, content: { "application/json": { schema: ref(schemaName), example: properties.query ? { query: searchExamples[endpoint.path.split('/').at(-2)] ?? "a", limit: 8 } : properties.page ? { page: { number: 1, size: 20 } } : {} } } },
     ...(properties.page ? { parameters: [
       { name: "page[number]", in: "query", schema: { type: "integer", minimum: 1, maximum: 1000000 } },
       { name: "page[size]", in: "query", schema: { type: "integer", minimum: 1, maximum: 100 } }
@@ -166,6 +174,16 @@ for (const endpoint of endpoints.filter(entry => !entry.mapped)) {
     responses
   };
   item.options = { operationId: `options-${item.get.operationId}`, summary: "Discover supported query methods", tags: item.get.tags, responses: { "204": { description: "Supported methods and query media type.", headers: { Allow: { schema: { type: "string", const: "GET, QUERY, OPTIONS" } }, "Accept-Query": { schema: { type: "string", const: "application/json" } } } } } };
+}
+// Give Swagger an executable search input instead of its generic "string".
+for (const [route, item] of Object.entries(output.paths)) {
+  for (const raw of item.parameters ?? []) {
+    const parameter = raw.$ref ? output.components.parameters[raw.$ref.split('/').at(-1)] : raw;
+    if (parameter?.in === "path" && parameter.name === "language") parameter.schema.example = "en";
+  }
+  for (const parameter of item.get?.parameters ?? []) {
+    if (parameter.name === "query" && parameter.schema?.example === undefined) parameter.schema.example = searchExamples[route.split('/').at(-2)] ?? "a";
+  }
 }
 const generated = "# Generated by npm run build; edit openapi-3.0.yaml or scripts/build-openapi.mjs.\n" + YAML.stringify(output, { lineWidth: 0 }).replace(/[ \t]+$/gm, "");
 const destination = path.join(root, "openapi-3.2.yaml");

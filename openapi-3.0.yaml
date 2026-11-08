@@ -179,14 +179,14 @@ paths:
       parameters:
         - schema:
             type: string
-            example: Dorée
+            example: almond
           in: query
           name: query
           description: case sensitive search query
           required: true
         - schema:
             type: string
-            example: Dragodinde
+            example: Dragoturkey
           in: query
           name: "filter[family.name]"
           description: only results with the translated family name
@@ -364,7 +364,7 @@ paths:
       parameters:
         - schema:
             type: string
-            example: Ficha
+            example: training
           in: query
           name: query
           description: case sensitive search query
@@ -901,7 +901,7 @@ paths:
       parameters:
         - schema:
             type: string
-            example: nedora
+            example: astrowig
           in: query
           name: query
           description: case sensitive search query
@@ -938,7 +938,7 @@ paths:
             items:
               type: string
             example:
-              - ceremonial-wings
+              - ceremonial-hat
             uniqueItems: true
           in: query
           name: "filter[type.name_id]"
@@ -1027,7 +1027,7 @@ paths:
         description: a valid language code
       - schema:
           type: integer
-          example: 7295
+          example: 274
         name: ankama_id
         in: path
         required: true
@@ -1089,7 +1089,7 @@ paths:
         description: a valid language code
       - schema:
           type: integer
-          example: 13971
+          example: 44
         name: ankama_id
         in: path
         required: true
@@ -2507,7 +2507,7 @@ paths:
             items:
               type: string
             example:
-              - ceremonial-wings
+              - ceremonial-hat
             uniqueItems: true
           in: query
           name: "filter[type.name_id]"
@@ -3048,7 +3048,7 @@ paths:
         description: code
       - schema:
           type: string
-          example: "2025-01-25"
+          example: "2026-11-08"
           format: date
         name: date
         in: path
@@ -3319,7 +3319,7 @@ paths:
       parameters:
         - schema:
             type: string
-            example: abond
+            example: experience
           in: query
           name: query
           description: case sensitive search query
@@ -3911,7 +3911,7 @@ paths:
       - name: ankama_id
         in: path
         required: true
-        schema: {type: integer}
+        schema: {type: integer, example: 1}
     get:
       summary: Get one class
       operationId: get-class-by-id
@@ -4002,7 +4002,7 @@ paths:
       - name: ankama_id
         in: path
         required: true
-        schema: {type: integer}
+        schema: {type: integer, example: 201}
     get:
       summary: Get one spell
       operationId: get-spell-by-id
@@ -4101,7 +4101,7 @@ paths:
       - name: ankama_id
         in: path
         required: true
-        schema: {type: integer}
+        schema: {type: integer, example: 31}
     get:
       summary: Get one monster
       operationId: get-monster-by-id
@@ -4194,7 +4194,7 @@ paths:
       - name: ankama_id
         in: path
         required: true
-        schema: {type: integer}
+        schema: {type: integer, example: 0}
     get:
       summary: Get one super-area
       operationId: get-super-area-by-id
@@ -4285,7 +4285,7 @@ paths:
       - name: ankama_id
         in: path
         required: true
-        schema: {type: integer}
+        schema: {type: integer, example: 0}
     get:
       summary: Get one area
       operationId: get-area-by-id
@@ -4376,7 +4376,7 @@ paths:
       - name: ankama_id
         in: path
         required: true
-        schema: {type: integer}
+        schema: {type: integer, example: 1}
     get:
       summary: Get one subarea
       operationId: get-subarea-by-id

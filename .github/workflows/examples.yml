@@ -1,0 +1,26 @@
+name: Check live documentation examples
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: API origin to test (read-only requests)
+        required: true
+        default: https://beta.api.dofusdu.de
+permissions:
+  contents: read
+jobs:
+  examples:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+      - run: npm run test:examples
+        env:
+          API_TEST_BASE_URL: ${{ inputs.base_url }}
