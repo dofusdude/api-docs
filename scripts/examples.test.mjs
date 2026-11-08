@@ -10,6 +10,13 @@ import { cases, resolve, examples, request } from './check-examples.mjs';
 
 const spec=YAML.parse(fs.readFileSync(new URL('../openapi-3.2.yaml',import.meta.url),'utf8'));
 const ajv=new Ajv({strict:false,allErrors:true}); addFormats(ajv);ajv.addSchema(spec,'https://examples.test/spec');
+test('beta website follows the beta branch without targeting the stable API',()=> {
+  const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
+  assert.match(html,/https:\/\/raw\.githubusercontent\.com\/dofusdude\/api-docs\/beta\/openapi-3\.2\.yaml/);
+  assert.equal(spec.servers[0].url,'https://beta.api.dofusdu.de');
+  assert.ok(!spec.servers.some(server=>server.url==='https://api.dofusdu.de'));
+  assert.deepEqual(spec.components.parameters.Game.schema.enum,['dofus3']);
+});
 function validate(schema,value,label) {
   const check=ajv.compile({...schema,components:spec.components});
   assert.ok(check(value),`${label}: ${ajv.errorsText(check.errors)}`);

@@ -3,7 +3,7 @@ openapi: 3.2.0
 x-stoplight:
   id: ezdjxlif28ceb
 info:
-  title: dofusdude
+  title: DoduAPI software beta
   version: 1.1.0-beta.1
   description: |
     # Open Ankama Developer Community
@@ -49,8 +49,8 @@ info:
     name: GPL-3.0
     url: https://github.com/dofusdude/doduapi/blob/main/LICENSE
 servers:
-  - url: https://api.dofusdu.de
-    description: API
+  - url: https://beta.api.dofusdu.de
+    description: Software beta API
   - url: http://localhost:3000
     description: Local development
 security: []
@@ -76,8 +76,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -245,8 +245,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -394,8 +394,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -560,8 +560,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -725,8 +725,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -892,8 +892,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -1162,8 +1162,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -1264,8 +1264,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -1431,8 +1431,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -1605,8 +1605,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -1669,8 +1669,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -1732,8 +1732,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -1795,8 +1795,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -1858,8 +1858,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -1921,8 +1921,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -1984,8 +1984,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -2040,8 +2040,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -2237,8 +2237,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -2407,8 +2407,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -2609,8 +2609,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -2808,8 +2808,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -3001,8 +3001,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -3200,8 +3200,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -3399,8 +3399,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -3542,8 +3542,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -3737,8 +3737,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -3901,8 +3901,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -4071,8 +4071,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -4235,8 +4235,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -4405,8 +4405,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -4764,8 +4764,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -4793,8 +4793,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -4833,8 +4833,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -4876,8 +4876,8 @@ paths:
           type: string
           enum:
             - dofus3
-            - dofus3beta
           example: dofus3
+          default: dofus3
         name: game
         in: path
         required: true
@@ -7339,7 +7339,7 @@ components:
         type: string
         enum:
           - dofus3
-          - dofus3beta
+        default: dofus3
     Language:
       name: language
       in: path

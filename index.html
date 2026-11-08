@@ -11,7 +11,9 @@
   <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.32.0/swagger-ui-bundle.js"></script>
   <script>
     window.ui = SwaggerUIBundle({
-      url: "./openapi-3.2.yaml",
+      url: window.location.hostname === "beta.docs.dofusdu.de"
+        ? "https://raw.githubusercontent.com/dofusdude/api-docs/beta/openapi-3.2.yaml"
+        : "./openapi-3.2.yaml",
       dom_id: "#swagger-ui",
       deepLinking: true,
       supportedSubmitMethods: ["get", "put", "post", "delete", "options", "head", "patch", "trace", "query"]

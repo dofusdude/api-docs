@@ -31,6 +31,18 @@ function migrate(value) {
 }
 const output = migrate(spec);
 output.openapi = "3.2.0";
+// The software preview currently serves the main-game dataset only.
+if (output.servers.some(server => server.url === "https://beta.api.dofusdu.de")) {
+  function mainGameOnly(value) {
+    if (!value || typeof value !== "object") return;
+    if (value.in === "path" && value.name === "game") {
+      value.schema.enum = ["dofus3"];
+      value.schema.default = "dofus3";
+    }
+    Object.values(value).forEach(mainGameOnly);
+  }
+  mainGameOnly(output);
+}
 output.servers.push({ url: "http://localhost:3000", description: "Local development" });
 const schemas = output.components.schemas;
 const searchExamples = { classes: "feca", monsters: "gobball", spells: "punch", "super-areas": "world", areas: "amakna", subareas: "madrestam" };

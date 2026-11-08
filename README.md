@@ -26,6 +26,10 @@ Serve this directory over HTTP and open `index.html`. Deploy the bundled UI
 with `openapi-3.2.yaml` for QUERY support. SDK generators without OpenAPI 3.2
 support can use `openapi-3.0.yaml` for GET operations. Both describe API v1.
 
+The hosted beta documentation loads `openapi-3.2.yaml` directly from the
+`beta` branch on GitHub. Push the regenerated specification to update the
+website. Its default API server is `https://beta.api.dofusdu.de`.
+
 ## Release channels
 
 `main` generates stable SDKs on their `main` branches. `beta` generates
