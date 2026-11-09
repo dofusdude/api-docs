@@ -27,6 +27,20 @@ test('every public GET/QUERY/OPTIONS operation produces an executable example',(
   assert.ok(plan.length>=total);
   assert.ok(plan.every(c=>!c.path.includes('{')));
 });
+test('QUERY generation never adds GET parameters or JSON request bodies',()=> {
+  const source=YAML.parse(fs.readFileSync(new URL('../openapi-3.0.yaml',import.meta.url),'utf8'));
+  for(const [path,item]of Object.entries(spec.paths)) {
+    if(!item.get)continue;
+    const names=(document,operation)=>(operation.parameters??[]).map(p=>resolve(document,p).name).sort();
+    assert.deepEqual(names(spec,item.get),names(source,source.paths[path].get),path);
+    assert.equal(item.get.requestBody,undefined,path);
+    for(const raw of item.get.parameters??[]) {
+      const parameter=resolve(spec,raw);
+      assert.ok(!parameter.content?.['application/json'],`${path}: JSON URL parameter`);
+      assert.ok(!['filter','sort'].includes(parameter.name),`${path}: structured GET filter/sort`);
+    }
+  }
+});
 test('all generated request bodies and JSON filter examples match their schemas',()=> {
   for(const [path,item]of Object.entries(spec.paths)) {
     for(const [method,operation]of Object.entries(item)) {

@@ -104,13 +104,6 @@ for (const [resource, title] of [["monsters", "Monster"], ["spells", "Spell"], [
     }
   };
   const item = output.paths[`/{game}/v1/{language}/${resource}`];
-  item.get.parameters.push(
-    { name: "filter", in: "query", description: "JSON-encoded filter, evaluated identically to QUERY. Prefer QUERY for complex filters. Advanced filters/sorting limit page size to 100.", content: { "application/json": { schema: ref(filterName), examples: {
-      simple: { summary: "Simple filter", value: filterExample },
-      combined: { summary: "Combined filters", value: { and: [filterExample, { or: [{ name: "a" }, { name: "e" }] }] } }
-    } } } },
-    { name: "sort", in: "query", description: "Comma-separated sort fields. Uses the same sorting as QUERY.", schema: { type: "string", example: "name,-ankama_id" } }
-  );
   item.query = {
     operationId: `query-${resource}`, summary: `Query ${resource}`, tags: ["game data"],
     description: "Read-only structured query (RFC 10008). Maximum JSON body size 64 KiB. Existing v1 collection and entity schemas are unchanged. Empty results return 200 with an empty collection. Pagination links must be followed with QUERY and the SAME JSON body: URL page[number]/page[size] override body pagination. These are not GET links. Other URL parameters are rejected. Cache-Control: no-store prevents unsafe URL-only caching until body-aware caching is deployed.",

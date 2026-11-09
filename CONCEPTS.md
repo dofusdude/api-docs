@@ -152,7 +152,9 @@ name for other collections. These names differ from older item fields such as
 `fields[item]`. Follow each operation's schema. `include` expands a relationship
 and is not the same as requesting full fields.
 
-GET uses URL parameters. QUERY is a read-only alternative with structured JSON,
+GET retains its existing URL parameters. Structured JSON filters and the new
+collection sorting options belong to QUERY, not to a GET body or a JSON-encoded
+URL parameter. QUERY is a read-only alternative with structured JSON,
 not a mutation or saved query. For example, `fields[spells]=all` corresponds to
 `{"fields":{"spells":["all"]}}` in a QUERY body. Related properties are nested
 objects, not JSON keys containing dots. `/search` is relevance-based text search.
