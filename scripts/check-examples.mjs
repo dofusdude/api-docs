@@ -49,6 +49,9 @@ export function cases(spec) {
       for(const [name,value] of variants) { const q=new URLSearchParams(query);q.set(name,value);add(q,bodies[0],` (${name} alternative)`); }
     }
   }
+  for (const match of (spec.info.description??'').matchAll(/^GET (\/\S+)$/gm)) {
+    result.push({method:'GET',path:match[1],label:`GUIDE GET ${match[1]}`});
+  }
   return result;
 }
 export function request(base, test, address, preflight) {

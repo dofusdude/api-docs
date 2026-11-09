@@ -30,6 +30,7 @@ function migrate(value) {
   return result;
 }
 const output = migrate(spec);
+output.info.description += "\n\n" + fs.readFileSync(path.join(root, "CONCEPTS.md"), "utf8").trim();
 output.openapi = "3.2.0";
 // The software preview currently serves the main-game dataset only.
 if (output.servers.some(server => server.url === "https://beta.api.dofusdu.de")) {

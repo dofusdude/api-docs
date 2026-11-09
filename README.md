@@ -7,7 +7,8 @@ If you find errors or want to propose features (never break backwards compatibil
 The original yaml was created with a GUI Tool named [Stoplight Studio](https://stoplight.io). There are many tools for working with OpenAPI, checkout [OpenAPI.Tools](https://openapi.tools) for more.
 
 Edit `openapi-3.0.yaml` for GET/response schemas and
-`scripts/build-openapi.mjs` for QUERY schemas. `openapi-3.2.yaml` is generated.
+`scripts/build-openapi.mjs` for QUERY schemas. Edit `CONCEPTS.md` for the concepts
+guide embedded in the Swagger overview. `openapi-3.2.yaml` is generated.
 Do not edit it directly. `query-contract.json` is generated from DoduAPI's
 `query/contract.go` registry:
 

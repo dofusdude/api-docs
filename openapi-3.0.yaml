@@ -2993,10 +2993,9 @@ paths:
       parameters:
         - schema:
             type: string
-            example: experience-points
           in: query
           name: "filter[bonus_type]"
-          description: "ids from meta/{language}/almanax/bonuses"
+          description: Optional bonus ID from meta/{language}/almanax/bonuses. Restricts the selected date range and can produce no results when that bonus does not occur in the range.
         - schema:
             type: string
             format: date
@@ -4010,7 +4009,7 @@ paths:
       parameters:
         - name: grade
           in: query
-          description: Return only the requested mapped spell grade in `levels`.
+          description: Select the spell variant identified by its explicit grade number, not its spell-level record ID or a player level. Returns the spell object with only that grade in levels. An unavailable grade returns 404.
           schema: {type: integer, minimum: 1}
       responses:
         "200":
@@ -4437,6 +4436,7 @@ components:
   schemas:
     MappedEntityListEntry:
       type: object
+      description: Compact collection summary. A missing detail field here does not mean the resource lacks that data. Request the single-record endpoint or the collection's full fields to obtain details.
       required: [ankama_id, name]
       properties:
         ankama_id:
@@ -4490,7 +4490,7 @@ components:
           additionalProperties: true
     CombatReference:
       type: object
-      description: A resolved game reference used by selectors, conditions, and triggers.
+      description: A compact resolved reference, not a complete resource. Interpret the ID in the context of the containing field. IDs in different resource types can have the same numeric value without referring to the same entity.
       properties:
         ankama_id:
           type: integer
@@ -4536,6 +4536,7 @@ components:
       additionalProperties: true
     TargetMask:
       type: object
+      description: Determines who an effect may affect. Combine the resolved selectors and conditions using logic. This is distinct from the zone geometry and from the event that triggers the effect.
       required: [raw, selectors]
       properties:
         raw:
@@ -4570,6 +4571,7 @@ components:
       additionalProperties: true
     SpellTriggers:
       type: object
+      description: Determines when an effect activates. Events are not additional effects to apply unconditionally. Use logic with the resolved event names and descriptions instead of parsing raw tokens.
       required: [raw, events]
       properties:
         raw:
@@ -4592,6 +4594,7 @@ components:
           description: Resolved shape name, such as point, circle, cross, line, or cone.
     EffectZone:
       type: object
+      description: Combat-cell area for this effect or activation context, not a geographic world area. Shape, size and inner size describe geometry. Actual affected cells can depend on position, direction and fight state. Each spell effect can have a different zone.
       required: [shape, cell_ids]
       properties:
         raw:
@@ -4609,6 +4612,7 @@ components:
           description: Effective inner size for hollow or minimum-size shapes. Omitted when the shape has no inner boundary.
         cell_ids:
           type: array
+          description: Explicit cells for a custom-cell shape. An empty array is normal for geometric shapes such as circles and does not mean the zone affects no cells.
           items:
             type: integer
         damage_decrease_step_percent:
@@ -4625,6 +4629,7 @@ components:
           type: boolean
     WeaponCombat:
       type: object
+      description: Weapon attack targeting and area geometry. Available for weapon equipment. This is separate from spell effect zones.
       required: [zone, cast_in_line, cast_in_diagonal, requires_line_of_sight]
       properties:
         zone:
@@ -4637,19 +4642,24 @@ components:
           type: boolean
     SpellEffect:
       type: object
+      description: One normal or critical effect of a particular spell grade. Its zone defines where it applies, target_mask defines eligible targets and triggers defines activation events. Templated text is for display, not a formula to parse.
       properties:
         type:
-          $ref: "#/components/schemas/CombatReference"
+          type: string
+          description: Localized effect category, such as Air damage. This is not a spell ID or a structured game reference.
         min:
           type: integer
         max:
           type: integer
         duration:
           type: integer
+          description: Effect duration in fight turns as represented by the source. Not a real-time duration in seconds.
         delay:
           type: integer
+          description: Delay before the effect in fight turns as represented by the source.
         random:
-          type: integer
+          type: number
+          description: Source random-selection value. Do not interpret it as a percentage without the effect's selection rules.
         group:
           type: integer
         dispellable:
@@ -4672,24 +4682,37 @@ components:
         triggers:
           $ref: "#/components/schemas/SpellTriggers"
         templated:
-          type: object
-          additionalProperties: true
+          type: string
+          description: Localized effect text suitable for display. Numeric effect properties remain available separately.
       additionalProperties: true
     SpellLevel:
       type: object
+      description: One grade of a spell. The levels array contains these spell variants, not player levels. Grade numbers are local to the containing spell and are independent of monster grades.
       properties:
         ankama_id:
           type: integer
+          description: ID of the spell-level definition. Different from the parent spell ID and from the grade number. Used by explicit spell-level references such as script spell_level_ids.
         grade:
           type: integer
+          description: Number identifying this variant within its spell. Select by this value, not by the array position. Used by the spell detail endpoint's grade parameter.
         ap_cost:
           type: integer
+          description: Action points required to cast this spell grade.
+        critical_hit_probability:
+          type: integer
+          description: Base critical-hit percentage recorded for this spell grade, before fighter-specific modifiers.
+        min_player_level:
+          type: integer
+          description: Player-level requirement recorded for this spell grade. This is not its grade number or a monster combat level.
         min_range:
           type: integer
+          description: Minimum casting range in combat cells.
         max_range:
           type: integer
+          description: Maximum casting range in combat cells as defined by this grade.
         max_cast_per_turn:
           type: integer
+          description: Per-caster cast limit within a turn as recorded by the source.
         max_cast_per_target:
           type: integer
         max_global_cast_per_turn:
@@ -4698,20 +4721,34 @@ components:
           type: integer
         min_cast_interval:
           type: integer
+          description: Minimum interval between casts, measured in fight turns.
         initial_cooldown:
           type: integer
+          description: Initial wait before casting, measured in fight turns.
         global_cooldown:
           type: integer
         ignore_prison_glyph:
           type: boolean
         spell_breed:
           type: integer
+        states_criterion:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/EligibilityNode"
+          description: Available client-side state requirements for this spell grade. Null does not assert that the server imposes no restriction.
+        preview_zones:
+          type: array
+          description: Client preview and activation geometry for this grade. Use each effect's zone for its actual effect-area definition.
+          items:
+            $ref: "#/components/schemas/SpellPreviewZone"
         effects:
           type: array
+          description: Normal-cast effects for this grade. Each entry has independent targeting and area geometry.
           items:
             $ref: "#/components/schemas/SpellEffect"
         critical_effects:
           type: array
+          description: Critical-cast effects for this grade. Keep separate from normal effects rather than applying both arrays to every cast.
           items:
             $ref: "#/components/schemas/SpellEffect"
       additionalProperties: true
@@ -4735,17 +4772,23 @@ components:
         image_urls:
           $ref: "#/components/schemas/Images"
         type:
-          $ref: "#/components/schemas/CombatReference"
+          $ref: "#/components/schemas/SpellType"
+        base_preview_zone:
+          $ref: "#/components/schemas/EffectZone"
+          description: Base client preview geometry. Does not replace the independent area of each effect.
         classes:
           type: array
+          description: Reverse references to playable classes associated with this spell. These are compact references, not complete class documents.
           items:
             $ref: "#/components/schemas/CombatReference"
         monsters:
           type: array
+          description: Reverse references to monsters associated with this spell. Use a monster's grade-specific assignments to determine which spell grade it uses.
           items:
             $ref: "#/components/schemas/CombatReference"
         levels:
           type: array
+          description: Available spell grades. Despite the field name, entries are not player levels. A grade-filtered detail response contains only the requested entry while retaining the parent spell object.
           items:
             $ref: "#/components/schemas/SpellLevel"
         scripts:
@@ -4757,6 +4800,23 @@ components:
           items:
             $ref: "#/components/schemas/SpellScriptUsage"
       additionalProperties: true
+    SpellType:
+      type: object
+      description: Classification of a spell, with localized short and long labels. Not a playable class, spell grade or monster family.
+      properties:
+        ankama_id: {type: integer}
+        short_name: {type: string}
+        long_name: {type: string}
+    SpellPreviewZone:
+      type: object
+      description: Client preview binding. Activation criteria and display geometry serve a different purpose from an effect's zone.
+      properties:
+        ankama_id: {type: integer}
+        activation_mask: {$ref: "#/components/schemas/TargetMask"}
+        caster_mask: {$ref: "#/components/schemas/TargetMask"}
+        hidden: {type: boolean}
+        activation_zone: {$ref: "#/components/schemas/EffectZone"}
+        display_zone: {$ref: "#/components/schemas/EffectZone"}
     SpellScriptUsage:
       type: object
       description: Resolved client-side spell script binding, including target selection and areas.
@@ -4780,6 +4840,7 @@ components:
         target_treated_as_caster: {type: boolean}
         spell_level_ids:
           type: array
+          description: Spell-level definition IDs to which this script binding applies. Match SpellLevel.ankama_id, not Spell.ankama_id or SpellLevel.grade.
           items: {type: integer}
     Class:
       type: object
@@ -4821,7 +4882,7 @@ components:
           $ref: "#/components/schemas/ClassLooks"
         spells:
           type: array
-          description: Fully mapped class spells, including levels, effects, targeting, and zones.
+          description: Full spell definitions assigned to this playable class, including their own grades, effects and targeting. A class has no monster-grade dimension. The same spells are independently available from the spells endpoint.
           items:
             $ref: "#/components/schemas/Spell"
       additionalProperties: true
@@ -4835,6 +4896,7 @@ components:
           $ref: "#/components/schemas/ClassAppearance"
     ClassAppearance:
       type: object
+      description: Structured client appearance data for an asset renderer. Bone and skin IDs are not image URLs. Use the parent record's image_urls for ready-to-display artwork.
       required: [bones_id, skin_ids, scale_percent, default_colors]
       properties:
         bones_id:
@@ -4870,12 +4932,12 @@ components:
           $ref: "#/components/schemas/MonsterRace"
         grades:
           type: array
-          description: Monster statistics and spells grouped by the monster grade that uses them.
+          description: Variants of this monster. Each has its own combat level, statistics and assigned spells. The monster grade number is not a spell grade number or combat level.
           items:
             $ref: "#/components/schemas/MonsterGrade"
         spawn_locations:
           type: array
-          description: Spawn subareas taken from the monster's authoritative subarea list.
+          description: Known spawn subareas and their geographic parents. This is not live population data or a per-map spawn probability. Maps listed within a subarea are not guaranteed individual spawn points.
           items:
             $ref: "#/components/schemas/MonsterSpawnLocation"
         drops:
@@ -4915,6 +4977,7 @@ components:
       additionalProperties: true
     MonsterRace:
       type: object
+      description: Monster taxonomy. Race is the monster's family and super_race is the broader grouping. Neither is a playable class or a monster grade.
       required: [ankama_id, name, super_race]
       properties:
         ankama_id:
@@ -4925,12 +4988,15 @@ components:
           $ref: "#/components/schemas/CombatReference"
     MonsterGrade:
       type: object
+      description: One variant of this monster, combining combat level, statistics and spell assignments. Match grade-specific drop rates using its grade value. Do not use it to infer a spell grade.
       required: [grade, level, spells]
       properties:
         grade:
           type: integer
+          description: Number identifying this variant within the monster. Not the combat level, array position or grade of an assigned spell.
         level:
           type: integer
+          description: Combat level of this monster variant. Distinct from its grade number.
         life_points: {type: integer}
         action_points: {type: integer}
         movement_points: {type: integer}
@@ -4962,6 +5028,7 @@ components:
       additionalProperties: true
     MonsterSpellRelationship:
       type: object
+      description: Compact spell assignment inside one monster grade. The assignment's grade identifies the spell variant, not the enclosing monster variant. Follow url unchanged to retrieve it or use an include option to embed it.
       required: [ankama_id, name, grade, url]
       properties:
         ankama_id:
@@ -4970,7 +5037,7 @@ components:
           type: string
         grade:
           type: integer
-          description: The spell grade assigned to this monster grade.
+          description: Grade of the assigned spell. It does not need to equal the enclosing MonsterGrade.grade.
         url:
           type: string
           format: uri
@@ -4979,6 +5046,7 @@ components:
           $ref: "#/components/schemas/Images"
     MonsterSpawnLocation:
       type: object
+      description: Known spawn subarea with its parent area, super-area and map membership. Does not assert a spawn on each listed map and does not include spawn probabilities.
       required: [subarea, area, super_area, subarea_maps, preferred]
       properties:
         subarea:
@@ -4989,6 +5057,7 @@ components:
           $ref: "#/components/schemas/CombatReference"
         subarea_maps:
           type: array
+          description: Maps belonging to the referenced subarea. Map membership alone is not proof that the monster spawns on a particular map.
           items:
             type: object
             required: [ankama_id, position_x, position_y, world_map_id]
@@ -5001,9 +5070,10 @@ components:
                 type: integer
               world_map_id:
                 type: integer
+                description: World-map context for these coordinates. Coordinates alone are not a globally unique map identifier.
         preferred:
           type: boolean
-          description: Whether the game marks this as the monster's preferred subarea.
+          description: Whether the source marks this as a preferred subarea. A preference flag, not a spawn percentage or guarantee of presence.
     EligibilityNode:
       type: object
       description: Client-side conditions using the v1 condition-node structure. Confirmed server-owned predicates are excluded during mapping. This is not the complete server eligibility formula, and the API does not dynamically remove fields based on interpretation status.
@@ -5036,13 +5106,14 @@ components:
             secondary_reference: {$ref: "#/components/schemas/CombatReference"}
     MonsterDrop:
       type: object
+      description: A possible item drop with base rates indexed by monster grade. Final player-specific chances also depend on conditions and game modifiers.
       required: [item, rates_percent, has_conditions]
       properties:
         item:
           $ref: "#/components/schemas/CombatReference"
         rates_percent:
           type: array
-          description: Base drop percentage for each monster grade.
+          description: Base drop percentages indexed by MonsterGrade.grade, not spell grade or array position. A value of 5 means 5 percent, not 0.05 percent. These are not spawn percentages.
           items:
             type: object
             required: [grade, percent]
@@ -5054,6 +5125,7 @@ components:
                 format: double
         has_conditions:
           type: boolean
+          description: The source reports restrictions. Can be true without a complete client-side condition tree because server-only predicates are not exposed.
         drop_id: {type: integer}
         count: {type: integer}
         condition:
@@ -5069,6 +5141,7 @@ components:
             additionalProperties: true
     MonsterGlobalDrop:
       type: object
+      description: A separate global-drop entry with a base percentage range. It is not the per-monster-grade rates table and does not by itself define a final player-specific drop chance.
       required: [item, min_percent, max_percent]
       properties:
         has_conditions: {type: boolean}
@@ -5084,12 +5157,32 @@ components:
         disable_drop_modifier: {type: boolean}
     WorldArea:
       type: object
+      description: Geographic data from a super-area, area or subarea endpoint. The hierarchy is super-area to area to subarea to map. Field availability depends on the selected geographic resource. Unrelated to combat-cell effect zones.
       required: [ankama_id, name]
       properties:
         ankama_id:
           type: integer
         name:
           type: string
+        world_map_id:
+          type: integer
+          description: World-map context supplied on super-area records.
+        areas:
+          type: array
+          description: Child area references supplied on super-area records.
+          items:
+            $ref: "#/components/schemas/CombatReference"
+        level:
+          type: integer
+          description: Suggested geographic difficulty level supplied on subarea records. Not a monster grade or the level of every monster there.
+        dungeon_id:
+          type: integer
+          description: Dungeon association when supplied by the subarea data.
+        maps:
+          type: array
+          description: Map membership supplied on subarea records. Does not imply a spawn on every map.
+          items:
+            $ref: "#/components/schemas/WorldMapReference"
         super_area:
           $ref: "#/components/schemas/CombatReference"
         area:
@@ -5103,6 +5196,14 @@ components:
           items:
             $ref: "#/components/schemas/CombatReference"
       additionalProperties: true
+    WorldMapReference:
+      type: object
+      description: A map ID and its position within a world-map context. Maps can share coordinates in different contexts.
+      properties:
+        ankama_id: {type: integer}
+        position_x: {type: integer}
+        position_y: {type: integer}
+        world_map_id: {type: integer}
     ListItemGeneral:
       type: object
       x-examples: {}
@@ -5445,11 +5546,29 @@ components:
       properties:
         operator:
           type: string
+          description: Comparison to apply to the interpreted requirement value.
         int_value:
           type: integer
         element:
           $ref: "#/components/schemas/TranslatedId"
+        kind:
+          type: string
+          description: Interpreted requirement category, such as profession_level or item_received_age. Use this with the operator, values and references rather than decoding original condition tokens.
+        unit:
+          type: string
+          description: Unit associated with the requirement value when the interpreted condition supplies one.
+        quantity:
+          type: integer
+        string_value:
+          type: string
+        value_label:
+          type: string
+        reference:
+          $ref: "#/components/schemas/CombatReference"
+        secondary_reference:
+          $ref: "#/components/schemas/CombatReference"
     ConditionNode:
+      description: Client-side requirement tree. Leaf nodes contain one condition and relation nodes combine children with and or or. Preserves grouping. Not an authoritative server eligibility decision.
       x-stoplight:
         id: kv2rib65himdt
       x-examples: {}
