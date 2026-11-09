@@ -7,10 +7,20 @@ import addFormats from 'ajv-formats';
 
 const root=new URL('../',import.meta.url);
 const spec=YAML.parse(fs.readFileSync(new URL('openapi-3.2.yaml',root),'utf8'));
-const guide=fs.readFileSync(new URL('CONCEPTS.md',root),'utf8').trim();
-test('concept guide is embedded in the published Swagger description',()=> {
-  assert.ok(spec.info.description.endsWith(guide));
-  for(const heading of ['Grades are variants','Following and expanding relationships','Effects, targeting','World areas, spawn locations','Conditions and incomplete','Choosing response size']) assert.ok(guide.includes(heading),heading);
+test('concepts are explained in relevant endpoints, not a top-level guide',()=> {
+  assert.ok(!spec.info.description.includes('## Game data concepts'));
+  const detail=resource=>spec.paths[`/{game}/v1/{language}/${resource}/{ankama_id}`].get.description;
+  assert.match(detail('classes'),/class itself does not have grades/);
+  assert.match(detail('spells'),/spell-level record ID/);
+  assert.match(detail('monsters'),/need not equal the monster grade/);
+  assert.match(detail('subareas'),/coordinates alone are not globally unique/);
+  for(const resource of ['classes','spells','monsters','super-areas','areas','subareas']) {
+    for(const suffix of ['', '/all','/search','/{ankama_id}']) {
+      assert.ok(spec.paths[`/{game}/v1/{language}/${resource}${suffix}`].get.description,resource+suffix);
+    }
+    assert.ok(spec.paths[`/{game}/v1/{language}/${resource}`].query.description.includes(spec.paths[`/{game}/v1/{language}/${resource}`].get.description));
+  }
+  assert.equal(spec.info.title,'doduapi beta');
 });
 test('grade and field documentation distinguishes IDs, variants and levels',()=> {
   const schemas=spec.components.schemas;

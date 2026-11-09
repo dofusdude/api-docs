@@ -3,9 +3,9 @@ openapi: 3.2.0
 x-stoplight:
   id: ezdjxlif28ceb
 info:
-  title: DoduAPI software beta
-  version: 1.1.0-beta.1
-  description: |-
+  title: doduapi beta
+  version: 1.1.0-beta.2
+  description: |
     # Open Ankama Developer Community
     The all-in-one toolbelt for your next Ankama related project.
 
@@ -17,7 +17,7 @@ info:
     ## Client SDKs
     - [Javascript](https://github.com/dofusdude/dofusdude-js) `npm i dofusdude-js@beta --save`
     - [Typescript](https://github.com/dofusdude/dofusdude-ts) `npm i dofusdude-ts@beta --save`
-    - [Go](https://github.com/dofusdude/dodugo) `go get github.com/dofusdude/dodugo@v1.1.0-beta.1`
+    - [Go](https://github.com/dofusdude/dodugo) `go get github.com/dofusdude/dodugo@v1.1.0-beta.2`
     - [Python](https://github.com/dofusdude/dofusdude-py) `pip install --pre dofusdude`
     - [Java](https://github.com/dofusdude/dofusdude-java) Maven with GitHub packages setup
 
@@ -41,178 +41,6 @@ info:
     - 🕵️ **Official Sources** generated from actual data from the game.
 
     ... and much more on the Roadmap on my [Discord](https://discord.gg/3EtHskZD8h).
-
-
-    ## Game data concepts
-
-    Classes, spells, monsters and world areas are independently addressable resources.
-    Their relationships let clients combine them when needed. A client can use one
-    resource without loading the others. The following conventions apply whether
-    you are building a calculator, search tool, game integration or data browser.
-
-    ### IDs, names and snapshots
-
-    Use `ankama_id` as identity within a resource, not the translated name or an
-    array position. The same number in two different resources does not establish
-    a relationship. A spell's `icon_id` and a monster's `gfx_id` identify assets,
-    not API records. Use supplied `image_urls` rather than constructing filenames.
-    An image field can be absent when no image is available.
-
-    The language in the request selects localized text. Missing translations fall
-    back to English for mapped game data. IDs do not change when the language changes.
-    The version endpoint identifies the game-data snapshot. Game updates can change
-    names, statistics and assignments, so refresh related cached records together
-    when the snapshot changes.
-
-    The software-beta host previews API changes. This is separate from the Dofus
-    game-beta dataset. Use only the game values offered by the selected API server.
-
-    ### Grades are variants, not IDs or character levels
-
-    | Field | Meaning | How to use it |
-    | --- | --- | --- |
-    | `Monster.grades[].grade` | A numbered variant of this monster | Select its statistics and assigned spells |
-    | `Monster.grades[].level` | The combat level of that monster variant | Display or filter by monster level |
-    | `Spell.levels[].grade` | A numbered variant of this spell | Select its costs, effects and casting limits |
-    | `Spell.levels[].ankama_id` | The game record ID for that spell-level definition | Match explicit spell-level references such as script bindings |
-    | `Spell.levels[].min_player_level` | The player-level requirement recorded for that spell grade | Keep separate from the grade number |
-    | `MonsterSpellRelationship.grade` | The spell grade assigned to the enclosing monster grade | Follow its URL or request that exact spell grade |
-
-    The `levels` name on spells is historical. Its entries are spell grades, not
-    a list of player levels. A class does not have monster grades. Its `spells`
-    contain spell definitions with their own `levels` arrays.
-
-    Playable classes are also called breeds in the client game data. Use the
-    `classes` resource for them. Monster families and their broader groupings are
-    a separate taxonomy.
-
-    Grade numbers belong to their containing monster or spell. Monster grade 5
-    does not imply spell grade 5. Select records by their explicit `grade` values,
-    not by array offsets, and do not assume a fixed number of grades. A spell's
-    top-level `ankama_id` stays the same across its grades.
-
-    ### Following and expanding relationships
-
-    Single-record endpoints return full records. A class response includes full
-    spell definitions in `spells`. Those spells can also be requested independently
-    from the spells endpoint.
-
-    Monster spells are grouped under the monster grade that uses them. By default,
-    each assignment is a compact object with `ankama_id`, `name`, `grade` and `url`.
-    The URL already selects the assigned spell grade. Follow it without removing
-    the query string if you want exactly the assigned variant.
-
-    For example, these requests offer different response sizes:
-
-    ```http
-    GET /dofus3/v1/en/monsters/31
-    GET /dofus3/v1/en/monsters/31?include=spells.grade
-    GET /dofus3/v1/en/monsters/31?include=spells
-    GET /dofus3/v1/en/spells/10198?grade=1
-    ```
-
-    The first returns spell assignments as links. `spells.grade` embeds each
-    assigned spell with only its assigned entry in `levels`. `spells` embeds the
-    complete definition with all available spell grades. Asking a spell endpoint
-    for `grade=1` returns a spell object whose `levels` contains that grade, not a
-    bare spell-level object. An unavailable grade returns 404.
-
-    Small references containing an ID and name are not complete records. Interpret
-    them according to the field containing them. For example, `race.super_race`
-    describes monster taxonomy, not a playable class. `race` is the monster family,
-    and `race.super_race` is its broader grouping. Spell `classes` and `monsters`
-    are reverse associations, not substitutes for grade-specific assignments.
-
-    ### Effects, targeting and areas of effect
-
-    Read a spell grade's `effects` for its normal outcome and `critical_effects`
-    for its critical outcome. Keep them separate instead of adding both lists
-    together as if every cast applies both. Effect `templated` text is localized
-    display text. Numeric fields and structured targeting describe the data behind it.
-
-    Each effect has its own `zone`. There is no single damage zone that safely
-    describes every effect of a spell. A weapon's `combat.zone` describes weapon
-    combat geometry. Spell preview zones and script activation/display zones serve
-    different purposes and must not replace effect zones.
-
-    Use `zone.shape.name` with `size`, `min_size` and the other zone properties.
-    Sizes describe combat-cell geometry, not world-map distances. Point zones have
-    size 0. Whole-map and explicit-cell shapes do not need the same size fields as
-    circles. An empty `cell_ids` list does not mean an empty zone when the shape is
-    geometric. Exact affected cells can also depend on cast direction, target
-    position, line of sight and the current fight state.
-
-    `target_mask` answers who can be affected. Its selectors identify categories
-    such as allies or enemies, and its conditions restrict them according to the
-    reported `logic`. `triggers` answers when an effect activates, such as immediately
-    or after an event. Use resolved names, descriptions and structured references.
-    Original `raw` strings and token `code` values are diagnostic data, not text
-    that users need to decode.
-
-    AP means action points and MP means movement points. Spell ranges are in combat
-    cells. Duration and casting-delay fields concern fight turns, not real-time
-    seconds. Preserve zero values rather than treating them as missing. Limits and
-    special source values must be interpreted per field, not through a universal
-    rule that every zero means unlimited. These definitions are game data, not a
-    complete damage calculator or fight simulator.
-
-    ### World areas, spawn locations and drops
-
-    The world hierarchy is **super-area → area → subarea → map**. These geographic
-    areas are unrelated to an effect's combat-cell zone. A map ID identifies a
-    specific game map. Coordinates should be interpreted with `world_map_id`, not
-    as a globally unique location by themselves.
-
-    `spawn_locations` lists the monster's known spawn subareas and their parent
-    areas. `subarea_maps` lists maps belonging to each subarea. It does not guarantee
-    that the monster spawns on every listed map or is currently present there.
-    `preferred` marks a preferred subarea in the source data. It is not a spawn
-    probability. The API does not provide a per-map spawn percentage or live population.
-
-    Drop percentages are different. Match `drops[].rates_percent[].grade` to the
-    selected **monster grade**, not a spell grade. A percentage of 5 means 5%, not
-    0.05%. These are base drop rates, not a player's final chance after conditions,
-    modifiers and fight-specific rules. `global_drops` exposes a percentage range
-    instead of the same grade-rate table. Do not invent a grade-specific rate from it.
-
-    ### Conditions and incomplete client knowledge
-
-    Conditions are trees. A node with `is_operand: true` contains one requirement
-    in `condition`. A relation node combines `children` using `and` or `or`.
-    Keep this grouping when displaying or evaluating a requirement. Use interpreted
-    `kind`, `operator`, values, units and references rather than translating raw codes.
-
-    Only client-side conditions available in the game data are represented.
-    Server-owned predicates are excluded during mapping. A missing condition does
-    not prove that the server imposes no restriction. Likewise, `has_conditions`
-    can remain true without a complete evaluable condition tree. Do not present a
-    client-side check as an authoritative server eligibility decision.
-
-    ### Choosing response size and query transport
-
-    The classes, spells, monsters and world-area lists return compact summaries by
-    default. Use their single-record endpoints for full details, or request
-    `fields[spells]=all` on the spells collection, with the corresponding resource
-    name for other collections. These names differ from older item fields such as
-    `fields[item]`. Follow each operation's schema. `include` expands a relationship
-    and is not the same as requesting full fields.
-
-    GET retains its existing URL parameters. Structured JSON filters and the new
-    collection sorting options belong to QUERY, not to a GET body or a JSON-encoded
-    URL parameter. QUERY is a read-only alternative with structured JSON,
-    not a mutation or saved query. For example, `fields[spells]=all` corresponds to
-    `{"fields":{"spells":["all"]}}` in a QUERY body. Related properties are nested
-    objects, not JSON keys containing dots. `/search` is relevance-based text search.
-    Collection filters select matching records and do not remove non-matching
-    grades from a record. Use the spell detail endpoint's `grade` parameter to select
-    one spell grade explicitly.
-
-    Follow `_links` for pagination. For QUERY, repeat the same method and body when
-    following a pagination URL. Do not turn that URL into a GET request. Bulk `/all`
-    responses can be large. Prefer pagination for interactive or incremental use.
-    An empty array means no entries were returned in that field. An omitted field
-    can instead reflect a summary response, an unavailable optional value or a
-    field that does not apply. None of those alone proves a resource has no related data.
   contact:
     name: Survival
     url: https://discord.gg/3EtHskZD8h
@@ -222,7 +50,7 @@ info:
     url: https://github.com/dofusdude/doduapi/blob/main/LICENSE
 servers:
   - url: https://beta.api.dofusdu.de
-    description: Software beta API
+    description: Beta API
   - url: http://localhost:3000
     description: Local development
 security: []
@@ -5751,6 +5579,7 @@ paths:
       - $ref: "#/components/parameters/Language"
     get:
       summary: List classes
+      description: Lists playable classes, also called breeds in the client data. Results are compact summaries by default. Request fields[classes]=all for class characteristics, appearance and full assigned spell definitions. Spell grades belong to each spell, not to the class. Use the detail endpoint for one full class. Existing GET pagination and field parameters remain unchanged. Use QUERY for structured JSON filtering.
       operationId: get-classes
       tags:
         - game data
@@ -5781,7 +5610,10 @@ paths:
       summary: Query classes
       tags:
         - game data
-      description: "Read-only structured query (RFC 10008). Maximum JSON body size 64 KiB. Existing v1 collection and entity schemas are unchanged. Empty results return 200 with an empty collection. Pagination links must be followed with QUERY and the SAME JSON body: URL page[number]/page[size] override body pagination. These are not GET links. Other URL parameters are rejected. Cache-Control: no-store prevents unsafe URL-only caching until body-aware caching is deployed."
+      description: |-
+        Lists playable classes, also called breeds in the client data. Results are compact summaries by default. Request fields[classes]=all for class characteristics, appearance and full assigned spell definitions. Spell grades belong to each spell, not to the class. Use the detail endpoint for one full class. Existing GET pagination and field parameters remain unchanged. Use QUERY for structured JSON filtering.
+
+        Read-only structured query (RFC 10008). JSON filters and sorting are available through QUERY only. Maximum body size is 64 KiB. Matching returns whole records without trimming their grades. Empty results return 200 with an empty collection. Follow pagination links with QUERY and the same JSON body. URL page[number] and page[size] override body pagination. These are not GET links. Other URL parameters are rejected. Responses use Cache-Control: no-store.
       parameters:
         - name: page[number]
           in: query
@@ -5868,6 +5700,7 @@ paths:
       - $ref: "#/components/parameters/Language"
     get:
       summary: Get all classes
+      description: Returns full playable-class definitions without pagination, including their assigned spells and each spell's available grades. Classes do not have monster grades. For smaller responses use the paginated classes endpoint or request one class by ID.
       operationId: get-all-classes
       tags:
         - game data
@@ -5884,6 +5717,7 @@ paths:
       - $ref: "#/components/parameters/Language"
     get:
       summary: Search classes
+      description: Searches localized class names by relevance and returns compact summaries. Search is distinct from structured filtering. Use a returned ankama_id with the class detail endpoint for characteristics, appearance and assigned spell definitions.
       operationId: search-classes
       tags: &a26
         - game data
@@ -5991,6 +5825,10 @@ paths:
           example: 1
     get:
       summary: Get one class
+      description: |-
+        Returns a playable class, also called a breed in the client data. Its spells array contains full spell definitions. Each spell has its own levels array of spell grades. The class itself does not have grades, and a spell grade is not a character level.
+
+        Characteristic cost tiers describe point costs. Appearance bone and skin IDs are asset-renderer inputs, not image URLs. Use image_urls for ready-to-display artwork. IDs identify records independently of their translated names. Assigned spells can also be requested from the spells endpoint without loading the class again.
       operationId: get-class-by-id
       tags:
         - game data
@@ -6013,6 +5851,7 @@ paths:
       - $ref: "#/components/parameters/Language"
     get:
       summary: List spells
+      description: Lists independent spell records as compact summaries. Request fields[spells]=all for their grades and effects, or use the spell detail endpoint for one spell. The levels field contains spell variants called grades, not player levels. Existing GET pagination and field parameters remain unchanged. Structured filters and sorting belong to QUERY and do not trim grades from matching spell records.
       operationId: get-spells
       tags:
         - game data
@@ -6043,7 +5882,10 @@ paths:
       summary: Query spells
       tags:
         - game data
-      description: "Read-only structured query (RFC 10008). Maximum JSON body size 64 KiB. Existing v1 collection and entity schemas are unchanged. Empty results return 200 with an empty collection. Pagination links must be followed with QUERY and the SAME JSON body: URL page[number]/page[size] override body pagination. These are not GET links. Other URL parameters are rejected. Cache-Control: no-store prevents unsafe URL-only caching until body-aware caching is deployed."
+      description: |-
+        Lists independent spell records as compact summaries. Request fields[spells]=all for their grades and effects, or use the spell detail endpoint for one spell. The levels field contains spell variants called grades, not player levels. Existing GET pagination and field parameters remain unchanged. Structured filters and sorting belong to QUERY and do not trim grades from matching spell records.
+
+        Read-only structured query (RFC 10008). JSON filters and sorting are available through QUERY only. Maximum body size is 64 KiB. Matching returns whole records without trimming their grades. Empty results return 200 with an empty collection. Follow pagination links with QUERY and the same JSON body. URL page[number] and page[size] override body pagination. These are not GET links. Other URL parameters are rejected. Responses use Cache-Control: no-store.
       parameters:
         - name: page[number]
           in: query
@@ -6133,6 +5975,7 @@ paths:
       - $ref: "#/components/parameters/Language"
     get:
       summary: Get all spells
+      description: Returns complete spell definitions and all available grades without pagination. Each grade has its own costs, casting rules, normal effects and critical effects. Bulk responses can be large. Prefer pagination for interactive or incremental use.
       operationId: get-all-spells
       tags:
         - game data
@@ -6149,6 +5992,7 @@ paths:
       - $ref: "#/components/parameters/Language"
     get:
       summary: Search spells
+      description: Searches localized spell names by relevance and returns compact summaries. The result ID identifies the spell, not a grade. Request the detail endpoint for available grades, or pass grade to that detail endpoint to select one variant.
       operationId: search-spells
       tags: &a27
         - game data
@@ -6256,6 +6100,12 @@ paths:
           example: 201
     get:
       summary: Get one spell
+      description: |-
+        Returns a spell and its available grades in levels. A grade is a variant with its own action-point cost, range, casting limits and effects. Select by levels[].grade, not array position. levels[].ankama_id is the separate spell-level record ID. min_player_level records a player-level requirement and is not a grade number.
+
+        Pass grade to return only that variant inside the same spell object. An unavailable grade returns 404. For example, /spells/10198?grade=1 selects spell grade 1. This does not imply that monster grade 1 is the only monster variant using it.
+
+        Keep normal effects and critical_effects separate. Each effect has its own combat-cell zone, target_mask and triggers. These describe where, who and when it affects. Preview and script zones do not replace effect zones. Use resolved names and descriptions instead of decoding raw tokens. Templated text is localized display text, not a formula to parse. This endpoint supplies definitions, not a full fight simulation or final damage calculation.
       operationId: get-spell-by-id
       tags:
         - game data
@@ -6285,6 +6135,7 @@ paths:
       - $ref: "#/components/parameters/Language"
     get:
       summary: List monsters
+      description: Lists monster summaries. Request fields[monsters]=all or the monster detail endpoint for variants, statistics, drop rates and known spawn subareas. A monster grade is a variant with its own combat level, not that level itself. Optional include values expand spell assignments. GET retains its existing pagination, field and include parameters. Use QUERY for structured filtering and sorting.
       operationId: get-monsters
       tags:
         - game data
@@ -6316,7 +6167,10 @@ paths:
       summary: Query monsters
       tags:
         - game data
-      description: "Read-only structured query (RFC 10008). Maximum JSON body size 64 KiB. Existing v1 collection and entity schemas are unchanged. Empty results return 200 with an empty collection. Pagination links must be followed with QUERY and the SAME JSON body: URL page[number]/page[size] override body pagination. These are not GET links. Other URL parameters are rejected. Cache-Control: no-store prevents unsafe URL-only caching until body-aware caching is deployed."
+      description: |-
+        Lists monster summaries. Request fields[monsters]=all or the monster detail endpoint for variants, statistics, drop rates and known spawn subareas. A monster grade is a variant with its own combat level, not that level itself. Optional include values expand spell assignments. GET retains its existing pagination, field and include parameters. Use QUERY for structured filtering and sorting.
+
+        Read-only structured query (RFC 10008). JSON filters and sorting are available through QUERY only. Maximum body size is 64 KiB. Matching returns whole records without trimming their grades. Empty results return 200 with an empty collection. Follow pagination links with QUERY and the same JSON body. URL page[number] and page[size] override body pagination. These are not GET links. Other URL parameters are rejected. Responses use Cache-Control: no-store.
       parameters:
         - name: page[number]
           in: query
@@ -6411,6 +6265,7 @@ paths:
       - $ref: "#/components/parameters/Language"
     get:
       summary: Get all monsters
+      description: Returns complete monster definitions without pagination. Grades group each variant's statistics and spell assignments. Drop percentages are indexed by monster grade. Known spawn subareas are not live population or per-map spawn probabilities. Spell expansion is optional. This bulk response can be large, so prefer pagination when possible.
       operationId: get-all-monsters
       tags:
         - game data
@@ -6429,6 +6284,7 @@ paths:
       - $ref: "#/components/parameters/Language"
     get:
       summary: Search monsters
+      description: Searches localized monster names by relevance and returns summaries. Each result identifies a monster definition, not one combat-level variant. Use the detail endpoint for grades, taxonomy, drops and known spawn subareas.
       operationId: search-monsters
       tags: &a28
         - game data
@@ -6536,6 +6392,14 @@ paths:
           example: 31
     get:
       summary: Get one monster
+      description: |-
+        Returns a monster definition. race is its family and race.super_race is the broader monster grouping. Neither is a playable class. Each entry in grades is one monster variant with a grade number, a separate combat level, statistics and assigned spells. Select by explicit grade values, not array positions or a fixed assumed grade count.
+
+        Spell assignments belong to the enclosing monster grade. Their grade values identify spell variants and need not equal the monster grade. Default assignments contain URLs that already select the assigned spell grade. Follow them unchanged. include=spells.grade embeds just the assigned variant in each spell's levels array. include=spells embeds every available spell grade instead. These are optional expansions of an independently addressable resource.
+
+        Match drops[].rates_percent[].grade to the monster grade, not the spell grade. Percentages are base drop rates before player-specific modifiers. global_drops provides ranges instead of that grade-rate table. Client condition trees preserve and/or grouping but exclude server-only predicates. A missing tree does not guarantee eligibility, even when has_conditions is true.
+
+        spawn_locations identifies known spawn subareas and their geographic parents. subarea_maps lists subarea membership, not guaranteed spawn maps. preferred is a source preference flag, not a probability. The endpoint does not report live presence or per-map spawn percentages.
       operationId: get-monster-by-id
       tags:
         - game data
@@ -6560,6 +6424,7 @@ paths:
       - $ref: "#/components/parameters/Language"
     get:
       summary: List super-areas
+      description: Lists summaries of the broadest geographic regions. The hierarchy is super-area to area to subarea to map. These world areas are unrelated to combat-cell effect zones. Request fields[super_areas]=all or a detail record for child area references and world-map context.
       operationId: get-super-areas
       tags:
         - game data
@@ -6590,7 +6455,10 @@ paths:
       summary: Query super-areas
       tags:
         - game data
-      description: "Read-only structured query (RFC 10008). Maximum JSON body size 64 KiB. Existing v1 collection and entity schemas are unchanged. Empty results return 200 with an empty collection. Pagination links must be followed with QUERY and the SAME JSON body: URL page[number]/page[size] override body pagination. These are not GET links. Other URL parameters are rejected. Cache-Control: no-store prevents unsafe URL-only caching until body-aware caching is deployed."
+      description: |-
+        Lists summaries of the broadest geographic regions. The hierarchy is super-area to area to subarea to map. These world areas are unrelated to combat-cell effect zones. Request fields[super_areas]=all or a detail record for child area references and world-map context.
+
+        Read-only structured query (RFC 10008). JSON filters and sorting are available through QUERY only. Maximum body size is 64 KiB. Matching returns whole records without trimming their grades. Empty results return 200 with an empty collection. Follow pagination links with QUERY and the same JSON body. URL page[number] and page[size] override body pagination. These are not GET links. Other URL parameters are rejected. Responses use Cache-Control: no-store.
       parameters:
         - name: page[number]
           in: query
@@ -6677,6 +6545,7 @@ paths:
       - $ref: "#/components/parameters/Language"
     get:
       summary: Get all super-areas
+      description: Returns every complete super-area record and its child area references without pagination. A super-area groups geographic areas and supplies a world-map context. It is not a spell effect zone.
       operationId: get-all-super-areas
       tags:
         - game data
@@ -6693,6 +6562,7 @@ paths:
       - $ref: "#/components/parameters/Language"
     get:
       summary: Search super-areas
+      description: Searches localized super-area names by relevance. Results are geographic-region summaries. Use a returned ID with the detail endpoint for child areas and world-map context.
       operationId: search-super-areas
       tags: &a29
         - game data
@@ -6800,6 +6670,7 @@ paths:
           example: 0
     get:
       summary: Get one super-area
+      description: Returns one broad geographic region with its child areas and world_map_id. Follow child area IDs to the areas endpoint to continue toward subareas and maps. World geography is independent of spell and weapon combat-cell geometry.
       operationId: get-super-area-by-id
       tags:
         - game data
@@ -6822,6 +6693,7 @@ paths:
       - $ref: "#/components/parameters/Language"
     get:
       summary: List areas
+      description: Lists geographic area summaries. An area belongs to a super-area and groups subareas. Request fields[areas]=all or an area detail record for those relationships. Use QUERY rather than GET for structured JSON filtering and sorting.
       operationId: get-areas
       tags:
         - game data
@@ -6852,7 +6724,10 @@ paths:
       summary: Query areas
       tags:
         - game data
-      description: "Read-only structured query (RFC 10008). Maximum JSON body size 64 KiB. Existing v1 collection and entity schemas are unchanged. Empty results return 200 with an empty collection. Pagination links must be followed with QUERY and the SAME JSON body: URL page[number]/page[size] override body pagination. These are not GET links. Other URL parameters are rejected. Cache-Control: no-store prevents unsafe URL-only caching until body-aware caching is deployed."
+      description: |-
+        Lists geographic area summaries. An area belongs to a super-area and groups subareas. Request fields[areas]=all or an area detail record for those relationships. Use QUERY rather than GET for structured JSON filtering and sorting.
+
+        Read-only structured query (RFC 10008). JSON filters and sorting are available through QUERY only. Maximum body size is 64 KiB. Matching returns whole records without trimming their grades. Empty results return 200 with an empty collection. Follow pagination links with QUERY and the same JSON body. URL page[number] and page[size] override body pagination. These are not GET links. Other URL parameters are rejected. Responses use Cache-Control: no-store.
       parameters:
         - name: page[number]
           in: query
@@ -6939,6 +6814,7 @@ paths:
       - $ref: "#/components/parameters/Language"
     get:
       summary: Get all areas
+      description: Returns every complete geographic area record, including its super-area reference and child subareas, without pagination. These relationships describe geography rather than combat effect zones.
       operationId: get-all-areas
       tags:
         - game data
@@ -6955,6 +6831,7 @@ paths:
       - $ref: "#/components/parameters/Language"
     get:
       summary: Search areas
+      description: Searches localized geographic area names by relevance and returns compact summaries. Use the detail endpoint to obtain the parent super-area and child subareas.
       operationId: search-areas
       tags: &a30
         - game data
@@ -7062,6 +6939,7 @@ paths:
           example: 0
     get:
       summary: Get one area
+      description: Returns an area's parent super-area and child subarea references. References contain an ID and localized name, not a complete nested record. Use the corresponding resource endpoint to load details. Matching numeric IDs in different resource types do not establish a relationship.
       operationId: get-area-by-id
       tags:
         - game data
@@ -7084,6 +6962,7 @@ paths:
       - $ref: "#/components/parameters/Language"
     get:
       summary: List subareas
+      description: Lists subarea summaries. A subarea belongs to an area and super-area and contains maps. Request fields[subareas]=all or a detail record for map membership and monster associations. Associations are not live monster presence or per-map spawn probabilities.
       operationId: get-subareas
       tags:
         - game data
@@ -7114,7 +6993,10 @@ paths:
       summary: Query subareas
       tags:
         - game data
-      description: "Read-only structured query (RFC 10008). Maximum JSON body size 64 KiB. Existing v1 collection and entity schemas are unchanged. Empty results return 200 with an empty collection. Pagination links must be followed with QUERY and the SAME JSON body: URL page[number]/page[size] override body pagination. These are not GET links. Other URL parameters are rejected. Cache-Control: no-store prevents unsafe URL-only caching until body-aware caching is deployed."
+      description: |-
+        Lists subarea summaries. A subarea belongs to an area and super-area and contains maps. Request fields[subareas]=all or a detail record for map membership and monster associations. Associations are not live monster presence or per-map spawn probabilities.
+
+        Read-only structured query (RFC 10008). JSON filters and sorting are available through QUERY only. Maximum body size is 64 KiB. Matching returns whole records without trimming their grades. Empty results return 200 with an empty collection. Follow pagination links with QUERY and the same JSON body. URL page[number] and page[size] override body pagination. These are not GET links. Other URL parameters are rejected. Responses use Cache-Control: no-store.
       parameters:
         - name: page[number]
           in: query
@@ -7201,6 +7083,7 @@ paths:
       - $ref: "#/components/parameters/Language"
     get:
       summary: Get all subareas
+      description: Returns complete subareas, map membership and monster references without pagination. Maps belong to the subarea but are not guaranteed spawn locations for every associated monster. Prefer pagination for smaller responses.
       operationId: get-all-subareas
       tags:
         - game data
@@ -7217,6 +7100,7 @@ paths:
       - $ref: "#/components/parameters/Language"
     get:
       summary: Search subareas
+      description: Searches localized subarea names by relevance and returns summaries. Use the detail endpoint for parent areas, map positions and monster associations. Search results do not indicate live monster populations.
       operationId: search-subareas
       tags: &a31
         - game data
@@ -7324,6 +7208,10 @@ paths:
           example: 1
     get:
       summary: Get one subarea
+      description: |-
+        Returns one geographic subarea with its parent area and super-area, maps and monster references. Its level is a geographic difficulty indicator, not a monster grade or the combat level of every associated monster.
+
+        A map's ankama_id identifies the map. Interpret position_x and position_y with world_map_id because coordinates alone are not globally unique. Map membership does not prove that a monster spawns on every map or is currently present. Monster references can be followed through the monster endpoint for grade-specific statistics, base drop rates and known spawn subareas. This endpoint does not provide spawn percentages.
       operationId: get-subarea-by-id
       tags:
         - game data

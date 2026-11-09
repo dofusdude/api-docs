@@ -30,9 +30,8 @@ function migrate(value) {
   return result;
 }
 const output = migrate(spec);
-output.info.description += "\n\n" + fs.readFileSync(path.join(root, "CONCEPTS.md"), "utf8").trim();
 output.openapi = "3.2.0";
-// The software preview currently serves the main-game dataset only.
+// The beta API currently serves the main-game dataset only.
 if (output.servers.some(server => server.url === "https://beta.api.dofusdu.de")) {
   function mainGameOnly(value) {
     if (!value || typeof value !== "object") return;
@@ -106,7 +105,7 @@ for (const [resource, title] of [["monsters", "Monster"], ["spells", "Spell"], [
   const item = output.paths[`/{game}/v1/{language}/${resource}`];
   item.query = {
     operationId: `query-${resource}`, summary: `Query ${resource}`, tags: ["game data"],
-    description: "Read-only structured query (RFC 10008). Maximum JSON body size 64 KiB. Existing v1 collection and entity schemas are unchanged. Empty results return 200 with an empty collection. Pagination links must be followed with QUERY and the SAME JSON body: URL page[number]/page[size] override body pagination. These are not GET links. Other URL parameters are rejected. Cache-Control: no-store prevents unsafe URL-only caching until body-aware caching is deployed.",
+    description: item.get.description + "\n\nRead-only structured query (RFC 10008). JSON filters and sorting are available through QUERY only. Maximum body size is 64 KiB. Matching returns whole records without trimming their grades. Empty results return 200 with an empty collection. Follow pagination links with QUERY and the same JSON body. URL page[number] and page[size] override body pagination. These are not GET links. Other URL parameters are rejected. Responses use Cache-Control: no-store.",
     parameters: [
       { name: "page[number]", in: "query", description: "Override body page.number when following pagination links.", schema: { type: "integer", minimum: 1, maximum: 1000000 } },
       { name: "page[size]", in: "query", description: "Override body page.size.", schema: { type: "integer", minimum: 1, maximum: 100 } }
